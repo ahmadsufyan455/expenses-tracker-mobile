@@ -61,6 +61,12 @@ class ErrorHandler {
           statusCode: statusCode,
         );
 
+      case 409:
+        return ValidationFailure(
+          message: message.isEmpty ? 'Resource already exists' : message,
+          statusCode: statusCode,
+        );
+
       case 422:
         return ValidationFailure(
           message: message.isEmpty ? 'Validation failed' : message,

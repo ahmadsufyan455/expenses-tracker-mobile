@@ -19,8 +19,12 @@ import 'package:expense_tracker_mobile/domain/repositories/auth_repository.dart'
     as _i900;
 import 'package:expense_tracker_mobile/domain/usecases/login_usecase.dart'
     as _i72;
+import 'package:expense_tracker_mobile/domain/usecases/register_usecase.dart'
+    as _i720;
 import 'package:expense_tracker_mobile/presentation/pages/auth/login/bloc/login_bloc.dart'
     as _i754;
+import 'package:expense_tracker_mobile/presentation/pages/auth/register/bloc/register_bloc.dart'
+    as _i1001;
 import 'package:get_it/get_it.dart' as _i174;
 import 'package:injectable/injectable.dart' as _i526;
 
@@ -45,6 +49,12 @@ extension GetItInjectableX on _i174.GetIt {
     );
     gh.factory<_i72.LoginUsecase>(
       () => _i72.LoginUsecase(gh<_i900.AuthRepository>()),
+    );
+    gh.factory<_i720.RegisterUsecase>(
+      () => _i720.RegisterUsecase(gh<_i900.AuthRepository>()),
+    );
+    gh.factory<_i1001.RegisterBloc>(
+      () => _i1001.RegisterBloc(gh<_i720.RegisterUsecase>()),
     );
     gh.factory<_i754.LoginBloc>(
       () => _i754.LoginBloc(loginUsecase: gh<_i72.LoginUsecase>()),

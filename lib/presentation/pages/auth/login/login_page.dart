@@ -46,7 +46,7 @@ class _LoginPageState extends State<LoginPage> {
     if (_formKey.currentState!.validate()) {
       _bloc.add(
         LoginSubmitted(
-          email: _emailController.text,
+          email: _emailController.text.trim().toLowerCase(),
           password: _passwordController.text,
         ),
       );

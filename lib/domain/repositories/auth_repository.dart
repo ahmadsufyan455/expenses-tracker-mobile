@@ -1,8 +1,12 @@
 import 'package:expense_tracker_mobile/core/errors/failure.dart';
 import 'package:expense_tracker_mobile/data/models/request/login_request.dart';
+import 'package:expense_tracker_mobile/data/models/request/register_request.dart';
+import 'package:expense_tracker_mobile/data/models/response/base_response.dart';
 import 'package:expense_tracker_mobile/data/models/response/login_response.dart';
+import 'package:expense_tracker_mobile/data/models/response/user_response.dart';
 import 'package:fpdart/fpdart.dart';
 
 abstract interface class AuthRepository {
   Future<Either<Failure, LoginResponse>> login(LoginRequest request);
+  Future<Either<Failure, BaseResponse<UserResponse>>> register(RegisterRequest request);
 }
