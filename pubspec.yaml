@@ -8,6 +8,7 @@ environment:
 
 dependencies:
   dio: ^5.9.0
+  equatable: ^2.0.5
   flutter:
     sdk: flutter
   flutter_bloc: ^9.1.1
@@ -19,6 +20,7 @@ dependencies:
   injectable: ^2.5.1
   intl: ^0.20.2
   json_annotation: ^4.9.0
+  network_logger: ^1.0.4
   retrofit: ^4.7.2
 
 dev_dependencies:
