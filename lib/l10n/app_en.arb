@@ -1,0 +1,110 @@
+{
+  "@@locale": "en",
+  "@@last_modified": "2024-01-01T00:00:00.000Z",
+  
+  "appTagline": "Your Smart Financial Companion",
+  "appSubtitle": "Track • Analyze • Save",
+  "welcomeBack": "Welcome Back!",
+  "loginSubtitle": "Sign in to continue managing your expenses",
+  "createAccount": "Create Account",
+  "registerSubtitle": "Join us to start tracking your expenses smartly",
+  "email": "Email Address",
+  "emailHint": "Enter your email",
+  "password": "Password",
+  "passwordHint": "Enter your password",
+  "createPasswordHint": "Create a strong password",
+  "firstName": "First Name",
+  "firstNameHint": "Enter first name",
+  "lastName": "Last Name",
+  "lastNameHint": "Enter last name",
+  "signIn": "Sign In",
+  "signUp": "Sign Up",
+  "createAccountButton": "Create Account",
+  "dontHaveAccount": "Don't have an account? ",
+  "alreadyHaveAccount": "Already have an account? ",
+  "agreeToTerms": "I agree to the ",
+  "termsAndConditions": "Terms and Conditions",
+  "and": " and ",
+  "privacyPolicy": "Privacy Policy",
+  "loginSuccessful": "Login successful!",
+  "accountCreatedSuccessfully": "Account created successfully!",
+  "pleaseAcceptTerms": "Please accept the terms and conditions",
+  "or": "or",
+  "emailRequired": "Email is required",
+  "emailInvalid": "Please enter a valid email address",
+  "passwordRequired": "Password is required",
+  "passwordTooShort": "Password must be at least {minLength} characters",
+  "@passwordTooShort": {
+    "description": "Validation message for password too short",
+    "placeholders": {
+      "minLength": {
+        "type": "int",
+        "example": "8"
+      }
+    }
+  },
+  "fieldRequired": "{fieldName} is required",
+  "@fieldRequired": {
+    "description": "Generic validation message for required fields",
+    "placeholders": {
+      "fieldName": {
+        "type": "String",
+        "example": "First name"
+      }
+    }
+  },
+  "fieldTooShort": "{fieldName} must be at least {minLength} characters",
+  "@fieldTooShort": {
+    "description": "Generic validation message for minimum length",
+    "placeholders": {
+      "fieldName": {
+        "type": "String",
+        "example": "First name"
+      },
+      "minLength": {
+        "type": "int",
+        "example": "2"
+      }
+    }
+  },
+  "nameLettersOnly": "{fieldName} can only contain letters",
+  "@nameLettersOnly": {
+    "description": "Validation message for name fields",
+    "placeholders": {
+      "fieldName": {
+        "type": "String",
+        "example": "First name"
+      }
+    }
+  },
+  "numberRequired": "{fieldName} is required",
+  "@numberRequired": {
+    "description": "Validation message for required number fields",
+    "placeholders": {
+      "fieldName": {
+        "type": "String",
+        "example": "Amount"
+      }
+    }
+  },
+  "numberInvalid": "{fieldName} must be a valid number",
+  "@numberInvalid": {
+    "description": "Validation message for invalid numbers",
+    "placeholders": {
+      "fieldName": {
+        "type": "String",
+        "example": "Amount"
+      }
+    }
+  },
+  "numberMustBePositive": "{fieldName} must be greater than 0",
+  "@numberMustBePositive": {
+    "description": "Validation message for positive numbers",
+    "placeholders": {
+      "fieldName": {
+        "type": "String",
+        "example": "Amount"
+      }
+    }
+  }
+}

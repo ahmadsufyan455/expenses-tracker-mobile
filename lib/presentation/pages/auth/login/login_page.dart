@@ -1,0 +1,161 @@
+import 'package:expense_tracker_mobile/app/router.dart';
+import 'package:expense_tracker_mobile/app/theme/app_colors.dart';
+import 'package:expense_tracker_mobile/app/theme/app_dimensions.dart';
+import 'package:expense_tracker_mobile/app/theme/app_text_styles.dart';
+import 'package:expense_tracker_mobile/core/extensions/build_context_extensions.dart';
+import 'package:expense_tracker_mobile/core/utils/validation_utils.dart';
+import 'package:expense_tracker_mobile/presentation/widgets/auth/auth_button.dart';
+import 'package:expense_tracker_mobile/presentation/widgets/auth/auth_header.dart';
+import 'package:expense_tracker_mobile/presentation/widgets/auth/auth_link_text.dart';
+import 'package:expense_tracker_mobile/presentation/widgets/auth/auth_text_field.dart';
+import 'package:expense_tracker_mobile/presentation/widgets/auth/password_text_field.dart';
+import 'package:flutter/material.dart';
+
+class LoginPage extends StatefulWidget {
+  const LoginPage({super.key});
+
+  @override
+  State<LoginPage> createState() => _LoginPageState();
+}
+
+class _LoginPageState extends State<LoginPage> {
+  final _formKey = GlobalKey<FormState>();
+  final _emailController = TextEditingController();
+  final _passwordController = TextEditingController();
+  bool _isLoading = false;
+
+  @override
+  void dispose() {
+    _emailController.dispose();
+    _passwordController.dispose();
+    super.dispose();
+  }
+
+  Future<void> _handleLogin() async {
+    if (_formKey.currentState!.validate()) {
+      setState(() {
+        _isLoading = true;
+      });
+
+      // TODO: Implement actual login logic
+      await Future.delayed(const Duration(seconds: 2));
+
+      if (mounted) {
+        setState(() {
+          _isLoading = false;
+        });
+
+        // TODO: Navigate to home page after successful login
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text(context.l10n.loginSuccessful),
+            backgroundColor: AppColors.success,
+          ),
+        );
+      }
+    }
+  }
+
+  void _navigateToRegister() {
+    Navigator.pushNamed(context, RouteName.register.path);
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+
+    return Scaffold(
+      backgroundColor: theme.colorScheme.surface,
+      body: SafeArea(
+        child: SingleChildScrollView(
+          padding: AppDimensions.paddingAllL,
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: [
+              const SizedBox(height: AppDimensions.spaceXXL),
+
+              // Header Section
+              AuthHeader(
+                title: context.l10n.welcomeBack,
+                subtitle: context.l10n.loginSubtitle,
+              ),
+
+              const SizedBox(height: AppDimensions.spaceXXL),
+
+              // Login Form
+              Form(
+                key: _formKey,
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.stretch,
+                  children: [
+                    // Email Field
+                    AuthTextField(
+                      controller: _emailController,
+                      labelText: context.l10n.email,
+                      hintText: context.l10n.emailHint,
+                      prefixIcon: Icons.email_outlined,
+                      keyboardType: TextInputType.emailAddress,
+                      textInputAction: TextInputAction.next,
+                      validator: ValidationUtils.validateEmail,
+                    ),
+
+                    const SizedBox(height: AppDimensions.spaceL),
+
+                    // Password Field
+                    PasswordTextField(
+                      controller: _passwordController,
+                      labelText: context.l10n.password,
+                      hintText: context.l10n.passwordHint,
+                      textInputAction: TextInputAction.done,
+                      validator: ValidationUtils.validatePassword,
+                      onFieldSubmitted: (_) => _handleLogin(),
+                    ),
+
+                    const SizedBox(height: AppDimensions.spaceXL),
+
+                    // Login Button
+                    AuthButton(
+                      text: context.l10n.signIn,
+                      onPressed: _handleLogin,
+                      isLoading: _isLoading,
+                    ),
+
+                    const SizedBox(height: AppDimensions.spaceXL),
+
+                    // Divider
+                    Row(
+                      children: [
+                        const Expanded(child: Divider()),
+                        Padding(
+                          padding: AppDimensions.paddingHorizontalM,
+                          child: Text(
+                            context.l10n.or,
+                            style: AppTextStyles.bodyMedium.copyWith(
+                              color: theme.colorScheme.onSurfaceVariant,
+                            ),
+                          ),
+                        ),
+                        const Expanded(child: Divider()),
+                      ],
+                    ),
+
+                    const SizedBox(height: AppDimensions.spaceXL),
+
+                    // Register Link
+                    AuthLinkText(
+                      normalText: context.l10n.dontHaveAccount,
+                      linkText: context.l10n.signUp,
+                      onTap: _navigateToRegister,
+                    ),
+                  ],
+                ),
+              ),
+
+              const SizedBox(height: AppDimensions.spaceXL),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+}

@@ -1,0 +1,51 @@
+{
+  "@@locale": "id",
+  "@@last_modified": "2024-01-01T00:00:00.000Z",
+  
+  "appTagline": "Pendamping Finansial Cerdas Anda",
+  "appSubtitle": "Catat • Analisis • Hemat",
+
+  "welcomeBack": "Selamat Datang Kembali!",
+  "loginSubtitle": "Masuk untuk melanjutkan mengelola pengeluaran Anda",
+  "createAccount": "Buat Akun",
+  "registerSubtitle": "Bergabunglah dengan kami untuk mulai mencatat pengeluaran dengan cerdas",
+
+  "email": "Alamat Email",
+  "emailHint": "Masukkan email Anda",
+  "password": "Kata Sandi",
+  "passwordHint": "Masukkan kata sandi Anda",
+  "createPasswordHint": "Buat kata sandi yang kuat",
+  "firstName": "Nama Depan",
+  "firstNameHint": "Masukkan nama depan",
+  "lastName": "Nama Belakang",
+  "lastNameHint": "Masukkan nama belakang",
+
+  "signIn": "Masuk",
+  "signUp": "Daftar",
+  "createAccountButton": "Buat Akun",
+
+  "dontHaveAccount": "Belum punya akun? ",
+  "alreadyHaveAccount": "Sudah punya akun? ",
+
+  "agreeToTerms": "Saya menyetujui ",
+  "termsAndConditions": "Syarat dan Ketentuan",
+  "and": " dan ",
+  "privacyPolicy": "Kebijakan Privasi",
+
+  "loginSuccessful": "Berhasil masuk!",
+  "accountCreatedSuccessfully": "Akun berhasil dibuat!",
+  "pleaseAcceptTerms": "Harap menyetujui syarat dan ketentuan",
+
+  "or": "atau",
+
+  "emailRequired": "Email wajib diisi",
+  "emailInvalid": "Harap masukkan alamat email yang valid",
+  "passwordRequired": "Kata sandi wajib diisi",
+  "passwordTooShort": "Kata sandi harus minimal {minLength} karakter",
+  "fieldRequired": "{fieldName} wajib diisi",
+  "fieldTooShort": "{fieldName} harus minimal {minLength} karakter",
+  "nameLettersOnly": "{fieldName} hanya boleh berisi huruf",
+  "numberRequired": "{fieldName} wajib diisi",
+  "numberInvalid": "{fieldName} harus berupa angka yang valid",
+  "numberMustBePositive": "{fieldName} harus lebih besar dari 0"
+}

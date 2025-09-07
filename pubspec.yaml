@@ -11,6 +11,8 @@ dependencies:
   flutter:
     sdk: flutter
   flutter_bloc: ^9.1.1
+  flutter_localizations:
+    sdk: flutter
   fpdart: ^1.1.1
   get_it: ^8.2.0
   injectable: ^2.5.1
@@ -29,6 +31,7 @@ dev_dependencies:
 
 flutter:
   uses-material-design: true
+  generate: true
 
   assets:
     - assets/images/
