@@ -11,8 +11,6 @@ class RegisterUsecase {
   RegisterUsecase(this._authRepository);
 
   Future<Either<Failure, String>> call(RegisterRequest request) async {
-    return await _authRepository.register(request).then((value) {
-      return value.map((response) => response.message);
-    });
+    return await _authRepository.register(request);
   }
 }

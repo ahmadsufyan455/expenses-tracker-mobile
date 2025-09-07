@@ -3,7 +3,6 @@ import 'package:expense_tracker_mobile/data/models/request/login_request.dart';
 import 'package:expense_tracker_mobile/data/models/request/register_request.dart';
 import 'package:expense_tracker_mobile/data/models/response/base_response.dart';
 import 'package:expense_tracker_mobile/data/models/response/login_response.dart';
-import 'package:expense_tracker_mobile/data/models/response/user_response.dart';
 import 'package:injectable/injectable.dart';
 import 'package:retrofit/retrofit.dart';
 
@@ -20,5 +19,5 @@ abstract class ApiService {
   Future<BaseResponse<LoginResponse>> login(@Body() LoginRequest request);
 
   @POST('/auth/register')
-  Future<BaseResponse<UserResponse>> register(@Body() RegisterRequest request);
+  Future<BaseResponse> register(@Body() RegisterRequest request);
 }
