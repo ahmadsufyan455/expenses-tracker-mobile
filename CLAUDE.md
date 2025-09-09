@@ -57,6 +57,7 @@ lib/
 **Environment Setup:**
 - Uses flutter_dotenv with config in `assets/env/.env`
 - Localization files in `lib/l10n/` (app_en.arb, app_id.arb)
+- Create localization id (Indonesian) and en (English) for every new text label
 
 **Code Generation Note:**
 After modifying models, DI modules, or API clients, run the build_runner command to regenerate necessary code.

@@ -10,6 +10,7 @@ import 'package:expense_tracker_mobile/presentation/widgets/auth/auth_header.dar
 import 'package:expense_tracker_mobile/presentation/widgets/auth/auth_link_text.dart';
 import 'package:expense_tracker_mobile/presentation/widgets/auth/auth_text_field.dart';
 import 'package:expense_tracker_mobile/presentation/widgets/auth/password_text_field.dart';
+import 'package:expense_tracker_mobile/presentation/widgets/common/error_dialog.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get_it/get_it.dart';
@@ -183,12 +184,7 @@ class _LoginPageState extends State<LoginPage> {
       setState(() {
         _isLoading = false;
       });
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(
-          content: Text(state.failure.message),
-          backgroundColor: AppColors.error,
-        ),
-      );
+      ErrorDialog.show(context, state.failure);
     }
   }
 }
