@@ -256,4 +256,94 @@ class AppLocalizationsId extends AppLocalizations {
 
   @override
   String get ok => 'OK';
+
+  @override
+  String get addTransaction => 'Tambah Transaksi';
+
+  @override
+  String get expense => 'Pengeluaran';
+
+  @override
+  String get income => 'Pemasukan';
+
+  @override
+  String get amount => 'Jumlah';
+
+  @override
+  String get category => 'Kategori';
+
+  @override
+  String get description => 'Deskripsi';
+
+  @override
+  String get descriptionOptional => 'Deskripsi (Opsional)';
+
+  @override
+  String get saveTransaction => 'Simpan Transaksi';
+
+  @override
+  String get pleaseEnterAmount => 'Harap masukkan jumlah';
+
+  @override
+  String get pleaseEnterValidAmount => 'Harap masukkan jumlah yang valid';
+
+  @override
+  String get pleaseSelectCategory => 'Harap pilih kategori';
+
+  @override
+  String get transactionSavedSuccessfully => 'Transaksi berhasil disimpan!';
+
+  @override
+  String get foodDining => 'Makanan & Restoran';
+
+  @override
+  String get transportation => 'Transportasi';
+
+  @override
+  String get shopping => 'Belanja';
+
+  @override
+  String get entertainment => 'Hiburan';
+
+  @override
+  String get billsUtilities => 'Tagihan & Utilitas';
+
+  @override
+  String get healthcare => 'Kesehatan';
+
+  @override
+  String get education => 'Pendidikan';
+
+  @override
+  String get others => 'Lainnya';
+
+  @override
+  String get salary => 'Gaji';
+
+  @override
+  String get business => 'Bisnis';
+
+  @override
+  String get investment => 'Investasi';
+
+  @override
+  String get gift => 'Hadiah';
+
+  @override
+  String get paymentMethod => 'Metode Pembayaran';
+
+  @override
+  String get pleaseSelectPaymentMethod => 'Harap pilih metode pembayaran';
+
+  @override
+  String get cash => 'Tunai';
+
+  @override
+  String get creditCard => 'Kartu Kredit';
+
+  @override
+  String get bankTransfer => 'Transfer Bank';
+
+  @override
+  String get digitalWallet => 'Dompet Digital';
 }

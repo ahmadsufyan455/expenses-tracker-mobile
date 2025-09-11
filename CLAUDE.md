@@ -5,7 +5,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 ## Development Commands
 
 **Build & Code Generation:**
-- `flutter pub get` - Install dependencies  
+- `flutter pub get` - Install dependencies
 - `dart run build_runner build --delete-conflicting-outputs` - Generate code (DI, JSON serialization, Retrofit)
 - `flutter gen-l10n` - Generate localization files
 - `flutter build apk` - Build Android APK
@@ -57,7 +57,10 @@ lib/
 **Environment Setup:**
 - Uses flutter_dotenv with config in `assets/env/.env`
 - Localization files in `lib/l10n/` (app_en.arb, app_id.arb)
+
+**New Page Setup:**
 - Create localization id (Indonesian) and en (English) for every new text label
+- If there any identic widget, create reusable widget
 
 **Code Generation Note:**
 After modifying models, DI modules, or API clients, run the build_runner command to regenerate necessary code.

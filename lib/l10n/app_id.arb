@@ -91,5 +91,38 @@
   
   "somethingWentWrong": "Terjadi kesalahan",
   "retry": "Coba Lagi",
-  "ok": "OK"
+  "ok": "OK",
+  
+  "addTransaction": "Tambah Transaksi",
+  "expense": "Pengeluaran",
+  "income": "Pemasukan",
+  "amount": "Jumlah",
+  "category": "Kategori",
+  "description": "Deskripsi",
+  "descriptionOptional": "Deskripsi (Opsional)",
+  "saveTransaction": "Simpan Transaksi",
+  "pleaseEnterAmount": "Harap masukkan jumlah",
+  "pleaseEnterValidAmount": "Harap masukkan jumlah yang valid",
+  "pleaseSelectCategory": "Harap pilih kategori",
+  "transactionSavedSuccessfully": "Transaksi berhasil disimpan!",
+  
+  "foodDining": "Makanan & Restoran",
+  "transportation": "Transportasi",
+  "shopping": "Belanja",
+  "entertainment": "Hiburan",
+  "billsUtilities": "Tagihan & Utilitas",
+  "healthcare": "Kesehatan",
+  "education": "Pendidikan",
+  "others": "Lainnya",
+  "salary": "Gaji",
+  "business": "Bisnis",
+  "investment": "Investasi",
+  "gift": "Hadiah",
+  
+  "paymentMethod": "Metode Pembayaran",
+  "pleaseSelectPaymentMethod": "Harap pilih metode pembayaran",
+  "cash": "Tunai",
+  "creditCard": "Kartu Kredit",
+  "bankTransfer": "Transfer Bank",
+  "digitalWallet": "Dompet Digital"
 }

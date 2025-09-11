@@ -255,4 +255,94 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get ok => 'OK';
+
+  @override
+  String get addTransaction => 'Add Transaction';
+
+  @override
+  String get expense => 'Expense';
+
+  @override
+  String get income => 'Income';
+
+  @override
+  String get amount => 'Amount';
+
+  @override
+  String get category => 'Category';
+
+  @override
+  String get description => 'Description';
+
+  @override
+  String get descriptionOptional => 'Description (Optional)';
+
+  @override
+  String get saveTransaction => 'Save Transaction';
+
+  @override
+  String get pleaseEnterAmount => 'Please enter amount';
+
+  @override
+  String get pleaseEnterValidAmount => 'Please enter valid amount';
+
+  @override
+  String get pleaseSelectCategory => 'Please select a category';
+
+  @override
+  String get transactionSavedSuccessfully => 'Transaction saved successfully!';
+
+  @override
+  String get foodDining => 'Food & Dining';
+
+  @override
+  String get transportation => 'Transportation';
+
+  @override
+  String get shopping => 'Shopping';
+
+  @override
+  String get entertainment => 'Entertainment';
+
+  @override
+  String get billsUtilities => 'Bills & Utilities';
+
+  @override
+  String get healthcare => 'Healthcare';
+
+  @override
+  String get education => 'Education';
+
+  @override
+  String get others => 'Others';
+
+  @override
+  String get salary => 'Salary';
+
+  @override
+  String get business => 'Business';
+
+  @override
+  String get investment => 'Investment';
+
+  @override
+  String get gift => 'Gift';
+
+  @override
+  String get paymentMethod => 'Payment Method';
+
+  @override
+  String get pleaseSelectPaymentMethod => 'Please select a payment method';
+
+  @override
+  String get cash => 'Cash';
+
+  @override
+  String get creditCard => 'Credit Card';
+
+  @override
+  String get bankTransfer => 'Bank Transfer';
+
+  @override
+  String get digitalWallet => 'Digital Wallet';
 }

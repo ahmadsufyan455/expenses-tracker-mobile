@@ -159,5 +159,38 @@
   
   "somethingWentWrong": "Something went wrong",
   "retry": "Retry",
-  "ok": "OK"
+  "ok": "OK",
+  
+  "addTransaction": "Add Transaction",
+  "expense": "Expense",
+  "income": "Income",
+  "amount": "Amount",
+  "category": "Category",
+  "description": "Description",
+  "descriptionOptional": "Description (Optional)",
+  "saveTransaction": "Save Transaction",
+  "pleaseEnterAmount": "Please enter amount",
+  "pleaseEnterValidAmount": "Please enter valid amount",
+  "pleaseSelectCategory": "Please select a category",
+  "transactionSavedSuccessfully": "Transaction saved successfully!",
+  
+  "foodDining": "Food & Dining",
+  "transportation": "Transportation",
+  "shopping": "Shopping",
+  "entertainment": "Entertainment",
+  "billsUtilities": "Bills & Utilities",
+  "healthcare": "Healthcare",
+  "education": "Education",
+  "others": "Others",
+  "salary": "Salary",
+  "business": "Business",
+  "investment": "Investment",
+  "gift": "Gift",
+  
+  "paymentMethod": "Payment Method",
+  "pleaseSelectPaymentMethod": "Please select a payment method",
+  "cash": "Cash",
+  "creditCard": "Credit Card",
+  "bankTransfer": "Bank Transfer",
+  "digitalWallet": "Digital Wallet"
 }
