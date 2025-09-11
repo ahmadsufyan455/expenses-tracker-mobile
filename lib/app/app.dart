@@ -1,4 +1,5 @@
 import 'package:expense_tracker_mobile/app/router.dart';
+import 'package:expense_tracker_mobile/core/di/di.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 
@@ -13,6 +14,9 @@ class ExpenseTrackerApp extends StatelessWidget {
     return MaterialApp(
       title: 'Expense Tracker',
       debugShowCheckedModeBanner: false,
+
+      // Navigation
+      navigatorKey: getIt<GlobalKey<NavigatorState>>(instanceName: 'navigatorKey'),
 
       // Localization
       localizationsDelegates: const [

@@ -138,11 +138,13 @@ class ProfilePage extends StatelessWidget {
   }
 
   Future<void> _handleLogout(BuildContext context, SessionService sessionService) async {
+    final theme = Theme.of(context);
     final shouldLogout = await showDialog<bool>(
       context: context,
       builder: (context) => AlertDialog(
         title: Text(context.l10n.logout),
         content: Text(context.l10n.logoutConfirmation),
+        backgroundColor: theme.colorScheme.surface,
         actions: [
           TextButton(onPressed: () => Navigator.of(context).pop(false), child: Text(context.l10n.cancel)),
           TextButton(

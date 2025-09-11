@@ -5,12 +5,12 @@ import 'package:expense_tracker_mobile/core/extensions/build_context_extensions.
 import 'package:expense_tracker_mobile/core/services/session_service.dart';
 import 'package:expense_tracker_mobile/core/utils/validation_utils.dart';
 import 'package:expense_tracker_mobile/presentation/pages/auth/login/bloc/login_bloc.dart';
-import 'package:expense_tracker_mobile/presentation/widgets/auth/auth_button.dart';
 import 'package:expense_tracker_mobile/presentation/widgets/auth/auth_header.dart';
 import 'package:expense_tracker_mobile/presentation/widgets/auth/auth_link_text.dart';
 import 'package:expense_tracker_mobile/presentation/widgets/auth/auth_text_field.dart';
 import 'package:expense_tracker_mobile/presentation/widgets/auth/password_text_field.dart';
 import 'package:expense_tracker_mobile/presentation/widgets/common/error_dialog.dart';
+import 'package:expense_tracker_mobile/presentation/widgets/common/global_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get_it/get_it.dart';
@@ -47,12 +47,7 @@ class _LoginPageState extends State<LoginPage> {
 
   Future<void> _handleLogin() async {
     if (_formKey.currentState!.validate()) {
-      _bloc.add(
-        LoginSubmitted(
-          email: _emailController.text.trim().toLowerCase(),
-          password: _passwordController.text,
-        ),
-      );
+      _bloc.add(LoginSubmitted(email: _emailController.text.trim().toLowerCase(), password: _passwordController.text));
     }
   }
 
@@ -81,10 +76,7 @@ class _LoginPageState extends State<LoginPage> {
                   const SizedBox(height: AppDimensions.spaceXXL),
 
                   // Header Section
-                  AuthHeader(
-                    title: context.l10n.welcomeBack,
-                    subtitle: context.l10n.loginSubtitle,
-                  ),
+                  AuthHeader(title: context.l10n.welcomeBack, subtitle: context.l10n.loginSubtitle),
 
                   const SizedBox(height: AppDimensions.spaceXXL),
 
@@ -120,11 +112,7 @@ class _LoginPageState extends State<LoginPage> {
                         const SizedBox(height: AppDimensions.spaceXL),
 
                         // Login Button
-                        AuthButton(
-                          text: context.l10n.signIn,
-                          onPressed: _handleLogin,
-                          isLoading: _isLoading,
-                        ),
+                        GlobalButton(text: context.l10n.signIn, onPressed: _handleLogin, isLoading: _isLoading),
 
                         const SizedBox(height: AppDimensions.spaceXL),
 
@@ -136,9 +124,7 @@ class _LoginPageState extends State<LoginPage> {
                               padding: AppDimensions.paddingHorizontalM,
                               child: Text(
                                 context.l10n.or,
-                                style: AppTextStyles.bodyMedium.copyWith(
-                                  color: theme.colorScheme.onSurfaceVariant,
-                                ),
+                                style: AppTextStyles.bodyMedium.copyWith(color: theme.colorScheme.onSurfaceVariant),
                               ),
                             ),
                             const Expanded(child: Divider()),
@@ -169,32 +155,28 @@ class _LoginPageState extends State<LoginPage> {
 
   void _handleLoginState(LoginState state) {
     if (state is LoginLoading) {
-      setState(() {
-        _isLoading = true;
-      });
+      _handleLoadingState(true);
     } else if (state is LoginSuccess) {
-      setState(() {
-        _isLoading = false;
-      });
-      
+      _handleLoadingState(false);
+
       // Save token to session
       _sessionService.saveToken(
         accessToken: state.data.accessToken,
         tokenType: state.data.tokenType,
         expiresIn: state.data.expiresIn,
       );
-      
+
       // Navigate to home page
-      Navigator.pushNamedAndRemoveUntil(
-        context,
-        RouteName.home.path,
-        (route) => false,
-      );
+      Navigator.pushNamedAndRemoveUntil(context, RouteName.home.path, (route) => false);
     } else if (state is LoginFailure) {
-      setState(() {
-        _isLoading = false;
-      });
+      _handleLoadingState(false);
       ErrorDialog.show(context, state.failure);
     }
+  }
+
+  _handleLoadingState(bool isLoading) {
+    setState(() {
+      _isLoading = isLoading;
+    });
   }
 }

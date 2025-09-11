@@ -1,7 +1,7 @@
 import 'package:expense_tracker_mobile/app/theme/app_colors.dart';
 import 'package:flutter/material.dart';
 
-class CustomDropdownFormField<T> extends StatelessWidget {
+class GlobalDropdownFormField<T> extends StatelessWidget {
   final T? value;
   final String labelText;
   final List<DropdownMenuItem<T>> items;
@@ -10,7 +10,7 @@ class CustomDropdownFormField<T> extends StatelessWidget {
   final String? hintText;
   final bool enabled;
 
-  const CustomDropdownFormField({
+  const GlobalDropdownFormField({
     super.key,
     this.value,
     required this.labelText,
@@ -31,42 +31,28 @@ class CustomDropdownFormField<T> extends StatelessWidget {
       decoration: InputDecoration(
         labelText: labelText,
         hintText: hintText,
-        border: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(12),
-        ),
+        border: OutlineInputBorder(borderRadius: BorderRadius.circular(12)),
         focusedBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(12),
           borderSide: BorderSide(color: AppColors.primary),
         ),
         enabledBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(12),
-          borderSide: BorderSide(
-            color: Theme.of(context).colorScheme.outline,
-          ),
+          borderSide: BorderSide(color: Theme.of(context).colorScheme.outline),
         ),
         disabledBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(12),
-          borderSide: BorderSide(
-            color: Theme.of(context).colorScheme.outline.withValues(alpha: 0.5),
-          ),
+          borderSide: BorderSide(color: Theme.of(context).colorScheme.outline.withValues(alpha: 0.5)),
         ),
         errorBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(12),
-          borderSide: BorderSide(
-            color: Theme.of(context).colorScheme.error,
-          ),
+          borderSide: BorderSide(color: Theme.of(context).colorScheme.error),
         ),
         focusedErrorBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(12),
-          borderSide: BorderSide(
-            color: Theme.of(context).colorScheme.error,
-            width: 2,
-          ),
+          borderSide: BorderSide(color: Theme.of(context).colorScheme.error, width: 2),
         ),
-        contentPadding: const EdgeInsets.symmetric(
-          horizontal: 16,
-          vertical: 16,
-        ),
+        contentPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
       ),
       borderRadius: BorderRadius.circular(12),
       dropdownColor: Theme.of(context).colorScheme.surface,

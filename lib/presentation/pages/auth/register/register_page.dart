@@ -4,12 +4,12 @@ import 'package:expense_tracker_mobile/app/theme/app_text_styles.dart';
 import 'package:expense_tracker_mobile/core/extensions/build_context_extensions.dart';
 import 'package:expense_tracker_mobile/core/utils/validation_utils.dart';
 import 'package:expense_tracker_mobile/presentation/pages/auth/register/bloc/register_bloc.dart';
-import 'package:expense_tracker_mobile/presentation/widgets/auth/auth_button.dart';
 import 'package:expense_tracker_mobile/presentation/widgets/auth/auth_header.dart';
 import 'package:expense_tracker_mobile/presentation/widgets/auth/auth_link_text.dart';
 import 'package:expense_tracker_mobile/presentation/widgets/auth/auth_text_field.dart';
 import 'package:expense_tracker_mobile/presentation/widgets/auth/password_text_field.dart';
 import 'package:expense_tracker_mobile/presentation/widgets/common/error_dialog.dart';
+import 'package:expense_tracker_mobile/presentation/widgets/common/global_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get_it/get_it.dart';
@@ -50,12 +50,9 @@ class _RegisterPageState extends State<RegisterPage> {
   Future<void> _handleRegister() async {
     if (_formKey.currentState!.validate()) {
       if (!_acceptTerms) {
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(
-            content: Text(context.l10n.pleaseAcceptTerms),
-            backgroundColor: AppColors.warning,
-          ),
-        );
+        ScaffoldMessenger.of(
+          context,
+        ).showSnackBar(SnackBar(content: Text(context.l10n.pleaseAcceptTerms), backgroundColor: AppColors.warning));
         return;
       }
 
@@ -119,11 +116,7 @@ class _RegisterPageState extends State<RegisterPage> {
                                 prefixIcon: Icons.person_outlined,
                                 textCapitalization: TextCapitalization.words,
                                 textInputAction: TextInputAction.next,
-                                validator: (value) =>
-                                    ValidationUtils.validateName(
-                                      value,
-                                      context.l10n.firstName,
-                                    ),
+                                validator: (value) => ValidationUtils.validateName(value, context.l10n.firstName),
                               ),
                             ),
 
@@ -138,11 +131,7 @@ class _RegisterPageState extends State<RegisterPage> {
                                 prefixIcon: Icons.person_outline,
                                 textCapitalization: TextCapitalization.words,
                                 textInputAction: TextInputAction.next,
-                                validator: (value) =>
-                                    ValidationUtils.validateName(
-                                      value,
-                                      context.l10n.lastName,
-                                    ),
+                                validator: (value) => ValidationUtils.validateName(value, context.l10n.lastName),
                               ),
                             ),
                           ],
@@ -202,27 +191,18 @@ class _RegisterPageState extends State<RegisterPage> {
                                   child: RichText(
                                     text: TextSpan(
                                       style: AppTextStyles.bodySmall.copyWith(
-                                        color:
-                                            theme.colorScheme.onSurfaceVariant,
+                                        color: theme.colorScheme.onSurfaceVariant,
                                       ),
                                       children: [
-                                        TextSpan(
-                                          text: context.l10n.agreeToTerms,
-                                        ),
+                                        TextSpan(text: context.l10n.agreeToTerms),
                                         TextSpan(
                                           text: context.l10n.termsAndConditions,
-                                          style: TextStyle(
-                                            color: AppColors.primary,
-                                            fontWeight: FontWeight.w600,
-                                          ),
+                                          style: TextStyle(color: AppColors.primary, fontWeight: FontWeight.w600),
                                         ),
                                         TextSpan(text: context.l10n.and),
                                         TextSpan(
                                           text: context.l10n.privacyPolicy,
-                                          style: TextStyle(
-                                            color: AppColors.primary,
-                                            fontWeight: FontWeight.w600,
-                                          ),
+                                          style: TextStyle(color: AppColors.primary, fontWeight: FontWeight.w600),
                                         ),
                                       ],
                                     ),
@@ -236,7 +216,7 @@ class _RegisterPageState extends State<RegisterPage> {
                         const SizedBox(height: AppDimensions.spaceXL),
 
                         // Register Button
-                        AuthButton(
+                        GlobalButton(
                           text: context.l10n.createAccountButton,
                           onPressed: _handleRegister,
                           isLoading: _isLoading,
@@ -274,10 +254,7 @@ class _RegisterPageState extends State<RegisterPage> {
         _isLoading = false;
       });
       ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(
-          content: Text(context.l10n.accountCreatedSuccessfully),
-          backgroundColor: AppColors.success,
-        ),
+        SnackBar(content: Text(context.l10n.accountCreatedSuccessfully), backgroundColor: AppColors.success),
       );
       Navigator.pop(context);
     } else if (state is RegisterFailure) {

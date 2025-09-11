@@ -12,13 +12,9 @@ class SessionService {
 
   SessionService(this._prefs);
 
-  Future<void> saveToken({
-    required String accessToken,
-    required String tokenType,
-    required int expiresIn,
-  }) async {
+  Future<void> saveToken({required String accessToken, required String tokenType, required int expiresIn}) async {
     final loginTime = DateTime.now().millisecondsSinceEpoch;
-    
+
     await Future.wait([
       _prefs.setString(_accessTokenKey, accessToken),
       _prefs.setString(_tokenTypeKey, tokenType),
@@ -38,28 +34,28 @@ class SessionService {
   bool isLoggedIn() {
     final token = getAccessToken();
     if (token == null || token.isEmpty) return false;
-    
+
     return !isTokenExpired();
   }
 
   bool isTokenExpired() {
     final expiresIn = _prefs.getInt(_expiresInKey);
     final loginTime = _prefs.getInt(_loginTimeKey);
-    
+
     if (expiresIn == null || loginTime == null) return true;
-    
+
     final expirationTime = loginTime + (expiresIn * 1000);
     final currentTime = DateTime.now().millisecondsSinceEpoch;
-    
+
     return currentTime >= expirationTime;
   }
 
   String? getAuthHeader() {
     final tokenType = getTokenType();
     final accessToken = getAccessToken();
-    
+
     if (tokenType == null || accessToken == null) return null;
-    
+
     return '$tokenType $accessToken';
   }
 
@@ -75,21 +71,21 @@ class SessionService {
   DateTime? getLoginTime() {
     final loginTime = _prefs.getInt(_loginTimeKey);
     if (loginTime == null) return null;
-    
+
     return DateTime.fromMillisecondsSinceEpoch(loginTime);
   }
 
   Duration? getTokenRemainingTime() {
     final expiresIn = _prefs.getInt(_expiresInKey);
     final loginTime = _prefs.getInt(_loginTimeKey);
-    
+
     if (expiresIn == null || loginTime == null) return null;
-    
+
     final expirationTime = loginTime + (expiresIn * 1000);
     final currentTime = DateTime.now().millisecondsSinceEpoch;
-    
+
     if (currentTime >= expirationTime) return Duration.zero;
-    
+
     return Duration(milliseconds: expirationTime - currentTime);
   }
 }

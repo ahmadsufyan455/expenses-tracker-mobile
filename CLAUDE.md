@@ -61,6 +61,7 @@ lib/
 **New Page Setup:**
 - Create localization id (Indonesian) and en (English) for every new text label
 - If there any identic widget, create reusable widget
+- Keep it clean and simple, don't over engineering
 
 **Code Generation Note:**
 After modifying models, DI modules, or API clients, run the build_runner command to regenerate necessary code.
