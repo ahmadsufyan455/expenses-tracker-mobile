@@ -33,25 +33,17 @@ class ProfilePage extends StatelessWidget {
                   CircleAvatar(
                     radius: 40,
                     backgroundColor: AppColors.primary,
-                    child: Icon(
-                      Icons.person,
-                      size: 40,
-                      color: AppColors.onPrimary,
-                    ),
+                    child: Icon(Icons.person, size: 40, color: AppColors.onPrimary),
                   ),
                   const SizedBox(height: AppDimensions.spaceM),
                   Text(
                     context.l10n.welcomeUser,
-                    style: AppTextStyles.headlineMedium.copyWith(
-                      color: AppColors.primary,
-                    ),
+                    style: AppTextStyles.headlineMedium.copyWith(color: AppColors.primary),
                   ),
                   const SizedBox(height: AppDimensions.spaceS),
                   Text(
                     context.l10n.manageAccount,
-                    style: AppTextStyles.bodyMedium.copyWith(
-                      color: AppColors.primary.withValues(alpha: 0.7),
-                    ),
+                    style: AppTextStyles.bodyMedium.copyWith(color: AppColors.primary.withValues(alpha: 0.7)),
                   ),
                 ],
               ),
@@ -69,15 +61,14 @@ class ProfilePage extends StatelessWidget {
               },
             ),
 
-            _buildProfileOption(
-              icon: Icons.notifications_outlined,
-              title: context.l10n.notifications,
-              subtitle: context.l10n.manageNotifications,
-              onTap: () {
-                // TODO: Navigate to notifications settings
-              },
-            ),
-
+            // _buildProfileOption(
+            //   icon: Icons.notifications_outlined,
+            //   title: context.l10n.notifications,
+            //   subtitle: context.l10n.manageNotifications,
+            //   onTap: () {
+            //     // TODO: Navigate to notifications settings
+            //   },
+            // ),
             _buildProfileOption(
               icon: Icons.security_outlined,
               title: context.l10n.security,
@@ -87,15 +78,14 @@ class ProfilePage extends StatelessWidget {
               },
             ),
 
-            _buildProfileOption(
-              icon: Icons.help_outline,
-              title: context.l10n.helpSupport,
-              subtitle: context.l10n.getHelp,
-              onTap: () {
-                // TODO: Navigate to help page
-              },
-            ),
-
+            // _buildProfileOption(
+            //   icon: Icons.help_outline,
+            //   title: context.l10n.helpSupport,
+            //   subtitle: context.l10n.getHelp,
+            //   onTap: () {
+            //     // TODO: Navigate to help page
+            //   },
+            // ),
             const Spacer(),
 
             // Logout Button
@@ -110,9 +100,7 @@ class ProfilePage extends StatelessWidget {
                 style: OutlinedButton.styleFrom(
                   foregroundColor: AppColors.error,
                   side: BorderSide(color: AppColors.error),
-                  padding: const EdgeInsets.symmetric(
-                    vertical: AppDimensions.paddingM,
-                  ),
+                  padding: const EdgeInsets.symmetric(vertical: AppDimensions.paddingM),
                 ),
               ),
             ),
@@ -149,20 +137,14 @@ class ProfilePage extends StatelessWidget {
     );
   }
 
-  Future<void> _handleLogout(
-    BuildContext context,
-    SessionService sessionService,
-  ) async {
+  Future<void> _handleLogout(BuildContext context, SessionService sessionService) async {
     final shouldLogout = await showDialog<bool>(
       context: context,
       builder: (context) => AlertDialog(
         title: Text(context.l10n.logout),
         content: Text(context.l10n.logoutConfirmation),
         actions: [
-          TextButton(
-            onPressed: () => Navigator.of(context).pop(false),
-            child: Text(context.l10n.cancel),
-          ),
+          TextButton(onPressed: () => Navigator.of(context).pop(false), child: Text(context.l10n.cancel)),
           TextButton(
             onPressed: () => Navigator.of(context).pop(true),
             style: TextButton.styleFrom(foregroundColor: AppColors.error),
@@ -172,13 +154,11 @@ class ProfilePage extends StatelessWidget {
       ),
     );
 
-    if (shouldLogout == true && context.mounted) {
+    if (shouldLogout == true) {
       await sessionService.clearSession();
-      Navigator.pushNamedAndRemoveUntil(
-        context,
-        RouteName.login.path,
-        (route) => false,
-      );
+      if (context.mounted) {
+        Navigator.pushNamedAndRemoveUntil(context, RouteName.login.path, (route) => false);
+      }
     }
   }
 }

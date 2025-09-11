@@ -3,7 +3,9 @@ import 'package:expense_tracker_mobile/app/theme/app_colors.dart';
 import 'package:expense_tracker_mobile/app/theme/app_dimensions.dart';
 import 'package:expense_tracker_mobile/app/theme/app_text_styles.dart';
 import 'package:expense_tracker_mobile/core/extensions/build_context_extensions.dart';
+import 'package:expense_tracker_mobile/core/services/session_service.dart';
 import 'package:flutter/material.dart';
+import 'package:get_it/get_it.dart';
 
 class SplashPage extends StatefulWidget {
   const SplashPage({super.key});
@@ -12,8 +14,7 @@ class SplashPage extends StatefulWidget {
   State<SplashPage> createState() => _SplashPageState();
 }
 
-class _SplashPageState extends State<SplashPage>
-    with SingleTickerProviderStateMixin {
+class _SplashPageState extends State<SplashPage> with SingleTickerProviderStateMixin {
   late AnimationController _animationController;
   late Animation<double> _fadeAnimation;
   late Animation<double> _scaleAnimation;
@@ -27,10 +28,7 @@ class _SplashPageState extends State<SplashPage>
   }
 
   void _setupAnimations() {
-    _animationController = AnimationController(
-      duration: const Duration(milliseconds: 2000),
-      vsync: this,
-    );
+    _animationController = AnimationController(duration: const Duration(milliseconds: 2000), vsync: this);
 
     _fadeAnimation = Tween<double>(begin: 0.0, end: 1.0).animate(
       CurvedAnimation(
@@ -46,21 +44,28 @@ class _SplashPageState extends State<SplashPage>
       ),
     );
 
-    _slideAnimation =
-        Tween<Offset>(begin: const Offset(0, 0.3), end: Offset.zero).animate(
-          CurvedAnimation(
-            parent: _animationController,
-            curve: const Interval(0.3, 0.8, curve: Curves.easeOutCubic),
-          ),
-        );
+    _slideAnimation = Tween<Offset>(begin: const Offset(0, 0.3), end: Offset.zero).animate(
+      CurvedAnimation(
+        parent: _animationController,
+        curve: const Interval(0.3, 0.8, curve: Curves.easeOutCubic),
+      ),
+    );
+  }
+
+  bool _isLoggedIn() {
+    final sessionService = GetIt.instance<SessionService>();
+    return sessionService.isLoggedIn();
   }
 
   void _startSplashSequence() {
     _animationController.forward();
     Future.delayed(const Duration(milliseconds: 3000), () {
       if (mounted) {
-        // Navigate to login page
-        Navigator.pushReplacementNamed(context, RouteName.login.path);
+        if (_isLoggedIn()) {
+          Navigator.pushReplacementNamed(context, RouteName.home.path);
+        } else {
+          Navigator.pushReplacementNamed(context, RouteName.login.path);
+        }
       }
     });
   }
@@ -114,11 +119,7 @@ class _SplashPageState extends State<SplashPage>
                               ),
                             ],
                           ),
-                          child: const Icon(
-                            Icons.account_balance_wallet_rounded,
-                            size: 60,
-                            color: AppColors.primary,
-                          ),
+                          child: const Icon(Icons.account_balance_wallet_rounded, size: 60, color: AppColors.primary),
                         ),
                       ),
                     );
@@ -191,9 +192,7 @@ class _SplashPageState extends State<SplashPage>
                         width: 24,
                         height: 24,
                         child: CircularProgressIndicator(
-                          valueColor: AlwaysStoppedAnimation<Color>(
-                            Colors.white,
-                          ),
+                          valueColor: AlwaysStoppedAnimation<Color>(Colors.white),
                           strokeWidth: 2.0,
                         ),
                       ),
