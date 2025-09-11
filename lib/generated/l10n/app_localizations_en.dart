@@ -136,4 +136,123 @@ class AppLocalizationsEn extends AppLocalizations {
   String numberMustBePositive(String fieldName) {
     return '$fieldName must be greater than 0';
   }
+
+  @override
+  String get goodMorning => 'Good Morning!';
+
+  @override
+  String get goodAfternoon => 'Good Afternoon!';
+
+  @override
+  String get goodEvening => 'Good Evening!';
+
+  @override
+  String get overview => 'Overview';
+
+  @override
+  String get totalIncome => 'Total Income';
+
+  @override
+  String get totalExpense => 'Total Expense';
+
+  @override
+  String get recentBudget => 'Recent Budget';
+
+  @override
+  String get recentTransactions => 'Recent Transactions';
+
+  @override
+  String get viewAll => 'View All';
+
+  @override
+  String get monthly => 'Monthly';
+
+  @override
+  String get weekly => 'Weekly';
+
+  @override
+  String get yearly => 'Yearly';
+
+  @override
+  String get used => 'used';
+
+  @override
+  String get today => 'Today';
+
+  @override
+  String get yesterday => 'Yesterday';
+
+  @override
+  String daysAgo(int days) {
+    return '$days days ago';
+  }
+
+  @override
+  String get home => 'Home';
+
+  @override
+  String get transactions => 'Transactions';
+
+  @override
+  String get budget => 'Budget';
+
+  @override
+  String get profile => 'Profile';
+
+  @override
+  String get manageTransactions => 'Manage your income and expenses';
+
+  @override
+  String get budgetManagement => 'Budget Management';
+
+  @override
+  String get planSpending => 'Plan and track your spending';
+
+  @override
+  String get welcomeUser => 'Welcome User!';
+
+  @override
+  String get manageAccount => 'Manage your account and preferences';
+
+  @override
+  String get accountSettings => 'Account Settings';
+
+  @override
+  String get updatePersonalInfo => 'Update your personal information';
+
+  @override
+  String get notifications => 'Notifications';
+
+  @override
+  String get manageNotifications => 'Manage your notification preferences';
+
+  @override
+  String get security => 'Security';
+
+  @override
+  String get changePassword => 'Change password and security settings';
+
+  @override
+  String get helpSupport => 'Help & Support';
+
+  @override
+  String get getHelp => 'Get help and contact support';
+
+  @override
+  String get logout => 'Logout';
+
+  @override
+  String get logoutConfirmation => 'Are you sure you want to logout?';
+
+  @override
+  String get cancel => 'Cancel';
+
+  @override
+  String get somethingWentWrong => 'Something went wrong';
+
+  @override
+  String get retry => 'Retry';
+
+  @override
+  String get ok => 'OK';
 }

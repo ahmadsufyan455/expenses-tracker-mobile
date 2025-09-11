@@ -137,4 +137,123 @@ class AppLocalizationsId extends AppLocalizations {
   String numberMustBePositive(String fieldName) {
     return '$fieldName harus lebih besar dari 0';
   }
+
+  @override
+  String get goodMorning => 'Selamat Pagi!';
+
+  @override
+  String get goodAfternoon => 'Selamat Siang!';
+
+  @override
+  String get goodEvening => 'Selamat Malam!';
+
+  @override
+  String get overview => 'Ringkasan';
+
+  @override
+  String get totalIncome => 'Total Pemasukan';
+
+  @override
+  String get totalExpense => 'Total Pengeluaran';
+
+  @override
+  String get recentBudget => 'Anggaran Terbaru';
+
+  @override
+  String get recentTransactions => 'Transaksi Terbaru';
+
+  @override
+  String get viewAll => 'Lihat Semua';
+
+  @override
+  String get monthly => 'Bulanan';
+
+  @override
+  String get weekly => 'Mingguan';
+
+  @override
+  String get yearly => 'Tahunan';
+
+  @override
+  String get used => 'digunakan';
+
+  @override
+  String get today => 'Hari ini';
+
+  @override
+  String get yesterday => 'Kemarin';
+
+  @override
+  String daysAgo(int days) {
+    return '$days hari lalu';
+  }
+
+  @override
+  String get home => 'Beranda';
+
+  @override
+  String get transactions => 'Transaksi';
+
+  @override
+  String get budget => 'Anggaran';
+
+  @override
+  String get profile => 'Profil';
+
+  @override
+  String get manageTransactions => 'Kelola pemasukan dan pengeluaran Anda';
+
+  @override
+  String get budgetManagement => 'Manajemen Anggaran';
+
+  @override
+  String get planSpending => 'Rencanakan dan lacak pengeluaran Anda';
+
+  @override
+  String get welcomeUser => 'Selamat Datang Pengguna!';
+
+  @override
+  String get manageAccount => 'Kelola akun dan preferensi Anda';
+
+  @override
+  String get accountSettings => 'Pengaturan Akun';
+
+  @override
+  String get updatePersonalInfo => 'Perbarui informasi pribadi Anda';
+
+  @override
+  String get notifications => 'Notifikasi';
+
+  @override
+  String get manageNotifications => 'Kelola preferensi notifikasi Anda';
+
+  @override
+  String get security => 'Keamanan';
+
+  @override
+  String get changePassword => 'Ubah kata sandi dan pengaturan keamanan';
+
+  @override
+  String get helpSupport => 'Bantuan & Dukungan';
+
+  @override
+  String get getHelp => 'Dapatkan bantuan dan hubungi dukungan';
+
+  @override
+  String get logout => 'Keluar';
+
+  @override
+  String get logoutConfirmation => 'Apakah Anda yakin ingin keluar?';
+
+  @override
+  String get cancel => 'Batal';
+
+  @override
+  String get somethingWentWrong => 'Terjadi kesalahan';
+
+  @override
+  String get retry => 'Coba Lagi';
+
+  @override
+  String get ok => 'OK';
 }

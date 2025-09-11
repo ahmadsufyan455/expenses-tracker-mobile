@@ -1,8 +1,8 @@
 import 'package:expense_tracker_mobile/app/router.dart';
-import 'package:expense_tracker_mobile/app/theme/app_colors.dart';
 import 'package:expense_tracker_mobile/app/theme/app_dimensions.dart';
 import 'package:expense_tracker_mobile/app/theme/app_text_styles.dart';
 import 'package:expense_tracker_mobile/core/extensions/build_context_extensions.dart';
+import 'package:expense_tracker_mobile/core/services/session_service.dart';
 import 'package:expense_tracker_mobile/core/utils/validation_utils.dart';
 import 'package:expense_tracker_mobile/presentation/pages/auth/login/bloc/login_bloc.dart';
 import 'package:expense_tracker_mobile/presentation/widgets/auth/auth_button.dart';
@@ -29,11 +29,13 @@ class _LoginPageState extends State<LoginPage> {
   bool _isLoading = false;
 
   late LoginBloc _bloc;
+  late SessionService _sessionService;
 
   @override
   void initState() {
     super.initState();
     _bloc = GetIt.instance<LoginBloc>();
+    _sessionService = GetIt.instance<SessionService>();
   }
 
   @override
@@ -174,11 +176,19 @@ class _LoginPageState extends State<LoginPage> {
       setState(() {
         _isLoading = false;
       });
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(
-          content: Text(context.l10n.loginSuccessful),
-          backgroundColor: AppColors.success,
-        ),
+      
+      // Save token to session
+      _sessionService.saveToken(
+        accessToken: state.data.accessToken,
+        tokenType: state.data.tokenType,
+        expiresIn: state.data.expiresIn,
+      );
+      
+      // Navigate to home page
+      Navigator.pushNamedAndRemoveUntil(
+        context,
+        RouteName.home.path,
+        (route) => false,
       );
     } else if (state is LoginFailure) {
       setState(() {

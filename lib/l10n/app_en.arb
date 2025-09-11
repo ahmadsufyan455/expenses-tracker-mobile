@@ -106,5 +106,58 @@
         "example": "Amount"
       }
     }
-  }
+  },
+  
+  "goodMorning": "Good Morning!",
+  "goodAfternoon": "Good Afternoon!",
+  "goodEvening": "Good Evening!",
+  "overview": "Overview",
+  "totalIncome": "Total Income",
+  "totalExpense": "Total Expense",
+  "recentBudget": "Recent Budget",
+  "recentTransactions": "Recent Transactions",
+  "viewAll": "View All",
+  "monthly": "Monthly",
+  "weekly": "Weekly",
+  "yearly": "Yearly",
+  "used": "used",
+  "today": "Today",
+  "yesterday": "Yesterday",
+  "daysAgo": "{days} days ago",
+  "@daysAgo": {
+    "description": "Number of days ago",
+    "placeholders": {
+      "days": {
+        "type": "int",
+        "example": "3"
+      }
+    }
+  },
+  
+  "home": "Home",
+  "transactions": "Transactions",
+  "budget": "Budget",
+  "profile": "Profile",
+  
+  "manageTransactions": "Manage your income and expenses",
+  "budgetManagement": "Budget Management",
+  "planSpending": "Plan and track your spending",
+  
+  "welcomeUser": "Welcome User!",
+  "manageAccount": "Manage your account and preferences",
+  "accountSettings": "Account Settings",
+  "updatePersonalInfo": "Update your personal information",
+  "notifications": "Notifications",
+  "manageNotifications": "Manage your notification preferences",
+  "security": "Security",
+  "changePassword": "Change password and security settings",
+  "helpSupport": "Help & Support",
+  "getHelp": "Get help and contact support",
+  "logout": "Logout",
+  "logoutConfirmation": "Are you sure you want to logout?",
+  "cancel": "Cancel",
+  
+  "somethingWentWrong": "Something went wrong",
+  "retry": "Retry",
+  "ok": "OK"
 }
