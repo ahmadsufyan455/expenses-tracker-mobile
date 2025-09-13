@@ -130,5 +130,6 @@
   "type": "Tipe",
   "edit": "Edit",
   "delete": "Hapus",
-  "transactionDetails": "Detail Transaksi"
+  "transactionDetails": "Detail Transaksi",
+  "past": "Sebelumnya"
 }

@@ -57,9 +57,9 @@ class _TransactionsPageState extends State<TransactionsPage> {
 
     // Define section order
     final sectionOrder = [
-      LocalizationUtils.isIndonesian(context) ? 'Hari ini' : 'Today',
-      LocalizationUtils.isIndonesian(context) ? 'Kemarin' : 'Yesterday',
-      LocalizationUtils.isIndonesian(context) ? 'Sebelumnya' : 'Past',
+      context.l10n.today,
+      context.l10n.yesterday,
+      context.l10n.past,
     ];
 
     for (final sectionName in sectionOrder) {

@@ -361,4 +361,7 @@ class AppLocalizationsId extends AppLocalizations {
 
   @override
   String get transactionDetails => 'Detail Transaksi';
+
+  @override
+  String get past => 'Sebelumnya';
 }

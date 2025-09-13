@@ -170,10 +170,10 @@ class LocalizationUtils {
       } else if (daysDifference == 1) {
         return l10n.yesterday;
       } else {
-        return isIndonesian(context) ? 'Sebelumnya' : 'Past';
+        return l10n.past;
       }
     } catch (e) {
-      return isIndonesian(context) ? 'Sebelumnya' : 'Past';
+      return of(context).past;
     }
   }
 }

@@ -198,5 +198,6 @@
   "type": "Type",
   "edit": "Edit",
   "delete": "Delete",
-  "transactionDetails": "Transaction Details"
+  "transactionDetails": "Transaction Details",
+  "past": "Past"
 }

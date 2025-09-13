@@ -360,4 +360,7 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get transactionDetails => 'Transaction Details';
+
+  @override
+  String get past => 'Past';
 }
