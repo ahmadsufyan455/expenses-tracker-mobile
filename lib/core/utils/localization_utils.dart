@@ -31,26 +31,25 @@ class LocalizationUtils {
     return Localizations.localeOf(context).languageCode;
   }
 
-  /// Format currency based on locale
+  /// Format currency based on locale (IDR for both locales)
   static String formatCurrency(BuildContext context, double amount) {
-    if (isIndonesian(context)) {
-      return 'Rp ${amount.toStringAsFixed(0).replaceAllMapped(RegExp(r'(\d{1,3})(?=(\d{3})+(?!\d))'), (Match m) => '${m[1]}.')}';
-    } else {
-      return '\$${amount.toStringAsFixed(2)}';
-    }
+    // Format as Indonesian Rupiah for both English and Indonesian locales
+    final formattedNumber = amount.toStringAsFixed(0).replaceAllMapped(
+      RegExp(r'(\d{1,3})(?=(\d{3})+(?!\d))'), 
+      (Match m) => '${m[1]}.',
+    );
+    return 'Rp $formattedNumber';
   }
 
-  /// Format number based on locale
+  /// Format number based on locale (Indonesian format for both locales)
   static String formatNumber(BuildContext context, double number) {
-    if (isIndonesian(context)) {
-      return number
-          .toStringAsFixed(0)
-          .replaceAllMapped(RegExp(r'(\d{1,3})(?=(\d{3})+(?!\d))'), (Match m) => '${m[1]}.');
-    } else {
-      return number
-          .toStringAsFixed(2)
-          .replaceAllMapped(RegExp(r'(\d{1,3})(?=(\d{3})+(?!\d))'), (Match m) => '${m[1]},');
-    }
+    // Use Indonesian number formatting (dots as thousand separators) for both locales
+    return number
+        .toStringAsFixed(0)
+        .replaceAllMapped(
+          RegExp(r'(\d{1,3})(?=(\d{3})+(?!\d))'),
+          (Match m) => '${m[1]}.',
+        );
   }
 
   /// Get localized date format pattern
