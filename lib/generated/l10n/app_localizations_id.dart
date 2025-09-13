@@ -346,4 +346,19 @@ class AppLocalizationsId extends AppLocalizations {
 
   @override
   String get digitalWallet => 'Dompet Digital';
+
+  @override
+  String get date => 'Tanggal';
+
+  @override
+  String get type => 'Tipe';
+
+  @override
+  String get edit => 'Edit';
+
+  @override
+  String get delete => 'Hapus';
+
+  @override
+  String get transactionDetails => 'Detail Transaksi';
 }

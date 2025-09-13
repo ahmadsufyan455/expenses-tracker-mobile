@@ -192,5 +192,11 @@
   "cash": "Cash",
   "creditCard": "Credit Card",
   "bankTransfer": "Bank Transfer",
-  "digitalWallet": "Digital Wallet"
+  "digitalWallet": "Digital Wallet",
+  
+  "date": "Date",
+  "type": "Type",
+  "edit": "Edit",
+  "delete": "Delete",
+  "transactionDetails": "Transaction Details"
 }

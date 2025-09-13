@@ -58,7 +58,7 @@ lib/
 - Uses flutter_dotenv with config in `assets/env/.env`
 - Localization files in `lib/l10n/` (app_en.arb, app_id.arb)
 
-**New Page Setup:**
+**New Page & Widget Setup:**
 - Create localization id (Indonesian) and en (English) for every new text label
 - If there any identic widget, create reusable widget
 - Keep it clean and simple, don't over engineering

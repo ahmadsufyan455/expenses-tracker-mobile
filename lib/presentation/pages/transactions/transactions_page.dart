@@ -8,6 +8,7 @@ import 'package:expense_tracker_mobile/presentation/pages/transactions/add_trans
 import 'package:expense_tracker_mobile/presentation/pages/transactions/bloc/transaction_bloc.dart';
 import 'package:expense_tracker_mobile/presentation/widgets/common/error_dialog.dart';
 import 'package:expense_tracker_mobile/presentation/widgets/transaction/transaction_item.dart';
+import 'package:expense_tracker_mobile/presentation/widgets/transaction/transaction_detail_bottom_sheet.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get_it/get_it.dart';
@@ -135,7 +136,7 @@ class _TransactionsPageState extends State<TransactionsPage> {
                     return TransactionItem(
                       transaction: item,
                       onTap: () {
-                        // TODO: Navigate to transaction detail page
+                        TransactionDetailBottomSheet.show(context, item);
                       },
                     );
                   }

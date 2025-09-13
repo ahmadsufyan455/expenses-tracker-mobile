@@ -124,5 +124,11 @@
   "cash": "Tunai",
   "creditCard": "Kartu Kredit",
   "bankTransfer": "Transfer Bank",
-  "digitalWallet": "Dompet Digital"
+  "digitalWallet": "Dompet Digital",
+  
+  "date": "Tanggal",
+  "type": "Tipe",
+  "edit": "Edit",
+  "delete": "Hapus",
+  "transactionDetails": "Detail Transaksi"
 }
