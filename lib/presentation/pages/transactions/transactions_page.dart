@@ -56,11 +56,7 @@ class _TransactionsPageState extends State<TransactionsPage> {
     final List<dynamic> sectionedList = [];
 
     // Define section order
-    final sectionOrder = [
-      context.l10n.today,
-      context.l10n.yesterday,
-      context.l10n.past,
-    ];
+    final sectionOrder = [context.l10n.today, context.l10n.yesterday, context.l10n.past];
 
     for (final sectionName in sectionOrder) {
       if (grouped[sectionName] != null && grouped[sectionName]!.isNotEmpty) {
