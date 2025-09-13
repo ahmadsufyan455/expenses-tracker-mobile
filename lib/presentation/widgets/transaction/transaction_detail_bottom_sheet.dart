@@ -47,7 +47,7 @@ class _TransactionDetailBottomSheetState extends State<TransactionDetailBottomSh
         _handleTransactionState(state);
       },
       builder: (context, state) {
-        final isDark = Theme.of(context).brightness == Brightness.dark;
+        final theme = Theme.of(context);
         final transactionType = TransactionType.fromString(widget.transaction.type);
         final paymentMethod = PaymentMethod.fromString(
           widget.transaction.paymentMethod.toLowerCase().replaceAll(' ', '_'),
@@ -63,7 +63,7 @@ class _TransactionDetailBottomSheetState extends State<TransactionDetailBottomSh
 
         return Container(
           decoration: BoxDecoration(
-            color: isDark ? AppColors.surfaceDark : AppColors.surface,
+            color: theme.colorScheme.surface,
             borderRadius: const BorderRadius.only(
               topLeft: Radius.circular(AppDimensions.radiusL),
               topRight: Radius.circular(AppDimensions.radiusL),
@@ -81,7 +81,7 @@ class _TransactionDetailBottomSheetState extends State<TransactionDetailBottomSh
                     width: 40,
                     height: 4,
                     decoration: BoxDecoration(
-                      color: (isDark ? AppColors.onSurfaceVariantDark : AppColors.onSurfaceVariant).withValues(
+                      color: theme.colorScheme.onSurfaceVariant.withValues(
                         alpha: 0.3,
                       ),
                       borderRadius: BorderRadius.circular(2),
@@ -106,7 +106,7 @@ class _TransactionDetailBottomSheetState extends State<TransactionDetailBottomSh
                         children: [
                           Text(
                             widget.transaction.categoryName,
-                            style: isDark ? AppTextStyles.headlineSmallDark : AppTextStyles.headlineSmall,
+                            style: theme.textTheme.headlineSmall,
                           ),
                           const SizedBox(height: AppDimensions.spaceXS),
                           Text(
@@ -227,7 +227,7 @@ class _TransactionDetailBottomSheetState extends State<TransactionDetailBottomSh
   }
 
   Widget _buildDetailRow(BuildContext context, IconData icon, String label, String value) {
-    final isDark = Theme.of(context).brightness == Brightness.dark;
+    final theme = Theme.of(context);
 
     return Padding(
       padding: const EdgeInsets.only(bottom: AppDimensions.spaceM),
@@ -236,7 +236,7 @@ class _TransactionDetailBottomSheetState extends State<TransactionDetailBottomSh
           Icon(
             icon,
             size: AppDimensions.iconS,
-            color: isDark ? AppColors.onSurfaceVariantDark : AppColors.onSurfaceVariant,
+            color: theme.colorScheme.onSurfaceVariant,
           ),
           const SizedBox(width: AppDimensions.spaceM),
           Expanded(
@@ -245,12 +245,12 @@ class _TransactionDetailBottomSheetState extends State<TransactionDetailBottomSh
               children: [
                 Text(
                   label,
-                  style: (isDark ? AppTextStyles.bodySmallDark : AppTextStyles.bodySmall).copyWith(
-                    color: isDark ? AppColors.onSurfaceVariantDark : AppColors.onSurfaceVariant,
+                  style: theme.textTheme.bodySmall?.copyWith(
+                    color: theme.colorScheme.onSurfaceVariant,
                   ),
                 ),
                 const SizedBox(height: AppDimensions.spaceXS),
-                Text(value, style: isDark ? AppTextStyles.bodyLargeDark : AppTextStyles.bodyLarge),
+                Text(value, style: theme.textTheme.bodyLarge),
               ],
             ),
           ),
@@ -260,7 +260,7 @@ class _TransactionDetailBottomSheetState extends State<TransactionDetailBottomSh
   }
 
   Widget _buildDetailSection(BuildContext context, IconData icon, String label, String content) {
-    final isDark = Theme.of(context).brightness == Brightness.dark;
+    final theme = Theme.of(context);
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -270,13 +270,13 @@ class _TransactionDetailBottomSheetState extends State<TransactionDetailBottomSh
             Icon(
               icon,
               size: AppDimensions.iconS,
-              color: isDark ? AppColors.onSurfaceVariantDark : AppColors.onSurfaceVariant,
+              color: theme.colorScheme.onSurfaceVariant,
             ),
             const SizedBox(width: AppDimensions.spaceM),
             Text(
               label,
-              style: (isDark ? AppTextStyles.bodySmallDark : AppTextStyles.bodySmall).copyWith(
-                color: isDark ? AppColors.onSurfaceVariantDark : AppColors.onSurfaceVariant,
+              style: theme.textTheme.bodySmall?.copyWith(
+                color: theme.colorScheme.onSurfaceVariant,
               ),
             ),
           ],
@@ -286,10 +286,10 @@ class _TransactionDetailBottomSheetState extends State<TransactionDetailBottomSh
           width: double.infinity,
           padding: const EdgeInsets.all(AppDimensions.paddingM),
           decoration: BoxDecoration(
-            color: isDark ? AppColors.surfaceVariantDark : AppColors.surfaceVariant,
+            color: theme.colorScheme.surfaceContainerHighest,
             borderRadius: AppDimensions.borderRadiusM,
           ),
-          child: Text(content, style: isDark ? AppTextStyles.bodyLargeDark : AppTextStyles.bodyLarge),
+          child: Text(content, style: theme.textTheme.bodyLarge),
         ),
       ],
     );

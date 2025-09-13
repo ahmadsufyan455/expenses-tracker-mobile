@@ -239,15 +239,18 @@ class _HomePageState extends State<HomePage> {
     required IconData icon,
   }) {
     final theme = Theme.of(context);
-    final isDarkMode = theme.brightness == Brightness.dark;
 
     return Container(
       padding: AppDimensions.paddingAllM,
       decoration: BoxDecoration(
-        color: isDarkMode ? color.withValues(alpha: 0.15) : color.withValues(alpha: 0.1),
+        color: theme.brightness == Brightness.dark 
+            ? color.withValues(alpha: 0.15) 
+            : color.withValues(alpha: 0.1),
         borderRadius: BorderRadius.circular(AppDimensions.radiusM),
         border: Border.all(
-          color: isDarkMode ? color.withValues(alpha: 0.4) : color.withValues(alpha: 0.3),
+          color: theme.brightness == Brightness.dark 
+              ? color.withValues(alpha: 0.4) 
+              : color.withValues(alpha: 0.3),
         ),
       ),
       child: Column(

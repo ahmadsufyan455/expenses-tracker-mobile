@@ -167,7 +167,7 @@ class _TransactionsPageState extends State<TransactionsPage> {
   }
 
   Widget _buildEmptyState() {
-    final isDark = Theme.of(context).brightness == Brightness.dark;
+    final theme = Theme.of(context);
 
     return Center(
       child: Padding(
@@ -179,13 +179,13 @@ class _TransactionsPageState extends State<TransactionsPage> {
             const SizedBox(height: AppDimensions.spaceL),
             Text(
               context.l10n.transactions,
-              style: isDark ? AppTextStyles.headlineMediumDark : AppTextStyles.headlineMedium,
+              style: theme.textTheme.headlineMedium,
             ),
             const SizedBox(height: AppDimensions.spaceS),
             Text(
               context.l10n.manageTransactions,
-              style: (isDark ? AppTextStyles.bodyMediumDark : AppTextStyles.bodyMedium).copyWith(
-                color: Theme.of(context).colorScheme.onSurfaceVariant,
+              style: theme.textTheme.bodyMedium?.copyWith(
+                color: theme.colorScheme.onSurfaceVariant,
               ),
               textAlign: TextAlign.center,
             ),
