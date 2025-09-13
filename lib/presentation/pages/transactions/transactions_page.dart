@@ -7,8 +7,8 @@ import 'package:expense_tracker_mobile/domain/dto/transaction_dto.dart';
 import 'package:expense_tracker_mobile/presentation/pages/transactions/add_transaction_page.dart';
 import 'package:expense_tracker_mobile/presentation/pages/transactions/bloc/transaction_bloc.dart';
 import 'package:expense_tracker_mobile/presentation/widgets/common/error_dialog.dart';
-import 'package:expense_tracker_mobile/presentation/widgets/transaction/transaction_item.dart';
 import 'package:expense_tracker_mobile/presentation/widgets/transaction/transaction_detail_bottom_sheet.dart';
+import 'package:expense_tracker_mobile/presentation/widgets/transaction/transaction_item.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get_it/get_it.dart';
@@ -167,6 +167,8 @@ class _TransactionsPageState extends State<TransactionsPage> {
   }
 
   Widget _buildEmptyState() {
+    final isDark = Theme.of(context).brightness == Brightness.dark;
+
     return Center(
       child: Padding(
         padding: AppDimensions.paddingAllL,
@@ -175,11 +177,16 @@ class _TransactionsPageState extends State<TransactionsPage> {
           children: [
             Icon(Icons.receipt_long_outlined, size: 64, color: Theme.of(context).colorScheme.onSurfaceVariant),
             const SizedBox(height: AppDimensions.spaceL),
-            Text(context.l10n.transactions, style: AppTextStyles.headlineMedium),
+            Text(
+              context.l10n.transactions,
+              style: isDark ? AppTextStyles.headlineMediumDark : AppTextStyles.headlineMedium,
+            ),
             const SizedBox(height: AppDimensions.spaceS),
             Text(
               context.l10n.manageTransactions,
-              style: AppTextStyles.bodyMedium.copyWith(color: Theme.of(context).colorScheme.onSurfaceVariant),
+              style: (isDark ? AppTextStyles.bodyMediumDark : AppTextStyles.bodyMedium).copyWith(
+                color: Theme.of(context).colorScheme.onSurfaceVariant,
+              ),
               textAlign: TextAlign.center,
             ),
             const SizedBox(height: AppDimensions.spaceXL),

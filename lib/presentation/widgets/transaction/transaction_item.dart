@@ -14,6 +14,7 @@ class TransactionItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final isDark = Theme.of(context).brightness == Brightness.dark;
     final transactionType = TransactionType.fromString(transaction.type);
     final paymentMethod = PaymentMethod.fromString(transaction.paymentMethod.toLowerCase().replaceAll(' ', '_'));
     final amount = transaction.amount.abs();
@@ -23,7 +24,7 @@ class TransactionItem extends StatelessWidget {
     return Container(
       margin: AppDimensions.paddingVerticalS,
       child: Material(
-        color: AppColors.surface,
+        color: isDark ? AppColors.surfaceDark : AppColors.surface,
         borderRadius: AppDimensions.borderRadiusM,
         elevation: AppDimensions.cardElevation,
         child: InkWell(
@@ -45,7 +46,7 @@ class TransactionItem extends StatelessWidget {
                           Expanded(
                             child: Text(
                               transaction.categoryName,
-                              style: AppTextStyles.titleMedium,
+                              style: isDark ? AppTextStyles.titleMediumDark : AppTextStyles.titleMedium,
                               overflow: TextOverflow.ellipsis,
                             ),
                           ),
@@ -60,18 +61,28 @@ class TransactionItem extends StatelessWidget {
                       const SizedBox(height: AppDimensions.spaceXS),
                       Row(
                         children: [
-                          Icon(paymentMethod.icon, size: AppDimensions.iconXS, color: AppColors.onSurfaceVariant),
+                          Icon(
+                            paymentMethod.icon, 
+                            size: AppDimensions.iconXS, 
+                            color: isDark ? AppColors.onSurfaceVariantDark : AppColors.onSurfaceVariant,
+                          ),
                           const SizedBox(width: AppDimensions.spaceXS),
                           Text(
                             paymentMethod.getDisplayName(context),
-                            style: AppTextStyles.bodySmall.copyWith(color: AppColors.onSurfaceVariant),
+                            style: (isDark ? AppTextStyles.bodySmallDark : AppTextStyles.bodySmall)
+                                .copyWith(color: isDark ? AppColors.onSurfaceVariantDark : AppColors.onSurfaceVariant),
                           ),
                           const SizedBox(width: AppDimensions.spaceS),
-                          const Icon(Icons.circle, size: 4, color: AppColors.onSurfaceVariant),
+                          Icon(
+                            Icons.circle, 
+                            size: 4, 
+                            color: isDark ? AppColors.onSurfaceVariantDark : AppColors.onSurfaceVariant,
+                          ),
                           const SizedBox(width: AppDimensions.spaceS),
                           Text(
                             relativeDate,
-                            style: AppTextStyles.bodySmall.copyWith(color: AppColors.onSurfaceVariant),
+                            style: (isDark ? AppTextStyles.bodySmallDark : AppTextStyles.bodySmall)
+                                .copyWith(color: isDark ? AppColors.onSurfaceVariantDark : AppColors.onSurfaceVariant),
                           ),
                         ],
                       ),
@@ -79,7 +90,8 @@ class TransactionItem extends StatelessWidget {
                         const SizedBox(height: AppDimensions.spaceXS),
                         Text(
                           transaction.description,
-                          style: AppTextStyles.bodySmall.copyWith(color: AppColors.onSurfaceVariant),
+                          style: (isDark ? AppTextStyles.bodySmallDark : AppTextStyles.bodySmall)
+                              .copyWith(color: isDark ? AppColors.onSurfaceVariantDark : AppColors.onSurfaceVariant),
                           maxLines: 1,
                           overflow: TextOverflow.ellipsis,
                         ),

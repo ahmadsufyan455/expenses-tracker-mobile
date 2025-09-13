@@ -8,10 +8,7 @@ import 'package:expense_tracker_mobile/domain/dto/transaction_dto.dart';
 import 'package:flutter/material.dart';
 
 class TransactionDetailBottomSheet extends StatelessWidget {
-  const TransactionDetailBottomSheet({
-    super.key,
-    required this.transaction,
-  });
+  const TransactionDetailBottomSheet({super.key, required this.transaction});
 
   final TransactionDto transaction;
 
@@ -26,11 +23,12 @@ class TransactionDetailBottomSheet extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final isDark = Theme.of(context).brightness == Brightness.dark;
     final transactionType = TransactionType.fromString(transaction.type);
     final paymentMethod = PaymentMethod.fromString(transaction.paymentMethod.toLowerCase().replaceAll(' ', '_'));
     final amount = transaction.amount.abs();
     final formattedAmount = LocalizationUtils.formatCurrency(context, amount.toDouble());
-    
+
     // Format date as "23 September 2025"
     final DateTime transactionDate = DateTime.parse(transaction.createdAt);
     final monthNames = LocalizationUtils.getMonthNames(context);
@@ -38,9 +36,9 @@ class TransactionDetailBottomSheet extends StatelessWidget {
     final fullDate = '${transactionDate.day} $monthName ${transactionDate.year}';
 
     return Container(
-      decoration: const BoxDecoration(
-        color: AppColors.surface,
-        borderRadius: BorderRadius.only(
+      decoration: BoxDecoration(
+        color: isDark ? AppColors.surfaceDark : AppColors.surface,
+        borderRadius: const BorderRadius.only(
           topLeft: Radius.circular(AppDimensions.radiusL),
           topRight: Radius.circular(AppDimensions.radiusL),
         ),
@@ -57,7 +55,8 @@ class TransactionDetailBottomSheet extends StatelessWidget {
                 width: 40,
                 height: 4,
                 decoration: BoxDecoration(
-                  color: AppColors.onSurfaceVariant.withValues(alpha: 0.3),
+                  color: (isDark ? AppColors.onSurfaceVariantDark : AppColors.onSurfaceVariant)
+                      .withValues(alpha: 0.3),
                   borderRadius: BorderRadius.circular(2),
                 ),
               ),
@@ -70,15 +69,8 @@ class TransactionDetailBottomSheet extends StatelessWidget {
                 Container(
                   width: AppDimensions.iconXL,
                   height: AppDimensions.iconXL,
-                  decoration: BoxDecoration(
-                    shape: BoxShape.circle,
-                    color: transactionType.backgroundColor,
-                  ),
-                  child: Icon(
-                    transactionType.icon,
-                    size: AppDimensions.iconM,
-                    color: transactionType.color,
-                  ),
+                  decoration: BoxDecoration(shape: BoxShape.circle, color: transactionType.backgroundColor),
+                  child: Icon(transactionType.icon, size: AppDimensions.iconM, color: transactionType.color),
                 ),
                 const SizedBox(width: AppDimensions.spaceM),
                 Expanded(
@@ -86,8 +78,8 @@ class TransactionDetailBottomSheet extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        transaction.categoryName,
-                        style: AppTextStyles.headlineSmall,
+                        transaction.categoryName, 
+                        style: isDark ? AppTextStyles.headlineSmallDark : AppTextStyles.headlineSmall,
                       ),
                       const SizedBox(height: AppDimensions.spaceXS),
                       Text(
@@ -104,31 +96,19 @@ class TransactionDetailBottomSheet extends StatelessWidget {
             const SizedBox(height: AppDimensions.spaceXL),
 
             // Transaction Details
-            _buildDetailRow(
-              context,
-              Icons.category_outlined,
-              context.l10n.category,
-              transaction.categoryName,
-            ),
+            _buildDetailRow(context, Icons.category_outlined, context.l10n.category, transaction.categoryName),
             _buildDetailRow(
               context,
               paymentMethod.icon,
               context.l10n.paymentMethod,
               paymentMethod.getDisplayName(context),
             ),
-            _buildDetailRow(
-              context,
-              Icons.calendar_today_outlined,
-              context.l10n.date,
-              fullDate,
-            ),
+            _buildDetailRow(context, Icons.calendar_today_outlined, context.l10n.date, fullDate),
             _buildDetailRow(
               context,
               transactionType.icon,
               context.l10n.type,
-              transactionType == TransactionType.income 
-                ? context.l10n.income 
-                : context.l10n.expense,
+              transactionType == TransactionType.income ? context.l10n.income : context.l10n.expense,
             ),
 
             // Description (if available)
@@ -180,7 +160,7 @@ class TransactionDetailBottomSheet extends StatelessWidget {
                 ),
               ],
             ),
-            
+
             // Bottom padding for safe area
             SizedBox(height: MediaQuery.of(context).padding.bottom),
           ],
@@ -190,14 +170,16 @@ class TransactionDetailBottomSheet extends StatelessWidget {
   }
 
   Widget _buildDetailRow(BuildContext context, IconData icon, String label, String value) {
+    final isDark = Theme.of(context).brightness == Brightness.dark;
+    
     return Padding(
       padding: const EdgeInsets.only(bottom: AppDimensions.spaceM),
       child: Row(
         children: [
           Icon(
-            icon,
-            size: AppDimensions.iconS,
-            color: AppColors.onSurfaceVariant,
+            icon, 
+            size: AppDimensions.iconS, 
+            color: isDark ? AppColors.onSurfaceVariantDark : AppColors.onSurfaceVariant,
           ),
           const SizedBox(width: AppDimensions.spaceM),
           Expanded(
@@ -205,15 +187,14 @@ class TransactionDetailBottomSheet extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  label,
-                  style: AppTextStyles.bodySmall.copyWith(
-                    color: AppColors.onSurfaceVariant,
-                  ),
+                  label, 
+                  style: (isDark ? AppTextStyles.bodySmallDark : AppTextStyles.bodySmall)
+                      .copyWith(color: isDark ? AppColors.onSurfaceVariantDark : AppColors.onSurfaceVariant),
                 ),
                 const SizedBox(height: AppDimensions.spaceXS),
                 Text(
-                  value,
-                  style: AppTextStyles.bodyLarge,
+                  value, 
+                  style: isDark ? AppTextStyles.bodyLargeDark : AppTextStyles.bodyLarge,
                 ),
               ],
             ),
@@ -224,22 +205,23 @@ class TransactionDetailBottomSheet extends StatelessWidget {
   }
 
   Widget _buildDetailSection(BuildContext context, IconData icon, String label, String content) {
+    final isDark = Theme.of(context).brightness == Brightness.dark;
+    
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Row(
           children: [
             Icon(
-              icon,
-              size: AppDimensions.iconS,
-              color: AppColors.onSurfaceVariant,
+              icon, 
+              size: AppDimensions.iconS, 
+              color: isDark ? AppColors.onSurfaceVariantDark : AppColors.onSurfaceVariant,
             ),
             const SizedBox(width: AppDimensions.spaceM),
             Text(
-              label,
-              style: AppTextStyles.bodySmall.copyWith(
-                color: AppColors.onSurfaceVariant,
-              ),
+              label, 
+              style: (isDark ? AppTextStyles.bodySmallDark : AppTextStyles.bodySmall)
+                  .copyWith(color: isDark ? AppColors.onSurfaceVariantDark : AppColors.onSurfaceVariant),
             ),
           ],
         ),
@@ -248,12 +230,12 @@ class TransactionDetailBottomSheet extends StatelessWidget {
           width: double.infinity,
           padding: const EdgeInsets.all(AppDimensions.paddingM),
           decoration: BoxDecoration(
-            color: AppColors.surfaceVariant,
+            color: isDark ? AppColors.surfaceVariantDark : AppColors.surfaceVariant, 
             borderRadius: AppDimensions.borderRadiusM,
           ),
           child: Text(
-            content,
-            style: AppTextStyles.bodyLarge,
+            content, 
+            style: isDark ? AppTextStyles.bodyLargeDark : AppTextStyles.bodyLarge,
           ),
         ),
       ],
