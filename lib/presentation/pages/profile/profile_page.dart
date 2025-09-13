@@ -4,6 +4,7 @@ import 'package:expense_tracker_mobile/app/theme/app_dimensions.dart';
 import 'package:expense_tracker_mobile/app/theme/app_text_styles.dart';
 import 'package:expense_tracker_mobile/core/extensions/build_context_extensions.dart';
 import 'package:expense_tracker_mobile/core/services/session_service.dart';
+import 'package:expense_tracker_mobile/presentation/widgets/common/confirmation_dialog.dart';
 import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
 
@@ -138,22 +139,12 @@ class ProfilePage extends StatelessWidget {
   }
 
   Future<void> _handleLogout(BuildContext context, SessionService sessionService) async {
-    final theme = Theme.of(context);
-    final shouldLogout = await showDialog<bool>(
-      context: context,
-      builder: (context) => AlertDialog(
-        title: Text(context.l10n.logout),
-        content: Text(context.l10n.logoutConfirmation),
-        backgroundColor: theme.colorScheme.surface,
-        actions: [
-          TextButton(onPressed: () => Navigator.of(context).pop(false), child: Text(context.l10n.cancel)),
-          TextButton(
-            onPressed: () => Navigator.of(context).pop(true),
-            style: TextButton.styleFrom(foregroundColor: AppColors.error),
-            child: Text(context.l10n.logout),
-          ),
-        ],
-      ),
+    final shouldLogout = await ConfirmationDialog.show(
+      context,
+      title: context.l10n.logout,
+      content: context.l10n.logoutConfirmation,
+      confirmText: context.l10n.logout,
+      isDestructive: true,
     );
 
     if (shouldLogout == true) {

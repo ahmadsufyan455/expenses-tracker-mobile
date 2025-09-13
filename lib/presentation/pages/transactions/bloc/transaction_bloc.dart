@@ -5,6 +5,7 @@ import 'package:expense_tracker_mobile/data/models/request/new_transaction_reque
 import 'package:expense_tracker_mobile/domain/dto/category_dto.dart';
 import 'package:expense_tracker_mobile/domain/dto/transaction_dto.dart';
 import 'package:expense_tracker_mobile/domain/usecases/create_transaction_usecase.dart';
+import 'package:expense_tracker_mobile/domain/usecases/delete_transaction_usecase.dart';
 import 'package:expense_tracker_mobile/domain/usecases/get_category_usecase.dart';
 import 'package:expense_tracker_mobile/domain/usecases/get_transaction_usecase.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -18,6 +19,7 @@ class TransactionBloc extends Bloc<TransactionEvent, TransactionState> {
   final CreateTransactionUsecase _createTransactionUsecase;
   final GetCategoryUsecase _getCategoryUsecase;
   final GetTransactionUsecase _getTransactionUsecase;
+  final DeleteTransactionUsecase _deleteTransactionUsecase;
 
   var stateData = TransactionStateData();
 
@@ -26,12 +28,17 @@ class TransactionBloc extends Bloc<TransactionEvent, TransactionState> {
   String sortBy = 'created_at';
   String sortOrder = 'desc';
 
-  TransactionBloc(this._createTransactionUsecase, this._getCategoryUsecase, this._getTransactionUsecase)
-    : super(TransactionInitial()) {
+  TransactionBloc(
+    this._createTransactionUsecase,
+    this._getCategoryUsecase,
+    this._getTransactionUsecase,
+    this._deleteTransactionUsecase,
+  ) : super(TransactionInitial()) {
     on<CreateTransactionEvent>(_onCreateTransaction);
     on<GetCategoryEvent>(_onGetCategory);
     on<GetTransactionEvent>(_onGetTransaction);
     on<GetMoreTransactionEvent>(_onGetMoreTransaction);
+    on<DeleteTransactionEvent>(_onDeleteTransaction);
   }
 
   Future<void> _onGetCategory(GetCategoryEvent event, Emitter<TransactionState> emit) async {
@@ -112,6 +119,20 @@ class TransactionBloc extends Bloc<TransactionEvent, TransactionState> {
           isLoadingMore: false,
         );
         emit(GetTransactionSuccess(data: stateData));
+      },
+    );
+  }
+
+  Future<void> _onDeleteTransaction(DeleteTransactionEvent event, Emitter<TransactionState> emit) async {
+    emit(DeleteTransactionLoading(data: stateData));
+    final result = await _deleteTransactionUsecase.call(event.id);
+    result.fold(
+      (failure) {
+        emit(DeleteTransactionFailure(failure: failure, data: stateData));
+      },
+      (_) {
+        stateData = stateData.copyWith(message: 'Transaction deleted successfully');
+        emit(DeleteTransactionSuccess(data: stateData));
       },
     );
   }

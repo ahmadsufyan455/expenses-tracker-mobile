@@ -8,8 +8,8 @@ class TransactionStateData extends Equatable {
   final bool isLoadingMore;
 
   const TransactionStateData({
-    this.categories = const [], 
-    this.message = '', 
+    this.categories = const [],
+    this.message = '',
     this.transactions = const [],
     this.hasMoreData = true,
     this.isLoadingMore = false,
@@ -19,8 +19,8 @@ class TransactionStateData extends Equatable {
   List<Object> get props => [categories, message, transactions, hasMoreData, isLoadingMore];
 
   TransactionStateData copyWith({
-    List<CategoryDto>? categories, 
-    String? message, 
+    List<CategoryDto>? categories,
+    String? message,
     List<TransactionDto>? transactions,
     bool? hasMoreData,
     bool? isLoadingMore,
@@ -91,4 +91,18 @@ final class GetTransactionSuccess extends TransactionState {
 final class GetTransactionFailure extends TransactionState {
   final Failure failure;
   const GetTransactionFailure({required this.failure, required super.data});
+}
+
+/// delete transaction
+final class DeleteTransactionLoading extends TransactionState {
+  const DeleteTransactionLoading({required super.data});
+}
+
+final class DeleteTransactionSuccess extends TransactionState {
+  const DeleteTransactionSuccess({required super.data});
+}
+
+final class DeleteTransactionFailure extends TransactionState {
+  final Failure failure;
+  const DeleteTransactionFailure({required this.failure, required super.data});
 }

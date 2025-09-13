@@ -131,5 +131,8 @@
   "edit": "Edit",
   "delete": "Hapus",
   "transactionDetails": "Detail Transaksi",
-  "past": "Sebelumnya"
+  "past": "Sebelumnya",
+  "deleteTransaction": "Hapus Transaksi",
+  "deleteTransactionConfirmation": "Apakah Anda yakin ingin menghapus transaksi ini? Tindakan ini tidak dapat dibatalkan.",
+  "transactionDeletedSuccessfully": "Transaksi berhasil dihapus"
 }

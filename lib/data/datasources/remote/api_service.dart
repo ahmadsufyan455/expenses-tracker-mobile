@@ -37,4 +37,7 @@ abstract class ApiService {
     @Query('sort_by') String sortBy,
     @Query('sort_order') String sortOrder,
   );
+
+  @DELETE('/transactions/{id}')
+  Future<void> deleteTransaction(@Path('id') int id);
 }

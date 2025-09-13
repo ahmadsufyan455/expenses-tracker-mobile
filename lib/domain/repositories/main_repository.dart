@@ -13,4 +13,5 @@ abstract interface class MainRepository {
     String sortBy,
     String sortOrder,
   );
+  Future<Either<Failure, void>> deleteTransaction(int id);
 }

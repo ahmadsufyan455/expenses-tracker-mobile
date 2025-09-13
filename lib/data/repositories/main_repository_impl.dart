@@ -48,4 +48,14 @@ class MainRepositoryImpl implements MainRepository {
       return Left(ErrorHandler.handleError(e));
     }
   }
+
+  @override
+  Future<Either<Failure, void>> deleteTransaction(int id) async {
+    try {
+      await _apiService.deleteTransaction(id);
+      return const Right(null);
+    } catch (e) {
+      return Left(ErrorHandler.handleError(e));
+    }
+  }
 }

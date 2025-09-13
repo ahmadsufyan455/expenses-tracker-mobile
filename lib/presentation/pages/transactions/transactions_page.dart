@@ -131,8 +131,12 @@ class _TransactionsPageState extends State<TransactionsPage> {
                   if (item is TransactionDto) {
                     return TransactionItem(
                       transaction: item,
-                      onTap: () {
-                        TransactionDetailBottomSheet.show(context, item);
+                      onTap: () async {
+                        final shouldRefresh = await TransactionDetailBottomSheet.show(context, item);
+
+                        if (shouldRefresh == true) {
+                          _bloc.add(GetTransactionEvent());
+                        }
                       },
                     );
                   }

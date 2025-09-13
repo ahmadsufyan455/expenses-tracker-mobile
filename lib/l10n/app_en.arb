@@ -199,5 +199,8 @@
   "edit": "Edit",
   "delete": "Delete",
   "transactionDetails": "Transaction Details",
-  "past": "Past"
+  "past": "Past",
+  "deleteTransaction": "Delete Transaction",
+  "deleteTransactionConfirmation": "Are you sure you want to delete this transaction? This action cannot be undone.",
+  "transactionDeletedSuccessfully": "Transaction deleted successfully"
 }

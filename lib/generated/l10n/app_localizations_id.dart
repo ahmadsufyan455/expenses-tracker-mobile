@@ -364,4 +364,14 @@ class AppLocalizationsId extends AppLocalizations {
 
   @override
   String get past => 'Sebelumnya';
+
+  @override
+  String get deleteTransaction => 'Hapus Transaksi';
+
+  @override
+  String get deleteTransactionConfirmation =>
+      'Apakah Anda yakin ingin menghapus transaksi ini? Tindakan ini tidak dapat dibatalkan.';
+
+  @override
+  String get transactionDeletedSuccessfully => 'Transaksi berhasil dihapus';
 }

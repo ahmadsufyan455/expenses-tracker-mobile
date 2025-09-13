@@ -363,4 +363,15 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get past => 'Past';
+
+  @override
+  String get deleteTransaction => 'Delete Transaction';
+
+  @override
+  String get deleteTransactionConfirmation =>
+      'Are you sure you want to delete this transaction? This action cannot be undone.';
+
+  @override
+  String get transactionDeletedSuccessfully =>
+      'Transaction deleted successfully';
 }
