@@ -7,41 +7,27 @@ import 'package:flutter/material.dart';
 class ErrorDialog extends StatelessWidget {
   final Failure failure;
 
-  const ErrorDialog({
-    super.key,
-    required this.failure,
-  });
+  const ErrorDialog({super.key, required this.failure});
 
   @override
   Widget build(BuildContext context) {
     return AlertDialog(
-      backgroundColor: Theme.of(context).colorScheme.surface,
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(AppDimensions.radiusM),
-      ),
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(AppDimensions.radiusM)),
       contentPadding: AppDimensions.paddingAllL,
       content: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
-          Icon(
-            _getIconForStatusCode(failure.statusCode),
-            size: 64,
-            color: _getColorForStatusCode(failure.statusCode),
-          ),
+          Icon(_getIconForStatusCode(failure.statusCode), size: 64, color: _getColorForStatusCode(failure.statusCode)),
           const SizedBox(height: AppDimensions.spaceL),
           Text(
             _getTitleForStatusCode(failure.statusCode),
-            style: AppTextStyles.headlineSmall.copyWith(
-              color: _getColorForStatusCode(failure.statusCode),
-            ),
+            style: AppTextStyles.headlineSmall.copyWith(color: _getColorForStatusCode(failure.statusCode)),
             textAlign: TextAlign.center,
           ),
           const SizedBox(height: AppDimensions.spaceM),
           Text(
             failure.message,
-            style: AppTextStyles.bodyMedium.copyWith(
-              color: Theme.of(context).colorScheme.onSurfaceVariant,
-            ),
+            style: AppTextStyles.bodyMedium.copyWith(color: Theme.of(context).colorScheme.onSurfaceVariant),
             textAlign: TextAlign.center,
           ),
           const SizedBox(height: AppDimensions.spaceL),
@@ -49,15 +35,8 @@ class ErrorDialog extends StatelessWidget {
             width: double.infinity,
             child: FilledButton(
               onPressed: () => Navigator.of(context).pop(),
-              style: FilledButton.styleFrom(
-                backgroundColor: _getColorForStatusCode(failure.statusCode),
-              ),
-              child: Text(
-                'OK',
-                style: AppTextStyles.labelLarge.copyWith(
-                  color: Colors.white,
-                ),
-              ),
+              style: FilledButton.styleFrom(backgroundColor: _getColorForStatusCode(failure.statusCode)),
+              child: Text('OK', style: AppTextStyles.labelLarge.copyWith(color: Colors.white)),
             ),
           ),
         ],
@@ -67,7 +46,7 @@ class ErrorDialog extends StatelessWidget {
 
   IconData _getIconForStatusCode(int? statusCode) {
     if (statusCode == null) return Icons.error_outline;
-    
+
     switch (statusCode) {
       case 400:
         return Icons.warning_amber_outlined;
@@ -100,7 +79,7 @@ class ErrorDialog extends StatelessWidget {
 
   Color _getColorForStatusCode(int? statusCode) {
     if (statusCode == null) return AppColors.error;
-    
+
     switch (statusCode) {
       case 400:
       case 422:
@@ -130,7 +109,7 @@ class ErrorDialog extends StatelessWidget {
 
   String _getTitleForStatusCode(int? statusCode) {
     if (statusCode == null) return 'Error';
-    
+
     switch (statusCode) {
       case 400:
         return 'Bad Request';

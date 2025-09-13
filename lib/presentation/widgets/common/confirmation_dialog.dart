@@ -1,5 +1,4 @@
 import 'package:expense_tracker_mobile/app/theme/app_colors.dart';
-import 'package:expense_tracker_mobile/app/theme/app_dimensions.dart';
 import 'package:expense_tracker_mobile/core/extensions/build_context_extensions.dart';
 import 'package:flutter/material.dart';
 
@@ -23,29 +22,33 @@ class ConfirmationDialog extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final theme = Theme.of(context);
-    
     return AlertDialog(
       title: Text(title),
       content: Text(content),
-      backgroundColor: theme.colorScheme.surface,
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(AppDimensions.radiusM),
-      ),
+      actionsAlignment: MainAxisAlignment.end,
+      buttonPadding: const EdgeInsets.symmetric(horizontal: 8.0),
       actions: [
-        TextButton(
-          onPressed: () => Navigator.of(context).pop(false),
-          child: Text(cancelText ?? context.l10n.cancel),
-        ),
-        TextButton(
-          onPressed: () {
-            Navigator.of(context).pop(true);
-            onConfirm?.call();
-          },
-          style: TextButton.styleFrom(
-            foregroundColor: isDestructive ? AppColors.error : AppColors.primary,
+        IntrinsicWidth(
+          child: TextButton(
+            onPressed: () => Navigator.of(context).pop(false),
+            style: TextButton.styleFrom(
+              minimumSize: const Size(64, 36),
+            ),
+            child: Text(cancelText ?? context.l10n.cancel),
           ),
-          child: Text(confirmText),
+        ),
+        IntrinsicWidth(
+          child: TextButton(
+            onPressed: () {
+              Navigator.of(context).pop(true);
+              onConfirm?.call();
+            },
+            style: TextButton.styleFrom(
+              foregroundColor: isDestructive ? AppColors.error : AppColors.primary,
+              minimumSize: const Size(64, 36),
+            ),
+            child: Text(confirmText),
+          ),
         ),
       ],
     );

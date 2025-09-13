@@ -106,7 +106,7 @@ class AppTheme {
       textButtonTheme: TextButtonThemeData(
         style: TextButton.styleFrom(
           foregroundColor: AppColors.primary,
-          minimumSize: const Size(double.infinity, AppDimensions.buttonHeightM),
+          minimumSize: const Size(64, AppDimensions.buttonHeightM),
           shape: RoundedRectangleBorder(
             borderRadius: AppDimensions.borderRadiusM,
           ),
@@ -219,13 +219,14 @@ class AppTheme {
 
       // Dialog Theme
       dialogTheme: DialogThemeData(
-        backgroundColor: const Color.fromARGB(255, 106, 102, 102),
+        backgroundColor: AppColors.surface,
         elevation: AppDimensions.cardElevation,
         shape: RoundedRectangleBorder(
           borderRadius: AppDimensions.borderRadiusL,
         ),
         titleTextStyle: AppTextStyles.titleLarge,
         contentTextStyle: AppTextStyles.bodyMedium,
+        actionsPadding: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 4.0),
       ),
 
       // Snack Bar Theme
@@ -321,6 +322,20 @@ class AppTheme {
         ),
       ),
 
+      // Text Button Theme
+      textButtonTheme: TextButtonThemeData(
+        style: TextButton.styleFrom(
+          foregroundColor: AppColors.primaryLight,
+          minimumSize: const Size(64, AppDimensions.buttonHeightM),
+          shape: RoundedRectangleBorder(
+            borderRadius: AppDimensions.borderRadiusM,
+          ),
+          textStyle: AppTextStyles.buttonText.copyWith(
+            color: AppColors.primaryLight,
+          ),
+        ),
+      ),
+
       // Input Decoration Theme
       inputDecorationTheme: InputDecorationTheme(
         filled: true,
@@ -385,6 +400,7 @@ class AppTheme {
         ),
         titleTextStyle: AppTextStyles.titleLargeDark,
         contentTextStyle: AppTextStyles.bodyMediumDark,
+        actionsPadding: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 4.0),
       ),
 
       // Snack Bar Theme
