@@ -2,9 +2,11 @@ import "package:dio/dio.dart";
 import 'package:expense_tracker_mobile/data/models/request/login_request.dart';
 import 'package:expense_tracker_mobile/data/models/request/new_transaction_request.dart';
 import 'package:expense_tracker_mobile/data/models/request/register_request.dart';
+import 'package:expense_tracker_mobile/data/models/response/base_pagination_response.dart';
 import 'package:expense_tracker_mobile/data/models/response/base_response.dart';
 import 'package:expense_tracker_mobile/data/models/response/category_response.dart';
 import 'package:expense_tracker_mobile/data/models/response/login_response.dart';
+import 'package:expense_tracker_mobile/data/models/response/transaction_response.dart';
 import 'package:injectable/injectable.dart';
 import 'package:retrofit/retrofit.dart';
 
@@ -27,4 +29,12 @@ abstract class ApiService {
 
   @GET('/categories')
   Future<BaseResponse<List<CategoryResponse>>> getCategories();
+
+  @GET('/transactions')
+  Future<BasePaginationResponse<TransactionResponse>> getTransactions(
+    @Query('page') int page,
+    @Query('per_page') int perPage,
+    @Query('sort_by') String sortBy,
+    @Query('sort_order') String sortOrder,
+  );
 }

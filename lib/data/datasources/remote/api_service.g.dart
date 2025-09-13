@@ -150,6 +150,49 @@ class _ApiService implements ApiService {
     return _value;
   }
 
+  @override
+  Future<BasePaginationResponse<TransactionResponse>> getTransactions(
+    int page,
+    int perPage,
+    String sortBy,
+    String sortOrder,
+  ) async {
+    final _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{
+      r'page': page,
+      r'per_page': perPage,
+      r'sort_by': sortBy,
+      r'sort_order': sortOrder,
+    };
+    final _headers = <String, dynamic>{};
+    const Map<String, dynamic>? _data = null;
+    final _options =
+        _setStreamType<BasePaginationResponse<TransactionResponse>>(
+          Options(method: 'GET', headers: _headers, extra: _extra)
+              .compose(
+                _dio.options,
+                '/transactions',
+                queryParameters: queryParameters,
+                data: _data,
+              )
+              .copyWith(
+                baseUrl: _combineBaseUrls(_dio.options.baseUrl, baseUrl),
+              ),
+        );
+    final _result = await _dio.fetch<Map<String, dynamic>>(_options);
+    late BasePaginationResponse<TransactionResponse> _value;
+    try {
+      _value = BasePaginationResponse<TransactionResponse>.fromJson(
+        _result.data!,
+        (json) => TransactionResponse.fromJson(json as Map<String, dynamic>),
+      );
+    } on Object catch (e, s) {
+      errorLogger?.logError(e, s, _options);
+      rethrow;
+    }
+    return _value;
+  }
+
   RequestOptions _setStreamType<T>(RequestOptions requestOptions) {
     if (T != dynamic &&
         !(requestOptions.responseType == ResponseType.bytes ||

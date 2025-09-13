@@ -174,7 +174,7 @@ class _LoginPageState extends State<LoginPage> {
     }
   }
 
-  _handleLoadingState(bool isLoading) {
+  void _handleLoadingState(bool isLoading) {
     setState(() {
       _isLoading = isLoading;
     });

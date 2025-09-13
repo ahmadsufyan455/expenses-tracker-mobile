@@ -3,8 +3,10 @@ import 'package:expense_tracker_mobile/core/enums/transaction_enums.dart';
 import 'package:expense_tracker_mobile/core/errors/failure.dart';
 import 'package:expense_tracker_mobile/data/models/request/new_transaction_request.dart';
 import 'package:expense_tracker_mobile/domain/dto/category_dto.dart';
+import 'package:expense_tracker_mobile/domain/dto/transaction_dto.dart';
 import 'package:expense_tracker_mobile/domain/usecases/create_transaction_usecase.dart';
 import 'package:expense_tracker_mobile/domain/usecases/get_category_usecase.dart';
+import 'package:expense_tracker_mobile/domain/usecases/get_transaction_usecase.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:injectable/injectable.dart';
 
@@ -15,12 +17,21 @@ part 'transaction_state.dart';
 class TransactionBloc extends Bloc<TransactionEvent, TransactionState> {
   final CreateTransactionUsecase _createTransactionUsecase;
   final GetCategoryUsecase _getCategoryUsecase;
+  final GetTransactionUsecase _getTransactionUsecase;
 
   var stateData = TransactionStateData();
 
-  TransactionBloc(this._createTransactionUsecase, this._getCategoryUsecase) : super(TransactionInitial()) {
+  int page = 1;
+  int perPage = 10;
+  String sortBy = 'created_at';
+  String sortOrder = 'desc';
+
+  TransactionBloc(this._createTransactionUsecase, this._getCategoryUsecase, this._getTransactionUsecase)
+    : super(TransactionInitial()) {
     on<CreateTransactionEvent>(_onCreateTransaction);
     on<GetCategoryEvent>(_onGetCategory);
+    on<GetTransactionEvent>(_onGetTransaction);
+    on<GetMoreTransactionEvent>(_onGetMoreTransaction);
   }
 
   Future<void> _onGetCategory(GetCategoryEvent event, Emitter<TransactionState> emit) async {
@@ -53,6 +64,54 @@ class TransactionBloc extends Bloc<TransactionEvent, TransactionState> {
       (message) {
         stateData = stateData.copyWith(message: message);
         emit(CreateTransactionSuccess(data: stateData));
+      },
+    );
+  }
+
+  Future<void> _onGetTransaction(GetTransactionEvent event, Emitter<TransactionState> emit) async {
+    // Reset pagination when refreshing
+    page = 1;
+    emit(GetTransactionLoading(data: stateData));
+    final result = await _getTransactionUsecase.call(page, perPage, sortBy, sortOrder);
+    result.fold(
+      (failure) {
+        emit(GetTransactionFailure(failure: failure, data: stateData));
+      },
+      (transactions) {
+        stateData = stateData.copyWith(
+          transactions: transactions,
+          hasMoreData: transactions.length == perPage, // If we got less than perPage, no more data
+          isLoadingMore: false,
+        );
+        emit(GetTransactionSuccess(data: stateData));
+      },
+    );
+  }
+
+  Future<void> _onGetMoreTransaction(GetMoreTransactionEvent event, Emitter<TransactionState> emit) async {
+    // Don't load more if already loading or no more data
+    if (stateData.isLoadingMore || !stateData.hasMoreData) return;
+
+    // Set loading more state
+    stateData = stateData.copyWith(isLoadingMore: true);
+    emit(GetTransactionSuccess(data: stateData));
+
+    page++;
+    final result = await _getTransactionUsecase.call(page, perPage, sortBy, sortOrder);
+    result.fold(
+      (failure) {
+        // Reset page on failure and stop loading
+        page--;
+        stateData = stateData.copyWith(isLoadingMore: false);
+        emit(GetTransactionFailure(failure: failure, data: stateData));
+      },
+      (transactions) {
+        stateData = stateData.copyWith(
+          transactions: [...stateData.transactions, ...transactions],
+          hasMoreData: transactions.length == perPage, // If we got less than perPage, no more data
+          isLoadingMore: false,
+        );
+        emit(GetTransactionSuccess(data: stateData));
       },
     );
   }

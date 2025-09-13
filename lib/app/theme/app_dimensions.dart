@@ -83,69 +83,32 @@ class AppDimensions {
   static const EdgeInsets paddingAllL = EdgeInsets.all(paddingL);
   static const EdgeInsets paddingAllXL = EdgeInsets.all(paddingXL);
 
-  static const EdgeInsets paddingHorizontalS = EdgeInsets.symmetric(
-    horizontal: paddingS,
-  );
-  static const EdgeInsets paddingHorizontalM = EdgeInsets.symmetric(
-    horizontal: paddingM,
-  );
-  static const EdgeInsets paddingHorizontalL = EdgeInsets.symmetric(
-    horizontal: paddingL,
-  );
+  static const EdgeInsets paddingHorizontalS = EdgeInsets.symmetric(horizontal: paddingS);
+  static const EdgeInsets paddingHorizontalM = EdgeInsets.symmetric(horizontal: paddingM);
+  static const EdgeInsets paddingHorizontalL = EdgeInsets.symmetric(horizontal: paddingL);
 
-  static const EdgeInsets paddingVerticalS = EdgeInsets.symmetric(
-    vertical: paddingS,
-  );
-  static const EdgeInsets paddingVerticalM = EdgeInsets.symmetric(
-    vertical: paddingM,
-  );
-  static const EdgeInsets paddingVerticalL = EdgeInsets.symmetric(
-    vertical: paddingL,
-  );
+  static const EdgeInsets paddingVerticalS = EdgeInsets.symmetric(vertical: paddingS);
+  static const EdgeInsets paddingVerticalM = EdgeInsets.symmetric(vertical: paddingM);
+  static const EdgeInsets paddingVerticalL = EdgeInsets.symmetric(vertical: paddingL);
 
   // Border Radius
-  static const BorderRadius borderRadiusXS = BorderRadius.all(
-    Radius.circular(radiusXS),
-  );
-  static const BorderRadius borderRadiusS = BorderRadius.all(
-    Radius.circular(radiusS),
-  );
-  static const BorderRadius borderRadiusM = BorderRadius.all(
-    Radius.circular(radiusM),
-  );
-  static const BorderRadius borderRadiusL = BorderRadius.all(
-    Radius.circular(radiusL),
-  );
-  static const BorderRadius borderRadiusXL = BorderRadius.all(
-    Radius.circular(radiusXL),
-  );
+  static const BorderRadius borderRadiusXS = BorderRadius.all(Radius.circular(radiusXS));
+  static const BorderRadius borderRadiusS = BorderRadius.all(Radius.circular(radiusS));
+  static const BorderRadius borderRadiusM = BorderRadius.all(Radius.circular(radiusM));
+  static const BorderRadius borderRadiusL = BorderRadius.all(Radius.circular(radiusL));
+  static const BorderRadius borderRadiusXL = BorderRadius.all(Radius.circular(radiusXL));
 
   // Box Shadows
   static const List<BoxShadow> shadowLight = [
-    BoxShadow(
-      color: Color(0x1A000000),
-      offset: Offset(0, 1),
-      blurRadius: 3,
-      spreadRadius: 0,
-    ),
+    BoxShadow(color: Color(0x1A000000), offset: Offset(0, 1), blurRadius: 3, spreadRadius: 0),
   ];
 
   static const List<BoxShadow> shadowMedium = [
-    BoxShadow(
-      color: Color(0x1A000000),
-      offset: Offset(0, 2),
-      blurRadius: 6,
-      spreadRadius: 0,
-    ),
+    BoxShadow(color: Color(0x1A000000), offset: Offset(0, 2), blurRadius: 6, spreadRadius: 0),
   ];
 
   static const List<BoxShadow> shadowHeavy = [
-    BoxShadow(
-      color: Color(0x1A000000),
-      offset: Offset(0, 4),
-      blurRadius: 12,
-      spreadRadius: 0,
-    ),
+    BoxShadow(color: Color(0x1A000000), offset: Offset(0, 4), blurRadius: 12, spreadRadius: 0),
   ];
 
   // Responsive helper methods

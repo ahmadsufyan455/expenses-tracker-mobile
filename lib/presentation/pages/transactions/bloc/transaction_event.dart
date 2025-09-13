@@ -32,3 +32,17 @@ class GetCategoryEvent extends TransactionEvent {
   @override
   List<Object> get props => [];
 }
+
+class GetTransactionEvent extends TransactionEvent {
+  const GetTransactionEvent();
+
+  @override
+  List<Object> get props => [];
+}
+
+class GetMoreTransactionEvent extends TransactionEvent {
+  const GetMoreTransactionEvent();
+
+  @override
+  List<Object> get props => [];
+}

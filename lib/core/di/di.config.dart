@@ -27,6 +27,8 @@ import 'package:expense_tracker_mobile/domain/usecases/create_transaction_usecas
     as _i886;
 import 'package:expense_tracker_mobile/domain/usecases/get_category_usecase.dart'
     as _i662;
+import 'package:expense_tracker_mobile/domain/usecases/get_transaction_usecase.dart'
+    as _i58;
 import 'package:expense_tracker_mobile/domain/usecases/login_usecase.dart'
     as _i72;
 import 'package:expense_tracker_mobile/domain/usecases/register_usecase.dart'
@@ -95,6 +97,9 @@ extension GetItInjectableX on _i174.GetIt {
     gh.factory<_i662.GetCategoryUsecase>(
       () => _i662.GetCategoryUsecase(gh<_i162.MainRepository>()),
     );
+    gh.factory<_i58.GetTransactionUsecase>(
+      () => _i58.GetTransactionUsecase(gh<_i162.MainRepository>()),
+    );
     gh.factory<_i1001.RegisterBloc>(
       () => _i1001.RegisterBloc(gh<_i720.RegisterUsecase>()),
     );
@@ -105,6 +110,7 @@ extension GetItInjectableX on _i174.GetIt {
       () => _i187.TransactionBloc(
         gh<_i886.CreateTransactionUsecase>(),
         gh<_i662.GetCategoryUsecase>(),
+        gh<_i58.GetTransactionUsecase>(),
       ),
     );
     return this;
