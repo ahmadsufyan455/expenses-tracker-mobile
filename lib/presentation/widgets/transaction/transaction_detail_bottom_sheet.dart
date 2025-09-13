@@ -29,11 +29,9 @@ class TransactionDetailBottomSheet extends StatelessWidget {
     final amount = transaction.amount.abs();
     final formattedAmount = LocalizationUtils.formatCurrency(context, amount.toDouble());
 
-    // Format date as "23 September 2025"
+    // Format date using localized short date format pattern
     final DateTime transactionDate = DateTime.parse(transaction.createdAt);
-    final monthNames = LocalizationUtils.getMonthNames(context);
-    final monthName = monthNames[transactionDate.month - 1];
-    final fullDate = '${transactionDate.day} $monthName ${transactionDate.year}';
+    final fullDate = LocalizationUtils.formatShortDate(context, transactionDate);
 
     return Container(
       decoration: BoxDecoration(

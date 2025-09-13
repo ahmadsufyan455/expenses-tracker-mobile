@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 
 import '../../generated/l10n/app_localizations.dart';
 
@@ -34,22 +35,10 @@ class LocalizationUtils {
   /// Format currency based on locale (IDR for both locales)
   static String formatCurrency(BuildContext context, double amount) {
     // Format as Indonesian Rupiah for both English and Indonesian locales
-    final formattedNumber = amount.toStringAsFixed(0).replaceAllMapped(
-      RegExp(r'(\d{1,3})(?=(\d{3})+(?!\d))'), 
-      (Match m) => '${m[1]}.',
-    );
-    return 'Rp $formattedNumber';
-  }
-
-  /// Format number based on locale (Indonesian format for both locales)
-  static String formatNumber(BuildContext context, double number) {
-    // Use Indonesian number formatting (dots as thousand separators) for both locales
-    return number
+    final formattedNumber = amount
         .toStringAsFixed(0)
-        .replaceAllMapped(
-          RegExp(r'(\d{1,3})(?=(\d{3})+(?!\d))'),
-          (Match m) => '${m[1]}.',
-        );
+        .replaceAllMapped(RegExp(r'(\d{1,3})(?=(\d{3})+(?!\d))'), (Match m) => '${m[1]}.');
+    return 'Rp $formattedNumber';
   }
 
   /// Get localized date format pattern
@@ -68,6 +57,13 @@ class LocalizationUtils {
     } else {
       return 'MMM dd, yyyy'; // Jan 01, 2024
     }
+  }
+
+  /// Format date using localized short date format pattern
+  static String formatShortDate(BuildContext context, DateTime date) {
+    final pattern = getShortDateFormatPattern(context);
+    final formatter = DateFormat(pattern, getCurrentLanguageCode(context));
+    return formatter.format(date);
   }
 
   /// Get localized month names
@@ -139,13 +135,9 @@ class LocalizationUtils {
         return l10n.today;
       } else if (daysDifference == 1) {
         return l10n.yesterday;
-      } else if (daysDifference <= 3) {
-        return l10n.daysAgo(daysDifference);
       } else {
-        // Format as "23 September 2025" for dates older than 3 days
-        final monthNames = getMonthNames(context);
-        final monthName = monthNames[transactionDate.month - 1];
-        return '${transactionDate.day} $monthName ${transactionDate.year}';
+        // Format using localized short date format pattern for dates older than 3 days
+        return formatShortDate(context, transactionDate);
       }
     } catch (e) {
       return dateString;
