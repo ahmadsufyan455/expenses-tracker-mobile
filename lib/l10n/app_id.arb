@@ -1,7 +1,7 @@
 {
   "@@locale": "id",
   "@@last_modified": "2024-01-01T00:00:00.000Z",
-  
+
   "appTagline": "Pendamping Finansial Cerdas Anda",
   "appSubtitle": "Catat • Analisis • Hemat",
 
@@ -48,7 +48,7 @@
   "numberRequired": "{fieldName} wajib diisi",
   "numberInvalid": "{fieldName} harus berupa angka yang valid",
   "numberMustBePositive": "{fieldName} harus lebih besar dari 0",
-  
+
   "goodMorning": "Selamat Pagi!",
   "goodAfternoon": "Selamat Siang!",
   "goodEvening": "Selamat Malam!",
@@ -65,16 +65,16 @@
   "today": "Hari ini",
   "yesterday": "Kemarin",
   "daysAgo": "{days} hari lalu",
-  
+
   "home": "Beranda",
   "transactions": "Transaksi",
   "budget": "Anggaran",
   "profile": "Profil",
-  
+
   "manageTransactions": "Kelola pemasukan dan pengeluaran Anda",
   "budgetManagement": "Manajemen Anggaran",
   "planSpending": "Rencanakan dan lacak pengeluaran Anda",
-  
+
   "welcomeUser": "Selamat Datang Pengguna!",
   "manageAccount": "Kelola akun dan preferensi Anda",
   "accountSettings": "Pengaturan Akun",
@@ -88,11 +88,11 @@
   "logout": "Keluar",
   "logoutConfirmation": "Apakah Anda yakin ingin keluar?",
   "cancel": "Batal",
-  
+
   "somethingWentWrong": "Terjadi kesalahan",
   "retry": "Coba Lagi",
   "ok": "OK",
-  
+
   "addTransaction": "Tambah Transaksi",
   "expense": "Pengeluaran",
   "income": "Pemasukan",
@@ -105,7 +105,7 @@
   "pleaseEnterValidAmount": "Harap masukkan jumlah yang valid",
   "pleaseSelectCategory": "Harap pilih kategori",
   "transactionSavedSuccessfully": "Transaksi berhasil disimpan!",
-  
+
   "foodDining": "Makanan & Restoran",
   "transportation": "Transportasi",
   "shopping": "Belanja",
@@ -118,7 +118,7 @@
   "business": "Bisnis",
   "investment": "Investasi",
   "gift": "Hadiah",
-  
+
   "paymentMethod": "Metode Pembayaran",
   "pleaseSelectPaymentMethod": "Harap pilih metode pembayaran",
   "cash": "Tunai",

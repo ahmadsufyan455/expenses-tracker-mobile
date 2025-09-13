@@ -35,31 +35,44 @@ class _MainNavigationState extends State<MainNavigation> {
         },
         child: Container(key: ValueKey<int>(_currentIndex), child: _pages[_currentIndex]),
       ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          Navigator.pushNamed(context, RouteName.addTransaction.path);
-        },
-        backgroundColor: AppColors.primary,
-        child: const Icon(Icons.add, color: Colors.white),
-      ),
-      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
-      bottomNavigationBar: BottomAppBar(
-        shape: const CircularNotchedRectangle(),
-        notchMargin: 8.0,
-        color: Theme.of(context).colorScheme.surface,
-        elevation: 8,
-        child: SizedBox(
-          height: 64,
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
-            children: [
-              _buildNavItem(Icons.home_outlined, Icons.home, context.l10n.home, 0),
-              _buildNavItem(Icons.receipt_long_outlined, Icons.receipt_long, context.l10n.transactions, 1),
-              const SizedBox(width: 40), // Space for FAB
-              _buildNavItem(Icons.pie_chart_outline, Icons.pie_chart, context.l10n.budget, 2),
-              _buildNavItem(Icons.person_outline, Icons.person, context.l10n.profile, 3),
-            ],
+      bottomNavigationBar: Container(
+        decoration: BoxDecoration(
+          color: Theme.of(context).colorScheme.surface,
+          boxShadow: [
+            BoxShadow(color: Colors.black.withValues(alpha: 0.1), offset: const Offset(0, -1), blurRadius: 8),
+          ],
+        ),
+        child: SafeArea(
+          child: SizedBox(
+            height: 64,
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                _buildNavItem(Icons.home_outlined, Icons.home, context.l10n.home, 0),
+                _buildNavItem(Icons.receipt_long_outlined, Icons.receipt_long, context.l10n.transactions, 1),
+                _buildAddTransactionItem(),
+                _buildNavItem(Icons.pie_chart_outline, Icons.pie_chart, context.l10n.budget, 2),
+                _buildNavItem(Icons.person_outline, Icons.person, context.l10n.profile, 3),
+              ],
+            ),
           ),
+        ),
+      ),
+    );
+  }
+
+  Widget _buildAddTransactionItem() {
+    return GestureDetector(
+      onTap: () {
+        Navigator.pushNamed(context, RouteName.addTransaction.path);
+      },
+      child: Container(
+        padding: const EdgeInsets.symmetric(vertical: 4),
+        child: Container(
+          width: 32,
+          height: 32,
+          decoration: BoxDecoration(color: AppColors.primary, borderRadius: BorderRadius.circular(8)),
+          child: const Icon(Icons.add, color: Colors.white, size: 20),
         ),
       ),
     );
