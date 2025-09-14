@@ -380,4 +380,79 @@ class AppLocalizationsId extends AppLocalizations {
 
   @override
   String get transactionDeletedSuccessfully => 'Transaksi berhasil dihapus';
+
+  @override
+  String get categories => 'Kategori';
+
+  @override
+  String get manageCategories => 'Kelola Kategori';
+
+  @override
+  String get manageCategoriesSubtitle => 'Tambah, edit, dan atur kategori Anda';
+
+  @override
+  String get addCategory => 'Tambah Kategori';
+
+  @override
+  String get editCategory => 'Edit Kategori';
+
+  @override
+  String get categoryName => 'Nama Kategori';
+
+  @override
+  String get chooseIcon => 'Pilih Ikon';
+
+  @override
+  String get chooseColor => 'Pilih Warna';
+
+  @override
+  String get addNewCategory => 'Tambah Kategori Baru';
+
+  @override
+  String get updateCategory => 'Perbarui Kategori';
+
+  @override
+  String get categoryAddedSuccessfully => 'Kategori berhasil ditambahkan!';
+
+  @override
+  String get categoryUpdatedSuccessfully => 'Kategori berhasil diperbarui!';
+
+  @override
+  String get categoryDeletedSuccessfully => 'Kategori berhasil dihapus!';
+
+  @override
+  String get deleteCategory => 'Hapus Kategori';
+
+  @override
+  String get deleteCategoryConfirmation =>
+      'Apakah Anda yakin ingin menghapus kategori ini?';
+
+  @override
+  String get searchCategories => 'Cari kategori...';
+
+  @override
+  String get noCategoriesYet => 'Belum ada kategori';
+
+  @override
+  String get noCategoriesFound => 'Kategori tidak ditemukan';
+
+  @override
+  String get addFirstCategory => 'Tambah kategori pertama Anda untuk memulai';
+
+  @override
+  String get tryDifferentSearch => 'Coba istilah pencarian yang berbeda';
+
+  @override
+  String usedInTransactions(int count) {
+    return 'Digunakan dalam $count transaksi';
+  }
+
+  @override
+  String get categoryNameRequired => 'Harap masukkan nama kategori';
+
+  @override
+  String get categoryNameTooShort => 'Nama kategori harus minimal 2 karakter';
+
+  @override
+  String get addNewCategoryTooltip => 'Tambah kategori baru';
 }

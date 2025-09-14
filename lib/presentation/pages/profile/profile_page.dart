@@ -71,6 +71,15 @@ class ProfilePage extends StatelessWidget {
             //   },
             // ),
             _buildProfileOption(
+              icon: Icons.category_outlined,
+              title: context.l10n.manageCategories,
+              subtitle: context.l10n.manageCategoriesSubtitle,
+              onTap: () {
+                Navigator.pushNamed(context, RouteName.categories.path);
+              },
+            ),
+
+            _buildProfileOption(
               icon: Icons.security_outlined,
               title: context.l10n.security,
               subtitle: context.l10n.changePassword,

@@ -381,4 +381,81 @@ class AppLocalizationsEn extends AppLocalizations {
   @override
   String get transactionDeletedSuccessfully =>
       'Transaction deleted successfully';
+
+  @override
+  String get categories => 'Categories';
+
+  @override
+  String get manageCategories => 'Manage Categories';
+
+  @override
+  String get manageCategoriesSubtitle =>
+      'Add, edit, and organize your categories';
+
+  @override
+  String get addCategory => 'Add Category';
+
+  @override
+  String get editCategory => 'Edit Category';
+
+  @override
+  String get categoryName => 'Category Name';
+
+  @override
+  String get chooseIcon => 'Choose Icon';
+
+  @override
+  String get chooseColor => 'Choose Color';
+
+  @override
+  String get addNewCategory => 'Add New Category';
+
+  @override
+  String get updateCategory => 'Update Category';
+
+  @override
+  String get categoryAddedSuccessfully => 'Category added successfully!';
+
+  @override
+  String get categoryUpdatedSuccessfully => 'Category updated successfully!';
+
+  @override
+  String get categoryDeletedSuccessfully => 'Category deleted successfully!';
+
+  @override
+  String get deleteCategory => 'Delete Category';
+
+  @override
+  String get deleteCategoryConfirmation =>
+      'Are you sure you want to delete this category?';
+
+  @override
+  String get searchCategories => 'Search categories...';
+
+  @override
+  String get noCategoriesYet => 'No categories yet';
+
+  @override
+  String get noCategoriesFound => 'No categories found';
+
+  @override
+  String get addFirstCategory => 'Add your first category to get started';
+
+  @override
+  String get tryDifferentSearch => 'Try a different search term';
+
+  @override
+  String usedInTransactions(int count) {
+    return 'Used in $count transactions';
+  }
+
+  @override
+  String get categoryNameRequired => 'Please enter category name';
+
+  @override
+  String get categoryNameTooShort =>
+      'Category name must be at least 2 characters';
+
+  @override
+  String get addNewCategoryTooltip => 'Add new category';
 }

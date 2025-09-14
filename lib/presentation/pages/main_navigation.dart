@@ -1,7 +1,7 @@
 import 'package:expense_tracker_mobile/app/router.dart';
 import 'package:expense_tracker_mobile/app/theme/app_colors.dart';
 import 'package:expense_tracker_mobile/core/extensions/build_context_extensions.dart';
-import 'package:expense_tracker_mobile/presentation/pages/budget/budget_page.dart';
+import 'package:expense_tracker_mobile/presentation/pages/budgets/budget_page.dart';
 import 'package:expense_tracker_mobile/presentation/pages/home/home_page.dart';
 import 'package:expense_tracker_mobile/presentation/pages/profile/profile_page.dart';
 import 'package:expense_tracker_mobile/presentation/pages/transactions/transactions_page.dart';

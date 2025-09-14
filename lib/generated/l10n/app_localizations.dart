@@ -805,6 +805,150 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Transaction deleted successfully'**
   String get transactionDeletedSuccessfully;
+
+  /// No description provided for @categories.
+  ///
+  /// In en, this message translates to:
+  /// **'Categories'**
+  String get categories;
+
+  /// No description provided for @manageCategories.
+  ///
+  /// In en, this message translates to:
+  /// **'Manage Categories'**
+  String get manageCategories;
+
+  /// No description provided for @manageCategoriesSubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Add, edit, and organize your categories'**
+  String get manageCategoriesSubtitle;
+
+  /// No description provided for @addCategory.
+  ///
+  /// In en, this message translates to:
+  /// **'Add Category'**
+  String get addCategory;
+
+  /// No description provided for @editCategory.
+  ///
+  /// In en, this message translates to:
+  /// **'Edit Category'**
+  String get editCategory;
+
+  /// No description provided for @categoryName.
+  ///
+  /// In en, this message translates to:
+  /// **'Category Name'**
+  String get categoryName;
+
+  /// No description provided for @chooseIcon.
+  ///
+  /// In en, this message translates to:
+  /// **'Choose Icon'**
+  String get chooseIcon;
+
+  /// No description provided for @chooseColor.
+  ///
+  /// In en, this message translates to:
+  /// **'Choose Color'**
+  String get chooseColor;
+
+  /// No description provided for @addNewCategory.
+  ///
+  /// In en, this message translates to:
+  /// **'Add New Category'**
+  String get addNewCategory;
+
+  /// No description provided for @updateCategory.
+  ///
+  /// In en, this message translates to:
+  /// **'Update Category'**
+  String get updateCategory;
+
+  /// No description provided for @categoryAddedSuccessfully.
+  ///
+  /// In en, this message translates to:
+  /// **'Category added successfully!'**
+  String get categoryAddedSuccessfully;
+
+  /// No description provided for @categoryUpdatedSuccessfully.
+  ///
+  /// In en, this message translates to:
+  /// **'Category updated successfully!'**
+  String get categoryUpdatedSuccessfully;
+
+  /// No description provided for @categoryDeletedSuccessfully.
+  ///
+  /// In en, this message translates to:
+  /// **'Category deleted successfully!'**
+  String get categoryDeletedSuccessfully;
+
+  /// No description provided for @deleteCategory.
+  ///
+  /// In en, this message translates to:
+  /// **'Delete Category'**
+  String get deleteCategory;
+
+  /// No description provided for @deleteCategoryConfirmation.
+  ///
+  /// In en, this message translates to:
+  /// **'Are you sure you want to delete this category?'**
+  String get deleteCategoryConfirmation;
+
+  /// No description provided for @searchCategories.
+  ///
+  /// In en, this message translates to:
+  /// **'Search categories...'**
+  String get searchCategories;
+
+  /// No description provided for @noCategoriesYet.
+  ///
+  /// In en, this message translates to:
+  /// **'No categories yet'**
+  String get noCategoriesYet;
+
+  /// No description provided for @noCategoriesFound.
+  ///
+  /// In en, this message translates to:
+  /// **'No categories found'**
+  String get noCategoriesFound;
+
+  /// No description provided for @addFirstCategory.
+  ///
+  /// In en, this message translates to:
+  /// **'Add your first category to get started'**
+  String get addFirstCategory;
+
+  /// No description provided for @tryDifferentSearch.
+  ///
+  /// In en, this message translates to:
+  /// **'Try a different search term'**
+  String get tryDifferentSearch;
+
+  /// Shows how many transactions use this category
+  ///
+  /// In en, this message translates to:
+  /// **'Used in {count} transactions'**
+  String usedInTransactions(int count);
+
+  /// No description provided for @categoryNameRequired.
+  ///
+  /// In en, this message translates to:
+  /// **'Please enter category name'**
+  String get categoryNameRequired;
+
+  /// No description provided for @categoryNameTooShort.
+  ///
+  /// In en, this message translates to:
+  /// **'Category name must be at least 2 characters'**
+  String get categoryNameTooShort;
+
+  /// No description provided for @addNewCategoryTooltip.
+  ///
+  /// In en, this message translates to:
+  /// **'Add new category'**
+  String get addNewCategoryTooltip;
 }
 
 class _AppLocalizationsDelegate

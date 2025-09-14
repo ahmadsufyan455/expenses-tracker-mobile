@@ -16,6 +16,7 @@ class GlobalTextFormField extends StatelessWidget {
   final bool obscureText;
   final List<TextInputFormatter>? inputFormatters;
   final int? maxLength;
+  final bool autofocus;
 
   const GlobalTextFormField({
     super.key,
@@ -32,6 +33,7 @@ class GlobalTextFormField extends StatelessWidget {
     this.obscureText = false,
     this.inputFormatters,
     this.maxLength,
+    this.autofocus = false,
   });
 
   @override
@@ -45,6 +47,7 @@ class GlobalTextFormField extends StatelessWidget {
       obscureText: obscureText,
       onChanged: onChanged,
       inputFormatters: inputFormatters,
+      autofocus: autofocus,
       decoration: InputDecoration(
         labelText: labelText,
         hintText: hintText,
