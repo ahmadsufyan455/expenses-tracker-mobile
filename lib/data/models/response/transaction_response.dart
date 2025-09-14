@@ -12,8 +12,8 @@ class TransactionResponse {
   final String type;
   @JsonKey(name: 'payment_method')
   final String paymentMethod;
-  @JsonKey(name: 'category_name')
-  final String categoryName;
+  @JsonKey(name: 'category')
+  final TransactionCategoryResponse category;
   @JsonKey(name: 'description')
   final String description;
   @JsonKey(name: 'created_at')
@@ -26,11 +26,24 @@ class TransactionResponse {
     required this.amount,
     required this.type,
     required this.paymentMethod,
-    required this.categoryName,
+    required this.category,
     required this.description,
     required this.createdAt,
     required this.updatedAt,
   });
 
   factory TransactionResponse.fromJson(Map<String, dynamic> json) => _$TransactionResponseFromJson(json);
+}
+
+@JsonSerializable(createToJson: false)
+class TransactionCategoryResponse {
+  @JsonKey(name: 'id')
+  final int id;
+  @JsonKey(name: 'name')
+  final String name;
+
+  TransactionCategoryResponse({required this.id, required this.name});
+
+  factory TransactionCategoryResponse.fromJson(Map<String, dynamic> json) =>
+      _$TransactionCategoryResponseFromJson(json);
 }

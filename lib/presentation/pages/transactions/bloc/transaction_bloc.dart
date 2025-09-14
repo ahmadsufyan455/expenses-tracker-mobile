@@ -8,6 +8,7 @@ import 'package:expense_tracker_mobile/domain/usecases/create_transaction_usecas
 import 'package:expense_tracker_mobile/domain/usecases/delete_transaction_usecase.dart';
 import 'package:expense_tracker_mobile/domain/usecases/get_category_usecase.dart';
 import 'package:expense_tracker_mobile/domain/usecases/get_transaction_usecase.dart';
+import 'package:expense_tracker_mobile/domain/usecases/update_transaction_usecase.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:injectable/injectable.dart';
 
@@ -20,6 +21,7 @@ class TransactionBloc extends Bloc<TransactionEvent, TransactionState> {
   final GetCategoryUsecase _getCategoryUsecase;
   final GetTransactionUsecase _getTransactionUsecase;
   final DeleteTransactionUsecase _deleteTransactionUsecase;
+  final UpdateTransactionUsecase _updateTransactionUsecase;
 
   var stateData = TransactionStateData();
 
@@ -33,12 +35,14 @@ class TransactionBloc extends Bloc<TransactionEvent, TransactionState> {
     this._getCategoryUsecase,
     this._getTransactionUsecase,
     this._deleteTransactionUsecase,
+    this._updateTransactionUsecase,
   ) : super(TransactionInitial()) {
     on<CreateTransactionEvent>(_onCreateTransaction);
     on<GetCategoryEvent>(_onGetCategory);
     on<GetTransactionEvent>(_onGetTransaction);
     on<GetMoreTransactionEvent>(_onGetMoreTransaction);
     on<DeleteTransactionEvent>(_onDeleteTransaction);
+    on<UpdateTransactionEvent>(_onUpdateTransaction);
   }
 
   Future<void> _onGetCategory(GetCategoryEvent event, Emitter<TransactionState> emit) async {
@@ -133,6 +137,27 @@ class TransactionBloc extends Bloc<TransactionEvent, TransactionState> {
       (_) {
         stateData = stateData.copyWith(message: 'Transaction deleted successfully');
         emit(DeleteTransactionSuccess(data: stateData));
+      },
+    );
+  }
+
+  Future<void> _onUpdateTransaction(UpdateTransactionEvent event, Emitter<TransactionState> emit) async {
+    emit(UpdateTransactionLoading(data: stateData));
+    final request = NewTransactionRequest(
+      amount: event.amount,
+      type: TransactionType.fromString(event.type),
+      paymentMethod: PaymentMethod.fromString(event.paymentMethod),
+      categoryId: event.categoryId,
+      description: event.description,
+    );
+    final result = await _updateTransactionUsecase.call(event.id, request);
+    result.fold(
+      (failure) {
+        emit(UpdateTransactionFailure(failure: failure, data: stateData));
+      },
+      (message) {
+        stateData = stateData.copyWith(message: message);
+        emit(UpdateTransactionSuccess(data: stateData));
       },
     );
   }

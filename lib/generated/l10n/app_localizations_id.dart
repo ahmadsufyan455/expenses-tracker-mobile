@@ -261,6 +261,9 @@ class AppLocalizationsId extends AppLocalizations {
   String get addTransaction => 'Tambah Transaksi';
 
   @override
+  String get updateTransaction => 'Ubah Transaction';
+
+  @override
   String get expense => 'Pengeluaran';
 
   @override
@@ -292,6 +295,9 @@ class AppLocalizationsId extends AppLocalizations {
 
   @override
   String get transactionSavedSuccessfully => 'Transaksi berhasil disimpan!';
+
+  @override
+  String get transactionUpdatedSuccessfully => 'Transaksi berhasil diperbarui!';
 
   @override
   String get foodDining => 'Makanan & Restoran';

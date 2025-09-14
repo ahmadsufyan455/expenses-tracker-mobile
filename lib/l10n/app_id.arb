@@ -94,6 +94,7 @@
   "ok": "OK",
 
   "addTransaction": "Tambah Transaksi",
+  "updateTransaction": "Ubah Transaction",
   "expense": "Pengeluaran",
   "income": "Pemasukan",
   "amount": "Jumlah",
@@ -105,6 +106,7 @@
   "pleaseEnterValidAmount": "Harap masukkan jumlah yang valid",
   "pleaseSelectCategory": "Harap pilih kategori",
   "transactionSavedSuccessfully": "Transaksi berhasil disimpan!",
+  "transactionUpdatedSuccessfully": "Transaksi berhasil diperbarui!",
 
   "foodDining": "Makanan & Restoran",
   "transportation": "Transportasi",
@@ -125,7 +127,7 @@
   "creditCard": "Kartu Kredit",
   "bankTransfer": "Transfer Bank",
   "digitalWallet": "Dompet Digital",
-  
+
   "date": "Tanggal",
   "type": "Tipe",
   "edit": "Edit",

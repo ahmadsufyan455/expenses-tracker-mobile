@@ -38,6 +38,9 @@ abstract class ApiService {
     @Query('sort_order') String sortOrder,
   );
 
+  @PUT('/transactions/{id}')
+  Future<BaseResponse> updateTransaction(@Path('id') int id, @Body() NewTransactionRequest request);
+
   @DELETE('/transactions/{id}')
   Future<void> deleteTransaction(@Path('id') int id);
 }

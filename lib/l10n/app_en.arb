@@ -1,7 +1,7 @@
 {
   "@@locale": "en",
   "@@last_modified": "2024-01-01T00:00:00.000Z",
-  
+
   "appTagline": "Your Smart Financial Companion",
   "appSubtitle": "Track • Analyze • Save",
   "welcomeBack": "Welcome Back!",
@@ -107,7 +107,7 @@
       }
     }
   },
-  
+
   "goodMorning": "Good Morning!",
   "goodAfternoon": "Good Afternoon!",
   "goodEvening": "Good Evening!",
@@ -133,16 +133,16 @@
       }
     }
   },
-  
+
   "home": "Home",
   "transactions": "Transactions",
   "budget": "Budget",
   "profile": "Profile",
-  
+
   "manageTransactions": "Manage your income and expenses",
   "budgetManagement": "Budget Management",
   "planSpending": "Plan and track your spending",
-  
+
   "welcomeUser": "Welcome User!",
   "manageAccount": "Manage your account and preferences",
   "accountSettings": "Account Settings",
@@ -156,12 +156,13 @@
   "logout": "Logout",
   "logoutConfirmation": "Are you sure you want to logout?",
   "cancel": "Cancel",
-  
+
   "somethingWentWrong": "Something went wrong",
   "retry": "Retry",
   "ok": "OK",
-  
+
   "addTransaction": "Add Transaction",
+  "updateTransaction": "Update Transaction",
   "expense": "Expense",
   "income": "Income",
   "amount": "Amount",
@@ -173,7 +174,8 @@
   "pleaseEnterValidAmount": "Please enter valid amount",
   "pleaseSelectCategory": "Please select a category",
   "transactionSavedSuccessfully": "Transaction saved successfully!",
-  
+  "transactionUpdatedSuccessfully": "Transaction updated successfully!",
+
   "foodDining": "Food & Dining",
   "transportation": "Transportation",
   "shopping": "Shopping",
@@ -186,14 +188,14 @@
   "business": "Business",
   "investment": "Investment",
   "gift": "Gift",
-  
+
   "paymentMethod": "Payment Method",
   "pleaseSelectPaymentMethod": "Please select a payment method",
   "cash": "Cash",
   "creditCard": "Credit Card",
   "bankTransfer": "Bank Transfer",
   "digitalWallet": "Digital Wallet",
-  
+
   "date": "Date",
   "type": "Type",
   "edit": "Edit",

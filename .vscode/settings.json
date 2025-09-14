@@ -67,7 +67,7 @@
   "window.commandCenter": true,
   "debug.toolBarLocation": "commandCenter",
   "terminal.integrated.defaultProfile.linux": "bash",
-  "terminal.integrated.fontSize": 13,
+  "terminal.integrated.fontSize": 12,
   "git.enableSmartCommit": true,
   "git.autofetch": true,
   "git.confirmSync": false,

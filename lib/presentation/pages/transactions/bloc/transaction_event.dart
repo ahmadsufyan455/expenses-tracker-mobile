@@ -55,3 +55,24 @@ class DeleteTransactionEvent extends TransactionEvent {
   @override
   List<Object> get props => [id];
 }
+
+class UpdateTransactionEvent extends TransactionEvent {
+  final int id;
+  final int amount;
+  final String type;
+  final String paymentMethod;
+  final int categoryId;
+  final String description;
+
+  const UpdateTransactionEvent({
+    required this.id,
+    required this.amount,
+    required this.type,
+    required this.paymentMethod,
+    required this.categoryId,
+    required this.description,
+  });
+
+  @override
+  List<Object> get props => [id, amount, type, paymentMethod, categoryId, description];
+}

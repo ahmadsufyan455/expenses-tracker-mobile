@@ -260,6 +260,9 @@ class AppLocalizationsEn extends AppLocalizations {
   String get addTransaction => 'Add Transaction';
 
   @override
+  String get updateTransaction => 'Update Transaction';
+
+  @override
   String get expense => 'Expense';
 
   @override
@@ -291,6 +294,10 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get transactionSavedSuccessfully => 'Transaction saved successfully!';
+
+  @override
+  String get transactionUpdatedSuccessfully =>
+      'Transaction updated successfully!';
 
   @override
   String get foodDining => 'Food & Dining';

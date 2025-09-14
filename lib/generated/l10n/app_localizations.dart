@@ -566,6 +566,12 @@ abstract class AppLocalizations {
   /// **'Add Transaction'**
   String get addTransaction;
 
+  /// No description provided for @updateTransaction.
+  ///
+  /// In en, this message translates to:
+  /// **'Update Transaction'**
+  String get updateTransaction;
+
   /// No description provided for @expense.
   ///
   /// In en, this message translates to:
@@ -631,6 +637,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Transaction saved successfully!'**
   String get transactionSavedSuccessfully;
+
+  /// No description provided for @transactionUpdatedSuccessfully.
+  ///
+  /// In en, this message translates to:
+  /// **'Transaction updated successfully!'**
+  String get transactionUpdatedSuccessfully;
 
   /// No description provided for @foodDining.
   ///

@@ -14,4 +14,5 @@ abstract interface class MainRepository {
     String sortOrder,
   );
   Future<Either<Failure, void>> deleteTransaction(int id);
+  Future<Either<Failure, String>> updateTransaction(int id, NewTransactionRequest request);
 }

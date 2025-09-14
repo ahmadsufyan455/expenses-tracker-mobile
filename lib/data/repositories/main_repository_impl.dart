@@ -58,4 +58,14 @@ class MainRepositoryImpl implements MainRepository {
       return Left(ErrorHandler.handleError(e));
     }
   }
+
+  @override
+  Future<Either<Failure, String>> updateTransaction(int id, NewTransactionRequest request) async {
+    try {
+      final response = await _apiService.updateTransaction(id, request);
+      return Right(response.message);
+    } catch (e) {
+      return Left(ErrorHandler.handleError(e));
+    }
+  }
 }

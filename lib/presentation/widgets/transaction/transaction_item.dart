@@ -44,7 +44,7 @@ class TransactionItem extends StatelessWidget {
                         children: [
                           Expanded(
                             child: Text(
-                              transaction.categoryName,
+                              transaction.category.name,
                               style: theme.textTheme.titleMedium,
                               overflow: TextOverflow.ellipsis,
                             ),
@@ -61,8 +61,8 @@ class TransactionItem extends StatelessWidget {
                       Row(
                         children: [
                           Icon(
-                            paymentMethod.icon, 
-                            size: AppDimensions.iconXS, 
+                            paymentMethod.icon,
+                            size: AppDimensions.iconXS,
                             color: theme.colorScheme.onSurfaceVariant,
                           ),
                           const SizedBox(width: AppDimensions.spaceXS),
@@ -72,8 +72,8 @@ class TransactionItem extends StatelessWidget {
                           ),
                           const SizedBox(width: AppDimensions.spaceS),
                           Icon(
-                            Icons.circle, 
-                            size: 4, 
+                            Icons.circle,
+                            size: 4,
                             color: theme.colorScheme.onSurfaceVariant,
                           ),
                           const SizedBox(width: AppDimensions.spaceS),

@@ -106,3 +106,17 @@ final class DeleteTransactionFailure extends TransactionState {
   final Failure failure;
   const DeleteTransactionFailure({required this.failure, required super.data});
 }
+
+/// update transaction
+final class UpdateTransactionLoading extends TransactionState {
+  const UpdateTransactionLoading({required super.data});
+}
+
+final class UpdateTransactionSuccess extends TransactionState {
+  const UpdateTransactionSuccess({required super.data});
+}
+
+final class UpdateTransactionFailure extends TransactionState {
+  final Failure failure;
+  const UpdateTransactionFailure({required this.failure, required super.data});
+}

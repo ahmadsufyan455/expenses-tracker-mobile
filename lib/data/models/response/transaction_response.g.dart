@@ -12,8 +12,17 @@ TransactionResponse _$TransactionResponseFromJson(Map<String, dynamic> json) =>
       amount: (json['amount'] as num).toInt(),
       type: json['type'] as String,
       paymentMethod: json['payment_method'] as String,
-      categoryName: json['category_name'] as String,
+      category: TransactionCategoryResponse.fromJson(
+        json['category'] as Map<String, dynamic>,
+      ),
       description: json['description'] as String,
       createdAt: json['created_at'] as String,
       updatedAt: json['updated_at'] as String,
     );
+
+TransactionCategoryResponse _$TransactionCategoryResponseFromJson(
+  Map<String, dynamic> json,
+) => TransactionCategoryResponse(
+  id: (json['id'] as num).toInt(),
+  name: json['name'] as String,
+);

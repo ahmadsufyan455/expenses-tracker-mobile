@@ -3,6 +3,7 @@ import 'package:expense_tracker_mobile/app/theme/app_colors.dart';
 import 'package:expense_tracker_mobile/core/enums/transaction_enums.dart';
 import 'package:expense_tracker_mobile/core/extensions/build_context_extensions.dart';
 import 'package:expense_tracker_mobile/domain/dto/category_dto.dart';
+import 'package:expense_tracker_mobile/domain/dto/transaction_dto.dart';
 import 'package:expense_tracker_mobile/presentation/pages/transactions/bloc/transaction_bloc.dart';
 import 'package:expense_tracker_mobile/presentation/widgets/common/error_dialog.dart';
 import 'package:expense_tracker_mobile/presentation/widgets/common/global_button.dart';
@@ -13,7 +14,10 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get_it/get_it.dart';
 
 class AddTransactionPage extends StatefulWidget {
-  const AddTransactionPage({super.key});
+  const AddTransactionPage({super.key, this.transaction, this.isUpdate});
+
+  final TransactionDto? transaction;
+  final bool? isUpdate;
 
   @override
   State<AddTransactionPage> createState() => _AddTransactionPageState();
@@ -36,6 +40,21 @@ class _AddTransactionPageState extends State<AddTransactionPage> {
   void initState() {
     super.initState();
     _bloc = GetIt.instance<TransactionBloc>()..add(GetCategoryEvent());
+    _checkTransactionData();
+  }
+
+  void _checkTransactionData() {
+    if (_isUpdate()) {
+      _selectedType = TransactionType.fromString(widget.transaction!.type);
+      _selectedCategory = CategoryDto(id: widget.transaction!.category.id, name: widget.transaction!.category.name);
+      _selectedPaymentMethod = PaymentMethod.fromString(widget.transaction!.paymentMethod);
+      _amountController.text = widget.transaction!.amount.toString();
+      _descriptionController.text = widget.transaction!.description;
+    }
+  }
+
+  bool _isUpdate() {
+    return widget.isUpdate != null && widget.isUpdate! && widget.transaction != null;
   }
 
   @override
@@ -48,11 +67,12 @@ class _AddTransactionPageState extends State<AddTransactionPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text(context.l10n.addTransaction)),
+      appBar: AppBar(title: Text(_isUpdate() ? context.l10n.updateTransaction : context.l10n.addTransaction)),
       body: BlocConsumer<TransactionBloc, TransactionState>(
         bloc: _bloc,
         listener: (context, state) {
-          _handleTransactionState(state);
+          _handleAddTransactionState(state);
+          _handleUpdateTransactionState(state);
         },
         builder: (context, state) {
           return SingleChildScrollView(
@@ -247,27 +267,55 @@ class _AddTransactionPageState extends State<AddTransactionPage> {
         return;
       }
 
-      _bloc.add(
-        CreateTransactionEvent(
-          amount: int.parse(_amountController.text),
-          type: _selectedType.value,
-          paymentMethod: _selectedPaymentMethod!.value,
-          categoryId: _selectedCategory?.id ?? 0,
-          description: _descriptionController.text,
-        ),
-      );
+      if (_isUpdate()) {
+        _bloc.add(
+          UpdateTransactionEvent(
+            id: widget.transaction!.id,
+            amount: int.parse(_amountController.text),
+            type: _selectedType.value,
+            paymentMethod: _selectedPaymentMethod!.value,
+            categoryId: _selectedCategory?.id ?? 0,
+            description: _descriptionController.text,
+          ),
+        );
+      } else {
+        _bloc.add(
+          CreateTransactionEvent(
+            amount: int.parse(_amountController.text),
+            type: _selectedType.value,
+            paymentMethod: _selectedPaymentMethod!.value,
+            categoryId: _selectedCategory?.id ?? 0,
+            description: _descriptionController.text,
+          ),
+        );
+      }
     }
   }
 
-  void _handleTransactionState(TransactionState state) {
+  void _handleAddTransactionState(TransactionState state) {
     if (state is CreateTransactionLoading) {
       _handleLoadingState(true);
     } else if (state is CreateTransactionSuccess) {
       _handleLoadingState(false);
+      Navigator.of(context).pop(true);
       ScaffoldMessenger.of(
         context,
       ).showSnackBar(SnackBar(content: Text(context.l10n.transactionSavedSuccessfully), backgroundColor: Colors.green));
+    } else if (state is CreateTransactionFailure) {
+      _handleLoadingState(false);
+      ErrorDialog.show(context, state.failure);
+    }
+  }
+
+  void _handleUpdateTransactionState(TransactionState state) {
+    if (state is UpdateTransactionLoading) {
+      _handleLoadingState(true);
+    } else if (state is UpdateTransactionSuccess) {
+      _handleLoadingState(false);
       Navigator.of(context).pop(true);
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text(context.l10n.transactionUpdatedSuccessfully), backgroundColor: Colors.green),
+      );
     } else if (state is CreateTransactionFailure) {
       _handleLoadingState(false);
       ErrorDialog.show(context, state.failure);

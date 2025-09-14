@@ -6,7 +6,7 @@ class TransactionDto {
   final String description;
   final String createdAt;
   final String updatedAt;
-  final String categoryName;
+  final TransactionCategoryDto category;
   final String paymentMethod;
   final String type;
 
@@ -16,7 +16,7 @@ class TransactionDto {
     required this.description,
     required this.createdAt,
     required this.updatedAt,
-    required this.categoryName,
+    required this.category,
     required this.paymentMethod,
     required this.type,
   });
@@ -28,7 +28,7 @@ class TransactionDto {
       description: response.description,
       createdAt: response.createdAt,
       updatedAt: response.updatedAt,
-      categoryName: response.categoryName,
+      category: TransactionCategoryDto(id: response.category.id, name: response.category.name),
       paymentMethod: response.paymentMethod,
       type: response.type,
     );
@@ -37,4 +37,11 @@ class TransactionDto {
   static List<TransactionDto> fromResponseList(List<TransactionResponse> response) {
     return response.map((transaction) => TransactionDto.fromResponse(transaction)).toList();
   }
+}
+
+class TransactionCategoryDto {
+  final int id;
+  final String name;
+
+  TransactionCategoryDto({required this.id, required this.name});
 }

@@ -1,3 +1,4 @@
+import 'package:expense_tracker_mobile/app/router.dart';
 import 'package:expense_tracker_mobile/app/theme/app_colors.dart';
 import 'package:expense_tracker_mobile/app/theme/app_dimensions.dart';
 import 'package:expense_tracker_mobile/app/theme/app_text_styles.dart';
@@ -81,9 +82,7 @@ class _TransactionDetailBottomSheetState extends State<TransactionDetailBottomSh
                     width: 40,
                     height: 4,
                     decoration: BoxDecoration(
-                      color: theme.colorScheme.onSurfaceVariant.withValues(
-                        alpha: 0.3,
-                      ),
+                      color: theme.colorScheme.onSurfaceVariant.withValues(alpha: 0.3),
                       borderRadius: BorderRadius.circular(2),
                     ),
                   ),
@@ -104,10 +103,7 @@ class _TransactionDetailBottomSheetState extends State<TransactionDetailBottomSh
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Text(
-                            widget.transaction.categoryName,
-                            style: theme.textTheme.headlineSmall,
-                          ),
+                          Text(widget.transaction.category.name, style: theme.textTheme.headlineSmall),
                           const SizedBox(height: AppDimensions.spaceXS),
                           Text(
                             '${transactionType == TransactionType.income ? '+' : '-'}$formattedAmount',
@@ -127,7 +123,7 @@ class _TransactionDetailBottomSheetState extends State<TransactionDetailBottomSh
                   context,
                   Icons.category_outlined,
                   context.l10n.category,
-                  widget.transaction.categoryName,
+                  widget.transaction.category.name,
                 ),
                 _buildDetailRow(
                   context,
@@ -161,9 +157,16 @@ class _TransactionDetailBottomSheetState extends State<TransactionDetailBottomSh
                   children: [
                     Expanded(
                       child: OutlinedButton.icon(
-                        onPressed: () {
-                          Navigator.of(context).pop();
-                          // TODO: Implement edit functionality
+                        onPressed: () async {
+                          final result = await Navigator.pushNamed(
+                            context,
+                            RouteName.addTransaction.path,
+                            arguments: {'transaction': widget.transaction, 'isUpdate': true},
+                          );
+
+                          if (result == true && context.mounted) {
+                            Navigator.of(context).pop(true);
+                          }
                         },
                         icon: const Icon(Icons.edit_outlined),
                         label: Text(context.l10n.edit),
@@ -233,22 +236,13 @@ class _TransactionDetailBottomSheetState extends State<TransactionDetailBottomSh
       padding: const EdgeInsets.only(bottom: AppDimensions.spaceM),
       child: Row(
         children: [
-          Icon(
-            icon,
-            size: AppDimensions.iconS,
-            color: theme.colorScheme.onSurfaceVariant,
-          ),
+          Icon(icon, size: AppDimensions.iconS, color: theme.colorScheme.onSurfaceVariant),
           const SizedBox(width: AppDimensions.spaceM),
           Expanded(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(
-                  label,
-                  style: theme.textTheme.bodySmall?.copyWith(
-                    color: theme.colorScheme.onSurfaceVariant,
-                  ),
-                ),
+                Text(label, style: theme.textTheme.bodySmall?.copyWith(color: theme.colorScheme.onSurfaceVariant)),
                 const SizedBox(height: AppDimensions.spaceXS),
                 Text(value, style: theme.textTheme.bodyLarge),
               ],
@@ -267,18 +261,9 @@ class _TransactionDetailBottomSheetState extends State<TransactionDetailBottomSh
       children: [
         Row(
           children: [
-            Icon(
-              icon,
-              size: AppDimensions.iconS,
-              color: theme.colorScheme.onSurfaceVariant,
-            ),
+            Icon(icon, size: AppDimensions.iconS, color: theme.colorScheme.onSurfaceVariant),
             const SizedBox(width: AppDimensions.spaceM),
-            Text(
-              label,
-              style: theme.textTheme.bodySmall?.copyWith(
-                color: theme.colorScheme.onSurfaceVariant,
-              ),
-            ),
+            Text(label, style: theme.textTheme.bodySmall?.copyWith(color: theme.colorScheme.onSurfaceVariant)),
           ],
         ),
         const SizedBox(height: AppDimensions.spaceS),
