@@ -274,7 +274,12 @@ class _TransactionDetailBottomSheetState extends State<TransactionDetailBottomSh
             color: theme.colorScheme.surfaceContainerHighest,
             borderRadius: AppDimensions.borderRadiusM,
           ),
-          child: Text(content, style: theme.textTheme.bodyLarge),
+          child: Text(
+            content,
+            style: theme.textTheme.bodyLarge,
+            maxLines: 3,
+            overflow: TextOverflow.ellipsis,
+          ),
         ),
       ],
     );

@@ -1,5 +1,6 @@
 import 'package:expense_tracker_mobile/app/theme/app_colors.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 class GlobalTextFormField extends StatelessWidget {
   final TextEditingController controller;
@@ -13,6 +14,8 @@ class GlobalTextFormField extends StatelessWidget {
   final bool enabled;
   final Widget? suffixIcon;
   final bool obscureText;
+  final List<TextInputFormatter>? inputFormatters;
+  final int? maxLength;
 
   const GlobalTextFormField({
     super.key,
@@ -27,6 +30,8 @@ class GlobalTextFormField extends StatelessWidget {
     this.enabled = true,
     this.suffixIcon,
     this.obscureText = false,
+    this.inputFormatters,
+    this.maxLength,
   });
 
   @override
@@ -35,9 +40,11 @@ class GlobalTextFormField extends StatelessWidget {
       controller: controller,
       keyboardType: keyboardType,
       maxLines: maxLines,
+      maxLength: maxLength,
       enabled: enabled,
       obscureText: obscureText,
       onChanged: onChanged,
+      inputFormatters: inputFormatters,
       decoration: InputDecoration(
         labelText: labelText,
         hintText: hintText,

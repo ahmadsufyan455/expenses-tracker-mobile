@@ -2,6 +2,7 @@ import 'package:animated_toggle_switch/animated_toggle_switch.dart';
 import 'package:expense_tracker_mobile/app/theme/app_colors.dart';
 import 'package:expense_tracker_mobile/core/enums/transaction_enums.dart';
 import 'package:expense_tracker_mobile/core/extensions/build_context_extensions.dart';
+import 'package:expense_tracker_mobile/core/utils/number_utils.dart';
 import 'package:expense_tracker_mobile/domain/dto/category_dto.dart';
 import 'package:expense_tracker_mobile/domain/dto/transaction_dto.dart';
 import 'package:expense_tracker_mobile/presentation/pages/transactions/bloc/transaction_bloc.dart';
@@ -48,8 +49,12 @@ class _AddTransactionPageState extends State<AddTransactionPage> {
       _selectedType = TransactionType.fromString(widget.transaction!.type);
       _selectedCategory = CategoryDto(id: widget.transaction!.category.id, name: widget.transaction!.category.name);
       _selectedPaymentMethod = PaymentMethod.fromString(widget.transaction!.paymentMethod);
-      _amountController.text = widget.transaction!.amount.toString();
-      _descriptionController.text = widget.transaction!.description;
+      _amountController.text = NumberUtils.formatWithThousandSeparator(widget.transaction!.amount.abs());
+      // Truncate description if it's longer than 150 characters
+      final description = widget.transaction!.description;
+      _descriptionController.text = description.length > 150
+        ? description.substring(0, 150)
+        : description;
     }
   }
 
@@ -143,11 +148,12 @@ class _AddTransactionPageState extends State<AddTransactionPage> {
                     labelText: context.l10n.amount,
                     prefixText: 'Rp ',
                     keyboardType: TextInputType.number,
+                    inputFormatters: [ThousandSeparatorInputFormatter()],
                     validator: (value) {
                       if (value == null || value.isEmpty) {
                         return context.l10n.pleaseEnterAmount;
                       }
-                      if (double.tryParse(value) == null) {
+                      if (!NumberUtils.isValidFormattedNumber(value)) {
                         return context.l10n.pleaseEnterValidAmount;
                       }
                       return null;
@@ -243,6 +249,7 @@ class _AddTransactionPageState extends State<AddTransactionPage> {
                     controller: _descriptionController,
                     labelText: context.l10n.descriptionOptional,
                     maxLines: 3,
+                    maxLength: 150,
                   ),
                   const SizedBox(height: 32),
 
@@ -267,11 +274,14 @@ class _AddTransactionPageState extends State<AddTransactionPage> {
         return;
       }
 
+      // Parse formatted amount (e.g., "10.000" -> 10000)
+      final amount = NumberUtils.parseFromFormattedString(_amountController.text);
+
       if (_isUpdate()) {
         _bloc.add(
           UpdateTransactionEvent(
             id: widget.transaction!.id,
-            amount: int.parse(_amountController.text),
+            amount: amount,
             type: _selectedType.value,
             paymentMethod: _selectedPaymentMethod!.value,
             categoryId: _selectedCategory?.id ?? 0,
@@ -281,7 +291,7 @@ class _AddTransactionPageState extends State<AddTransactionPage> {
       } else {
         _bloc.add(
           CreateTransactionEvent(
-            amount: int.parse(_amountController.text),
+            amount: amount,
             type: _selectedType.value,
             paymentMethod: _selectedPaymentMethod!.value,
             categoryId: _selectedCategory?.id ?? 0,
