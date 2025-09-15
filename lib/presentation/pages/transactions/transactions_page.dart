@@ -148,6 +148,11 @@ class _TransactionsPageState extends State<TransactionsPage> {
           );
         },
       ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: _navigateToAddTransaction,
+        backgroundColor: AppColors.primary,
+        child: const Icon(Icons.add, color: Colors.white),
+      ),
     );
   }
 

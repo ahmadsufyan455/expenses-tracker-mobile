@@ -1,7 +1,7 @@
-import 'package:expense_tracker_mobile/app/router.dart';
 import 'package:expense_tracker_mobile/app/theme/app_colors.dart';
 import 'package:expense_tracker_mobile/core/extensions/build_context_extensions.dart';
 import 'package:expense_tracker_mobile/presentation/pages/budgets/budget_page.dart';
+import 'package:expense_tracker_mobile/presentation/pages/categories/categories_page.dart';
 import 'package:expense_tracker_mobile/presentation/pages/home/home_page.dart';
 import 'package:expense_tracker_mobile/presentation/pages/profile/profile_page.dart';
 import 'package:expense_tracker_mobile/presentation/pages/transactions/transactions_page.dart';
@@ -17,7 +17,13 @@ class MainNavigation extends StatefulWidget {
 class _MainNavigationState extends State<MainNavigation> {
   int _currentIndex = 0;
 
-  final List<Widget> _pages = [const HomePage(), const TransactionsPage(), const BudgetPage(), const ProfilePage()];
+  final List<Widget> _pages = [
+    const HomePage(),
+    const BudgetPage(),
+    const TransactionsPage(),
+    const CategoriesPage(),
+    const ProfilePage(),
+  ];
 
   @override
   Widget build(BuildContext context) {
@@ -46,33 +52,16 @@ class _MainNavigationState extends State<MainNavigation> {
           child: SizedBox(
             height: 64,
             child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
-                _buildNavItem(Icons.home_outlined, Icons.home, context.l10n.home, 0),
-                _buildNavItem(Icons.receipt_long_outlined, Icons.receipt_long, context.l10n.transactions, 1),
-                _buildAddTransactionItem(),
-                _buildNavItem(Icons.pie_chart_outline, Icons.pie_chart, context.l10n.budget, 2),
-                _buildNavItem(Icons.person_outline, Icons.person, context.l10n.profile, 3),
+                Expanded(child: _buildNavItem(Icons.home_outlined, Icons.home, context.l10n.home, 0)),
+                Expanded(child: _buildNavItem(Icons.pie_chart_outline, Icons.pie_chart, context.l10n.budget, 1)),
+                Expanded(child: _buildNavItem(Icons.receipt_long_outlined, Icons.receipt_long, context.l10n.transactions, 2)),
+                Expanded(child: _buildNavItem(Icons.category_outlined, Icons.category, context.l10n.categories, 3)),
+                Expanded(child: _buildNavItem(Icons.person_outline, Icons.person, context.l10n.profile, 4)),
               ],
             ),
           ),
-        ),
-      ),
-    );
-  }
-
-  Widget _buildAddTransactionItem() {
-    return GestureDetector(
-      onTap: () {
-        Navigator.pushNamed(context, RouteName.addTransaction.path);
-      },
-      child: Container(
-        padding: const EdgeInsets.symmetric(vertical: 4),
-        child: Container(
-          width: 32,
-          height: 32,
-          decoration: BoxDecoration(color: AppColors.primary, borderRadius: BorderRadius.circular(8)),
-          child: const Icon(Icons.add, color: Colors.white, size: 20),
         ),
       ),
     );
@@ -90,6 +79,7 @@ class _MainNavigationState extends State<MainNavigation> {
         padding: const EdgeInsets.symmetric(vertical: 4),
         child: Column(
           mainAxisSize: MainAxisSize.min,
+          mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Icon(
               isSelected ? activeIcon : icon,
@@ -104,6 +94,9 @@ class _MainNavigationState extends State<MainNavigation> {
                 color: isSelected ? AppColors.primary : Theme.of(context).colorScheme.onSurfaceVariant,
                 fontWeight: isSelected ? FontWeight.w600 : FontWeight.normal,
               ),
+              textAlign: TextAlign.center,
+              maxLines: 1,
+              overflow: TextOverflow.ellipsis,
             ),
           ],
         ),

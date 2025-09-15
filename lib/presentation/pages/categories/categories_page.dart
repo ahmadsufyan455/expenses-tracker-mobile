@@ -1,4 +1,4 @@
-import 'package:expense_tracker_mobile/app/router.dart';
+import 'package:expense_tracker_mobile/presentation/pages/categories/add_category_page.dart';
 import 'package:expense_tracker_mobile/app/theme/app_colors.dart';
 import 'package:expense_tracker_mobile/app/theme/app_dimensions.dart';
 import 'package:expense_tracker_mobile/core/extensions/build_context_extensions.dart';
@@ -166,17 +166,14 @@ class _CategoriesPageState extends State<CategoriesPage> {
   }
 
   void _addCategory() {
-    Navigator.pushNamed(
-      context,
-      RouteName.addCategory.path,
-    );
+    AddCategoryBottomSheet.show(context);
   }
 
   void _editCategory(CategoryDto category) {
-    Navigator.pushNamed(
+    AddCategoryBottomSheet.show(
       context,
-      RouteName.addCategory.path,
-      arguments: {'category': category, 'isEdit': true},
+      category: category,
+      isEdit: true,
     );
   }
 

@@ -1,9 +1,7 @@
-import 'package:expense_tracker_mobile/domain/dto/category_dto.dart';
 import 'package:expense_tracker_mobile/domain/dto/transaction_dto.dart';
 import 'package:expense_tracker_mobile/presentation/pages/auth/login/login_page.dart';
 import 'package:expense_tracker_mobile/presentation/pages/auth/register/register_page.dart';
 import 'package:expense_tracker_mobile/presentation/pages/auth/splash_page.dart';
-import 'package:expense_tracker_mobile/presentation/pages/categories/add_category_page.dart';
 import 'package:expense_tracker_mobile/presentation/pages/categories/categories_page.dart';
 import 'package:expense_tracker_mobile/presentation/pages/main_navigation.dart';
 import 'package:expense_tracker_mobile/presentation/pages/transactions/add_transaction_page.dart';
@@ -35,11 +33,4 @@ final routes = {
     );
   },
   RouteName.categories.path: (context) => const CategoriesPage(),
-  RouteName.addCategory.path: (context) {
-    final arguments = ModalRoute.of(context)?.settings.arguments as Map<String, dynamic>?;
-    return AddCategoryPage(
-      category: arguments?['category'] as CategoryDto?,
-      isEdit: arguments?['isEdit'] as bool? ?? false,
-    );
-  },
 };
