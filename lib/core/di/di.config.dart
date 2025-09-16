@@ -41,6 +41,8 @@ import 'package:expense_tracker_mobile/presentation/pages/auth/login/bloc/login_
     as _i754;
 import 'package:expense_tracker_mobile/presentation/pages/auth/register/bloc/register_bloc.dart'
     as _i1001;
+import 'package:expense_tracker_mobile/presentation/pages/categories/bloc/category_bloc.dart'
+    as _i306;
 import 'package:expense_tracker_mobile/presentation/pages/home/bloc/home_bloc.dart'
     as _i387;
 import 'package:expense_tracker_mobile/presentation/pages/transactions/bloc/transaction_bloc.dart'
@@ -109,6 +111,9 @@ extension GetItInjectableX on _i174.GetIt {
     );
     gh.factory<_i965.UpdateTransactionUsecase>(
       () => _i965.UpdateTransactionUsecase(gh<_i162.MainRepository>()),
+    );
+    gh.factory<_i306.CategoryBloc>(
+      () => _i306.CategoryBloc(gh<_i662.GetCategoryUsecase>()),
     );
     gh.factory<_i1001.RegisterBloc>(
       () => _i1001.RegisterBloc(gh<_i720.RegisterUsecase>()),

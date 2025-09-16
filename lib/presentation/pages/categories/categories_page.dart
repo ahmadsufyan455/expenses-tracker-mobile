@@ -1,10 +1,14 @@
-import 'package:expense_tracker_mobile/presentation/pages/categories/add_category_page.dart';
 import 'package:expense_tracker_mobile/app/theme/app_colors.dart';
 import 'package:expense_tracker_mobile/app/theme/app_dimensions.dart';
 import 'package:expense_tracker_mobile/core/extensions/build_context_extensions.dart';
 import 'package:expense_tracker_mobile/domain/dto/category_dto.dart';
+import 'package:expense_tracker_mobile/presentation/pages/categories/add_category_page.dart';
+import 'package:expense_tracker_mobile/presentation/pages/categories/bloc/category_bloc.dart';
 import 'package:expense_tracker_mobile/presentation/widgets/category/category_item.dart';
+import 'package:expense_tracker_mobile/presentation/widgets/common/error_dialog.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:get_it/get_it.dart';
 
 class CategoriesPage extends StatefulWidget {
   const CategoriesPage({super.key});
@@ -15,27 +19,14 @@ class CategoriesPage extends StatefulWidget {
 
 class _CategoriesPageState extends State<CategoriesPage> {
   final TextEditingController _searchController = TextEditingController();
-  List<CategoryDto> _filteredCategories = [];
   String _searchQuery = '';
-
-  // Mock data for now - will be replaced with BLoC later
-  final List<CategoryDto> _allCategories = [
-    CategoryDto(id: 1, name: 'Food & Dining'),
-    CategoryDto(id: 2, name: 'Transportation'),
-    CategoryDto(id: 3, name: 'Shopping'),
-    CategoryDto(id: 4, name: 'Entertainment'),
-    CategoryDto(id: 5, name: 'Bills & Utilities'),
-    CategoryDto(id: 6, name: 'Healthcare'),
-    CategoryDto(id: 7, name: 'Education'),
-    CategoryDto(id: 8, name: 'Salary'),
-    CategoryDto(id: 9, name: 'Business'),
-    CategoryDto(id: 10, name: 'Investment'),
-  ];
+  late CategoryBloc _bloc;
+  final GlobalKey<RefreshIndicatorState> _refreshIndicatorKey = GlobalKey<RefreshIndicatorState>();
 
   @override
   void initState() {
     super.initState();
-    _filteredCategories = _allCategories;
+    _bloc = GetIt.instance<CategoryBloc>()..add(GetCategoryEvent());
     _searchController.addListener(_onSearchChanged);
   }
 
@@ -49,20 +40,22 @@ class _CategoriesPageState extends State<CategoriesPage> {
   void _onSearchChanged() {
     setState(() {
       _searchQuery = _searchController.text;
-      _filteredCategories = _allCategories
-          .where((category) =>
-              category.name.toLowerCase().contains(_searchQuery.toLowerCase()))
-          .toList();
     });
+  }
+
+  Future<void> _onRefresh() async {
+    _bloc.add(GetCategoryEvent());
+  }
+
+  List<CategoryDto> _filterCategories(List<CategoryDto> categories) {
+    if (_searchQuery.isEmpty) return categories;
+    return categories.where((category) => category.name.toLowerCase().contains(_searchQuery.toLowerCase())).toList();
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text(context.l10n.categories),
-        elevation: 0,
-      ),
+      appBar: AppBar(title: Text(context.l10n.categories), elevation: 0),
       body: Column(
         children: [
           // Search Bar
@@ -79,12 +72,9 @@ class _CategoriesPageState extends State<CategoriesPage> {
                         onPressed: () {
                           _searchController.clear();
                         },
-                        
                       )
                     : null,
-                border: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(AppDimensions.radiusM),
-                ),
+                border: OutlineInputBorder(borderRadius: BorderRadius.circular(AppDimensions.radiusM)),
                 focusedBorder: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(AppDimensions.radiusM),
                   borderSide: BorderSide(color: AppColors.primary),
@@ -95,22 +85,44 @@ class _CategoriesPageState extends State<CategoriesPage> {
 
           // Categories List
           Expanded(
-            child: _filteredCategories.isEmpty
-                ? _buildEmptyState()
-                : ListView.builder(
-                    padding: const EdgeInsets.symmetric(
-                      horizontal: AppDimensions.paddingM,
+            child: BlocConsumer<CategoryBloc, CategoryState>(
+              bloc: _bloc,
+              listener: (context, state) {
+                _handleCategoryState(state);
+              },
+              builder: (context, state) {
+                if (state is CategoryLoading) {
+                  return const Center(child: CircularProgressIndicator());
+                }
+
+                if (state is CategoryLoaded) {
+                  final filteredCategories = _filterCategories(state.categories);
+
+                  if (filteredCategories.isEmpty) {
+                    return _buildEmptyState();
+                  }
+
+                  return RefreshIndicator(
+                    key: _refreshIndicatorKey,
+                    onRefresh: _onRefresh,
+                    child: ListView.builder(
+                      padding: const EdgeInsets.symmetric(horizontal: AppDimensions.paddingM),
+                      itemCount: filteredCategories.length,
+                      itemBuilder: (context, index) {
+                        final category = filteredCategories[index];
+                        return CategoryItem(
+                          category: category,
+                          onTap: () => _editCategory(category),
+                          onDelete: () => _deleteCategory(category),
+                        );
+                      },
                     ),
-                    itemCount: _filteredCategories.length,
-                    itemBuilder: (context, index) {
-                      final category = _filteredCategories[index];
-                      return CategoryItem(
-                        category: category,
-                        onTap: () => _editCategory(category),
-                        onDelete: () => _deleteCategory(category),
-                      );
-                    },
-                  ),
+                  );
+                }
+
+                return _buildEmptyState();
+              },
+            ),
           ),
         ],
       ),
@@ -127,26 +139,18 @@ class _CategoriesPageState extends State<CategoriesPage> {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Icon(
-            Icons.category_outlined,
-            size: 64,
-            color: Theme.of(context).colorScheme.onSurfaceVariant,
-          ),
+          Icon(Icons.category_outlined, size: 64, color: Theme.of(context).colorScheme.onSurfaceVariant),
           const SizedBox(height: AppDimensions.spaceM),
           Text(
-            _searchQuery.isEmpty
-                ? context.l10n.noCategoriesYet
-                : context.l10n.noCategoriesFound,
+            _searchQuery.isEmpty ? context.l10n.noCategoriesYet : context.l10n.noCategoriesFound,
             style: Theme.of(context).textTheme.headlineSmall,
           ),
           const SizedBox(height: AppDimensions.spaceS),
           Text(
-            _searchQuery.isEmpty
-                ? context.l10n.addFirstCategory
-                : context.l10n.tryDifferentSearch,
-            style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                  color: Theme.of(context).colorScheme.onSurfaceVariant,
-                ),
+            _searchQuery.isEmpty ? context.l10n.addFirstCategory : context.l10n.tryDifferentSearch,
+            style: Theme.of(
+              context,
+            ).textTheme.bodyMedium?.copyWith(color: Theme.of(context).colorScheme.onSurfaceVariant),
           ),
           if (_searchQuery.isEmpty) ...[
             const SizedBox(height: AppDimensions.spaceL),
@@ -154,10 +158,7 @@ class _CategoriesPageState extends State<CategoriesPage> {
               onPressed: _addCategory,
               icon: const Icon(Icons.add),
               label: Text(context.l10n.addCategory),
-              style: ElevatedButton.styleFrom(
-                backgroundColor: AppColors.primary,
-                foregroundColor: Colors.white,
-              ),
+              style: ElevatedButton.styleFrom(backgroundColor: AppColors.primary, foregroundColor: Colors.white),
             ),
           ],
         ],
@@ -170,11 +171,7 @@ class _CategoriesPageState extends State<CategoriesPage> {
   }
 
   void _editCategory(CategoryDto category) {
-    AddCategoryBottomSheet.show(
-      context,
-      category: category,
-      isEdit: true,
-    );
+    AddCategoryBottomSheet.show(context, category: category, isEdit: true);
   }
 
   void _deleteCategory(CategoryDto category) {
@@ -184,19 +181,13 @@ class _CategoriesPageState extends State<CategoriesPage> {
         title: Text(context.l10n.deleteCategory),
         content: Text(context.l10n.deleteCategoryConfirmation),
         actions: [
-          TextButton(
-            onPressed: () => Navigator.of(context).pop(),
-            child: Text(context.l10n.cancel),
-          ),
+          TextButton(onPressed: () => Navigator.of(context).pop(), child: Text(context.l10n.cancel)),
           TextButton(
             onPressed: () {
               Navigator.of(context).pop();
               // TODO: Implement delete functionality with BLoC
               ScaffoldMessenger.of(context).showSnackBar(
-                SnackBar(
-                  content: Text(context.l10n.categoryDeletedSuccessfully),
-                  backgroundColor: Colors.green,
-                ),
+                SnackBar(content: Text(context.l10n.categoryDeletedSuccessfully), backgroundColor: Colors.green),
               );
             },
             style: TextButton.styleFrom(foregroundColor: Colors.red),
@@ -205,5 +196,11 @@ class _CategoriesPageState extends State<CategoriesPage> {
         ],
       ),
     );
+  }
+
+  void _handleCategoryState(CategoryState state) {
+    if (state is CategoryError) {
+      ErrorDialog.show(context, state.failure);
+    }
   }
 }
