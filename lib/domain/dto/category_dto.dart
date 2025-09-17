@@ -3,25 +3,15 @@ import 'package:expense_tracker_mobile/data/models/response/category_response.da
 class CategoryDto {
   final int id;
   final String name;
+  final int? usageCount;
 
-  CategoryDto({required this.id, required this.name});
+  CategoryDto({required this.id, required this.name, this.usageCount = 0});
 
   factory CategoryDto.fromCategoryResponse(CategoryResponse response) {
-    return CategoryDto(id: response.id, name: response.name);
+    return CategoryDto(id: response.id, name: response.name, usageCount: response.usageCount);
   }
 
   static List<CategoryDto> fromCategoryResponseList(List<CategoryResponse> responses) {
-    return responses.map((response) => CategoryDto.fromCategoryResponse(response)).toList();
+  return responses.map((response) => CategoryDto.fromCategoryResponse(response)).toList();
   }
-
-  @override
-  bool operator ==(Object other) =>
-      identical(this, other) ||
-      other is CategoryDto && runtimeType == other.runtimeType && id == other.id;
-
-  @override
-  int get hashCode => id.hashCode;
-
-  @override
-  String toString() => 'CategoryDto{id: $id, name: $name}';
 }

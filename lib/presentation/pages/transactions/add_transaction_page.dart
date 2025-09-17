@@ -52,9 +52,7 @@ class _AddTransactionPageState extends State<AddTransactionPage> {
       _amountController.text = NumberUtils.formatWithThousandSeparator(widget.transaction!.amount.abs());
       // Truncate description if it's longer than 150 characters
       final description = widget.transaction!.description;
-      _descriptionController.text = description.length > 150
-        ? description.substring(0, 150)
-        : description;
+      _descriptionController.text = description.length > 150 ? description.substring(0, 150) : description;
     }
   }
 

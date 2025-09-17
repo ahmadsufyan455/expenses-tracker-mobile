@@ -148,33 +148,36 @@ class _CategoriesPageState extends State<CategoriesPage> {
   }
 
   Widget _buildEmptyState() {
-    return Center(
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Icon(Icons.category_outlined, size: 64, color: Theme.of(context).colorScheme.onSurfaceVariant),
-          const SizedBox(height: AppDimensions.spaceM),
-          Text(
-            _searchQuery.isEmpty ? context.l10n.noCategoriesYet : context.l10n.noCategoriesFound,
-            style: Theme.of(context).textTheme.headlineSmall,
-          ),
-          const SizedBox(height: AppDimensions.spaceS),
-          Text(
-            _searchQuery.isEmpty ? context.l10n.addFirstCategory : context.l10n.tryDifferentSearch,
-            style: Theme.of(
-              context,
-            ).textTheme.bodyMedium?.copyWith(color: Theme.of(context).colorScheme.onSurfaceVariant),
-          ),
-          if (_searchQuery.isEmpty) ...[
-            const SizedBox(height: AppDimensions.spaceL),
-            ElevatedButton.icon(
-              onPressed: _addCategory,
-              icon: const Icon(Icons.add),
-              label: Text(context.l10n.addCategory),
-              style: ElevatedButton.styleFrom(backgroundColor: AppColors.primary, foregroundColor: Colors.white),
+    return Padding(
+      padding: AppDimensions.paddingAllL,
+      child: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Icon(Icons.category_outlined, size: 64, color: Theme.of(context).colorScheme.onSurfaceVariant),
+            const SizedBox(height: AppDimensions.spaceM),
+            Text(
+              _searchQuery.isEmpty ? context.l10n.noCategoriesYet : context.l10n.noCategoriesFound,
+              style: Theme.of(context).textTheme.headlineSmall,
             ),
+            const SizedBox(height: AppDimensions.spaceS),
+            Text(
+              _searchQuery.isEmpty ? context.l10n.addFirstCategory : context.l10n.tryDifferentSearch,
+              style: Theme.of(
+                context,
+              ).textTheme.bodyMedium?.copyWith(color: Theme.of(context).colorScheme.onSurfaceVariant),
+            ),
+            if (_searchQuery.isEmpty) ...[
+              const SizedBox(height: AppDimensions.spaceL),
+              ElevatedButton.icon(
+                onPressed: _addCategory,
+                icon: const Icon(Icons.add),
+                label: Text(context.l10n.addCategory),
+                style: ElevatedButton.styleFrom(backgroundColor: AppColors.primary, foregroundColor: Colors.white),
+              ),
+            ],
           ],
-        ],
+        ),
       ),
     );
   }

@@ -10,4 +10,5 @@ CategoryResponse _$CategoryResponseFromJson(Map<String, dynamic> json) =>
     CategoryResponse(
       id: (json['id'] as num).toInt(),
       name: json['name'] as String,
+      usageCount: (json['usage_count'] as num?)?.toInt(),
     );

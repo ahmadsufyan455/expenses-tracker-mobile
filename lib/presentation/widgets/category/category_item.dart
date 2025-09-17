@@ -37,7 +37,7 @@ class CategoryItem extends StatelessWidget {
         ),
         title: Text(category.name, style: Theme.of(context).textTheme.bodyLarge?.copyWith(fontWeight: FontWeight.w600)),
         subtitle: Text(
-          context.l10n.usedInTransactions(0), // TODO: Add real transaction count
+          context.l10n.usedInTransactions(category.usageCount ?? 0),
           style: Theme.of(context).textTheme.bodySmall?.copyWith(color: Theme.of(context).colorScheme.onSurfaceVariant),
         ),
         trailing: PopupMenuButton<String>(

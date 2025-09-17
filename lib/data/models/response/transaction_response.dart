@@ -13,7 +13,7 @@ class TransactionResponse {
   @JsonKey(name: 'payment_method')
   final String paymentMethod;
   @JsonKey(name: 'category')
-  final TransactionCategoryResponse category;
+  final TransactionCategoryResponse? category;
   @JsonKey(name: 'description')
   final String description;
   @JsonKey(name: 'created_at')
@@ -26,7 +26,7 @@ class TransactionResponse {
     required this.amount,
     required this.type,
     required this.paymentMethod,
-    required this.category,
+    this.category,
     required this.description,
     required this.createdAt,
     required this.updatedAt,

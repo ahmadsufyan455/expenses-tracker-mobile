@@ -28,7 +28,7 @@ class TransactionDto {
       description: response.description,
       createdAt: response.createdAt,
       updatedAt: response.updatedAt,
-      category: TransactionCategoryDto(id: response.category.id, name: response.category.name),
+      category: TransactionCategoryDto(id: response.category?.id ?? 0, name: response.category?.name ?? ''),
       paymentMethod: response.paymentMethod,
       type: response.type,
     );
