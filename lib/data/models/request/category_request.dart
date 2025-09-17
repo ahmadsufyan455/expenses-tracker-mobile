@@ -4,6 +4,7 @@ part 'category_request.g.dart';
 
 @JsonSerializable()
 class CategoryRequest {
+  @JsonKey(name: 'name')
   final String name;
 
   CategoryRequest({required this.name});

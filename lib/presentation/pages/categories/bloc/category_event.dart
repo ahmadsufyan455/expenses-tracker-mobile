@@ -8,3 +8,12 @@ class CategoryEvent extends Equatable {
 }
 
 class GetCategoryEvent extends CategoryEvent {}
+
+class CreateCategoryEvent extends CategoryEvent {
+  final String name;
+
+  const CreateCategoryEvent({required this.name});
+
+  @override
+  List<Object?> get props => [name];
+}

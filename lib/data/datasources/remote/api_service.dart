@@ -51,6 +51,6 @@ abstract class ApiService {
   @GET('/categories')
   Future<BaseResponse<List<CategoryResponse>>> getCategories();
 
-  @POST('/categories')
+  @POST('/categories/')
   Future<BaseResponse> createCategory(@Body() CategoryRequest request);
 }

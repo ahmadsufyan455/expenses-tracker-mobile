@@ -28,3 +28,25 @@ class CategoryError extends CategoryState {
   @override
   List<Object?> get props => [failure];
 }
+
+/// create category state
+
+class CreateCategoryLoading extends CategoryState {}
+
+class CreateCategorySuccess extends CategoryState {
+  final String message;
+
+  const CreateCategorySuccess({required this.message});
+
+  @override
+  List<Object?> get props => [message];
+}
+
+class CreateCategoryError extends CategoryState {
+  final Failure failure;
+
+  const CreateCategoryError({required this.failure});
+
+  @override
+  List<Object?> get props => [failure];
+}

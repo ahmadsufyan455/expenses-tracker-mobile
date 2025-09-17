@@ -2,8 +2,8 @@ import 'package:expense_tracker_mobile/app/theme/app_colors.dart';
 import 'package:expense_tracker_mobile/app/theme/app_dimensions.dart';
 import 'package:expense_tracker_mobile/core/extensions/build_context_extensions.dart';
 import 'package:expense_tracker_mobile/domain/dto/category_dto.dart';
-import 'package:expense_tracker_mobile/presentation/pages/categories/add_category_page.dart';
 import 'package:expense_tracker_mobile/presentation/pages/categories/bloc/category_bloc.dart';
+import 'package:expense_tracker_mobile/presentation/widgets/category/add_category_bottom_sheet.dart';
 import 'package:expense_tracker_mobile/presentation/widgets/category/category_item.dart';
 import 'package:expense_tracker_mobile/presentation/widgets/common/error_dialog.dart';
 import 'package:flutter/material.dart';
@@ -166,8 +166,12 @@ class _CategoriesPageState extends State<CategoriesPage> {
     );
   }
 
-  void _addCategory() {
-    AddCategoryBottomSheet.show(context);
+  void _addCategory() async {
+    final shouldRefresh = await AddCategoryBottomSheet.show(context);
+
+    if (shouldRefresh == true) {
+      _bloc.add(GetCategoryEvent());
+    }
   }
 
   void _editCategory(CategoryDto category) {
