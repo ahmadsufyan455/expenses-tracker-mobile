@@ -74,10 +74,28 @@ class MainRepositoryImpl implements MainRepository {
   Future<Either<Failure, String>> createCategory(CategoryRequest request) async {
     try {
       final response = await _apiService.createCategory(request);
-      print(response.message);
       return Right(response.message);
     } catch (e) {
-      print(e);
+      return Left(ErrorHandler.handleError(e));
+    }
+  }
+
+  @override
+  Future<Either<Failure, String>> updateCategory(int id, CategoryRequest request) async {
+    try {
+      final response = await _apiService.updateCategory(id, request);
+      return Right(response.message);
+    } catch (e) {
+      return Left(ErrorHandler.handleError(e));
+    }
+  }
+
+  @override
+  Future<Either<Failure, void>> deleteCategory(int id) async {
+    try {
+      await _apiService.deleteCategory(id);
+      return const Right(null);
+    } catch (e) {
       return Left(ErrorHandler.handleError(e));
     }
   }

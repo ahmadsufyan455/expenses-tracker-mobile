@@ -57,6 +57,7 @@ class _AddCategoryBottomSheetState extends State<AddCategoryBottomSheet> {
       bloc: _bloc,
       listener: (context, state) {
         _handleCategoryState(state);
+        _handleUpdateCategoryState(state);
       },
       builder: (context, state) {
         return Container(
@@ -139,7 +140,7 @@ class _AddCategoryBottomSheetState extends State<AddCategoryBottomSheet> {
   void _saveCategory() {
     if (_formKey.currentState!.validate()) {
       if (widget.isEdit) {
-        /// Edit category
+        _bloc.add(UpdateCategoryEvent(id: widget.category!.id, name: _nameController.text));
       } else {
         _bloc.add(CreateCategoryEvent(name: _nameController.text));
       }
@@ -155,6 +156,20 @@ class _AddCategoryBottomSheetState extends State<AddCategoryBottomSheet> {
       ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(state.message), backgroundColor: Colors.green));
     } else if (state is CreateCategoryError) {
       _setLoading(false);
+      Navigator.of(context).pop();
+      ErrorDialog.show(context, state.failure);
+    }
+  }
+
+  void _handleUpdateCategoryState(CategoryState state) {
+    if (state is UpdateCategoryLoading) {
+      _setLoading(true);
+    } else if (state is UpdateCategorySuccess) {
+      Navigator.of(context).pop(true);
+      ScaffoldMessenger.of(
+        context,
+      ).showSnackBar(SnackBar(content: Text(context.l10n.categoryUpdatedSuccessfully), backgroundColor: Colors.green));
+    } else if (state is UpdateCategoryError) {
       Navigator.of(context).pop();
       ErrorDialog.show(context, state.failure);
     }

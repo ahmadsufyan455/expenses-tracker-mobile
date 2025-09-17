@@ -27,6 +27,8 @@ import 'package:expense_tracker_mobile/domain/usecases/create_category_usecase.d
     as _i115;
 import 'package:expense_tracker_mobile/domain/usecases/create_transaction_usecase.dart'
     as _i886;
+import 'package:expense_tracker_mobile/domain/usecases/delete_category_usecase.dart'
+    as _i685;
 import 'package:expense_tracker_mobile/domain/usecases/delete_transaction_usecase.dart'
     as _i826;
 import 'package:expense_tracker_mobile/domain/usecases/get_category_usecase.dart'
@@ -37,6 +39,8 @@ import 'package:expense_tracker_mobile/domain/usecases/login_usecase.dart'
     as _i72;
 import 'package:expense_tracker_mobile/domain/usecases/register_usecase.dart'
     as _i720;
+import 'package:expense_tracker_mobile/domain/usecases/update_category_usecase.dart'
+    as _i590;
 import 'package:expense_tracker_mobile/domain/usecases/update_transaction_usecase.dart'
     as _i965;
 import 'package:expense_tracker_mobile/presentation/pages/auth/login/bloc/login_bloc.dart'
@@ -117,6 +121,20 @@ extension GetItInjectableX on _i174.GetIt {
     gh.factory<_i115.CreateCategoryUseCase>(
       () => _i115.CreateCategoryUseCase(gh<_i162.MainRepository>()),
     );
+    gh.factory<_i590.UpdateCategoryUsecase>(
+      () => _i590.UpdateCategoryUsecase(gh<_i162.MainRepository>()),
+    );
+    gh.factory<_i685.DeleteCategoryUsecase>(
+      () => _i685.DeleteCategoryUsecase(gh<_i162.MainRepository>()),
+    );
+    gh.factory<_i306.CategoryBloc>(
+      () => _i306.CategoryBloc(
+        gh<_i662.GetCategoryUsecase>(),
+        gh<_i115.CreateCategoryUseCase>(),
+        gh<_i590.UpdateCategoryUsecase>(),
+        gh<_i685.DeleteCategoryUsecase>(),
+      ),
+    );
     gh.factory<_i1001.RegisterBloc>(
       () => _i1001.RegisterBloc(gh<_i720.RegisterUsecase>()),
     );
@@ -127,12 +145,6 @@ extension GetItInjectableX on _i174.GetIt {
         gh<_i58.GetTransactionUsecase>(),
         gh<_i826.DeleteTransactionUsecase>(),
         gh<_i965.UpdateTransactionUsecase>(),
-      ),
-    );
-    gh.factory<_i306.CategoryBloc>(
-      () => _i306.CategoryBloc(
-        gh<_i662.GetCategoryUsecase>(),
-        gh<_i115.CreateCategoryUseCase>(),
       ),
     );
     gh.factory<_i754.LoginBloc>(

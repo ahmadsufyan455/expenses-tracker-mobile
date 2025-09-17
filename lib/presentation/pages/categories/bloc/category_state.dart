@@ -50,3 +50,39 @@ class CreateCategoryError extends CategoryState {
   @override
   List<Object?> get props => [failure];
 }
+
+/// update category state
+
+class UpdateCategoryLoading extends CategoryState {}
+
+class UpdateCategorySuccess extends CategoryState {
+  final String message;
+
+  const UpdateCategorySuccess({required this.message});
+}
+
+class UpdateCategoryError extends CategoryState {
+  final Failure failure;
+
+  const UpdateCategoryError({required this.failure});
+
+  @override
+  List<Object?> get props => [failure];
+}
+
+/// delete category state
+
+class DeleteCategoryLoading extends CategoryState {}
+
+class DeleteCategorySuccess extends CategoryState {
+  const DeleteCategorySuccess();
+}
+
+class DeleteCategoryError extends CategoryState {
+  final Failure failure;
+
+  const DeleteCategoryError({required this.failure});
+
+  @override
+  List<Object?> get props => [failure];
+}

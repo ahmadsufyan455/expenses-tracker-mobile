@@ -22,4 +22,8 @@ abstract interface class MainRepository {
   Future<Either<Failure, String>> updateTransaction(int id, NewTransactionRequest request);
 
   Future<Either<Failure, String>> createCategory(CategoryRequest request);
+
+  Future<Either<Failure, String>> updateCategory(int id, CategoryRequest request);
+
+  Future<Either<Failure, void>> deleteCategory(int id);
 }

@@ -89,6 +89,7 @@ class _CategoriesPageState extends State<CategoriesPage> {
               bloc: _bloc,
               listener: (context, state) {
                 _handleCategoryState(state);
+                _handleDeleteCategoryState(state);
               },
               builder: (context, state) {
                 if (state is CategoryLoading) {
@@ -112,8 +113,20 @@ class _CategoriesPageState extends State<CategoriesPage> {
                         final category = filteredCategories[index];
                         return CategoryItem(
                           category: category,
-                          onTap: () => _editCategory(category),
-                          onDelete: () => _deleteCategory(category),
+                          onTap: () async {
+                            final shouldRefresh = await _editCategory(category);
+
+                            if (shouldRefresh == true) {
+                              _bloc.add(GetCategoryEvent());
+                            }
+                          },
+                          onDelete: () async {
+                            final shouldRefresh = await _deleteCategory(category);
+
+                            if (shouldRefresh == true) {
+                              _bloc.add(GetCategoryEvent());
+                            }
+                          },
                         );
                       },
                     ),
@@ -174,12 +187,12 @@ class _CategoriesPageState extends State<CategoriesPage> {
     }
   }
 
-  void _editCategory(CategoryDto category) {
-    AddCategoryBottomSheet.show(context, category: category, isEdit: true);
+  Future<bool?> _editCategory(CategoryDto category) {
+    return AddCategoryBottomSheet.show(context, category: category, isEdit: true);
   }
 
-  void _deleteCategory(CategoryDto category) {
-    showDialog(
+  Future<bool?> _deleteCategory(CategoryDto category) async {
+    return showDialog<bool?>(
       context: context,
       builder: (context) => AlertDialog(
         title: Text(context.l10n.deleteCategory),
@@ -188,11 +201,7 @@ class _CategoriesPageState extends State<CategoriesPage> {
           TextButton(onPressed: () => Navigator.of(context).pop(), child: Text(context.l10n.cancel)),
           TextButton(
             onPressed: () {
-              Navigator.of(context).pop();
-              // TODO: Implement delete functionality with BLoC
-              ScaffoldMessenger.of(context).showSnackBar(
-                SnackBar(content: Text(context.l10n.categoryDeletedSuccessfully), backgroundColor: Colors.green),
-              );
+              _bloc.add(DeleteCategoryEvent(id: category.id));
             },
             style: TextButton.styleFrom(foregroundColor: Colors.red),
             child: Text(context.l10n.delete),
@@ -204,6 +213,18 @@ class _CategoriesPageState extends State<CategoriesPage> {
 
   void _handleCategoryState(CategoryState state) {
     if (state is CategoryError) {
+      ErrorDialog.show(context, state.failure);
+    }
+  }
+
+  void _handleDeleteCategoryState(CategoryState state) {
+    if (state is DeleteCategorySuccess) {
+      Navigator.of(context).pop(true);
+      ScaffoldMessenger.of(
+        context,
+      ).showSnackBar(SnackBar(content: Text(context.l10n.categoryDeletedSuccessfully), backgroundColor: Colors.green));
+    } else if (state is DeleteCategoryError) {
+      Navigator.of(context).pop();
       ErrorDialog.show(context, state.failure);
     }
   }

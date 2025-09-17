@@ -53,4 +53,10 @@ abstract class ApiService {
 
   @POST('/categories/')
   Future<BaseResponse> createCategory(@Body() CategoryRequest request);
+
+  @PUT('/categories/{id}')
+  Future<BaseResponse> updateCategory(@Path('id') int id, @Body() CategoryRequest request);
+
+  @DELETE('/categories/{id}')
+  Future<void> deleteCategory(@Path('id') int id);
 }
