@@ -227,7 +227,7 @@ class _CategoriesPageState extends State<CategoriesPage> {
         context,
       ).showSnackBar(SnackBar(content: Text(context.l10n.categoryDeletedSuccessfully), backgroundColor: Colors.green));
     } else if (state is DeleteCategoryError) {
-      Navigator.of(context).pop();
+      Navigator.of(context).pop(true);
       ErrorDialog.show(context, state.failure);
     }
   }
