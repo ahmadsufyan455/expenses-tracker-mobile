@@ -9,7 +9,7 @@ class DeleteBudgetUsecase {
 
   DeleteBudgetUsecase(this._mainRepository);
 
-  Future<Either<Failure, String>> call(int id) async {
+  Future<Either<Failure, void>> call(int id) async {
     return await _mainRepository.deleteBudget(id);
   }
 }

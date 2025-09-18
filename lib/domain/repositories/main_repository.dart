@@ -35,5 +35,5 @@ abstract interface class MainRepository {
 
   Future<Either<Failure, String>> updateBudget(int id, BudgetRequest request);
 
-  Future<Either<Failure, String>> deleteBudget(int id);
+  Future<Either<Failure, void>> deleteBudget(int id);
 }

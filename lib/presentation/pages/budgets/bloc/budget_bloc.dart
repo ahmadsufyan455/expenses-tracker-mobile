@@ -108,8 +108,7 @@ class BudgetBloc extends Bloc<BudgetEvent, BudgetState> {
       (failure) {
         emit(DeleteBudgetFailure(failure: failure, data: stateData));
       },
-      (message) {
-        stateData = stateData.copyWith(message: message);
+      (_) {
         emit(DeleteBudgetSuccess(data: stateData));
       },
     );

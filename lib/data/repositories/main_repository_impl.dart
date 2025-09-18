@@ -134,10 +134,10 @@ class MainRepositoryImpl implements MainRepository {
   }
 
   @override
-  Future<Either<Failure, String>> deleteBudget(int id) async {
+  Future<Either<Failure, void>> deleteBudget(int id) async {
     try {
       await _apiService.deleteBudget(id);
-      return const Right('Budget deleted successfully');
+      return const Right(null);
     } catch (e) {
       return Left(ErrorHandler.handleError(e));
     }
