@@ -324,7 +324,7 @@ class _AddTransactionPageState extends State<AddTransactionPage> {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(content: Text(context.l10n.transactionUpdatedSuccessfully), backgroundColor: Colors.green),
       );
-    } else if (state is CreateTransactionFailure) {
+    } else if (state is UpdateTransactionFailure) {
       _handleLoadingState(false);
       ErrorDialog.show(context, state.failure);
     }
