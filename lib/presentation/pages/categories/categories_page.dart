@@ -55,7 +55,17 @@ class _CategoriesPageState extends State<CategoriesPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text(context.l10n.categories), elevation: 0),
+      appBar: AppBar(
+        title: Text(context.l10n.categories),
+        elevation: 0,
+        actions: [
+          IconButton(
+            onPressed: _addCategory,
+            icon: const Icon(Icons.add),
+            tooltip: context.l10n.addNewCategoryTooltip,
+          ),
+        ],
+      ),
       body: Column(
         children: [
           // Search Bar
@@ -138,11 +148,6 @@ class _CategoriesPageState extends State<CategoriesPage> {
             ),
           ),
         ],
-      ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: _addCategory,
-        backgroundColor: AppColors.primary,
-        child: const Icon(Icons.add, color: Colors.white),
       ),
     );
   }

@@ -23,14 +23,20 @@ import 'package:expense_tracker_mobile/domain/repositories/auth_repository.dart'
     as _i900;
 import 'package:expense_tracker_mobile/domain/repositories/main_repository.dart'
     as _i162;
+import 'package:expense_tracker_mobile/domain/usecases/create_budget_usecase.dart'
+    as _i157;
 import 'package:expense_tracker_mobile/domain/usecases/create_category_usecase.dart'
     as _i115;
 import 'package:expense_tracker_mobile/domain/usecases/create_transaction_usecase.dart'
     as _i886;
+import 'package:expense_tracker_mobile/domain/usecases/delete_budget_usecase.dart'
+    as _i1015;
 import 'package:expense_tracker_mobile/domain/usecases/delete_category_usecase.dart'
     as _i685;
 import 'package:expense_tracker_mobile/domain/usecases/delete_transaction_usecase.dart'
     as _i826;
+import 'package:expense_tracker_mobile/domain/usecases/get_budget_usecase.dart'
+    as _i322;
 import 'package:expense_tracker_mobile/domain/usecases/get_category_usecase.dart'
     as _i662;
 import 'package:expense_tracker_mobile/domain/usecases/get_transaction_usecase.dart'
@@ -39,6 +45,8 @@ import 'package:expense_tracker_mobile/domain/usecases/login_usecase.dart'
     as _i72;
 import 'package:expense_tracker_mobile/domain/usecases/register_usecase.dart'
     as _i720;
+import 'package:expense_tracker_mobile/domain/usecases/update_budget_usecase.dart'
+    as _i154;
 import 'package:expense_tracker_mobile/domain/usecases/update_category_usecase.dart'
     as _i590;
 import 'package:expense_tracker_mobile/domain/usecases/update_transaction_usecase.dart'
@@ -47,6 +55,8 @@ import 'package:expense_tracker_mobile/presentation/pages/auth/login/bloc/login_
     as _i754;
 import 'package:expense_tracker_mobile/presentation/pages/auth/register/bloc/register_bloc.dart'
     as _i1001;
+import 'package:expense_tracker_mobile/presentation/pages/budgets/bloc/budget_bloc.dart'
+    as _i815;
 import 'package:expense_tracker_mobile/presentation/pages/categories/bloc/category_bloc.dart'
     as _i306;
 import 'package:expense_tracker_mobile/presentation/pages/home/bloc/home_bloc.dart'
@@ -127,6 +137,18 @@ extension GetItInjectableX on _i174.GetIt {
     gh.factory<_i685.DeleteCategoryUsecase>(
       () => _i685.DeleteCategoryUsecase(gh<_i162.MainRepository>()),
     );
+    gh.factory<_i322.GetBudgetUsecase>(
+      () => _i322.GetBudgetUsecase(gh<_i162.MainRepository>()),
+    );
+    gh.factory<_i154.UpdateBudgetUsecase>(
+      () => _i154.UpdateBudgetUsecase(gh<_i162.MainRepository>()),
+    );
+    gh.factory<_i1015.DeleteBudgetUsecase>(
+      () => _i1015.DeleteBudgetUsecase(gh<_i162.MainRepository>()),
+    );
+    gh.factory<_i157.CreateBudgetUsecase>(
+      () => _i157.CreateBudgetUsecase(gh<_i162.MainRepository>()),
+    );
     gh.factory<_i306.CategoryBloc>(
       () => _i306.CategoryBloc(
         gh<_i662.GetCategoryUsecase>(),
@@ -145,6 +167,15 @@ extension GetItInjectableX on _i174.GetIt {
         gh<_i58.GetTransactionUsecase>(),
         gh<_i826.DeleteTransactionUsecase>(),
         gh<_i965.UpdateTransactionUsecase>(),
+      ),
+    );
+    gh.factory<_i815.BudgetBloc>(
+      () => _i815.BudgetBloc(
+        gh<_i322.GetBudgetUsecase>(),
+        gh<_i157.CreateBudgetUsecase>(),
+        gh<_i154.UpdateBudgetUsecase>(),
+        gh<_i1015.DeleteBudgetUsecase>(),
+        gh<_i662.GetCategoryUsecase>(),
       ),
     );
     gh.factory<_i754.LoginBloc>(

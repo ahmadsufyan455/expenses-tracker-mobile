@@ -2,6 +2,7 @@ import 'package:expense_tracker_mobile/domain/dto/transaction_dto.dart';
 import 'package:expense_tracker_mobile/presentation/pages/auth/login/login_page.dart';
 import 'package:expense_tracker_mobile/presentation/pages/auth/register/register_page.dart';
 import 'package:expense_tracker_mobile/presentation/pages/auth/splash_page.dart';
+import 'package:expense_tracker_mobile/presentation/pages/budgets/budget_page.dart';
 import 'package:expense_tracker_mobile/presentation/pages/categories/categories_page.dart';
 import 'package:expense_tracker_mobile/presentation/pages/main_navigation.dart';
 import 'package:expense_tracker_mobile/presentation/pages/transactions/add_transaction_page.dart';
@@ -14,7 +15,8 @@ enum RouteName {
   home('/home'),
   addTransaction('/add-transaction'),
   categories('/categories'),
-  addCategory('/add-category');
+  addCategory('/add-category'),
+  budgets('/budgets');
 
   final String path;
   const RouteName(this.path);
@@ -33,4 +35,5 @@ final routes = {
     );
   },
   RouteName.categories.path: (context) => const CategoriesPage(),
+  RouteName.budgets.path: (context) => const BudgetPage(),
 };

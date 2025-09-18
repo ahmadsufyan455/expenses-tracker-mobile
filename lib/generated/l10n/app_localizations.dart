@@ -949,6 +949,150 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Add new category'**
   String get addNewCategoryTooltip;
+
+  /// No description provided for @budgets.
+  ///
+  /// In en, this message translates to:
+  /// **'Budgets'**
+  String get budgets;
+
+  /// No description provided for @manageBudgets.
+  ///
+  /// In en, this message translates to:
+  /// **'Manage Budgets'**
+  String get manageBudgets;
+
+  /// No description provided for @manageBudgetsSubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Plan and track your spending limits'**
+  String get manageBudgetsSubtitle;
+
+  /// No description provided for @addBudget.
+  ///
+  /// In en, this message translates to:
+  /// **'Add Budget'**
+  String get addBudget;
+
+  /// No description provided for @editBudget.
+  ///
+  /// In en, this message translates to:
+  /// **'Edit Budget'**
+  String get editBudget;
+
+  /// No description provided for @deleteBudget.
+  ///
+  /// In en, this message translates to:
+  /// **'Delete Budget'**
+  String get deleteBudget;
+
+  /// No description provided for @budgetAmount.
+  ///
+  /// In en, this message translates to:
+  /// **'Budget Amount'**
+  String get budgetAmount;
+
+  /// No description provided for @selectMonth.
+  ///
+  /// In en, this message translates to:
+  /// **'Select Month'**
+  String get selectMonth;
+
+  /// No description provided for @budgetMonth.
+  ///
+  /// In en, this message translates to:
+  /// **'Budget Month'**
+  String get budgetMonth;
+
+  /// No description provided for @createBudget.
+  ///
+  /// In en, this message translates to:
+  /// **'Create Budget'**
+  String get createBudget;
+
+  /// No description provided for @updateBudget.
+  ///
+  /// In en, this message translates to:
+  /// **'Update Budget'**
+  String get updateBudget;
+
+  /// No description provided for @saveBudget.
+  ///
+  /// In en, this message translates to:
+  /// **'Save Budget'**
+  String get saveBudget;
+
+  /// No description provided for @budgetAddedSuccessfully.
+  ///
+  /// In en, this message translates to:
+  /// **'Budget added successfully!'**
+  String get budgetAddedSuccessfully;
+
+  /// No description provided for @budgetUpdatedSuccessfully.
+  ///
+  /// In en, this message translates to:
+  /// **'Budget updated successfully!'**
+  String get budgetUpdatedSuccessfully;
+
+  /// No description provided for @budgetDeletedSuccessfully.
+  ///
+  /// In en, this message translates to:
+  /// **'Budget deleted successfully!'**
+  String get budgetDeletedSuccessfully;
+
+  /// No description provided for @deleteBudgetConfirmation.
+  ///
+  /// In en, this message translates to:
+  /// **'Are you sure you want to delete this budget?'**
+  String get deleteBudgetConfirmation;
+
+  /// No description provided for @noBudgetsYet.
+  ///
+  /// In en, this message translates to:
+  /// **'No budgets yet'**
+  String get noBudgetsYet;
+
+  /// No description provided for @addFirstBudget.
+  ///
+  /// In en, this message translates to:
+  /// **'Add your first budget to get started'**
+  String get addFirstBudget;
+
+  /// No description provided for @pleaseEnterBudgetAmount.
+  ///
+  /// In en, this message translates to:
+  /// **'Please enter budget amount'**
+  String get pleaseEnterBudgetAmount;
+
+  /// No description provided for @pleaseEnterValidBudgetAmount.
+  ///
+  /// In en, this message translates to:
+  /// **'Please enter valid budget amount'**
+  String get pleaseEnterValidBudgetAmount;
+
+  /// No description provided for @pleaseSelectMonth.
+  ///
+  /// In en, this message translates to:
+  /// **'Please select a month'**
+  String get pleaseSelectMonth;
+
+  /// Budget title with category name
+  ///
+  /// In en, this message translates to:
+  /// **'Budget for {categoryName}'**
+  String budgetForCategory(String categoryName);
+
+  /// Month and year format
+  ///
+  /// In en, this message translates to:
+  /// **'{month} {year}'**
+  String monthYear(String month, String year);
+
+  /// No description provided for @addNewBudgetTooltip.
+  ///
+  /// In en, this message translates to:
+  /// **'Add new budget'**
+  String get addNewBudgetTooltip;
 }
 
 class _AppLocalizationsDelegate

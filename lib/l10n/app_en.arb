@@ -238,5 +238,52 @@
   },
   "categoryNameRequired": "Please enter category name",
   "categoryNameTooShort": "Category name must be at least 2 characters",
-  "addNewCategoryTooltip": "Add new category"
+  "addNewCategoryTooltip": "Add new category",
+
+  "budgets": "Budgets",
+  "manageBudgets": "Manage Budgets",
+  "manageBudgetsSubtitle": "Plan and track your spending limits",
+  "addBudget": "Add Budget",
+  "editBudget": "Edit Budget",
+  "deleteBudget": "Delete Budget",
+  "budgetAmount": "Budget Amount",
+  "selectMonth": "Select Month",
+  "budgetMonth": "Budget Month",
+  "createBudget": "Create Budget",
+  "updateBudget": "Update Budget",
+  "saveBudget": "Save Budget",
+  "budgetAddedSuccessfully": "Budget added successfully!",
+  "budgetUpdatedSuccessfully": "Budget updated successfully!",
+  "budgetDeletedSuccessfully": "Budget deleted successfully!",
+  "deleteBudgetConfirmation": "Are you sure you want to delete this budget?",
+  "noBudgetsYet": "No budgets yet",
+  "addFirstBudget": "Add your first budget to get started",
+  "pleaseEnterBudgetAmount": "Please enter budget amount",
+  "pleaseEnterValidBudgetAmount": "Please enter valid budget amount",
+  "pleaseSelectMonth": "Please select a month",
+  "budgetForCategory": "Budget for {categoryName}",
+  "@budgetForCategory": {
+    "description": "Budget title with category name",
+    "placeholders": {
+      "categoryName": {
+        "type": "String",
+        "example": "Food"
+      }
+    }
+  },
+  "monthYear": "{month} {year}",
+  "@monthYear": {
+    "description": "Month and year format",
+    "placeholders": {
+      "month": {
+        "type": "String",
+        "example": "September"
+      },
+      "year": {
+        "type": "String",
+        "example": "2025"
+      }
+    }
+  },
+  "addNewBudgetTooltip": "Add new budget"
 }

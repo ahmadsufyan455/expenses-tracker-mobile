@@ -458,4 +458,81 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get addNewCategoryTooltip => 'Add new category';
+
+  @override
+  String get budgets => 'Budgets';
+
+  @override
+  String get manageBudgets => 'Manage Budgets';
+
+  @override
+  String get manageBudgetsSubtitle => 'Plan and track your spending limits';
+
+  @override
+  String get addBudget => 'Add Budget';
+
+  @override
+  String get editBudget => 'Edit Budget';
+
+  @override
+  String get deleteBudget => 'Delete Budget';
+
+  @override
+  String get budgetAmount => 'Budget Amount';
+
+  @override
+  String get selectMonth => 'Select Month';
+
+  @override
+  String get budgetMonth => 'Budget Month';
+
+  @override
+  String get createBudget => 'Create Budget';
+
+  @override
+  String get updateBudget => 'Update Budget';
+
+  @override
+  String get saveBudget => 'Save Budget';
+
+  @override
+  String get budgetAddedSuccessfully => 'Budget added successfully!';
+
+  @override
+  String get budgetUpdatedSuccessfully => 'Budget updated successfully!';
+
+  @override
+  String get budgetDeletedSuccessfully => 'Budget deleted successfully!';
+
+  @override
+  String get deleteBudgetConfirmation =>
+      'Are you sure you want to delete this budget?';
+
+  @override
+  String get noBudgetsYet => 'No budgets yet';
+
+  @override
+  String get addFirstBudget => 'Add your first budget to get started';
+
+  @override
+  String get pleaseEnterBudgetAmount => 'Please enter budget amount';
+
+  @override
+  String get pleaseEnterValidBudgetAmount => 'Please enter valid budget amount';
+
+  @override
+  String get pleaseSelectMonth => 'Please select a month';
+
+  @override
+  String budgetForCategory(String categoryName) {
+    return 'Budget for $categoryName';
+  }
+
+  @override
+  String monthYear(String month, String year) {
+    return '$month $year';
+  }
+
+  @override
+  String get addNewBudgetTooltip => 'Add new budget';
 }

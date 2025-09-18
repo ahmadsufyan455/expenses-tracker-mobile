@@ -455,4 +455,83 @@ class AppLocalizationsId extends AppLocalizations {
 
   @override
   String get addNewCategoryTooltip => 'Tambah kategori baru';
+
+  @override
+  String get budgets => 'Anggaran';
+
+  @override
+  String get manageBudgets => 'Kelola Anggaran';
+
+  @override
+  String get manageBudgetsSubtitle =>
+      'Rencanakan dan pantau batas pengeluaran Anda';
+
+  @override
+  String get addBudget => 'Tambah Anggaran';
+
+  @override
+  String get editBudget => 'Edit Anggaran';
+
+  @override
+  String get deleteBudget => 'Hapus Anggaran';
+
+  @override
+  String get budgetAmount => 'Jumlah Anggaran';
+
+  @override
+  String get selectMonth => 'Pilih Bulan';
+
+  @override
+  String get budgetMonth => 'Bulan Anggaran';
+
+  @override
+  String get createBudget => 'Buat Anggaran';
+
+  @override
+  String get updateBudget => 'Perbarui Anggaran';
+
+  @override
+  String get saveBudget => 'Simpan Anggaran';
+
+  @override
+  String get budgetAddedSuccessfully => 'Anggaran berhasil ditambahkan!';
+
+  @override
+  String get budgetUpdatedSuccessfully => 'Anggaran berhasil diperbarui!';
+
+  @override
+  String get budgetDeletedSuccessfully => 'Anggaran berhasil dihapus!';
+
+  @override
+  String get deleteBudgetConfirmation =>
+      'Apakah Anda yakin ingin menghapus anggaran ini?';
+
+  @override
+  String get noBudgetsYet => 'Belum ada anggaran';
+
+  @override
+  String get addFirstBudget => 'Tambahkan anggaran pertama Anda untuk memulai';
+
+  @override
+  String get pleaseEnterBudgetAmount => 'Harap masukkan jumlah anggaran';
+
+  @override
+  String get pleaseEnterValidBudgetAmount =>
+      'Harap masukkan jumlah anggaran yang valid';
+
+  @override
+  String get pleaseSelectMonth => 'Harap pilih bulan';
+
+  @override
+  String budgetForCategory(String categoryName) {
+    return 'Anggaran untuk $categoryName';
+  }
+
+  @override
+  String monthYear(String month, String year) {
+    return '$month $year';
+  }
+
+  @override
+  String get addNewBudgetTooltip => 'Tambah anggaran baru';
 }

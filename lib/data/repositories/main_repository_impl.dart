@@ -1,10 +1,12 @@
 import 'package:expense_tracker_mobile/core/errors/error_handler.dart';
 import 'package:expense_tracker_mobile/core/errors/failure.dart';
 import 'package:expense_tracker_mobile/data/datasources/remote/api_service.dart';
+import 'package:expense_tracker_mobile/data/models/request/budget_request.dart';
 import 'package:expense_tracker_mobile/data/models/request/category_request.dart';
 import 'package:expense_tracker_mobile/data/models/request/new_transaction_request.dart';
 import 'package:expense_tracker_mobile/data/models/response/category_response.dart';
 import 'package:expense_tracker_mobile/data/models/response/transaction_response.dart';
+import 'package:expense_tracker_mobile/domain/dto/budget_dto.dart';
 import 'package:expense_tracker_mobile/domain/repositories/main_repository.dart';
 import 'package:fpdart/fpdart.dart';
 import 'package:injectable/injectable.dart';
@@ -95,6 +97,47 @@ class MainRepositoryImpl implements MainRepository {
     try {
       await _apiService.deleteCategory(id);
       return const Right(null);
+    } catch (e) {
+      return Left(ErrorHandler.handleError(e));
+    }
+  }
+
+  @override
+  Future<Either<Failure, List<BudgetDto>>> getBudgets() async {
+    try {
+      final response = await _apiService.getBudgets();
+      final budgets = BudgetDto.fromResponseList(response.data!);
+      return Right(budgets);
+    } catch (e) {
+      return Left(ErrorHandler.handleError(e));
+    }
+  }
+
+  @override
+  Future<Either<Failure, String>> createBudget(BudgetRequest request) async {
+    try {
+      final response = await _apiService.createBudget(request);
+      return Right(response.message);
+    } catch (e) {
+      return Left(ErrorHandler.handleError(e));
+    }
+  }
+
+  @override
+  Future<Either<Failure, String>> updateBudget(int id, BudgetRequest request) async {
+    try {
+      final response = await _apiService.updateBudget(id, request);
+      return Right(response.message);
+    } catch (e) {
+      return Left(ErrorHandler.handleError(e));
+    }
+  }
+
+  @override
+  Future<Either<Failure, String>> deleteBudget(int id) async {
+    try {
+      await _apiService.deleteBudget(id);
+      return const Right('Budget deleted successfully');
     } catch (e) {
       return Left(ErrorHandler.handleError(e));
     }

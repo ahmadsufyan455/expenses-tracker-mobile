@@ -1,10 +1,12 @@
 import "package:dio/dio.dart";
+import 'package:expense_tracker_mobile/data/models/request/budget_request.dart';
 import 'package:expense_tracker_mobile/data/models/request/category_request.dart';
 import 'package:expense_tracker_mobile/data/models/request/login_request.dart';
 import 'package:expense_tracker_mobile/data/models/request/new_transaction_request.dart';
 import 'package:expense_tracker_mobile/data/models/request/register_request.dart';
 import 'package:expense_tracker_mobile/data/models/response/base_pagination_response.dart';
 import 'package:expense_tracker_mobile/data/models/response/base_response.dart';
+import 'package:expense_tracker_mobile/data/models/response/budget_response.dart';
 import 'package:expense_tracker_mobile/data/models/response/category_response.dart';
 import 'package:expense_tracker_mobile/data/models/response/login_response.dart';
 import 'package:expense_tracker_mobile/data/models/response/transaction_response.dart';
@@ -59,4 +61,18 @@ abstract class ApiService {
 
   @DELETE('/categories/{id}')
   Future<void> deleteCategory(@Path('id') int id);
+
+  /// Budget Endpoints
+
+  @GET('/budgets')
+  Future<BaseResponse<List<BudgetResponse>>> getBudgets();
+
+  @POST('/budgets/')
+  Future<BaseResponse> createBudget(@Body() BudgetRequest request);
+
+  @PUT('/budgets/{id}')
+  Future<BaseResponse> updateBudget(@Path('id') int id, @Body() BudgetRequest request);
+
+  @DELETE('/budgets/{id}')
+  Future<void> deleteBudget(@Path('id') int id);
 }

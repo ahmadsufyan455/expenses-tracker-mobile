@@ -76,7 +76,16 @@ class _TransactionsPageState extends State<TransactionsPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text(context.l10n.transactions)),
+      appBar: AppBar(
+        title: Text(context.l10n.transactions),
+        actions: [
+          IconButton(
+            onPressed: _navigateToAddTransaction,
+            icon: const Icon(Icons.add),
+            tooltip: context.l10n.addTransaction,
+          ),
+        ],
+      ),
       body: BlocConsumer<TransactionBloc, TransactionState>(
         bloc: _bloc,
         listener: (context, state) {
@@ -147,11 +156,6 @@ class _TransactionsPageState extends State<TransactionsPage> {
             ),
           );
         },
-      ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: _navigateToAddTransaction,
-        backgroundColor: AppColors.primary,
-        child: const Icon(Icons.add, color: Colors.white),
       ),
     );
   }
