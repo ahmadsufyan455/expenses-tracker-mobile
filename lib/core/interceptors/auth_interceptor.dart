@@ -28,8 +28,10 @@ class AuthInterceptor extends Interceptor {
 
   @override
   void onError(DioException err, ErrorInterceptorHandler handler) {
-    // Handle 401 Unauthorized responses (but skip for auth endpoints)
-    if (err.response?.statusCode == 401 && !err.requestOptions.path.startsWith('/auth/')) {
+    // Handle 401 Unauthorized responses (but skip for auth endpoints and change password)
+    if (err.response?.statusCode == 401 &&
+        !err.requestOptions.path.startsWith('/auth/') &&
+        !err.requestOptions.path.contains('/users/change-password')) {
       _handleTokenExpired();
     }
 

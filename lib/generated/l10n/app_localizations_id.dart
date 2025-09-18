@@ -534,4 +534,83 @@ class AppLocalizationsId extends AppLocalizations {
 
   @override
   String get addNewBudgetTooltip => 'Tambah anggaran baru';
+
+  @override
+  String get editProfile => 'Edit Profil';
+
+  @override
+  String get updateProfile => 'Perbarui Profil';
+
+  @override
+  String get personalInformation => 'Informasi Pribadi';
+
+  @override
+  String get changePasswordTitle => 'Ubah Kata Sandi';
+
+  @override
+  String get currentPassword => 'Kata Sandi Saat Ini';
+
+  @override
+  String get newPassword => 'Kata Sandi Baru';
+
+  @override
+  String get confirmNewPassword => 'Konfirmasi Kata Sandi Baru';
+
+  @override
+  String get saveChanges => 'Simpan Perubahan';
+
+  @override
+  String get changePasswordButton => 'Ubah Kata Sandi';
+
+  @override
+  String get profileUpdatedSuccessfully => 'Profil berhasil diperbarui!';
+
+  @override
+  String get passwordChangedSuccessfully => 'Kata sandi berhasil diubah!';
+
+  @override
+  String get accountDeletedSuccessfully => 'Akun berhasil dihapus!';
+
+  @override
+  String get deleteAccount => 'Hapus Akun';
+
+  @override
+  String get deleteAccountWarning =>
+      'Apakah Anda yakin ingin menghapus akun Anda? Tindakan ini tidak dapat dibatalkan dan semua data Anda akan hilang secara permanen.';
+
+  @override
+  String get currentPasswordRequired => 'Kata sandi saat ini wajib diisi';
+
+  @override
+  String get newPasswordRequired => 'Kata sandi baru wajib diisi';
+
+  @override
+  String get passwordsDontMatch => 'Kata sandi tidak cocok';
+
+  @override
+  String newPasswordTooShort(int minLength) {
+    return 'Kata sandi baru harus minimal $minLength karakter';
+  }
+
+  @override
+  String get enterCurrentPassword => 'Masukkan kata sandi saat ini';
+
+  @override
+  String get enterNewPassword => 'Masukkan kata sandi baru';
+
+  @override
+  String get confirmYourNewPassword => 'Konfirmasi kata sandi baru Anda';
+
+  @override
+  String get profileInformation => 'Informasi Profil';
+
+  @override
+  String get accountDeletion => 'Penghapusan Akun';
+
+  @override
+  String get dangerZone => 'Zona Bahaya';
+
+  @override
+  String get deleteAccountDescription =>
+      'Hapus akun Anda secara permanen beserta semua data terkait';
 }

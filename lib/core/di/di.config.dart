@@ -23,12 +23,16 @@ import 'package:expense_tracker_mobile/domain/repositories/auth_repository.dart'
     as _i900;
 import 'package:expense_tracker_mobile/domain/repositories/main_repository.dart'
     as _i162;
+import 'package:expense_tracker_mobile/domain/usecases/change_password_usecase.dart'
+    as _i621;
 import 'package:expense_tracker_mobile/domain/usecases/create_budget_usecase.dart'
     as _i157;
 import 'package:expense_tracker_mobile/domain/usecases/create_category_usecase.dart'
     as _i115;
 import 'package:expense_tracker_mobile/domain/usecases/create_transaction_usecase.dart'
     as _i886;
+import 'package:expense_tracker_mobile/domain/usecases/delete_account_usecase.dart'
+    as _i406;
 import 'package:expense_tracker_mobile/domain/usecases/delete_budget_usecase.dart'
     as _i1015;
 import 'package:expense_tracker_mobile/domain/usecases/delete_category_usecase.dart'
@@ -39,6 +43,8 @@ import 'package:expense_tracker_mobile/domain/usecases/get_budget_usecase.dart'
     as _i322;
 import 'package:expense_tracker_mobile/domain/usecases/get_category_usecase.dart'
     as _i662;
+import 'package:expense_tracker_mobile/domain/usecases/get_profile_usecase.dart'
+    as _i310;
 import 'package:expense_tracker_mobile/domain/usecases/get_transaction_usecase.dart'
     as _i58;
 import 'package:expense_tracker_mobile/domain/usecases/login_usecase.dart'
@@ -49,6 +55,8 @@ import 'package:expense_tracker_mobile/domain/usecases/update_budget_usecase.dar
     as _i154;
 import 'package:expense_tracker_mobile/domain/usecases/update_category_usecase.dart'
     as _i590;
+import 'package:expense_tracker_mobile/domain/usecases/update_profile_usecase.dart'
+    as _i680;
 import 'package:expense_tracker_mobile/domain/usecases/update_transaction_usecase.dart'
     as _i965;
 import 'package:expense_tracker_mobile/presentation/pages/auth/login/bloc/login_bloc.dart'
@@ -61,6 +69,8 @@ import 'package:expense_tracker_mobile/presentation/pages/categories/bloc/catego
     as _i306;
 import 'package:expense_tracker_mobile/presentation/pages/home/bloc/home_bloc.dart'
     as _i387;
+import 'package:expense_tracker_mobile/presentation/pages/profile/bloc/profile_bloc.dart'
+    as _i705;
 import 'package:expense_tracker_mobile/presentation/pages/transactions/bloc/transaction_bloc.dart'
     as _i187;
 import 'package:flutter/material.dart' as _i409;
@@ -112,6 +122,18 @@ extension GetItInjectableX on _i174.GetIt {
     );
     gh.factory<_i72.LoginUsecase>(
       () => _i72.LoginUsecase(gh<_i900.AuthRepository>()),
+    );
+    gh.factory<_i680.UpdateProfileUsecase>(
+      () => _i680.UpdateProfileUsecase(gh<_i900.AuthRepository>()),
+    );
+    gh.factory<_i310.GetProfileUsecase>(
+      () => _i310.GetProfileUsecase(gh<_i900.AuthRepository>()),
+    );
+    gh.factory<_i406.DeleteAccountUsecase>(
+      () => _i406.DeleteAccountUsecase(gh<_i900.AuthRepository>()),
+    );
+    gh.factory<_i621.ChangePasswordUsecase>(
+      () => _i621.ChangePasswordUsecase(gh<_i900.AuthRepository>()),
     );
     gh.factory<_i886.CreateTransactionUsecase>(
       () => _i886.CreateTransactionUsecase(gh<_i162.MainRepository>()),
@@ -176,6 +198,14 @@ extension GetItInjectableX on _i174.GetIt {
         gh<_i154.UpdateBudgetUsecase>(),
         gh<_i1015.DeleteBudgetUsecase>(),
         gh<_i662.GetCategoryUsecase>(),
+      ),
+    );
+    gh.factory<_i705.ProfileBloc>(
+      () => _i705.ProfileBloc(
+        gh<_i310.GetProfileUsecase>(),
+        gh<_i680.UpdateProfileUsecase>(),
+        gh<_i406.DeleteAccountUsecase>(),
+        gh<_i621.ChangePasswordUsecase>(),
       ),
     );
     gh.factory<_i754.LoginBloc>(

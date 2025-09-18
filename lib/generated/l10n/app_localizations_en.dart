@@ -535,4 +535,83 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get addNewBudgetTooltip => 'Add new budget';
+
+  @override
+  String get editProfile => 'Edit Profile';
+
+  @override
+  String get updateProfile => 'Update Profile';
+
+  @override
+  String get personalInformation => 'Personal Information';
+
+  @override
+  String get changePasswordTitle => 'Change Password';
+
+  @override
+  String get currentPassword => 'Current Password';
+
+  @override
+  String get newPassword => 'New Password';
+
+  @override
+  String get confirmNewPassword => 'Confirm New Password';
+
+  @override
+  String get saveChanges => 'Save Changes';
+
+  @override
+  String get changePasswordButton => 'Change Password';
+
+  @override
+  String get profileUpdatedSuccessfully => 'Profile updated successfully!';
+
+  @override
+  String get passwordChangedSuccessfully => 'Password changed successfully!';
+
+  @override
+  String get accountDeletedSuccessfully => 'Account deleted successfully!';
+
+  @override
+  String get deleteAccount => 'Delete Account';
+
+  @override
+  String get deleteAccountWarning =>
+      'Are you sure you want to delete your account? This action cannot be undone and all your data will be permanently lost.';
+
+  @override
+  String get currentPasswordRequired => 'Current password is required';
+
+  @override
+  String get newPasswordRequired => 'New password is required';
+
+  @override
+  String get passwordsDontMatch => 'Passwords don\'t match';
+
+  @override
+  String newPasswordTooShort(int minLength) {
+    return 'New password must be at least $minLength characters';
+  }
+
+  @override
+  String get enterCurrentPassword => 'Enter your current password';
+
+  @override
+  String get enterNewPassword => 'Enter your new password';
+
+  @override
+  String get confirmYourNewPassword => 'Confirm your new password';
+
+  @override
+  String get profileInformation => 'Profile Information';
+
+  @override
+  String get accountDeletion => 'Account Deletion';
+
+  @override
+  String get dangerZone => 'Danger Zone';
+
+  @override
+  String get deleteAccountDescription =>
+      'Permanently delete your account and all associated data';
 }

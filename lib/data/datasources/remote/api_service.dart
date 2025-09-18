@@ -1,14 +1,17 @@
 import "package:dio/dio.dart";
 import 'package:expense_tracker_mobile/data/models/request/budget_request.dart';
 import 'package:expense_tracker_mobile/data/models/request/category_request.dart';
+import 'package:expense_tracker_mobile/data/models/request/change_password_request.dart';
 import 'package:expense_tracker_mobile/data/models/request/login_request.dart';
 import 'package:expense_tracker_mobile/data/models/request/new_transaction_request.dart';
 import 'package:expense_tracker_mobile/data/models/request/register_request.dart';
+import 'package:expense_tracker_mobile/data/models/request/update_profile_request.dart';
 import 'package:expense_tracker_mobile/data/models/response/base_pagination_response.dart';
 import 'package:expense_tracker_mobile/data/models/response/base_response.dart';
 import 'package:expense_tracker_mobile/data/models/response/budget_response.dart';
 import 'package:expense_tracker_mobile/data/models/response/category_response.dart';
 import 'package:expense_tracker_mobile/data/models/response/login_response.dart';
+import 'package:expense_tracker_mobile/data/models/response/profile_response.dart';
 import 'package:expense_tracker_mobile/data/models/response/transaction_response.dart';
 import 'package:injectable/injectable.dart';
 import 'package:retrofit/retrofit.dart';
@@ -75,4 +78,18 @@ abstract class ApiService {
 
   @DELETE('/budgets/{id}')
   Future<void> deleteBudget(@Path('id') int id);
+
+  /// Profile Endpoints
+
+  @GET('/users')
+  Future<BaseResponse<ProfileResponse>> getProfile();
+
+  @PUT('/users/')
+  Future<BaseResponse> updateProfile(@Body() UpdateProfileRequest request);
+
+  @DELETE('/users/')
+  Future<void> deleteAccount();
+
+  @POST('/users/change-password')
+  Future<BaseResponse> changePassword(@Body() ChangePasswordRequest request);
 }

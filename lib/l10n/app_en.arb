@@ -285,5 +285,40 @@
       }
     }
   },
-  "addNewBudgetTooltip": "Add new budget"
+  "addNewBudgetTooltip": "Add new budget",
+
+  "editProfile": "Edit Profile",
+  "updateProfile": "Update Profile",
+  "personalInformation": "Personal Information",
+  "changePasswordTitle": "Change Password",
+  "currentPassword": "Current Password",
+  "newPassword": "New Password",
+  "confirmNewPassword": "Confirm New Password",
+  "saveChanges": "Save Changes",
+  "changePasswordButton": "Change Password",
+  "profileUpdatedSuccessfully": "Profile updated successfully!",
+  "passwordChangedSuccessfully": "Password changed successfully!",
+  "accountDeletedSuccessfully": "Account deleted successfully!",
+  "deleteAccount": "Delete Account",
+  "deleteAccountWarning": "Are you sure you want to delete your account? This action cannot be undone and all your data will be permanently lost.",
+  "currentPasswordRequired": "Current password is required",
+  "newPasswordRequired": "New password is required",
+  "passwordsDontMatch": "Passwords don't match",
+  "newPasswordTooShort": "New password must be at least {minLength} characters",
+  "@newPasswordTooShort": {
+    "description": "Validation message for new password too short",
+    "placeholders": {
+      "minLength": {
+        "type": "int",
+        "example": "8"
+      }
+    }
+  },
+  "enterCurrentPassword": "Enter your current password",
+  "enterNewPassword": "Enter your new password",
+  "confirmYourNewPassword": "Confirm your new password",
+  "profileInformation": "Profile Information",
+  "accountDeletion": "Account Deletion",
+  "dangerZone": "Danger Zone",
+  "deleteAccountDescription": "Permanently delete your account and all associated data"
 }

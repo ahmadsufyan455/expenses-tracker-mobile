@@ -1,3 +1,4 @@
+import 'package:expense_tracker_mobile/domain/dto/profile_dto.dart';
 import 'package:expense_tracker_mobile/domain/dto/transaction_dto.dart';
 import 'package:expense_tracker_mobile/presentation/pages/auth/login/login_page.dart';
 import 'package:expense_tracker_mobile/presentation/pages/auth/register/register_page.dart';
@@ -5,6 +6,7 @@ import 'package:expense_tracker_mobile/presentation/pages/auth/splash_page.dart'
 import 'package:expense_tracker_mobile/presentation/pages/budgets/budget_page.dart';
 import 'package:expense_tracker_mobile/presentation/pages/categories/categories_page.dart';
 import 'package:expense_tracker_mobile/presentation/pages/main_navigation.dart';
+import 'package:expense_tracker_mobile/presentation/pages/profile/edit_profile_page.dart';
 import 'package:expense_tracker_mobile/presentation/pages/transactions/add_transaction_page.dart';
 import 'package:flutter/material.dart';
 
@@ -16,7 +18,8 @@ enum RouteName {
   addTransaction('/add-transaction'),
   categories('/categories'),
   addCategory('/add-category'),
-  budgets('/budgets');
+  budgets('/budgets'),
+  editProfile('/edit-profile');
 
   final String path;
   const RouteName(this.path);
@@ -36,4 +39,10 @@ final routes = {
   },
   RouteName.categories.path: (context) => const CategoriesPage(),
   RouteName.budgets.path: (context) => const BudgetPage(),
+  RouteName.editProfile.path: (context) {
+    final arguments = ModalRoute.of(context)?.settings.arguments as Map<String, dynamic>?;
+    return EditProfilePage(
+      profile: arguments?['profile'] as ProfileDto,
+    );
+  },
 };

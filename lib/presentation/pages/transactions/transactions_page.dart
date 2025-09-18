@@ -1,10 +1,10 @@
+import 'package:expense_tracker_mobile/app/router.dart';
 import 'package:expense_tracker_mobile/app/theme/app_colors.dart';
 import 'package:expense_tracker_mobile/app/theme/app_dimensions.dart';
 import 'package:expense_tracker_mobile/app/theme/app_text_styles.dart';
 import 'package:expense_tracker_mobile/core/extensions/build_context_extensions.dart';
 import 'package:expense_tracker_mobile/core/utils/localization_utils.dart';
 import 'package:expense_tracker_mobile/domain/dto/transaction_dto.dart';
-import 'package:expense_tracker_mobile/presentation/pages/transactions/add_transaction_page.dart';
 import 'package:expense_tracker_mobile/presentation/pages/transactions/bloc/transaction_bloc.dart';
 import 'package:expense_tracker_mobile/presentation/widgets/common/error_dialog.dart';
 import 'package:expense_tracker_mobile/presentation/widgets/transaction/transaction_detail_bottom_sheet.dart';
@@ -219,9 +219,10 @@ class _TransactionsPageState extends State<TransactionsPage> {
   }
 
   Future<void> _navigateToAddTransaction() async {
-    final result = await Navigator.of(
+    final result = await Navigator.pushNamed(
       context,
-    ).push(MaterialPageRoute(builder: (context) => const AddTransactionPage()));
+      RouteName.addTransaction.path,
+    );
 
     // Refresh the transaction list if a new transaction was added
     if (result == true) {
