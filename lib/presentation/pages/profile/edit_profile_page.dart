@@ -2,6 +2,7 @@ import 'package:expense_tracker_mobile/app/router.dart';
 import 'package:expense_tracker_mobile/app/theme/app_colors.dart';
 import 'package:expense_tracker_mobile/app/theme/app_dimensions.dart';
 import 'package:expense_tracker_mobile/core/extensions/build_context_extensions.dart';
+import 'package:expense_tracker_mobile/core/services/session_service.dart';
 import 'package:expense_tracker_mobile/domain/dto/profile_dto.dart';
 import 'package:expense_tracker_mobile/presentation/pages/profile/bloc/profile_bloc.dart';
 import 'package:expense_tracker_mobile/presentation/widgets/common/error_dialog.dart';
@@ -27,6 +28,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
   final _emailController = TextEditingController();
 
   late ProfileBloc _bloc;
+  final _sessionService = GetIt.instance<SessionService>();
   bool _isLoading = false;
 
   @override
@@ -276,8 +278,12 @@ class _EditProfilePageState extends State<EditProfilePage> {
       ScaffoldMessenger.of(
         context,
       ).showSnackBar(SnackBar(content: Text(context.l10n.accountDeletedSuccessfully), backgroundColor: Colors.green));
-      // Navigate to login screen and clear navigation stack
-      Navigator.pushNamedAndRemoveUntil(context, RouteName.login.path, (route) => false);
+      // Clear session and navigate to login screen
+      _sessionService.clearSession().then((_) {
+        if (mounted) {
+          Navigator.pushNamedAndRemoveUntil(context, RouteName.login.path, (route) => false);
+        }
+      });
     } else if (state is DeleteAccountFailure) {
       ErrorDialog.show(context, state.failure);
     }
