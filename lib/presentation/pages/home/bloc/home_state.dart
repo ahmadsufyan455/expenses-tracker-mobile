@@ -34,24 +34,25 @@ final class HomeLoaded extends HomeState {
 
   @override
   List<Object> get props => [
-        totalIncome,
-        totalExpense,
-        netBalance,
-        savingsRate,
-        currentFilter,
-        recentBudgets,
-        recentTransactions,
-        topExpenses,
-      ];
+    totalIncome,
+    totalExpense,
+    netBalance,
+    savingsRate,
+    currentFilter,
+    recentBudgets,
+    recentTransactions,
+    topExpenses,
+  ];
 }
 
 final class HomeError extends HomeState {
+  final String filter;
   final String message;
 
-  const HomeError({required this.message});
+  const HomeError({required this.message, required this.filter});
 
   @override
-  List<Object> get props => [message];
+  List<Object> get props => [message, filter];
 }
 
 // Data classes for mock data
@@ -61,12 +62,7 @@ class BudgetItem extends Equatable {
   final double used;
   final String category;
 
-  const BudgetItem({
-    required this.name,
-    required this.allocated,
-    required this.used,
-    required this.category,
-  });
+  const BudgetItem({required this.name, required this.allocated, required this.used, required this.category});
 
   double get percentage => allocated > 0 ? (used / allocated * 100) : 0;
   bool get isOverBudget => used > allocated;
@@ -101,11 +97,7 @@ class TopExpenseItem extends Equatable {
   final double amount;
   final double percentage;
 
-  const TopExpenseItem({
-    required this.category,
-    required this.amount,
-    required this.percentage,
-  });
+  const TopExpenseItem({required this.category, required this.amount, required this.percentage});
 
   @override
   List<Object> get props => [category, amount, percentage];

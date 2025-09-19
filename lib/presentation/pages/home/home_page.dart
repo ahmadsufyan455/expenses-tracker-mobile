@@ -3,6 +3,7 @@ import 'package:expense_tracker_mobile/app/theme/app_colors.dart';
 import 'package:expense_tracker_mobile/app/theme/app_dimensions.dart';
 import 'package:expense_tracker_mobile/app/theme/app_text_styles.dart';
 import 'package:expense_tracker_mobile/core/extensions/build_context_extensions.dart';
+import 'package:expense_tracker_mobile/core/utils/date_utils.dart' as app_date_utils;
 import 'package:expense_tracker_mobile/presentation/pages/home/bloc/home_bloc.dart';
 import 'package:expense_tracker_mobile/presentation/widgets/home/budget_card.dart';
 import 'package:expense_tracker_mobile/presentation/widgets/home/overview_section.dart';
@@ -27,7 +28,7 @@ class _HomePageState extends State<HomePage> {
   void initState() {
     super.initState();
     _bloc = GetIt.instance<HomeBloc>();
-    _bloc.add(HomeStarted());
+    _bloc.add(HomeStarted(app_date_utils.AppDateUtils.getCurrentMonthFilter()));
   }
 
   @override
@@ -66,7 +67,7 @@ class _HomePageState extends State<HomePage> {
     if (state is HomeLoaded) {
       return RefreshIndicator(
         onRefresh: () async {
-          _bloc.add(HomeRefresh());
+          _bloc.add(HomeRefresh(state.currentFilter));
           await Future.delayed(const Duration(seconds: 1));
         },
         child: SingleChildScrollView(
@@ -76,10 +77,7 @@ class _HomePageState extends State<HomePage> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               // Overview Section
-              OverviewSection(
-                state: state,
-                onFilterChanged: (filter) => _bloc.add(FilterChanged(filter: filter)),
-              ),
+              OverviewSection(state: state, onFilterChanged: (filter) => _bloc.add(FilterChanged(filter))),
 
               const SizedBox(height: AppDimensions.spaceXL),
 
@@ -141,7 +139,7 @@ class _HomePageState extends State<HomePage> {
             ),
             const SizedBox(height: AppDimensions.spaceL),
             ElevatedButton.icon(
-              onPressed: () => _bloc.add(HomeRefresh()),
+              onPressed: () => _bloc.add(HomeRefresh(state.filter)),
               icon: const Icon(Icons.refresh_rounded),
               label: Text(context.l10n.retry),
               style: ElevatedButton.styleFrom(

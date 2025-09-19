@@ -145,9 +145,13 @@ class MainRepositoryImpl implements MainRepository {
   }
 
   @override
-  Future<Either<Failure, DashboardDto>> getDashboard() async {
+  Future<Either<Failure, DashboardDto>> getDashboard({String? month, int? transactionLimit, int? expenseLimit}) async {
     try {
-      final response = await _apiService.getDashboard();
+      final response = await _apiService.getDashboard(
+        month: month,
+        transactionLimit: transactionLimit,
+        expenseLimit: expenseLimit,
+      );
       final dashboard = DashboardDto.fromResponse(response.data!);
       return Right(dashboard);
     } catch (e) {

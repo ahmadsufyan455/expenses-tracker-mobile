@@ -38,5 +38,5 @@ abstract interface class MainRepository {
 
   Future<Either<Failure, void>> deleteBudget(int id);
 
-  Future<Either<Failure, DashboardDto>> getDashboard();
+  Future<Either<Failure, DashboardDto>> getDashboard({String? month, int? transactionLimit, int? expenseLimit});
 }

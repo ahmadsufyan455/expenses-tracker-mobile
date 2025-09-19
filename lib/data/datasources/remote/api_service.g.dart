@@ -566,9 +566,18 @@ class _ApiService implements ApiService {
   }
 
   @override
-  Future<BaseResponse<DashboardResponse>> getDashboard() async {
+  Future<BaseResponse<DashboardResponse>> getDashboard({
+    String? month,
+    int? transactionLimit = 5,
+    int? expenseLimit = 3,
+  }) async {
     final _extra = <String, dynamic>{};
-    final queryParameters = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{
+      r'month': month,
+      r'transaction_limit': transactionLimit,
+      r'expense_limit': expenseLimit,
+    };
+    queryParameters.removeWhere((k, v) => v == null);
     final _headers = <String, dynamic>{};
     const Map<String, dynamic>? _data = null;
     final _options = _setStreamType<BaseResponse<DashboardResponse>>(

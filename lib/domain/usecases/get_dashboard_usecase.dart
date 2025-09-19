@@ -10,7 +10,11 @@ class GetDashboardUsecase {
 
   GetDashboardUsecase(this._mainRepository);
 
-  Future<Either<Failure, DashboardDto>> call() async {
-    return await _mainRepository.getDashboard();
+  Future<Either<Failure, DashboardDto>> call({String? month, int? transactionLimit, int? expenseLimit}) async {
+    return await _mainRepository.getDashboard(
+      month: month,
+      transactionLimit: transactionLimit,
+      expenseLimit: expenseLimit,
+    );
   }
 }
