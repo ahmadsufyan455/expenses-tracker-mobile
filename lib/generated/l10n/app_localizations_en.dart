@@ -156,10 +156,28 @@ class AppLocalizationsEn extends AppLocalizations {
   String get totalExpense => 'Total Expense';
 
   @override
+  String get netBalance => 'Net Balance';
+
+  @override
+  String get savingsRate => 'Savings Rate';
+
+  @override
   String get recentBudget => 'Recent Budget';
 
   @override
   String get recentTransactions => 'Recent Transactions';
+
+  @override
+  String get topExpenses => 'Top Expenses';
+
+  @override
+  String get ofTotalExpenses => 'of total expenses';
+
+  @override
+  String get overBudget => 'Over budget';
+
+  @override
+  String get withinBudget => 'Within budget';
 
   @override
   String get viewAll => 'View All';

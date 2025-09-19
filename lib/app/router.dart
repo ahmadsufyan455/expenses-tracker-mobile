@@ -29,7 +29,12 @@ final routes = {
   RouteName.splash.path: (context) => const SplashPage(),
   RouteName.login.path: (context) => const LoginPage(),
   RouteName.register.path: (context) => const RegisterPage(),
-  RouteName.home.path: (context) => const MainNavigation(),
+  RouteName.home.path: (context) {
+    final arguments = ModalRoute.of(context)?.settings.arguments as Map<String, dynamic>?;
+    return MainNavigation(
+      initialIndex: arguments?['initialIndex'] as int? ?? 0,
+    );
+  },
   RouteName.addTransaction.path: (context) {
     final arguments = ModalRoute.of(context)?.settings.arguments as Map<String, dynamic>?;
     return AddTransactionPage(

@@ -1,4 +1,5 @@
 import 'package:equatable/equatable.dart';
+import 'package:expense_tracker_mobile/domain/usecases/get_dashboard_usecase.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:injectable/injectable.dart';
 
@@ -7,7 +8,9 @@ part 'home_state.dart';
 
 @injectable
 class HomeBloc extends Bloc<HomeEvent, HomeState> {
-  HomeBloc() : super(HomeInitial()) {
+  final GetDashboardUsecase _getDashboardUsecase;
+
+  HomeBloc(this._getDashboardUsecase) : super(HomeInitial()) {
     on<HomeStarted>(_onHomeStarted);
     on<HomeRefresh>(_onHomeRefresh);
     on<FilterChanged>(_onFilterChanged);
@@ -44,85 +47,45 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
 
   Future<void> _loadHomeData(Emitter<HomeState> emit, String filter) async {
     try {
-      // Simulate network delay
-      await Future.delayed(const Duration(seconds: 1));
+      final result = await _getDashboardUsecase();
 
-      // Mock data - replace with actual API calls later
-      final mockBudgets = [
-        const BudgetItem(
-          name: 'Food & Dining',
-          allocated: 500.0,
-          used: 320.0,
-          category: 'food',
-        ),
-        const BudgetItem(
-          name: 'Transportation',
-          allocated: 300.0,
-          used: 280.0,
-          category: 'transport',
-        ),
-        const BudgetItem(
-          name: 'Entertainment',
-          allocated: 200.0,
-          used: 250.0,
-          category: 'entertainment',
-        ),
-      ];
+      result.fold(
+        (failure) => emit(HomeError(message: failure.message)),
+        (dashboard) {
+          final budgets = dashboard.budgets.map((budget) => BudgetItem(
+            name: budget.category,
+            allocated: budget.limit,
+            used: budget.spent,
+            category: budget.category.toLowerCase().replaceAll(' ', ''),
+          )).toList();
 
-      final mockTransactions = [
-        TransactionItem(
-          id: '1',
-          amount: 25.50,
-          description: 'Coffee Shop',
-          category: 'food',
-          date: DateTime.now().subtract(const Duration(hours: 2)),
-          isExpense: true,
-        ),
-        TransactionItem(
-          id: '2',
-          amount: 1200.00,
-          description: 'Salary',
-          category: 'income',
-          date: DateTime.now().subtract(const Duration(days: 1)),
-          isExpense: false,
-        ),
-        TransactionItem(
-          id: '3',
-          amount: 45.00,
-          description: 'Gas Station',
-          category: 'transport',
-          date: DateTime.now().subtract(const Duration(days: 2)),
-          isExpense: true,
-        ),
-        TransactionItem(
-          id: '4',
-          amount: 15.00,
-          description: 'Movie Ticket',
-          category: 'entertainment',
-          date: DateTime.now().subtract(const Duration(days: 3)),
-          isExpense: true,
-        ),
-      ];
+          final transactions = dashboard.recentTransactions.map((transaction) => TransactionItem(
+            id: transaction.id.toString(),
+            amount: transaction.amount,
+            description: transaction.category,
+            category: transaction.category.toLowerCase().replaceAll(' ', ''),
+            date: transaction.date,
+            isExpense: transaction.isExpense,
+          )).toList();
 
-      // Calculate totals
-      double totalIncome = 0;
-      double totalExpense = 0;
-      
-      for (final transaction in mockTransactions) {
-        if (transaction.isExpense) {
-          totalExpense += transaction.amount;
-        } else {
-          totalIncome += transaction.amount;
-        }
-      }
+          final topExpenses = dashboard.topExpenses.map((expense) => TopExpenseItem(
+            category: expense.category,
+            amount: expense.amount,
+            percentage: expense.percentage,
+          )).toList();
 
-      emit(HomeLoaded(
-        totalIncome: totalIncome,
-        totalExpense: totalExpense,
-        currentFilter: filter,
-        recentBudgets: mockBudgets,
-        recentTransactions: mockTransactions.take(3).toList(),
-      ));
+          emit(HomeLoaded(
+            totalIncome: dashboard.summary.totalIncome,
+            totalExpense: dashboard.summary.totalExpenses,
+            netBalance: dashboard.summary.netBalance,
+            savingsRate: dashboard.summary.savingsRate,
+            currentFilter: filter,
+            recentBudgets: budgets,
+            recentTransactions: transactions,
+            topExpenses: topExpenses,
+          ));
+        },
+      );
     } catch (e) {
       emit(HomeError(message: e.toString()));
     }

@@ -5,6 +5,7 @@ import 'package:expense_tracker_mobile/data/models/request/new_transaction_reque
 import 'package:expense_tracker_mobile/data/models/response/category_response.dart';
 import 'package:expense_tracker_mobile/data/models/response/transaction_response.dart';
 import 'package:expense_tracker_mobile/domain/dto/budget_dto.dart';
+import 'package:expense_tracker_mobile/domain/dto/dashboard_dto.dart';
 import 'package:fpdart/fpdart.dart';
 
 abstract interface class MainRepository {
@@ -36,4 +37,6 @@ abstract interface class MainRepository {
   Future<Either<Failure, String>> updateBudget(int id, BudgetRequest request);
 
   Future<Either<Failure, void>> deleteBudget(int id);
+
+  Future<Either<Failure, DashboardDto>> getDashboard();
 }

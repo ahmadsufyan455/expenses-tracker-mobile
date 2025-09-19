@@ -157,10 +157,28 @@ class AppLocalizationsId extends AppLocalizations {
   String get totalExpense => 'Total Pengeluaran';
 
   @override
+  String get netBalance => 'Saldo Bersih';
+
+  @override
+  String get savingsRate => 'Tingkat Tabungan';
+
+  @override
   String get recentBudget => 'Anggaran Terbaru';
 
   @override
   String get recentTransactions => 'Transaksi Terbaru';
+
+  @override
+  String get topExpenses => 'Pengeluaran Tertinggi';
+
+  @override
+  String get ofTotalExpenses => 'dari total pengeluaran';
+
+  @override
+  String get overBudget => 'Melebihi anggaran';
+
+  @override
+  String get withinBudget => 'Dalam anggaran';
 
   @override
   String get viewAll => 'Lihat Semua';

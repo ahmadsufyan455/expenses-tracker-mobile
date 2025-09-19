@@ -43,6 +43,8 @@ import 'package:expense_tracker_mobile/domain/usecases/get_budget_usecase.dart'
     as _i322;
 import 'package:expense_tracker_mobile/domain/usecases/get_category_usecase.dart'
     as _i662;
+import 'package:expense_tracker_mobile/domain/usecases/get_dashboard_usecase.dart'
+    as _i1030;
 import 'package:expense_tracker_mobile/domain/usecases/get_profile_usecase.dart'
     as _i310;
 import 'package:expense_tracker_mobile/domain/usecases/get_transaction_usecase.dart'
@@ -86,7 +88,6 @@ extension GetItInjectableX on _i174.GetIt {
   }) async {
     final gh = _i526.GetItHelper(this, environment, environmentFilter);
     final diModule = _$DiModule();
-    gh.factory<_i387.HomeBloc>(() => _i387.HomeBloc());
     await gh.lazySingletonAsync<_i460.SharedPreferences>(
       () => diModule.sharedPreferences(),
       preResolve: true,
@@ -171,6 +172,9 @@ extension GetItInjectableX on _i174.GetIt {
     gh.factory<_i157.CreateBudgetUsecase>(
       () => _i157.CreateBudgetUsecase(gh<_i162.MainRepository>()),
     );
+    gh.factory<_i1030.GetDashboardUsecase>(
+      () => _i1030.GetDashboardUsecase(gh<_i162.MainRepository>()),
+    );
     gh.factory<_i306.CategoryBloc>(
       () => _i306.CategoryBloc(
         gh<_i662.GetCategoryUsecase>(),
@@ -190,6 +194,9 @@ extension GetItInjectableX on _i174.GetIt {
         gh<_i826.DeleteTransactionUsecase>(),
         gh<_i965.UpdateTransactionUsecase>(),
       ),
+    );
+    gh.factory<_i387.HomeBloc>(
+      () => _i387.HomeBloc(gh<_i1030.GetDashboardUsecase>()),
     );
     gh.factory<_i815.BudgetBloc>(
       () => _i815.BudgetBloc(

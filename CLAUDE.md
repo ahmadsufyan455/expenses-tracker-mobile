@@ -12,6 +12,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 - `flutter build ios` - Build iOS app
 
 **Running & Development:**
+
 - `flutter run` - Run app in debug mode
 - `flutter run --release` - Run in release mode
 - `flutter run -d chrome` - Run in web browser

@@ -8,14 +8,16 @@ import 'package:expense_tracker_mobile/presentation/pages/transactions/transacti
 import 'package:flutter/material.dart';
 
 class MainNavigation extends StatefulWidget {
-  const MainNavigation({super.key});
+  final int initialIndex;
+
+  const MainNavigation({super.key, this.initialIndex = 0});
 
   @override
   State<MainNavigation> createState() => _MainNavigationState();
 }
 
 class _MainNavigationState extends State<MainNavigation> {
-  int _currentIndex = 0;
+  late int _currentIndex;
 
   final List<Widget> _pages = [
     const HomePage(),
@@ -24,6 +26,12 @@ class _MainNavigationState extends State<MainNavigation> {
     const CategoriesPage(),
     const ProfilePage(),
   ];
+
+  @override
+  void initState() {
+    super.initState();
+    _currentIndex = widget.initialIndex;
+  }
 
   @override
   Widget build(BuildContext context) {

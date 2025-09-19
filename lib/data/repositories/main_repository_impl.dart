@@ -7,6 +7,7 @@ import 'package:expense_tracker_mobile/data/models/request/new_transaction_reque
 import 'package:expense_tracker_mobile/data/models/response/category_response.dart';
 import 'package:expense_tracker_mobile/data/models/response/transaction_response.dart';
 import 'package:expense_tracker_mobile/domain/dto/budget_dto.dart';
+import 'package:expense_tracker_mobile/domain/dto/dashboard_dto.dart';
 import 'package:expense_tracker_mobile/domain/repositories/main_repository.dart';
 import 'package:fpdart/fpdart.dart';
 import 'package:injectable/injectable.dart';
@@ -138,6 +139,17 @@ class MainRepositoryImpl implements MainRepository {
     try {
       await _apiService.deleteBudget(id);
       return const Right(null);
+    } catch (e) {
+      return Left(ErrorHandler.handleError(e));
+    }
+  }
+
+  @override
+  Future<Either<Failure, DashboardDto>> getDashboard() async {
+    try {
+      final response = await _apiService.getDashboard();
+      final dashboard = DashboardDto.fromResponse(response.data!);
+      return Right(dashboard);
     } catch (e) {
       return Left(ErrorHandler.handleError(e));
     }

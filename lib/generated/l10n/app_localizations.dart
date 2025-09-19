@@ -362,6 +362,18 @@ abstract class AppLocalizations {
   /// **'Total Expense'**
   String get totalExpense;
 
+  /// No description provided for @netBalance.
+  ///
+  /// In en, this message translates to:
+  /// **'Net Balance'**
+  String get netBalance;
+
+  /// No description provided for @savingsRate.
+  ///
+  /// In en, this message translates to:
+  /// **'Savings Rate'**
+  String get savingsRate;
+
   /// No description provided for @recentBudget.
   ///
   /// In en, this message translates to:
@@ -373,6 +385,30 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Recent Transactions'**
   String get recentTransactions;
+
+  /// No description provided for @topExpenses.
+  ///
+  /// In en, this message translates to:
+  /// **'Top Expenses'**
+  String get topExpenses;
+
+  /// No description provided for @ofTotalExpenses.
+  ///
+  /// In en, this message translates to:
+  /// **'of total expenses'**
+  String get ofTotalExpenses;
+
+  /// No description provided for @overBudget.
+  ///
+  /// In en, this message translates to:
+  /// **'Over budget'**
+  String get overBudget;
+
+  /// No description provided for @withinBudget.
+  ///
+  /// In en, this message translates to:
+  /// **'Within budget'**
+  String get withinBudget;
 
   /// No description provided for @viewAll.
   ///

@@ -14,25 +14,34 @@ final class HomeLoading extends HomeState {}
 final class HomeLoaded extends HomeState {
   final double totalIncome;
   final double totalExpense;
+  final double netBalance;
+  final double savingsRate;
   final String currentFilter;
   final List<BudgetItem> recentBudgets;
   final List<TransactionItem> recentTransactions;
+  final List<TopExpenseItem> topExpenses;
 
   const HomeLoaded({
     required this.totalIncome,
     required this.totalExpense,
+    required this.netBalance,
+    required this.savingsRate,
     required this.currentFilter,
     required this.recentBudgets,
     required this.recentTransactions,
+    required this.topExpenses,
   });
 
   @override
   List<Object> get props => [
         totalIncome,
         totalExpense,
+        netBalance,
+        savingsRate,
         currentFilter,
         recentBudgets,
         recentTransactions,
+        topExpenses,
       ];
 }
 
@@ -85,4 +94,19 @@ class TransactionItem extends Equatable {
 
   @override
   List<Object> get props => [id, amount, description, category, date, isExpense];
+}
+
+class TopExpenseItem extends Equatable {
+  final String category;
+  final double amount;
+  final double percentage;
+
+  const TopExpenseItem({
+    required this.category,
+    required this.amount,
+    required this.percentage,
+  });
+
+  @override
+  List<Object> get props => [category, amount, percentage];
 }

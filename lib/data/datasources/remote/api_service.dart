@@ -10,6 +10,7 @@ import 'package:expense_tracker_mobile/data/models/response/base_pagination_resp
 import 'package:expense_tracker_mobile/data/models/response/base_response.dart';
 import 'package:expense_tracker_mobile/data/models/response/budget_response.dart';
 import 'package:expense_tracker_mobile/data/models/response/category_response.dart';
+import 'package:expense_tracker_mobile/data/models/response/dashboard_response.dart';
 import 'package:expense_tracker_mobile/data/models/response/login_response.dart';
 import 'package:expense_tracker_mobile/data/models/response/profile_response.dart';
 import 'package:expense_tracker_mobile/data/models/response/transaction_response.dart';
@@ -92,4 +93,9 @@ abstract class ApiService {
 
   @POST('/users/change-password')
   Future<BaseResponse> changePassword(@Body() ChangePasswordRequest request);
+
+  /// Dashboard Endpoints
+
+  @GET('/dashboard')
+  Future<BaseResponse<DashboardResponse>> getDashboard();
 }
