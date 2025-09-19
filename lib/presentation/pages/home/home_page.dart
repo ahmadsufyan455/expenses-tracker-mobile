@@ -42,32 +42,8 @@ class _HomePageState extends State<HomePage> {
         scrolledUnderElevation: 0,
         title: Text(
           _getGreeting(context),
-          style: AppTextStyles.headlineMedium.copyWith(
-            color: theme.colorScheme.onSurface,
-            fontWeight: FontWeight.w700,
-          ),
+          style: AppTextStyles.headlineMedium.copyWith(color: theme.colorScheme.onSurface, fontWeight: FontWeight.w700),
         ),
-        actions: [
-          Container(
-            margin: const EdgeInsets.only(right: AppDimensions.paddingM),
-            decoration: BoxDecoration(
-              color: theme.colorScheme.surfaceContainerHighest,
-              borderRadius: BorderRadius.circular(AppDimensions.radiusM),
-              border: Border.all(
-                color: theme.colorScheme.outline.withValues(alpha: 0.2),
-              ),
-            ),
-            child: IconButton(
-              icon: Icon(
-                Icons.person_outline_rounded,
-                color: theme.colorScheme.onSurface,
-              ),
-              onPressed: () {
-                // TODO: Navigate to profile
-              },
-            ),
-          ),
-        ],
       ),
       body: BlocBuilder<HomeBloc, HomeState>(
         bloc: _bloc,
@@ -144,15 +120,9 @@ class _HomePageState extends State<HomePage> {
               decoration: BoxDecoration(
                 color: AppColors.error.withValues(alpha: 0.1),
                 borderRadius: BorderRadius.circular(AppDimensions.radiusL),
-                border: Border.all(
-                  color: AppColors.error.withValues(alpha: 0.3),
-                ),
+                border: Border.all(color: AppColors.error.withValues(alpha: 0.3)),
               ),
-              child: Icon(
-                Icons.error_outline_rounded,
-                size: 64,
-                color: AppColors.error,
-              ),
+              child: Icon(Icons.error_outline_rounded, size: 64, color: AppColors.error),
             ),
             const SizedBox(height: AppDimensions.spaceL),
             Text(
@@ -166,9 +136,7 @@ class _HomePageState extends State<HomePage> {
             const SizedBox(height: AppDimensions.spaceS),
             Text(
               state.message,
-              style: AppTextStyles.bodyMedium.copyWith(
-                color: theme.colorScheme.onSurfaceVariant,
-              ),
+              style: AppTextStyles.bodyMedium.copyWith(color: theme.colorScheme.onSurfaceVariant),
               textAlign: TextAlign.center,
             ),
             const SizedBox(height: AppDimensions.spaceL),
@@ -183,9 +151,7 @@ class _HomePageState extends State<HomePage> {
                   horizontal: AppDimensions.paddingL,
                   vertical: AppDimensions.paddingM,
                 ),
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(AppDimensions.radiusM),
-                ),
+                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(AppDimensions.radiusM)),
               ),
             ),
           ],
@@ -250,9 +216,7 @@ class _HomePageState extends State<HomePage> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        SectionHeader(
-          title: context.l10n.topExpenses,
-        ),
+        SectionHeader(title: context.l10n.topExpenses),
         ...state.topExpenses.map((expense) => TopExpenseCard(expense: expense)),
       ],
     );
