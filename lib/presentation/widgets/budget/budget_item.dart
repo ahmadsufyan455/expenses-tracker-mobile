@@ -32,11 +32,32 @@ class BudgetItem extends StatelessWidget {
     final monthDate = DateTime.parse(budget.month);
     final formattedMonth = DateFormat.yMMMM().format(monthDate);
 
-    return Card(
+    return Container(
       margin: const EdgeInsets.only(bottom: AppDimensions.spaceM),
+      decoration: BoxDecoration(
+        color: theme.brightness == Brightness.dark
+            ? theme.colorScheme.surfaceContainerHighest
+            : theme.colorScheme.surface,
+        borderRadius: BorderRadius.circular(AppDimensions.radiusM),
+        border: theme.brightness == Brightness.dark
+            ? Border.all(
+                color: theme.colorScheme.outline.withValues(alpha: 0.2),
+                width: 1,
+              )
+            : null,
+        boxShadow: theme.brightness == Brightness.dark
+            ? null
+            : [
+                BoxShadow(
+                  color: theme.shadowColor.withValues(alpha: 0.08),
+                  blurRadius: 8,
+                  offset: const Offset(0, 2),
+                ),
+              ],
+      ),
       child: InkWell(
         onTap: onTap,
-        borderRadius: AppDimensions.borderRadiusM,
+        borderRadius: BorderRadius.circular(AppDimensions.radiusM),
         child: Padding(
           padding: AppDimensions.paddingAllM,
           child: Column(

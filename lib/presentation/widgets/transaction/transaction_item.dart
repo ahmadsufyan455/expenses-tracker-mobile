@@ -22,14 +22,31 @@ class TransactionItem extends StatelessWidget {
 
     return Container(
       margin: AppDimensions.paddingVerticalS,
-      child: Material(
-        color: theme.colorScheme.surface,
-        borderRadius: AppDimensions.borderRadiusM,
-        elevation: AppDimensions.cardElevation,
-        child: InkWell(
-          onTap: onTap,
-          borderRadius: AppDimensions.borderRadiusM,
-          child: Padding(
+      decoration: BoxDecoration(
+        color: theme.brightness == Brightness.dark
+            ? theme.colorScheme.surfaceContainerHighest
+            : theme.colorScheme.surface,
+        borderRadius: BorderRadius.circular(AppDimensions.radiusM),
+        border: theme.brightness == Brightness.dark
+            ? Border.all(
+                color: theme.colorScheme.outline.withValues(alpha: 0.2),
+                width: 1,
+              )
+            : null,
+        boxShadow: theme.brightness == Brightness.dark
+            ? null
+            : [
+                BoxShadow(
+                  color: theme.shadowColor.withValues(alpha: 0.08),
+                  blurRadius: 8,
+                  offset: const Offset(0, 2),
+                ),
+              ],
+      ),
+      child: InkWell(
+        onTap: onTap,
+        borderRadius: BorderRadius.circular(AppDimensions.radiusM),
+        child: Padding(
             padding: AppDimensions.paddingAllM,
             child: Row(
               children: [
@@ -95,8 +112,7 @@ class TransactionItem extends StatelessWidget {
             ),
           ),
         ),
-      ),
-    );
+      );
   }
 
   Widget _buildTransactionIcon(TransactionType transactionType) {

@@ -59,12 +59,25 @@ class _ProfilePageState extends State<ProfilePage> {
                   width: double.infinity,
                   padding: AppDimensions.paddingAllL,
                   decoration: BoxDecoration(
-                    color: theme.colorScheme.surfaceContainerHighest,
-                    borderRadius: BorderRadius.circular(AppDimensions.radiusL),
-                    border: Border.all(
-                      color: theme.colorScheme.outline.withValues(alpha: 0.2),
-                      width: 1,
-                    ),
+                    color: theme.brightness == Brightness.dark
+                        ? theme.colorScheme.surfaceContainerHighest
+                        : theme.colorScheme.surface,
+                    borderRadius: BorderRadius.circular(AppDimensions.radiusM),
+                    border: theme.brightness == Brightness.dark
+                        ? Border.all(
+                            color: theme.colorScheme.outline.withValues(alpha: 0.2),
+                            width: 1,
+                          )
+                        : null,
+                    boxShadow: theme.brightness == Brightness.dark
+                        ? null
+                        : [
+                            BoxShadow(
+                              color: theme.shadowColor.withValues(alpha: 0.08),
+                              blurRadius: 8,
+                              offset: const Offset(0, 2),
+                            ),
+                          ],
                   ),
                   child: Column(
                     children: [
@@ -173,12 +186,25 @@ class _ProfilePageState extends State<ProfilePage> {
     return Container(
       margin: const EdgeInsets.only(bottom: AppDimensions.spaceM),
       decoration: BoxDecoration(
-        color: theme.colorScheme.surface,
+        color: theme.brightness == Brightness.dark
+            ? theme.colorScheme.surfaceContainerHighest
+            : theme.colorScheme.surface,
         borderRadius: BorderRadius.circular(AppDimensions.radiusM),
-        border: Border.all(
-          color: theme.colorScheme.outline.withValues(alpha: 0.2),
-          width: 1,
-        ),
+        border: theme.brightness == Brightness.dark
+            ? Border.all(
+                color: theme.colorScheme.outline.withValues(alpha: 0.2),
+                width: 1,
+              )
+            : null,
+        boxShadow: theme.brightness == Brightness.dark
+            ? null
+            : [
+                BoxShadow(
+                  color: theme.shadowColor.withValues(alpha: 0.08),
+                  blurRadius: 8,
+                  offset: const Offset(0, 2),
+                ),
+              ],
       ),
       child: ListTile(
         leading: Container(
