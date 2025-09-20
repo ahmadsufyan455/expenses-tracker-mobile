@@ -48,6 +48,8 @@ class _ProfilePageState extends State<ProfilePage> {
             return const Center(child: Text('No profile data'));
           }
 
+          final theme = Theme.of(context);
+
           return Padding(
             padding: AppDimensions.paddingAllL,
             child: Column(
@@ -57,27 +59,41 @@ class _ProfilePageState extends State<ProfilePage> {
                   width: double.infinity,
                   padding: AppDimensions.paddingAllL,
                   decoration: BoxDecoration(
-                    color: AppColors.primaryContainer,
+                    color: theme.colorScheme.surfaceContainerHighest,
                     borderRadius: BorderRadius.circular(AppDimensions.radiusL),
+                    border: Border.all(
+                      color: theme.colorScheme.outline.withValues(alpha: 0.2),
+                      width: 1,
+                    ),
                   ),
                   child: Column(
                     children: [
                       CircleAvatar(
                         radius: 40,
-                        backgroundColor: AppColors.primary,
-                        child: Icon(Icons.person, size: 40, color: AppColors.onPrimary),
+                        backgroundColor: theme.colorScheme.primary,
+                        child: Icon(Icons.person, size: 40, color: theme.colorScheme.onPrimary),
                       ),
                       const SizedBox(height: AppDimensions.spaceM),
-                      Text(profile.fullName, style: AppTextStyles.headlineMedium.copyWith(color: AppColors.primary)),
+                      Text(
+                        profile.fullName,
+                        style: theme.textTheme.headlineMedium?.copyWith(
+                          color: theme.colorScheme.onSurface,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
                       const SizedBox(height: AppDimensions.spaceXS),
                       Text(
                         profile.email,
-                        style: AppTextStyles.bodyMedium.copyWith(color: AppColors.primary.withValues(alpha: 0.8)),
+                        style: theme.textTheme.bodyMedium?.copyWith(
+                          color: theme.colorScheme.onSurfaceVariant,
+                        ),
                       ),
                       const SizedBox(height: AppDimensions.spaceS),
                       Text(
                         context.l10n.manageAccount,
-                        style: AppTextStyles.bodyMedium.copyWith(color: AppColors.primary.withValues(alpha: 0.7)),
+                        style: theme.textTheme.bodySmall?.copyWith(
+                          color: theme.colorScheme.onSurfaceVariant,
+                        ),
                       ),
                     ],
                   ),
@@ -87,6 +103,7 @@ class _ProfilePageState extends State<ProfilePage> {
 
                 // Profile Options
                 _buildProfileOption(
+                  theme: theme,
                   icon: Icons.account_circle_outlined,
                   title: context.l10n.accountSettings,
                   subtitle: context.l10n.updatePersonalInfo,
@@ -103,6 +120,7 @@ class _ProfilePageState extends State<ProfilePage> {
                 ),
 
                 _buildProfileOption(
+                  theme: theme,
                   icon: Icons.security_outlined,
                   title: context.l10n.security,
                   subtitle: context.l10n.changePassword,
@@ -146,6 +164,7 @@ class _ProfilePageState extends State<ProfilePage> {
   }
 
   Widget _buildProfileOption({
+    required ThemeData theme,
     required IconData icon,
     required String title,
     required String subtitle,
@@ -153,19 +172,30 @@ class _ProfilePageState extends State<ProfilePage> {
   }) {
     return Container(
       margin: const EdgeInsets.only(bottom: AppDimensions.spaceM),
+      decoration: BoxDecoration(
+        color: theme.colorScheme.surface,
+        borderRadius: BorderRadius.circular(AppDimensions.radiusM),
+        border: Border.all(
+          color: theme.colorScheme.outline.withValues(alpha: 0.2),
+          width: 1,
+        ),
+      ),
       child: ListTile(
         leading: Container(
           padding: const EdgeInsets.all(AppDimensions.paddingS),
           decoration: BoxDecoration(
-            color: AppColors.primaryContainer,
+            color: theme.colorScheme.primaryContainer,
             borderRadius: BorderRadius.circular(AppDimensions.radiusS),
           ),
-          child: Icon(icon, color: AppColors.primary),
+          child: Icon(icon, color: theme.colorScheme.primary),
         ),
-        title: Text(title, style: AppTextStyles.titleMedium),
-        subtitle: Text(subtitle, style: AppTextStyles.bodySmall),
-        trailing: Icon(Icons.chevron_right, color: AppColors.primary),
+        title: Text(title, style: theme.textTheme.titleMedium),
+        subtitle: Text(subtitle, style: theme.textTheme.bodySmall),
+        trailing: Icon(Icons.chevron_right, color: theme.colorScheme.onSurfaceVariant),
         onTap: onTap,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(AppDimensions.radiusM),
+        ),
       ),
     );
   }

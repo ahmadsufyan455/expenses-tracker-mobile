@@ -62,6 +62,8 @@ class _EditProfilePageState extends State<EditProfilePage> {
           _handleProfileState(state);
         },
         builder: (context, state) {
+          final theme = Theme.of(context);
+
           return SingleChildScrollView(
             padding: AppDimensions.paddingAllL,
             child: Column(
@@ -72,22 +74,27 @@ class _EditProfilePageState extends State<EditProfilePage> {
                   width: double.infinity,
                   padding: AppDimensions.paddingAllL,
                   decoration: BoxDecoration(
-                    color: AppColors.primaryContainer,
+                    color: theme.colorScheme.surfaceContainerHighest,
                     borderRadius: BorderRadius.circular(AppDimensions.radiusL),
+                    border: Border.all(
+                      color: theme.colorScheme.outline.withValues(alpha: 0.2),
+                      width: 1,
+                    ),
                   ),
                   child: Column(
                     children: [
                       CircleAvatar(
                         radius: 50,
-                        backgroundColor: AppColors.primary,
-                        child: Icon(Icons.person, size: 50, color: AppColors.onPrimary),
+                        backgroundColor: theme.colorScheme.primary,
+                        child: Icon(Icons.person, size: 50, color: theme.colorScheme.onPrimary),
                       ),
                       const SizedBox(height: AppDimensions.spaceM),
                       Text(
                         context.l10n.personalInformation,
-                        style: Theme.of(
-                          context,
-                        ).textTheme.headlineSmall?.copyWith(color: AppColors.primary, fontWeight: FontWeight.bold),
+                        style: theme.textTheme.headlineSmall?.copyWith(
+                          color: theme.colorScheme.onSurface,
+                          fontWeight: FontWeight.bold,
+                        ),
                       ),
                     ],
                   ),
@@ -174,6 +181,8 @@ class _EditProfilePageState extends State<EditProfilePage> {
   }
 
   Widget _buildDangerZone() {
+    final theme = Theme.of(context);
+
     return Container(
       width: double.infinity,
       padding: AppDimensions.paddingAllL,
@@ -191,16 +200,19 @@ class _EditProfilePageState extends State<EditProfilePage> {
               const SizedBox(width: AppDimensions.spaceS),
               Text(
                 context.l10n.dangerZone,
-                style: Theme.of(
-                  context,
-                ).textTheme.titleMedium?.copyWith(color: AppColors.error, fontWeight: FontWeight.bold),
+                style: theme.textTheme.titleMedium?.copyWith(
+                  color: AppColors.error,
+                  fontWeight: FontWeight.bold,
+                ),
               ),
             ],
           ),
           const SizedBox(height: AppDimensions.spaceM),
           Text(
             context.l10n.deleteAccountDescription,
-            style: Theme.of(context).textTheme.bodyMedium?.copyWith(color: AppColors.error),
+            style: theme.textTheme.bodyMedium?.copyWith(
+              color: AppColors.error,
+            ),
           ),
           const SizedBox(height: AppDimensions.spaceM),
           SizedBox(

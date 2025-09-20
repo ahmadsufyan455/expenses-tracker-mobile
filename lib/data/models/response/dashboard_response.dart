@@ -27,8 +27,7 @@ class DashboardResponse {
     required this.topExpenses,
   });
 
-  factory DashboardResponse.fromJson(Map<String, dynamic> json) =>
-      _$DashboardResponseFromJson(json);
+  factory DashboardResponse.fromJson(Map<String, dynamic> json) => _$DashboardResponseFromJson(json);
 }
 
 @JsonSerializable(createToJson: false)
@@ -52,8 +51,7 @@ class DashboardSummaryResponse {
     required this.savingsRate,
   });
 
-  factory DashboardSummaryResponse.fromJson(Map<String, dynamic> json) =>
-      _$DashboardSummaryResponseFromJson(json);
+  factory DashboardSummaryResponse.fromJson(Map<String, dynamic> json) => _$DashboardSummaryResponseFromJson(json);
 }
 
 @JsonSerializable(createToJson: false)
@@ -77,8 +75,7 @@ class DashboardBudgetResponse {
     required this.percentage,
   });
 
-  factory DashboardBudgetResponse.fromJson(Map<String, dynamic> json) =>
-      _$DashboardBudgetResponseFromJson(json);
+  factory DashboardBudgetResponse.fromJson(Map<String, dynamic> json) => _$DashboardBudgetResponseFromJson(json);
 }
 
 @JsonSerializable(createToJson: false)
@@ -121,11 +118,7 @@ class DashboardTopExpenseResponse {
   @JsonKey(name: 'percentage')
   final double percentage;
 
-  const DashboardTopExpenseResponse({
-    required this.category,
-    required this.amount,
-    required this.percentage,
-  });
+  const DashboardTopExpenseResponse({required this.category, required this.amount, required this.percentage});
 
   factory DashboardTopExpenseResponse.fromJson(Map<String, dynamic> json) =>
       _$DashboardTopExpenseResponseFromJson(json);
