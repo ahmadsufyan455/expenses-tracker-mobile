@@ -1,7 +1,6 @@
 import 'package:expense_tracker_mobile/app/router.dart';
 import 'package:expense_tracker_mobile/app/theme/app_colors.dart';
 import 'package:expense_tracker_mobile/app/theme/app_dimensions.dart';
-import 'package:expense_tracker_mobile/app/theme/app_text_styles.dart';
 import 'package:expense_tracker_mobile/core/extensions/build_context_extensions.dart';
 import 'package:expense_tracker_mobile/core/services/session_service.dart';
 import 'package:expense_tracker_mobile/presentation/pages/profile/bloc/profile_bloc.dart';
@@ -64,10 +63,7 @@ class _ProfilePageState extends State<ProfilePage> {
                         : theme.colorScheme.surface,
                     borderRadius: BorderRadius.circular(AppDimensions.radiusM),
                     border: theme.brightness == Brightness.dark
-                        ? Border.all(
-                            color: theme.colorScheme.outline.withValues(alpha: 0.2),
-                            width: 1,
-                          )
+                        ? Border.all(color: theme.colorScheme.outline.withValues(alpha: 0.2), width: 1)
                         : null,
                     boxShadow: theme.brightness == Brightness.dark
                         ? null
@@ -97,16 +93,12 @@ class _ProfilePageState extends State<ProfilePage> {
                       const SizedBox(height: AppDimensions.spaceXS),
                       Text(
                         profile.email,
-                        style: theme.textTheme.bodyMedium?.copyWith(
-                          color: theme.colorScheme.onSurfaceVariant,
-                        ),
+                        style: theme.textTheme.bodyMedium?.copyWith(color: theme.colorScheme.onSurfaceVariant),
                       ),
                       const SizedBox(height: AppDimensions.spaceS),
                       Text(
                         context.l10n.manageAccount,
-                        style: theme.textTheme.bodySmall?.copyWith(
-                          color: theme.colorScheme.onSurfaceVariant,
-                        ),
+                        style: theme.textTheme.bodySmall?.copyWith(color: theme.colorScheme.onSurfaceVariant),
                       ),
                     ],
                   ),
@@ -191,20 +183,11 @@ class _ProfilePageState extends State<ProfilePage> {
             : theme.colorScheme.surface,
         borderRadius: BorderRadius.circular(AppDimensions.radiusM),
         border: theme.brightness == Brightness.dark
-            ? Border.all(
-                color: theme.colorScheme.outline.withValues(alpha: 0.2),
-                width: 1,
-              )
+            ? Border.all(color: theme.colorScheme.outline.withValues(alpha: 0.2), width: 1)
             : null,
         boxShadow: theme.brightness == Brightness.dark
             ? null
-            : [
-                BoxShadow(
-                  color: theme.shadowColor.withValues(alpha: 0.08),
-                  blurRadius: 8,
-                  offset: const Offset(0, 2),
-                ),
-              ],
+            : [BoxShadow(color: theme.shadowColor.withValues(alpha: 0.08), blurRadius: 8, offset: const Offset(0, 2))],
       ),
       child: ListTile(
         leading: Container(
@@ -219,9 +202,7 @@ class _ProfilePageState extends State<ProfilePage> {
         subtitle: Text(subtitle, style: theme.textTheme.bodySmall),
         trailing: Icon(Icons.chevron_right, color: theme.colorScheme.onSurfaceVariant),
         onTap: onTap,
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(AppDimensions.radiusM),
-        ),
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(AppDimensions.radiusM)),
       ),
     );
   }
