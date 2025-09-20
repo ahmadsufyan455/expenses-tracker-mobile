@@ -71,11 +71,7 @@ class TransactionItem extends StatelessWidget {
                             style: theme.textTheme.bodySmall?.copyWith(color: theme.colorScheme.onSurfaceVariant),
                           ),
                           const SizedBox(width: AppDimensions.spaceS),
-                          Icon(
-                            Icons.circle,
-                            size: 4,
-                            color: theme.colorScheme.onSurfaceVariant,
-                          ),
+                          Icon(Icons.circle, size: 4, color: theme.colorScheme.onSurfaceVariant),
                           const SizedBox(width: AppDimensions.spaceS),
                           Text(
                             relativeDate,
@@ -83,10 +79,10 @@ class TransactionItem extends StatelessWidget {
                           ),
                         ],
                       ),
-                      if (transaction.description.isNotEmpty) ...[
+                      if (transaction.description != null && transaction.description!.isNotEmpty) ...[
                         const SizedBox(height: AppDimensions.spaceXS),
                         Text(
-                          transaction.description,
+                          transaction.description!,
                           style: theme.textTheme.bodySmall?.copyWith(color: theme.colorScheme.onSurfaceVariant),
                           maxLines: 1,
                           overflow: TextOverflow.ellipsis,

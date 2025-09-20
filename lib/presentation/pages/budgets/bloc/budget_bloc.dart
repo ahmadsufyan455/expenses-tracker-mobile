@@ -69,6 +69,9 @@ class BudgetBloc extends Bloc<BudgetEvent, BudgetState> {
       categoryId: event.categoryId,
       amount: event.amount,
       month: event.month,
+      predictionEnabled: event.predictionEnabled,
+      predictionType: event.predictionType,
+      predictionDaysCount: event.predictionDaysCount,
     );
     final result = await _createBudgetUsecase.call(request);
     result.fold(
@@ -88,6 +91,9 @@ class BudgetBloc extends Bloc<BudgetEvent, BudgetState> {
       categoryId: event.categoryId,
       amount: event.amount,
       month: event.month,
+      predictionEnabled: event.predictionEnabled,
+      predictionType: event.predictionType,
+      predictionDaysCount: event.predictionDaysCount,
     );
     final result = await _updateBudgetUsecase.call(event.id, request);
     result.fold(

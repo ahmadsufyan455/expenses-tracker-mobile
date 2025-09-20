@@ -140,13 +140,13 @@ class _TransactionDetailBottomSheetState extends State<TransactionDetailBottomSh
                 ),
 
                 // Description (if available)
-                if (widget.transaction.description.isNotEmpty) ...[
+                if (widget.transaction.description != null && widget.transaction.description!.isNotEmpty) ...[
                   const SizedBox(height: AppDimensions.spaceM),
                   _buildDetailSection(
                     context,
                     Icons.description_outlined,
                     context.l10n.description,
-                    widget.transaction.description,
+                    widget.transaction.description!,
                   ),
                 ],
 
@@ -274,12 +274,7 @@ class _TransactionDetailBottomSheetState extends State<TransactionDetailBottomSh
             color: theme.colorScheme.surfaceContainerHighest,
             borderRadius: AppDimensions.borderRadiusM,
           ),
-          child: Text(
-            content,
-            style: theme.textTheme.bodyLarge,
-            maxLines: 3,
-            overflow: TextOverflow.ellipsis,
-          ),
+          child: Text(content, style: theme.textTheme.bodyLarge, maxLines: 3, overflow: TextOverflow.ellipsis),
         ),
       ],
     );

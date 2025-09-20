@@ -1,4 +1,5 @@
 import 'package:expense_tracker_mobile/app/theme/app_dimensions.dart';
+import 'package:expense_tracker_mobile/core/enums/budget_enums.dart';
 import 'package:expense_tracker_mobile/core/extensions/build_context_extensions.dart';
 import 'package:expense_tracker_mobile/core/utils/number_utils.dart';
 import 'package:expense_tracker_mobile/domain/dto/budget_dto.dart';
@@ -35,11 +36,15 @@ class AddBudgetBottomSheet extends StatefulWidget {
 class _AddBudgetBottomSheetState extends State<AddBudgetBottomSheet> {
   final _formKey = GlobalKey<FormState>();
   final _amountController = TextEditingController();
+  final _predictionDaysController = TextEditingController();
 
   late BudgetBloc _bloc;
   CategoryDto? _selectedCategory;
   DateTime? _selectedMonth;
   bool _isLoading = false;
+  bool _predictionEnabled = false;
+  PredictionType? _selectedPredictionType;
+  int? _predictionDaysCount;
 
   bool get _isUpdate => widget.budget != null;
 
@@ -59,6 +64,12 @@ class _AddBudgetBottomSheetState extends State<AddBudgetBottomSheet> {
       );
       _selectedMonth = DateTime.parse(budget.month);
       _amountController.text = NumberUtils.formatWithThousandSeparator(budget.amount);
+      _predictionEnabled = budget.predictionEnabled;
+      _selectedPredictionType = budget.predictionType;
+      _predictionDaysCount = budget.predictionDaysCount;
+      if (_predictionDaysCount != null) {
+        _predictionDaysController.text = _predictionDaysCount.toString();
+      }
     } else {
       // Default to current month for new budgets
       _selectedMonth = DateTime(DateTime.now().year, DateTime.now().month);
@@ -68,6 +79,7 @@ class _AddBudgetBottomSheetState extends State<AddBudgetBottomSheet> {
   @override
   void dispose() {
     _amountController.dispose();
+    _predictionDaysController.dispose();
     super.dispose();
   }
 
@@ -180,6 +192,81 @@ class _AddBudgetBottomSheetState extends State<AddBudgetBottomSheet> {
                           ),
                         ),
                       ),
+                      const SizedBox(height: AppDimensions.spaceM),
+
+                      // Prediction Section
+                      SwitchListTile(
+                        title: Text(context.l10n.enablePrediction),
+                        value: _predictionEnabled,
+                        onChanged: (value) {
+                          setState(() {
+                            _predictionEnabled = value;
+                            if (!value) {
+                              _selectedPredictionType = null;
+                              _predictionDaysCount = null;
+                              _predictionDaysController.clear();
+                            }
+                          });
+                        },
+                      ),
+
+                      if (_predictionEnabled) ...[
+                        const SizedBox(height: AppDimensions.spaceM),
+                        // Prediction Type Dropdown
+                        GlobalDropdownFormField<PredictionType>(
+                          value: _selectedPredictionType,
+                          labelText: context.l10n.predictionType,
+                          items: PredictionType.values
+                              .map(
+                                (type) => DropdownMenuItem(
+                                  value: type,
+                                  child: Row(
+                                    children: [
+                                      Icon(type.icon, size: 20),
+                                      const SizedBox(width: AppDimensions.spaceS),
+                                      Text(type.getDisplayName(context)),
+                                    ],
+                                  ),
+                                ),
+                              )
+                              .toList(),
+                          onChanged: (value) {
+                            setState(() {
+                              _selectedPredictionType = value;
+                              if (value != PredictionType.custom) {
+                                _predictionDaysCount = null;
+                                _predictionDaysController.clear();
+                              }
+                            });
+                          },
+                        ),
+
+                        if (_selectedPredictionType == PredictionType.custom) ...[
+                          const SizedBox(height: AppDimensions.spaceM),
+                          // Custom Days Count Field
+                          GlobalTextFormField(
+                            controller: _predictionDaysController,
+                            labelText: context.l10n.predictionDaysCount,
+                            keyboardType: TextInputType.number,
+                            validator: (value) {
+                              if (_selectedPredictionType == PredictionType.custom) {
+                                if (value == null || value.isEmpty) {
+                                  return context.l10n.pleaseEnterPredictionDays;
+                                }
+                                final days = int.tryParse(value);
+                                if (days == null || days < 1 || days > 365) {
+                                  return context.l10n.pleaseEnterValidPredictionDays;
+                                }
+                              }
+                              return null;
+                            },
+                            onChanged: (value) {
+                              _predictionDaysCount = int.tryParse(value);
+                            },
+                          ),
+                        ],
+                      ],
+
                       const SizedBox(height: AppDimensions.spaceXL),
 
                       // Save Button
@@ -260,10 +347,22 @@ class _AddBudgetBottomSheetState extends State<AddBudgetBottomSheet> {
             categoryId: _selectedCategory!.id,
             amount: amount,
             month: monthString,
+            predictionEnabled: _predictionEnabled,
+            predictionType: _selectedPredictionType?.value,
+            predictionDaysCount: _predictionDaysCount,
           ),
         );
       } else {
-        _bloc.add(CreateBudgetEvent(categoryId: _selectedCategory!.id, amount: amount, month: monthString));
+        _bloc.add(
+          CreateBudgetEvent(
+            categoryId: _selectedCategory!.id,
+            amount: amount,
+            month: monthString,
+            predictionEnabled: _predictionEnabled,
+            predictionType: _selectedPredictionType?.value,
+            predictionDaysCount: _predictionDaysCount,
+          ),
+        );
       }
     }
   }

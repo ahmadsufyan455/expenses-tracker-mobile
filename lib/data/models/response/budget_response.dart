@@ -1,3 +1,4 @@
+import 'package:expense_tracker_mobile/data/models/response/prediction_response.dart';
 import 'package:json_annotation/json_annotation.dart';
 
 part 'budget_response.g.dart';
@@ -12,14 +13,25 @@ class BudgetResponse {
   final int amount;
   @JsonKey(name: 'month')
   final String month;
+  @JsonKey(name: 'prediction_enabled')
+  final bool predictionEnabled;
+  @JsonKey(name: 'prediction_type')
+  final String? predictionType;
+  @JsonKey(name: 'prediction_days_count')
+  final int? predictionDaysCount;
+  @JsonKey(name: 'prediction')
+  final PredictionResponse? prediction;
 
   BudgetResponse({
     required this.id,
     required this.categoryId,
     required this.amount,
     required this.month,
+    required this.predictionEnabled,
+    this.predictionType,
+    this.predictionDaysCount,
+    this.prediction,
   });
 
-  factory BudgetResponse.fromJson(Map<String, dynamic> json) =>
-      _$BudgetResponseFromJson(json);
+  factory BudgetResponse.fromJson(Map<String, dynamic> json) => _$BudgetResponseFromJson(json);
 }

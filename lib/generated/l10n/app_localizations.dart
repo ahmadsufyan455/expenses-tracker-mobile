@@ -1130,6 +1130,84 @@ abstract class AppLocalizations {
   /// **'Add new budget'**
   String get addNewBudgetTooltip;
 
+  /// No description provided for @enablePrediction.
+  ///
+  /// In en, this message translates to:
+  /// **'Enable Prediction'**
+  String get enablePrediction;
+
+  /// No description provided for @predictionType.
+  ///
+  /// In en, this message translates to:
+  /// **'Prediction Type'**
+  String get predictionType;
+
+  /// No description provided for @predictionDaysCount.
+  ///
+  /// In en, this message translates to:
+  /// **'Custom Days Count'**
+  String get predictionDaysCount;
+
+  /// No description provided for @daily.
+  ///
+  /// In en, this message translates to:
+  /// **'Daily'**
+  String get daily;
+
+  /// No description provided for @weekends.
+  ///
+  /// In en, this message translates to:
+  /// **'Weekends'**
+  String get weekends;
+
+  /// No description provided for @weekdays.
+  ///
+  /// In en, this message translates to:
+  /// **'Weekdays'**
+  String get weekdays;
+
+  /// No description provided for @custom.
+  ///
+  /// In en, this message translates to:
+  /// **'Custom'**
+  String get custom;
+
+  /// No description provided for @dailyAllowance.
+  ///
+  /// In en, this message translates to:
+  /// **'Daily Allowance'**
+  String get dailyAllowance;
+
+  /// No description provided for @remainingBudget.
+  ///
+  /// In en, this message translates to:
+  /// **'Remaining Budget'**
+  String get remainingBudget;
+
+  /// No description provided for @daysRemaining.
+  ///
+  /// In en, this message translates to:
+  /// **'Days Remaining'**
+  String get daysRemaining;
+
+  /// No description provided for @predictionTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Budget Prediction'**
+  String get predictionTitle;
+
+  /// No description provided for @pleaseEnterPredictionDays.
+  ///
+  /// In en, this message translates to:
+  /// **'Please enter custom days count'**
+  String get pleaseEnterPredictionDays;
+
+  /// No description provided for @pleaseEnterValidPredictionDays.
+  ///
+  /// In en, this message translates to:
+  /// **'Please enter valid days count (1-365)'**
+  String get pleaseEnterValidPredictionDays;
+
   /// No description provided for @editProfile.
   ///
   /// In en, this message translates to:

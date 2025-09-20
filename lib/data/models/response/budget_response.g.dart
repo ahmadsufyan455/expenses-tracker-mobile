@@ -12,4 +12,12 @@ BudgetResponse _$BudgetResponseFromJson(Map<String, dynamic> json) =>
       categoryId: (json['category_id'] as num).toInt(),
       amount: (json['amount'] as num).toInt(),
       month: json['month'] as String,
+      predictionEnabled: json['prediction_enabled'] as bool,
+      predictionType: json['prediction_type'] as String?,
+      predictionDaysCount: (json['prediction_days_count'] as num?)?.toInt(),
+      prediction: json['prediction'] == null
+          ? null
+          : PredictionResponse.fromJson(
+              json['prediction'] as Map<String, dynamic>,
+            ),
     );

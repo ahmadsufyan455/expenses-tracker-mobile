@@ -47,11 +47,11 @@ class _AddTransactionPageState extends State<AddTransactionPage> {
   void _checkTransactionData() {
     if (_isUpdate()) {
       _selectedType = TransactionType.fromString(widget.transaction!.type);
-      _selectedCategory = CategoryDto(id: widget.transaction!.category.id, name: widget.transaction!.category.name);
+      // Don't set _selectedCategory here - it will be set when categories are loaded
       _selectedPaymentMethod = PaymentMethod.fromString(widget.transaction!.paymentMethod);
       _amountController.text = NumberUtils.formatWithThousandSeparator(widget.transaction!.amount.abs());
       // Truncate description if it's longer than 150 characters
-      final description = widget.transaction!.description;
+      final description = widget.transaction!.description ?? '';
       _descriptionController.text = description.length > 150 ? description.substring(0, 150) : description;
     }
   }
@@ -76,6 +76,7 @@ class _AddTransactionPageState extends State<AddTransactionPage> {
         listener: (context, state) {
           _handleAddTransactionState(state);
           _handleUpdateTransactionState(state);
+          _handleCategoryState(state);
         },
         builder: (context, state) {
           return SingleChildScrollView(
@@ -327,6 +328,21 @@ class _AddTransactionPageState extends State<AddTransactionPage> {
     } else if (state is UpdateTransactionFailure) {
       _handleLoadingState(false);
       ErrorDialog.show(context, state.failure);
+    }
+  }
+
+  void _handleCategoryState(TransactionState state) {
+    if (state is GetCategorySuccess) {
+      // Set selected category for update mode when categories are loaded
+      if (_isUpdate() && _selectedCategory == null && state.data.categories.isNotEmpty) {
+        final categoryId = widget.transaction!.category.id;
+        final matchingCategory = state.data.categories
+            .firstWhere((cat) => cat.id == categoryId, orElse: () => state.data.categories.first);
+
+        setState(() {
+          _selectedCategory = matchingCategory;
+        });
+      }
     }
   }
 

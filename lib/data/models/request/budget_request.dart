@@ -10,11 +10,20 @@ class BudgetRequest {
   final int amount;
   @JsonKey(name: 'month')
   final String month;
+  @JsonKey(name: 'prediction_enabled')
+  final bool predictionEnabled;
+  @JsonKey(name: 'prediction_type')
+  final String? predictionType;
+  @JsonKey(name: 'prediction_days_count')
+  final int? predictionDaysCount;
 
   BudgetRequest({
     required this.categoryId,
     required this.amount,
     required this.month,
+    required this.predictionEnabled,
+    this.predictionType,
+    this.predictionDaysCount,
   });
 
   factory BudgetRequest.fromJson(Map<String, dynamic> json) =>

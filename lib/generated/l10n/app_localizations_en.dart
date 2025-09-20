@@ -555,6 +555,46 @@ class AppLocalizationsEn extends AppLocalizations {
   String get addNewBudgetTooltip => 'Add new budget';
 
   @override
+  String get enablePrediction => 'Enable Prediction';
+
+  @override
+  String get predictionType => 'Prediction Type';
+
+  @override
+  String get predictionDaysCount => 'Custom Days Count';
+
+  @override
+  String get daily => 'Daily';
+
+  @override
+  String get weekends => 'Weekends';
+
+  @override
+  String get weekdays => 'Weekdays';
+
+  @override
+  String get custom => 'Custom';
+
+  @override
+  String get dailyAllowance => 'Daily Allowance';
+
+  @override
+  String get remainingBudget => 'Remaining Budget';
+
+  @override
+  String get daysRemaining => 'Days Remaining';
+
+  @override
+  String get predictionTitle => 'Budget Prediction';
+
+  @override
+  String get pleaseEnterPredictionDays => 'Please enter custom days count';
+
+  @override
+  String get pleaseEnterValidPredictionDays =>
+      'Please enter valid days count (1-365)';
+
+  @override
   String get editProfile => 'Edit Profile';
 
   @override

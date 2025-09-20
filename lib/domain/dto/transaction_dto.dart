@@ -3,7 +3,7 @@ import 'package:expense_tracker_mobile/data/models/response/transaction_response
 class TransactionDto {
   final int id;
   final int amount;
-  final String description;
+  final String? description;
   final String createdAt;
   final String updatedAt;
   final TransactionCategoryDto category;
@@ -13,7 +13,7 @@ class TransactionDto {
   TransactionDto({
     required this.id,
     required this.amount,
-    required this.description,
+    this.description,
     required this.createdAt,
     required this.updatedAt,
     required this.category,

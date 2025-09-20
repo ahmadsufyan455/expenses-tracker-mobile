@@ -554,6 +554,46 @@ class AppLocalizationsId extends AppLocalizations {
   String get addNewBudgetTooltip => 'Tambah anggaran baru';
 
   @override
+  String get enablePrediction => 'Aktifkan Prediksi';
+
+  @override
+  String get predictionType => 'Jenis Prediksi';
+
+  @override
+  String get predictionDaysCount => 'Jumlah Hari Kustom';
+
+  @override
+  String get daily => 'Harian';
+
+  @override
+  String get weekends => 'Akhir Pekan';
+
+  @override
+  String get weekdays => 'Hari Kerja';
+
+  @override
+  String get custom => 'Kustom';
+
+  @override
+  String get dailyAllowance => 'Tunjangan Harian';
+
+  @override
+  String get remainingBudget => 'Sisa Anggaran';
+
+  @override
+  String get daysRemaining => 'Hari Tersisa';
+
+  @override
+  String get predictionTitle => 'Prediksi Anggaran';
+
+  @override
+  String get pleaseEnterPredictionDays => 'Masukkan jumlah hari kustom';
+
+  @override
+  String get pleaseEnterValidPredictionDays =>
+      'Masukkan jumlah hari yang valid (1-365)';
+
+  @override
   String get editProfile => 'Edit Profil';
 
   @override

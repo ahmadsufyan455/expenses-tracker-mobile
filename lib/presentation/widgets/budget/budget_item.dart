@@ -1,5 +1,6 @@
 import 'package:expense_tracker_mobile/app/theme/app_colors.dart';
 import 'package:expense_tracker_mobile/app/theme/app_dimensions.dart';
+import 'package:expense_tracker_mobile/core/enums/budget_enums.dart';
 import 'package:expense_tracker_mobile/core/extensions/build_context_extensions.dart';
 import 'package:expense_tracker_mobile/core/utils/localization_utils.dart';
 import 'package:expense_tracker_mobile/domain/dto/budget_dto.dart';
@@ -9,13 +10,7 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
 class BudgetItem extends StatelessWidget {
-  const BudgetItem({
-    super.key,
-    required this.budget,
-    required this.categories,
-    this.onTap,
-    this.onDelete,
-  });
+  const BudgetItem({super.key, required this.budget, required this.categories, this.onTap, this.onDelete});
 
   final BudgetDto budget;
   final List<CategoryDto> categories;
@@ -54,18 +49,11 @@ class BudgetItem extends StatelessWidget {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Text(
-                          category.name,
-                          style: theme.textTheme.titleMedium?.copyWith(
-                            fontWeight: FontWeight.w600,
-                          ),
-                        ),
+                        Text(category.name, style: theme.textTheme.titleMedium?.copyWith(fontWeight: FontWeight.w600)),
                         const SizedBox(height: AppDimensions.spaceXS),
                         Text(
                           formattedMonth,
-                          style: theme.textTheme.bodySmall?.copyWith(
-                            color: theme.colorScheme.onSurfaceVariant,
-                          ),
+                          style: theme.textTheme.bodySmall?.copyWith(color: theme.colorScheme.onSurfaceVariant),
                         ),
                       ],
                     ),
@@ -105,18 +93,11 @@ class BudgetItem extends StatelessWidget {
                 decoration: BoxDecoration(
                   color: AppColors.primary.withValues(alpha: 0.1),
                   borderRadius: AppDimensions.borderRadiusS,
-                  border: Border.all(
-                    color: AppColors.primary.withValues(alpha: 0.3),
-                    width: 1,
-                  ),
+                  border: Border.all(color: AppColors.primary.withValues(alpha: 0.3), width: 1),
                 ),
                 child: Row(
                   children: [
-                    Icon(
-                      Icons.account_balance_wallet_outlined,
-                      color: AppColors.primary,
-                      size: 20,
-                    ),
+                    Icon(Icons.account_balance_wallet_outlined, color: AppColors.primary, size: 20),
                     const SizedBox(width: AppDimensions.spaceS),
                     Expanded(
                       child: Column(
@@ -143,10 +124,80 @@ class BudgetItem extends StatelessWidget {
                   ],
                 ),
               ),
+
+              // Prediction information
+              if (budget.predictionEnabled && budget.prediction != null) ...[
+                const SizedBox(height: AppDimensions.spaceM),
+                Container(
+                  width: double.infinity,
+                  padding: AppDimensions.paddingAllM,
+                  decoration: BoxDecoration(
+                    color: Colors.blue.withValues(alpha: 0.1),
+                    borderRadius: AppDimensions.borderRadiusS,
+                    border: Border.all(color: Colors.blue.withValues(alpha: 0.3), width: 1),
+                  ),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Row(
+                        children: [
+                          Icon(budget.predictionType?.icon ?? Icons.insights_outlined, color: Colors.blue, size: 20),
+                          const SizedBox(width: AppDimensions.spaceS),
+                          Text(
+                            context.l10n.predictionTitle,
+                            style: theme.textTheme.bodySmall?.copyWith(color: Colors.blue, fontWeight: FontWeight.w500),
+                          ),
+                        ],
+                      ),
+                      const SizedBox(height: AppDimensions.spaceS),
+                      Row(
+                        children: [
+                          Expanded(
+                            child: _buildPredictionInfo(
+                              context,
+                              context.l10n.dailyAllowance,
+                              LocalizationUtils.formatCurrency(context, budget.prediction!.dailyAllowance.toDouble()),
+                            ),
+                          ),
+                          const SizedBox(width: AppDimensions.spaceM),
+                          Expanded(
+                            child: _buildPredictionInfo(
+                              context,
+                              context.l10n.daysRemaining,
+                              budget.prediction!.daysRemaining.toString(),
+                            ),
+                          ),
+                        ],
+                      ),
+                      const SizedBox(height: AppDimensions.spaceS),
+                      _buildPredictionInfo(
+                        context,
+                        context.l10n.remainingBudget,
+                        LocalizationUtils.formatCurrency(context, budget.prediction!.remainingBudget.toDouble()),
+                      ),
+                    ],
+                  ),
+                ),
+              ],
             ],
           ),
         ),
       ),
+    );
+  }
+
+  Widget _buildPredictionInfo(BuildContext context, String label, String value) {
+    final theme = Theme.of(context);
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(label, style: theme.textTheme.bodySmall?.copyWith(color: Colors.blue.shade700, fontSize: 11)),
+        const SizedBox(height: 2),
+        Text(
+          value,
+          style: theme.textTheme.bodyMedium?.copyWith(color: Colors.blue.shade800, fontWeight: FontWeight.w600),
+        ),
+      ],
     );
   }
 
