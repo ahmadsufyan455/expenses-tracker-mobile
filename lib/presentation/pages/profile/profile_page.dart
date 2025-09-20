@@ -1,11 +1,11 @@
 import 'package:expense_tracker_mobile/app/router.dart';
-import 'package:expense_tracker_mobile/app/theme/app_colors.dart';
 import 'package:expense_tracker_mobile/app/theme/app_dimensions.dart';
 import 'package:expense_tracker_mobile/core/extensions/build_context_extensions.dart';
 import 'package:expense_tracker_mobile/core/services/session_service.dart';
 import 'package:expense_tracker_mobile/presentation/pages/profile/bloc/profile_bloc.dart';
 import 'package:expense_tracker_mobile/presentation/widgets/common/confirmation_dialog.dart';
 import 'package:expense_tracker_mobile/presentation/widgets/common/error_dialog.dart';
+import 'package:expense_tracker_mobile/presentation/widgets/common/global_button.dart';
 import 'package:expense_tracker_mobile/presentation/widgets/profile/change_password_bottom_sheet.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -137,20 +137,11 @@ class _ProfilePageState extends State<ProfilePage> {
                 const Spacer(),
 
                 // Logout Button
-                SizedBox(
-                  width: double.infinity,
-                  child: OutlinedButton.icon(
-                    onPressed: () async {
-                      await _handleLogout(context, sessionService);
-                    },
-                    icon: const Icon(Icons.logout),
-                    label: Text(context.l10n.logout),
-                    style: OutlinedButton.styleFrom(
-                      foregroundColor: AppColors.error,
-                      side: BorderSide(color: AppColors.error),
-                      padding: const EdgeInsets.symmetric(vertical: AppDimensions.paddingM),
-                    ),
-                  ),
+                GlobalButton(
+                  text: context.l10n.logout,
+                  onPressed: () async {
+                    await _handleLogout(context, sessionService);
+                  },
                 ),
 
                 const SizedBox(height: AppDimensions.spaceL),
