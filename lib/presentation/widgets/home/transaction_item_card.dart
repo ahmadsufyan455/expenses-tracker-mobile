@@ -3,6 +3,7 @@ import 'package:expense_tracker_mobile/app/theme/app_dimensions.dart';
 import 'package:expense_tracker_mobile/app/theme/app_text_styles.dart';
 import 'package:expense_tracker_mobile/core/extensions/build_context_extensions.dart';
 import 'package:expense_tracker_mobile/core/utils/localization_utils.dart';
+import 'package:expense_tracker_mobile/core/utils/category_icon_utils.dart';
 import 'package:expense_tracker_mobile/presentation/pages/home/bloc/home_bloc.dart';
 import 'package:flutter/material.dart';
 
@@ -64,7 +65,7 @@ class TransactionItemCard extends StatelessWidget {
               ),
             ),
             child: Icon(
-              _getCategoryIcon(transaction.category),
+              CategoryIconUtils.getCategoryIcon(transaction.category),
               color: transaction.isExpense
                   ? AppColors.error
                   : AppColors.success,
@@ -138,29 +139,6 @@ class TransactionItemCard extends StatelessWidget {
     );
   }
 
-  IconData _getCategoryIcon(String category) {
-    switch (category.toLowerCase()) {
-      case 'food':
-      case 'fooddining':
-        return Icons.restaurant;
-      case 'transport':
-      case 'transportation':
-        return Icons.directions_car;
-      case 'entertainment':
-        return Icons.movie;
-      case 'income':
-      case 'salary':
-        return Icons.attach_money;
-      case 'shopping':
-        return Icons.shopping_bag;
-      case 'healthcare':
-        return Icons.local_hospital;
-      case 'education':
-        return Icons.school;
-      default:
-        return Icons.receipt;
-    }
-  }
 
   String _formatDate(DateTime date, BuildContext context) {
     final now = DateTime.now();

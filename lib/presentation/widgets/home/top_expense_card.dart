@@ -3,6 +3,7 @@ import 'package:expense_tracker_mobile/app/theme/app_dimensions.dart';
 import 'package:expense_tracker_mobile/app/theme/app_text_styles.dart';
 import 'package:expense_tracker_mobile/core/extensions/build_context_extensions.dart';
 import 'package:expense_tracker_mobile/core/utils/localization_utils.dart';
+import 'package:expense_tracker_mobile/core/utils/category_icon_utils.dart';
 import 'package:expense_tracker_mobile/presentation/pages/home/bloc/home_bloc.dart';
 import 'package:flutter/material.dart';
 
@@ -58,7 +59,7 @@ class TopExpenseCard extends StatelessWidget {
               ),
             ),
             child: Icon(
-              _getCategoryIcon(expense.category),
+              CategoryIconUtils.getCategoryIcon(expense.category),
               color: AppColors.error,
               size: 22,
             ),
@@ -124,28 +125,4 @@ class TopExpenseCard extends StatelessWidget {
     );
   }
 
-  IconData _getCategoryIcon(String category) {
-    switch (category.toLowerCase()) {
-      case 'food':
-      case 'food & dining':
-      case 'fooddining':
-        return Icons.restaurant;
-      case 'transport':
-      case 'transportation':
-        return Icons.directions_car;
-      case 'entertainment':
-        return Icons.movie;
-      case 'shopping':
-        return Icons.shopping_bag;
-      case 'healthcare':
-        return Icons.local_hospital;
-      case 'education':
-        return Icons.school;
-      case 'bills':
-      case 'bills & utilities':
-        return Icons.receipt_long;
-      default:
-        return Icons.category;
-    }
-  }
 }
