@@ -570,12 +570,14 @@ class _ApiService implements ApiService {
     String? month,
     int? transactionLimit = 5,
     int? expenseLimit = 3,
+    int? budgetLimit = 3,
   }) async {
     final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{
       r'month': month,
       r'transaction_limit': transactionLimit,
       r'expense_limit': expenseLimit,
+      r'budget_limit': budgetLimit,
     };
     queryParameters.removeWhere((k, v) => v == null);
     final _headers = <String, dynamic>{};

@@ -101,5 +101,6 @@ abstract class ApiService {
     @Query('month') String? month,
     @Query('transaction_limit') int? transactionLimit = 5,
     @Query('expense_limit') int? expenseLimit = 3,
+    @Query('budget_limit') int? budgetLimit = 3,
   });
 }
