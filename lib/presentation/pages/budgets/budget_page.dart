@@ -1,5 +1,6 @@
 import 'package:expense_tracker_mobile/app/theme/app_colors.dart';
 import 'package:expense_tracker_mobile/app/theme/app_dimensions.dart';
+import 'package:expense_tracker_mobile/core/enums/budget_enums.dart';
 import 'package:expense_tracker_mobile/core/extensions/build_context_extensions.dart';
 import 'package:expense_tracker_mobile/domain/dto/budget_dto.dart';
 import 'package:expense_tracker_mobile/presentation/pages/budgets/bloc/budget_bloc.dart';
@@ -54,7 +55,7 @@ class _BudgetPageState extends State<BudgetPage> {
             return const Center(child: CircularProgressIndicator());
           }
 
-          final budgets = state.data.budgets;
+          final budgets = _sortBudgetsByStatus(state.data.budgets);
 
           if (budgets.isEmpty) {
             return _buildEmptyState();
@@ -170,5 +171,38 @@ class _BudgetPageState extends State<BudgetPage> {
     } else if (state is DeleteBudgetFailure) {
       ErrorDialog.show(context, state.failure);
     }
+  }
+
+  /// Sort budgets by status: Active first, then Upcoming, then Expired
+  /// Within each status group, sort by start date (earliest first)
+  List<BudgetDto> _sortBudgetsByStatus(List<BudgetDto> budgets) {
+    final List<BudgetDto> sortedBudgets = [...budgets];
+
+    sortedBudgets.sort((a, b) {
+      // First, sort by status priority
+      final statusPriority = {
+        BudgetStatus.active: 1,
+        BudgetStatus.upcoming: 2,
+        BudgetStatus.expired: 3,
+      };
+
+      final aPriority = statusPriority[a.status] ?? 4;
+      final bPriority = statusPriority[b.status] ?? 4;
+
+      if (aPriority != bPriority) {
+        return aPriority.compareTo(bPriority);
+      }
+
+      // If same status, sort by start date
+      // For active and upcoming: earliest start date first
+      // For expired: latest end date first (most recently expired first)
+      if (a.status == BudgetStatus.expired) {
+        return b.endDate.compareTo(a.endDate);
+      } else {
+        return a.startDate.compareTo(b.startDate);
+      }
+    });
+
+    return sortedBudgets;
   }
 }

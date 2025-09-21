@@ -194,6 +194,11 @@
   "budgetForCategory": "Anggaran untuk {categoryName}",
   "monthYear": "{month} {year}",
   "addNewBudgetTooltip": "Tambah anggaran baru",
+  "budgetStatusActive": "Aktif",
+  "budgetStatusExpired": "Kedaluwarsa",
+  "budgetStatusUpcoming": "Akan Datang",
+  "budgetEndingSoon": "Segera Berakhir",
+  "daysRemaining": "{days} hari tersisa",
 
   "enablePrediction": "Aktifkan Prediksi",
   "predictionType": "Jenis Prediksi",

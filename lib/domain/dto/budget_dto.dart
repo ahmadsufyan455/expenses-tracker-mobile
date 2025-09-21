@@ -43,3 +43,54 @@ class BudgetDto {
     return response.map((budget) => BudgetDto.fromResponse(budget)).toList();
   }
 }
+
+/// Extension methods for BudgetDto to handle status and lifecycle
+extension BudgetDtoExtension on BudgetDto {
+  /// Get the current status of the budget based on dates
+  BudgetStatus get status {
+    final now = DateTime.now();
+    final nowDateOnly = DateTime(now.year, now.month, now.day);
+    final startDateOnly = DateTime(startDate.year, startDate.month, startDate.day);
+    final endDateOnly = DateTime(endDate.year, endDate.month, endDate.day);
+
+    if (nowDateOnly.isBefore(startDateOnly)) {
+      return BudgetStatus.upcoming;
+    } else if (nowDateOnly.isAfter(endDateOnly)) {
+      return BudgetStatus.expired;
+    } else {
+      return BudgetStatus.active;
+    }
+  }
+
+  /// Check if budget is currently active
+  bool get isActive => status == BudgetStatus.active;
+
+  /// Check if budget has expired
+  bool get isExpired => status == BudgetStatus.expired;
+
+  /// Check if budget is upcoming
+  bool get isUpcoming => status == BudgetStatus.upcoming;
+
+  /// Check if budget is ending soon (within 3 days)
+  bool get isEndingSoon {
+    if (!isActive) return false;
+    final now = DateTime.now();
+    final daysRemaining = endDate.difference(now).inDays;
+    return daysRemaining <= 3 && daysRemaining >= 0;
+  }
+
+  /// Get days remaining in the budget period (-1 if expired, 0 if today is last day)
+  int get daysRemaining {
+    final now = DateTime.now();
+    final nowDateOnly = DateTime(now.year, now.month, now.day);
+    final endDateOnly = DateTime(endDate.year, endDate.month, endDate.day);
+    return endDateOnly.difference(nowDateOnly).inDays;
+  }
+
+  /// Get total duration of budget period in days
+  int get totalDays {
+    final startDateOnly = DateTime(startDate.year, startDate.month, startDate.day);
+    final endDateOnly = DateTime(endDate.year, endDate.month, endDate.day);
+    return endDateOnly.difference(startDateOnly).inDays + 1; // +1 to include both start and end dates
+  }
+}

@@ -557,6 +557,23 @@ class AppLocalizationsId extends AppLocalizations {
   String get addNewBudgetTooltip => 'Tambah anggaran baru';
 
   @override
+  String get budgetStatusActive => 'Aktif';
+
+  @override
+  String get budgetStatusExpired => 'Kedaluwarsa';
+
+  @override
+  String get budgetStatusUpcoming => 'Akan Datang';
+
+  @override
+  String get budgetEndingSoon => 'Segera Berakhir';
+
+  @override
+  String daysRemaining(int days) {
+    return 'Hari Tersisa';
+  }
+
+  @override
   String get enablePrediction => 'Aktifkan Prediksi';
 
   @override
@@ -582,9 +599,6 @@ class AppLocalizationsId extends AppLocalizations {
 
   @override
   String get remainingBudget => 'Sisa Anggaran';
-
-  @override
-  String get daysRemaining => 'Hari Tersisa';
 
   @override
   String get predictionTitle => 'Prediksi Anggaran';

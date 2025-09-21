@@ -1136,6 +1136,36 @@ abstract class AppLocalizations {
   /// **'Add new budget'**
   String get addNewBudgetTooltip;
 
+  /// No description provided for @budgetStatusActive.
+  ///
+  /// In en, this message translates to:
+  /// **'Active'**
+  String get budgetStatusActive;
+
+  /// No description provided for @budgetStatusExpired.
+  ///
+  /// In en, this message translates to:
+  /// **'Expired'**
+  String get budgetStatusExpired;
+
+  /// No description provided for @budgetStatusUpcoming.
+  ///
+  /// In en, this message translates to:
+  /// **'Upcoming'**
+  String get budgetStatusUpcoming;
+
+  /// No description provided for @budgetEndingSoon.
+  ///
+  /// In en, this message translates to:
+  /// **'Ending Soon'**
+  String get budgetEndingSoon;
+
+  /// Number of days remaining in budget period
+  ///
+  /// In en, this message translates to:
+  /// **'Days Remaining'**
+  String daysRemaining(int days);
+
   /// No description provided for @enablePrediction.
   ///
   /// In en, this message translates to:
@@ -1189,12 +1219,6 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Remaining Budget'**
   String get remainingBudget;
-
-  /// No description provided for @daysRemaining.
-  ///
-  /// In en, this message translates to:
-  /// **'Days Remaining'**
-  String get daysRemaining;
 
   /// No description provided for @predictionTitle.
   ///

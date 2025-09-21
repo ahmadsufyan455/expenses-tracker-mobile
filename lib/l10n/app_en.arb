@@ -293,6 +293,20 @@
     }
   },
   "addNewBudgetTooltip": "Add new budget",
+  "budgetStatusActive": "Active",
+  "budgetStatusExpired": "Expired",
+  "budgetStatusUpcoming": "Upcoming",
+  "budgetEndingSoon": "Ending Soon",
+  "daysRemaining": "{days} days remaining",
+  "@daysRemaining": {
+    "description": "Number of days remaining in budget period",
+    "placeholders": {
+      "days": {
+        "type": "int",
+        "example": "5"
+      }
+    }
+  },
 
   "enablePrediction": "Enable Prediction",
   "predictionType": "Prediction Type",

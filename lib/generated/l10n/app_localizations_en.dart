@@ -558,6 +558,23 @@ class AppLocalizationsEn extends AppLocalizations {
   String get addNewBudgetTooltip => 'Add new budget';
 
   @override
+  String get budgetStatusActive => 'Active';
+
+  @override
+  String get budgetStatusExpired => 'Expired';
+
+  @override
+  String get budgetStatusUpcoming => 'Upcoming';
+
+  @override
+  String get budgetEndingSoon => 'Ending Soon';
+
+  @override
+  String daysRemaining(int days) {
+    return 'Days Remaining';
+  }
+
+  @override
   String get enablePrediction => 'Enable Prediction';
 
   @override
@@ -583,9 +600,6 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get remainingBudget => 'Remaining Budget';
-
-  @override
-  String get daysRemaining => 'Days Remaining';
 
   @override
   String get predictionTitle => 'Budget Prediction';

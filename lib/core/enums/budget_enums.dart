@@ -1,4 +1,62 @@
 import 'package:flutter/material.dart';
+import 'package:expense_tracker_mobile/core/extensions/build_context_extensions.dart';
+
+/// Budget status enum for tracking budget lifecycle
+enum BudgetStatus {
+  upcoming('upcoming'),
+  active('active'),
+  expired('expired');
+
+  const BudgetStatus(this.value);
+  final String value;
+
+  /// Create BudgetStatus from string value
+  static BudgetStatus fromString(String value) {
+    return BudgetStatus.values.firstWhere(
+      (status) => status.value == value,
+      orElse: () => BudgetStatus.active,
+    );
+  }
+}
+
+/// Extension methods for BudgetStatus
+extension BudgetStatusExtension on BudgetStatus {
+  /// Get localized display name
+  String getDisplayName(BuildContext context) {
+    switch (this) {
+      case BudgetStatus.upcoming:
+        return context.l10n.budgetStatusUpcoming;
+      case BudgetStatus.active:
+        return context.l10n.budgetStatusActive;
+      case BudgetStatus.expired:
+        return context.l10n.budgetStatusExpired;
+    }
+  }
+
+  /// Get color for budget status
+  Color get color {
+    switch (this) {
+      case BudgetStatus.upcoming:
+        return Colors.blue;
+      case BudgetStatus.active:
+        return Colors.green;
+      case BudgetStatus.expired:
+        return Colors.red;
+    }
+  }
+
+  /// Get icon for budget status
+  IconData get icon {
+    switch (this) {
+      case BudgetStatus.upcoming:
+        return Icons.schedule;
+      case BudgetStatus.active:
+        return Icons.check_circle;
+      case BudgetStatus.expired:
+        return Icons.access_time;
+    }
+  }
+}
 
 /// Prediction type enum for budget prediction options
 enum PredictionType {
