@@ -499,16 +499,10 @@ class AppLocalizationsEn extends AppLocalizations {
   String get budgetAmount => 'Budget Amount';
 
   @override
-  String get startDate => 'Start Date';
+  String get dateRange => 'Date Range';
 
   @override
-  String get endDate => 'End Date';
-
-  @override
-  String get selectStartDate => 'Select Start Date';
-
-  @override
-  String get selectEndDate => 'Select End Date';
+  String get selectDateRange => 'Select Date Range';
 
   @override
   String get budgetPeriod => 'Budget Period';
@@ -548,13 +542,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get pleaseEnterValidBudgetAmount => 'Please enter valid budget amount';
 
   @override
-  String get pleaseSelectStartDate => 'Please select a start date';
-
-  @override
-  String get pleaseSelectEndDate => 'Please select an end date';
-
-  @override
-  String get endDateMustBeAfterStartDate => 'End date must be after start date';
+  String get pleaseSelectDateRange => 'Please select a date range';
 
   @override
   String budgetForCategory(String categoryName) {

@@ -497,16 +497,10 @@ class AppLocalizationsId extends AppLocalizations {
   String get budgetAmount => 'Jumlah Anggaran';
 
   @override
-  String get startDate => 'Tanggal Mulai';
+  String get dateRange => 'Rentang Tanggal';
 
   @override
-  String get endDate => 'Tanggal Selesai';
-
-  @override
-  String get selectStartDate => 'Pilih Tanggal Mulai';
-
-  @override
-  String get selectEndDate => 'Pilih Tanggal Selesai';
+  String get selectDateRange => 'Pilih Rentang Tanggal';
 
   @override
   String get budgetPeriod => 'Periode Anggaran';
@@ -547,14 +541,7 @@ class AppLocalizationsId extends AppLocalizations {
       'Harap masukkan jumlah anggaran yang valid';
 
   @override
-  String get pleaseSelectStartDate => 'Harap pilih tanggal mulai';
-
-  @override
-  String get pleaseSelectEndDate => 'Harap pilih tanggal selesai';
-
-  @override
-  String get endDateMustBeAfterStartDate =>
-      'Tanggal selesai harus setelah tanggal mulai';
+  String get pleaseSelectDateRange => 'Harap pilih rentang tanggal';
 
   @override
   String budgetForCategory(String categoryName) {

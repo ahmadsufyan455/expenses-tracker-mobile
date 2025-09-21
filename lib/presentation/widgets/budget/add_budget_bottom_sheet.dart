@@ -179,38 +179,19 @@ class _AddBudgetBottomSheetState extends State<AddBudgetBottomSheet> {
                       ),
                       const SizedBox(height: AppDimensions.spaceM),
 
-                      // Start Date Selector
+                      // Date Range Selector
                       InkWell(
-                        onTap: _selectStartDate,
+                        onTap: _selectDateRange,
                         child: InputDecorator(
                           decoration: InputDecoration(
-                            labelText: context.l10n.startDate,
+                            labelText: context.l10n.dateRange,
                             border: const OutlineInputBorder(),
-                            suffixIcon: const Icon(Icons.calendar_today_outlined),
+                            suffixIcon: const Icon(Icons.date_range_outlined),
                           ),
                           child: Text(
-                            _selectedStartDate != null
-                                ? DateFormat.yMMMEd().format(_selectedStartDate!)
-                                : context.l10n.selectStartDate,
-                            style: Theme.of(context).textTheme.bodyLarge,
-                          ),
-                        ),
-                      ),
-                      const SizedBox(height: AppDimensions.spaceM),
-
-                      // End Date Selector
-                      InkWell(
-                        onTap: _selectEndDate,
-                        child: InputDecorator(
-                          decoration: InputDecoration(
-                            labelText: context.l10n.endDate,
-                            border: const OutlineInputBorder(),
-                            suffixIcon: const Icon(Icons.calendar_today_outlined),
-                          ),
-                          child: Text(
-                            _selectedEndDate != null
-                                ? DateFormat.yMMMEd().format(_selectedEndDate!)
-                                : context.l10n.selectEndDate,
+                            _selectedStartDate != null && _selectedEndDate != null
+                                ? _formatDateRange(_selectedStartDate!, _selectedEndDate!)
+                                : context.l10n.selectDateRange,
                             style: Theme.of(context).textTheme.bodyLarge,
                           ),
                         ),
@@ -305,69 +286,50 @@ class _AddBudgetBottomSheetState extends State<AddBudgetBottomSheet> {
     );
   }
 
-  Future<void> _selectStartDate() async {
+  Future<void> _selectDateRange() async {
     final now = DateTime.now();
-    final initialDate = _selectedStartDate ?? now;
+    final initialDateRange = _selectedStartDate != null && _selectedEndDate != null
+        ? DateTimeRange(start: _selectedStartDate!, end: _selectedEndDate!)
+        : DateTimeRange(start: now, end: now.add(const Duration(days: 7)));
 
-    final selectedDate = await showDatePicker(
+    final selectedDateRange = await showDateRangePicker(
       context: context,
-      initialDate: initialDate,
+      initialDateRange: initialDateRange,
       firstDate: DateTime(now.year - 5),
       lastDate: DateTime(now.year + 5),
-      helpText: context.l10n.selectStartDate,
+      helpText: context.l10n.selectDateRange,
+      saveText: context.l10n.saveBudget,
     );
 
-    if (selectedDate != null) {
+    if (selectedDateRange != null) {
       setState(() {
-        _selectedStartDate = selectedDate;
-        // If end date is not set or is before start date, set it to start date + 7 days
-        if (_selectedEndDate == null || _selectedEndDate!.isBefore(selectedDate)) {
-          _selectedEndDate = selectedDate.add(const Duration(days: 7));
-        }
+        _selectedStartDate = selectedDateRange.start;
+        _selectedEndDate = selectedDateRange.end;
       });
     }
   }
 
-  Future<void> _selectEndDate() async {
-    final now = DateTime.now();
-    final initialDate = _selectedEndDate ?? (_selectedStartDate?.add(const Duration(days: 7)) ?? now.add(const Duration(days: 7)));
-    final firstDate = _selectedStartDate ?? now;
-
-    final selectedDate = await showDatePicker(
-      context: context,
-      initialDate: initialDate,
-      firstDate: firstDate,
-      lastDate: DateTime(now.year + 5),
-      helpText: context.l10n.selectEndDate,
-    );
-
-    if (selectedDate != null) {
-      setState(() {
-        _selectedEndDate = selectedDate;
-      });
+  String _formatDateRange(DateTime startDate, DateTime endDate) {
+    if (startDate.year == endDate.year) {
+      if (startDate.month == endDate.month) {
+        // Same month: "Sep 27-30, 2025"
+        return '${DateFormat.MMMd().format(startDate)}-${DateFormat.d().format(endDate)}, ${DateFormat.y().format(startDate)}';
+      } else {
+        // Same year, different months: "Sep 27 - Oct 30, 2025"
+        return '${DateFormat.MMMd().format(startDate)} - ${DateFormat.MMMd().format(endDate)}, ${DateFormat.y().format(startDate)}';
+      }
+    } else {
+      // Different years: "Dec 27, 2025 - Jan 30, 2026"
+      return '${DateFormat.yMMMd().format(startDate)} - ${DateFormat.yMMMd().format(endDate)}';
     }
   }
 
   void _saveBudget() {
     if (_formKey.currentState!.validate()) {
-      if (_selectedStartDate == null) {
+      if (_selectedStartDate == null || _selectedEndDate == null) {
         ScaffoldMessenger.of(
           context,
-        ).showSnackBar(SnackBar(content: Text(context.l10n.pleaseSelectStartDate), backgroundColor: Colors.red));
-        return;
-      }
-
-      if (_selectedEndDate == null) {
-        ScaffoldMessenger.of(
-          context,
-        ).showSnackBar(SnackBar(content: Text(context.l10n.pleaseSelectEndDate), backgroundColor: Colors.red));
-        return;
-      }
-
-      if (_selectedEndDate!.isBefore(_selectedStartDate!) || _selectedEndDate!.isAtSameMomentAs(_selectedStartDate!)) {
-        ScaffoldMessenger.of(
-          context,
-        ).showSnackBar(SnackBar(content: Text(context.l10n.endDateMustBeAfterStartDate), backgroundColor: Colors.red));
+        ).showSnackBar(SnackBar(content: Text(context.l10n.pleaseSelectDateRange), backgroundColor: Colors.red));
         return;
       }
 
