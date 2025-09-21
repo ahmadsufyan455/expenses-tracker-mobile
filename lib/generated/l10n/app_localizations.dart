@@ -1357,6 +1357,60 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Permanently delete your account and all associated data'**
   String get deleteAccountDescription;
+
+  /// No description provided for @noDataAvailable.
+  ///
+  /// In en, this message translates to:
+  /// **'No data available'**
+  String get noDataAvailable;
+
+  /// No description provided for @noBudgetData.
+  ///
+  /// In en, this message translates to:
+  /// **'No budget data available'**
+  String get noBudgetData;
+
+  /// No description provided for @totalIncomeChart.
+  ///
+  /// In en, this message translates to:
+  /// **'Total Income'**
+  String get totalIncomeChart;
+
+  /// No description provided for @totalExpensesChart.
+  ///
+  /// In en, this message translates to:
+  /// **'Total Expenses'**
+  String get totalExpensesChart;
+
+  /// No description provided for @netBalanceChart.
+  ///
+  /// In en, this message translates to:
+  /// **'Net Balance'**
+  String get netBalanceChart;
+
+  /// No description provided for @savingsRateGauge.
+  ///
+  /// In en, this message translates to:
+  /// **'Savings Rate'**
+  String get savingsRateGauge;
+
+  /// No description provided for @expenses.
+  ///
+  /// In en, this message translates to:
+  /// **'Expenses'**
+  String get expenses;
+
+  /// No description provided for @net.
+  ///
+  /// In en, this message translates to:
+  /// **'Net'**
+  String get net;
+
+  /// No description provided for @savings.
+  ///
+  /// In en, this message translates to:
+  /// **'Savings'**
+  String get savings;
 }
 
 class _AppLocalizationsDelegate

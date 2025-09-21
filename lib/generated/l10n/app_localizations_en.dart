@@ -672,4 +672,31 @@ class AppLocalizationsEn extends AppLocalizations {
   @override
   String get deleteAccountDescription =>
       'Permanently delete your account and all associated data';
+
+  @override
+  String get noDataAvailable => 'No data available';
+
+  @override
+  String get noBudgetData => 'No budget data available';
+
+  @override
+  String get totalIncomeChart => 'Total Income';
+
+  @override
+  String get totalExpensesChart => 'Total Expenses';
+
+  @override
+  String get netBalanceChart => 'Net Balance';
+
+  @override
+  String get savingsRateGauge => 'Savings Rate';
+
+  @override
+  String get expenses => 'Expenses';
+
+  @override
+  String get net => 'Net';
+
+  @override
+  String get savings => 'Savings';
 }

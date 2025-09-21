@@ -4,11 +4,12 @@ import 'package:expense_tracker_mobile/app/theme/app_dimensions.dart';
 import 'package:expense_tracker_mobile/app/theme/app_text_styles.dart';
 import 'package:expense_tracker_mobile/core/extensions/build_context_extensions.dart';
 import 'package:expense_tracker_mobile/core/utils/date_utils.dart' as app_date_utils;
+import 'package:expense_tracker_mobile/domain/dto/dashboard_dto.dart';
 import 'package:expense_tracker_mobile/presentation/pages/home/bloc/home_bloc.dart';
+import 'package:expense_tracker_mobile/presentation/widgets/dashboard/top_expenses_pie_chart.dart';
 import 'package:expense_tracker_mobile/presentation/widgets/home/budget_card.dart';
 import 'package:expense_tracker_mobile/presentation/widgets/home/overview_section.dart';
 import 'package:expense_tracker_mobile/presentation/widgets/home/section_header.dart';
-import 'package:expense_tracker_mobile/presentation/widgets/home/top_expense_card.dart';
 import 'package:expense_tracker_mobile/presentation/widgets/home/transaction_item_card.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -79,6 +80,11 @@ class _HomePageState extends State<HomePage> {
               // Overview Section
               OverviewSection(state: state, onFilterChanged: (filter) => _bloc.add(FilterChanged(filter))),
 
+              const SizedBox(height: AppDimensions.spaceM),
+
+              // Charts Section
+              _buildChartsSection(state),
+
               const SizedBox(height: AppDimensions.spaceXL),
 
               // Recent Budget Section
@@ -88,11 +94,6 @@ class _HomePageState extends State<HomePage> {
 
               // Recent Transactions Section
               _buildRecentTransactionsSection(state),
-
-              const SizedBox(height: AppDimensions.spaceXL),
-
-              // Top Expenses Section
-              _buildTopExpensesSection(state),
 
               const SizedBox(height: AppDimensions.spaceXL + AppDimensions.spaceM),
             ],
@@ -206,16 +207,51 @@ class _HomePageState extends State<HomePage> {
     );
   }
 
-  Widget _buildTopExpensesSection(HomeLoaded state) {
-    if (state.topExpenses.isEmpty) {
-      return const SizedBox.shrink();
-    }
+  Widget _buildChartsSection(HomeLoaded state) {
+    // Convert HomeLoaded data to chart-compatible data
+    final topExpenses = state.topExpenses
+        .map(
+          (expense) => DashboardTopExpenseDto(
+            category: expense.category,
+            amount: expense.amount,
+            percentage: expense.percentage,
+          ),
+        )
+        .toList();
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        SectionHeader(title: context.l10n.topExpenses),
-        ...state.topExpenses.map((expense) => TopExpenseCard(expense: expense)),
+        const SizedBox(height: AppDimensions.spaceM),
+
+        // Top Expenses Pie Chart
+        Container(
+          padding: const EdgeInsets.all(16),
+          decoration: BoxDecoration(
+            color: Theme.of(context).colorScheme.surface,
+            borderRadius: BorderRadius.circular(12),
+            boxShadow: [
+              BoxShadow(
+                color: Theme.of(context).colorScheme.onSurface.withValues(alpha: 0.05),
+                blurRadius: 10,
+                offset: const Offset(0, 2),
+              ),
+            ],
+          ),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                context.l10n.topExpenses,
+                style: Theme.of(context).textTheme.titleMedium?.copyWith(fontWeight: FontWeight.w600),
+              ),
+              const SizedBox(height: 8),
+              TopExpensesPieChart(topExpenses: topExpenses),
+              const SizedBox(height: 12),
+              TopExpensesLegend(topExpenses: topExpenses),
+            ],
+          ),
+        ),
       ],
     );
   }

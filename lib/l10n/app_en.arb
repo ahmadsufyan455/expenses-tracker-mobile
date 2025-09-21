@@ -340,5 +340,16 @@
   "profileInformation": "Profile Information",
   "accountDeletion": "Account Deletion",
   "dangerZone": "Danger Zone",
-  "deleteAccountDescription": "Permanently delete your account and all associated data"
+  "deleteAccountDescription": "Permanently delete your account and all associated data",
+
+  "noDataAvailable": "No data available",
+  "noBudgetData": "No budget data available",
+  "totalIncomeChart": "Total Income",
+  "totalExpensesChart": "Total Expenses",
+  "netBalanceChart": "Net Balance",
+  "savingsRateGauge": "Savings Rate",
+  "income": "Income",
+  "expenses": "Expenses",
+  "net": "Net",
+  "savings": "Savings"
 }

@@ -671,4 +671,31 @@ class AppLocalizationsId extends AppLocalizations {
   @override
   String get deleteAccountDescription =>
       'Hapus akun Anda secara permanen beserta semua data terkait';
+
+  @override
+  String get noDataAvailable => 'Tidak ada data tersedia';
+
+  @override
+  String get noBudgetData => 'Tidak ada data anggaran tersedia';
+
+  @override
+  String get totalIncomeChart => 'Total Pemasukan';
+
+  @override
+  String get totalExpensesChart => 'Total Pengeluaran';
+
+  @override
+  String get netBalanceChart => 'Saldo Bersih';
+
+  @override
+  String get savingsRateGauge => 'Tingkat Tabungan';
+
+  @override
+  String get expenses => 'Pengeluaran';
+
+  @override
+  String get net => 'Bersih';
+
+  @override
+  String get savings => 'Tabungan';
 }

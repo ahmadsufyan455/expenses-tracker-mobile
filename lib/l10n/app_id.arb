@@ -232,5 +232,16 @@
   "profileInformation": "Informasi Profil",
   "accountDeletion": "Penghapusan Akun",
   "dangerZone": "Zona Bahaya",
-  "deleteAccountDescription": "Hapus akun Anda secara permanen beserta semua data terkait"
+  "deleteAccountDescription": "Hapus akun Anda secara permanen beserta semua data terkait",
+
+  "noDataAvailable": "Tidak ada data tersedia",
+  "noBudgetData": "Tidak ada data anggaran tersedia",
+  "totalIncomeChart": "Total Pemasukan",
+  "totalExpensesChart": "Total Pengeluaran",
+  "netBalanceChart": "Saldo Bersih",
+  "savingsRateGauge": "Tingkat Tabungan",
+  "income": "Pemasukan",
+  "expenses": "Pengeluaran",
+  "net": "Bersih",
+  "savings": "Tabungan"
 }
