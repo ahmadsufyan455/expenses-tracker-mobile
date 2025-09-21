@@ -38,7 +38,7 @@ abstract class ApiService {
   @POST('/transactions/')
   Future<BaseResponse> createTransaction(@Body() NewTransactionRequest request);
 
-  @GET('/transactions')
+  @GET('/transactions/')
   Future<BasePaginationResponse<TransactionResponse>> getTransactions(
     @Query('page') int page,
     @Query('per_page') int perPage,
@@ -54,7 +54,7 @@ abstract class ApiService {
 
   /// Category Endpoints
 
-  @GET('/categories')
+  @GET('/categories/')
   Future<BaseResponse<List<CategoryResponse>>> getCategories();
 
   @POST('/categories/')
@@ -68,7 +68,7 @@ abstract class ApiService {
 
   /// Budget Endpoints
 
-  @GET('/budgets')
+  @GET('/budgets/')
   Future<BasePaginationResponse<BudgetResponse>> getBudgets(
     @Query('page') int page,
     @Query('per_page') int perPage,
@@ -87,7 +87,7 @@ abstract class ApiService {
 
   /// Profile Endpoints
 
-  @GET('/users')
+  @GET('/users/')
   Future<BaseResponse<ProfileResponse>> getProfile();
 
   @PUT('/users/')
@@ -101,7 +101,7 @@ abstract class ApiService {
 
   /// Dashboard Endpoints
 
-  @GET('/dashboard')
+  @GET('/dashboard/')
   Future<BaseResponse<DashboardResponse>> getDashboard({
     @Query('month') String? month,
     @Query('transaction_limit') int? transactionLimit = 5,

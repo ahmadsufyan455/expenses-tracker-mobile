@@ -135,7 +135,7 @@ class _ApiService implements ApiService {
           Options(method: 'GET', headers: _headers, extra: _extra)
               .compose(
                 _dio.options,
-                '/transactions',
+                '/transactions/',
                 queryParameters: queryParameters,
                 data: _data,
               )
@@ -220,7 +220,7 @@ class _ApiService implements ApiService {
       Options(method: 'GET', headers: _headers, extra: _extra)
           .compose(
             _dio.options,
-            '/categories',
+            '/categories/',
             queryParameters: queryParameters,
             data: _data,
           )
@@ -350,7 +350,7 @@ class _ApiService implements ApiService {
       Options(method: 'GET', headers: _headers, extra: _extra)
           .compose(
             _dio.options,
-            '/budgets',
+            '/budgets/',
             queryParameters: queryParameters,
             data: _data,
           )
@@ -464,7 +464,7 @@ class _ApiService implements ApiService {
       Options(method: 'GET', headers: _headers, extra: _extra)
           .compose(
             _dio.options,
-            '/users',
+            '/users/',
             queryParameters: queryParameters,
             data: _data,
           )
@@ -590,7 +590,7 @@ class _ApiService implements ApiService {
       Options(method: 'GET', headers: _headers, extra: _extra)
           .compose(
             _dio.options,
-            '/dashboard',
+            '/dashboard/',
             queryParameters: queryParameters,
             data: _data,
           )
