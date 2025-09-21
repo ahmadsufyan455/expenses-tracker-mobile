@@ -42,10 +42,15 @@ class BudgetBloc extends Bloc<BudgetEvent, BudgetState> {
     emit(GetBudgetLoading(data: stateData));
 
     // Reset pagination state for initial load
-    stateData = stateData.copyWith(currentPage: 1, budgets: [], hasMoreData: false, isLoadingMore: false);
+    stateData = stateData.copyWith(
+      currentPage: 1,
+      budgets: [],
+      hasMoreData: false,
+      isLoadingMore: false,
+    );
 
     // Get budgets and categories concurrently
-    final budgetResult = await _getBudgetUsecase.call(1, 3, 'start_date', 'asc');
+    final budgetResult = await _getBudgetUsecase.call(1, 20, 'start_date', 'asc');
     final categoryResult = await _getCategoryUsecase.call();
 
     budgetResult.fold(
@@ -88,7 +93,7 @@ class BudgetBloc extends Bloc<BudgetEvent, BudgetState> {
     emit(GetBudgetSuccess(data: stateData));
 
     final nextPage = stateData.currentPage + 1;
-    final budgetResult = await _getBudgetUsecase.call(nextPage, 3, 'start_date', 'asc');
+    final budgetResult = await _getBudgetUsecase.call(nextPage, 20, 'start_date', 'asc');
 
     budgetResult.fold(
       (failure) {
