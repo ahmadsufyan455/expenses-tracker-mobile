@@ -64,18 +64,37 @@ class _BudgetPageState extends State<BudgetPage> {
           return RefreshIndicator(
             key: _refreshIndicatorKey,
             onRefresh: _onRefresh,
-            child: ListView.builder(
-              padding: AppDimensions.paddingAllM,
-              itemCount: budgets.length,
-              itemBuilder: (context, index) {
-                final budget = budgets[index];
-                return BudgetItem(
-                  budget: budget,
-                  categories: state.data.categories,
-                  onTap: () => _showEditBudgetBottomSheet(budget),
-                  onDelete: () => _deleteBudget(budget.id),
-                );
+            child: NotificationListener<ScrollNotification>(
+              onNotification: (notification) {
+                if (notification is ScrollEndNotification &&
+                    notification.metrics.pixels >= notification.metrics.maxScrollExtent - 200 &&
+                    state.data.hasMoreData &&
+                    !state.data.isLoadingMore) {
+                  _bloc.add(LoadMoreBudgetEvent());
+                }
+                return false;
               },
+              child: ListView.builder(
+                padding: AppDimensions.paddingAllM,
+                itemCount: budgets.length + (state.data.isLoadingMore ? 1 : 0),
+                itemBuilder: (context, index) {
+                  if (index < budgets.length) {
+                    final budget = budgets[index];
+                    return BudgetItem(
+                      budget: budget,
+                      categories: state.data.categories,
+                      onTap: () => _showEditBudgetBottomSheet(budget),
+                      onDelete: () => _deleteBudget(budget.id),
+                    );
+                  } else {
+                    // Loading indicator at the bottom
+                    return const Padding(
+                      padding: EdgeInsets.all(AppDimensions.paddingM),
+                      child: Center(child: CircularProgressIndicator()),
+                    );
+                  }
+                },
+              ),
             ),
           );
         },

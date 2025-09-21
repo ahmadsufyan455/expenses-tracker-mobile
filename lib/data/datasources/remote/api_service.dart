@@ -69,7 +69,12 @@ abstract class ApiService {
   /// Budget Endpoints
 
   @GET('/budgets')
-  Future<BaseResponse<List<BudgetResponse>>> getBudgets();
+  Future<BasePaginationResponse<BudgetResponse>> getBudgets(
+    @Query('page') int page,
+    @Query('per_page') int perPage,
+    @Query('sort_by') String sortBy,
+    @Query('sort_order') String sortOrder,
+  );
 
   @POST('/budgets/')
   Future<BaseResponse> createBudget(@Body() BudgetRequest request);

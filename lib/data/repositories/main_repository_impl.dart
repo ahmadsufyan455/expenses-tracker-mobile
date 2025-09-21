@@ -4,9 +4,10 @@ import 'package:expense_tracker_mobile/data/datasources/remote/api_service.dart'
 import 'package:expense_tracker_mobile/data/models/request/budget_request.dart';
 import 'package:expense_tracker_mobile/data/models/request/category_request.dart';
 import 'package:expense_tracker_mobile/data/models/request/new_transaction_request.dart';
+import 'package:expense_tracker_mobile/data/models/response/base_pagination_response.dart';
+import 'package:expense_tracker_mobile/data/models/response/budget_response.dart';
 import 'package:expense_tracker_mobile/data/models/response/category_response.dart';
 import 'package:expense_tracker_mobile/data/models/response/transaction_response.dart';
-import 'package:expense_tracker_mobile/domain/dto/budget_dto.dart';
 import 'package:expense_tracker_mobile/domain/dto/dashboard_dto.dart';
 import 'package:expense_tracker_mobile/domain/repositories/main_repository.dart';
 import 'package:fpdart/fpdart.dart';
@@ -104,11 +105,15 @@ class MainRepositoryImpl implements MainRepository {
   }
 
   @override
-  Future<Either<Failure, List<BudgetDto>>> getBudgets() async {
+  Future<Either<Failure, BasePaginationResponse<BudgetResponse>>> getBudgets(
+    int page,
+    int perPage,
+    String sortBy,
+    String sortOrder,
+  ) async {
     try {
-      final response = await _apiService.getBudgets();
-      final budgets = BudgetDto.fromResponseList(response.data!);
-      return Right(budgets);
+      final response = await _apiService.getBudgets(page, perPage, sortBy, sortOrder);
+      return Right(response);
     } catch (e) {
       return Left(ErrorHandler.handleError(e));
     }

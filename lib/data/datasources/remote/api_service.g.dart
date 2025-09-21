@@ -331,12 +331,22 @@ class _ApiService implements ApiService {
   }
 
   @override
-  Future<BaseResponse<List<BudgetResponse>>> getBudgets() async {
+  Future<BasePaginationResponse<BudgetResponse>> getBudgets(
+    int page,
+    int perPage,
+    String sortBy,
+    String sortOrder,
+  ) async {
     final _extra = <String, dynamic>{};
-    final queryParameters = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{
+      r'page': page,
+      r'per_page': perPage,
+      r'sort_by': sortBy,
+      r'sort_order': sortOrder,
+    };
     final _headers = <String, dynamic>{};
     const Map<String, dynamic>? _data = null;
-    final _options = _setStreamType<BaseResponse<List<BudgetResponse>>>(
+    final _options = _setStreamType<BasePaginationResponse<BudgetResponse>>(
       Options(method: 'GET', headers: _headers, extra: _extra)
           .compose(
             _dio.options,
@@ -347,17 +357,11 @@ class _ApiService implements ApiService {
           .copyWith(baseUrl: _combineBaseUrls(_dio.options.baseUrl, baseUrl)),
     );
     final _result = await _dio.fetch<Map<String, dynamic>>(_options);
-    late BaseResponse<List<BudgetResponse>> _value;
+    late BasePaginationResponse<BudgetResponse> _value;
     try {
-      _value = BaseResponse<List<BudgetResponse>>.fromJson(
+      _value = BasePaginationResponse<BudgetResponse>.fromJson(
         _result.data!,
-        (json) => json is List<dynamic>
-            ? json
-                  .map<BudgetResponse>(
-                    (i) => BudgetResponse.fromJson(i as Map<String, dynamic>),
-                  )
-                  .toList()
-            : List.empty(),
+        (json) => BudgetResponse.fromJson(json as Map<String, dynamic>),
       );
     } on Object catch (e, s) {
       errorLogger?.logError(e, s, _options);

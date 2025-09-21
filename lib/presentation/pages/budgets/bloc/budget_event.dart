@@ -14,6 +14,13 @@ class GetBudgetEvent extends BudgetEvent {
   List<Object?> get props => [];
 }
 
+class LoadMoreBudgetEvent extends BudgetEvent {
+  const LoadMoreBudgetEvent();
+
+  @override
+  List<Object?> get props => [];
+}
+
 class CreateBudgetEvent extends BudgetEvent {
   final int categoryId;
   final int amount;

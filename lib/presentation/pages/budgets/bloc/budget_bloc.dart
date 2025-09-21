@@ -32,6 +32,7 @@ class BudgetBloc extends Bloc<BudgetEvent, BudgetState> {
     this._getCategoryUsecase,
   ) : super(BudgetInitial()) {
     on<GetBudgetEvent>(_onGetBudget);
+    on<LoadMoreBudgetEvent>(_onLoadMoreBudget);
     on<CreateBudgetEvent>(_onCreateBudget);
     on<UpdateBudgetEvent>(_onUpdateBudget);
     on<DeleteBudgetEvent>(_onDeleteBudget);
@@ -40,25 +41,72 @@ class BudgetBloc extends Bloc<BudgetEvent, BudgetState> {
   Future<void> _onGetBudget(GetBudgetEvent event, Emitter<BudgetState> emit) async {
     emit(GetBudgetLoading(data: stateData));
 
+    // Reset pagination state for initial load
+    stateData = stateData.copyWith(currentPage: 1, budgets: [], hasMoreData: false, isLoadingMore: false);
+
     // Get budgets and categories concurrently
-    final budgetResult = await _getBudgetUsecase.call();
+    final budgetResult = await _getBudgetUsecase.call(1, 3, 'start_date', 'asc');
     final categoryResult = await _getCategoryUsecase.call();
 
     budgetResult.fold(
       (failure) {
         emit(GetBudgetFailure(failure: failure, data: stateData));
       },
-      (budgets) {
+      (budgetResponse) {
         categoryResult.fold(
           (failure) {
-            stateData = stateData.copyWith(budgets: budgets);
+            final budgets = BudgetDto.fromResponseList(budgetResponse.data);
+            stateData = stateData.copyWith(
+              budgets: budgets,
+              currentPage: budgetResponse.page,
+              totalItems: budgetResponse.total,
+              hasMoreData: budgets.length < budgetResponse.total,
+            );
             emit(GetBudgetFailure(failure: failure, data: stateData));
           },
           (categories) {
-            stateData = stateData.copyWith(budgets: budgets, categories: categories);
+            final budgets = BudgetDto.fromResponseList(budgetResponse.data);
+            stateData = stateData.copyWith(
+              budgets: budgets,
+              categories: categories,
+              currentPage: budgetResponse.page,
+              totalItems: budgetResponse.total,
+              hasMoreData: budgets.length < budgetResponse.total,
+            );
             emit(GetBudgetSuccess(data: stateData));
           },
         );
+      },
+    );
+  }
+
+  Future<void> _onLoadMoreBudget(LoadMoreBudgetEvent event, Emitter<BudgetState> emit) async {
+    if (stateData.isLoadingMore || !stateData.hasMoreData) return;
+
+    // Set loading more state
+    stateData = stateData.copyWith(isLoadingMore: true);
+    emit(GetBudgetSuccess(data: stateData));
+
+    final nextPage = stateData.currentPage + 1;
+    final budgetResult = await _getBudgetUsecase.call(nextPage, 3, 'start_date', 'asc');
+
+    budgetResult.fold(
+      (failure) {
+        stateData = stateData.copyWith(isLoadingMore: false);
+        emit(GetBudgetFailure(failure: failure, data: stateData));
+      },
+      (budgetResponse) {
+        final newBudgets = BudgetDto.fromResponseList(budgetResponse.data);
+        final allBudgets = [...stateData.budgets, ...newBudgets];
+
+        stateData = stateData.copyWith(
+          budgets: allBudgets,
+          currentPage: budgetResponse.page,
+          totalItems: budgetResponse.total,
+          hasMoreData: allBudgets.length < budgetResponse.total,
+          isLoadingMore: false,
+        );
+        emit(GetBudgetSuccess(data: stateData));
       },
     );
   }
