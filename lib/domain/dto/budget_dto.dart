@@ -6,7 +6,8 @@ class BudgetDto {
   final int id;
   final int categoryId;
   final int amount;
-  final String month;
+  final DateTime startDate;
+  final DateTime endDate;
   final bool predictionEnabled;
   final PredictionType? predictionType;
   final int? predictionDaysCount;
@@ -16,7 +17,8 @@ class BudgetDto {
     required this.id,
     required this.categoryId,
     required this.amount,
-    required this.month,
+    required this.startDate,
+    required this.endDate,
     required this.predictionEnabled,
     this.predictionType,
     this.predictionDaysCount,
@@ -28,7 +30,8 @@ class BudgetDto {
       id: response.id,
       categoryId: response.categoryId,
       amount: response.amount,
-      month: response.month,
+      startDate: DateTime.parse(response.startDate),
+      endDate: DateTime.parse(response.endDate),
       predictionEnabled: response.predictionEnabled,
       predictionType: response.predictionType != null ? PredictionType.fromString(response.predictionType!) : null,
       predictionDaysCount: response.predictionDaysCount,

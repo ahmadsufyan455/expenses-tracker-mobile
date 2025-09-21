@@ -118,14 +118,14 @@ extension GetItInjectableX on _i174.GetIt {
     gh.lazySingleton<_i162.MainRepository>(
       () => _i650.MainRepositoryImpl(gh<_i240.ApiService>()),
     );
+    gh.factory<_i680.UpdateProfileUsecase>(
+      () => _i680.UpdateProfileUsecase(gh<_i900.AuthRepository>()),
+    );
     gh.factory<_i720.RegisterUsecase>(
       () => _i720.RegisterUsecase(gh<_i900.AuthRepository>()),
     );
     gh.factory<_i72.LoginUsecase>(
       () => _i72.LoginUsecase(gh<_i900.AuthRepository>()),
-    );
-    gh.factory<_i680.UpdateProfileUsecase>(
-      () => _i680.UpdateProfileUsecase(gh<_i900.AuthRepository>()),
     );
     gh.factory<_i310.GetProfileUsecase>(
       () => _i310.GetProfileUsecase(gh<_i900.AuthRepository>()),
@@ -136,32 +136,35 @@ extension GetItInjectableX on _i174.GetIt {
     gh.factory<_i621.ChangePasswordUsecase>(
       () => _i621.ChangePasswordUsecase(gh<_i900.AuthRepository>()),
     );
-    gh.factory<_i886.CreateTransactionUsecase>(
-      () => _i886.CreateTransactionUsecase(gh<_i162.MainRepository>()),
-    );
-    gh.factory<_i662.GetCategoryUsecase>(
-      () => _i662.GetCategoryUsecase(gh<_i162.MainRepository>()),
-    );
     gh.factory<_i58.GetTransactionUsecase>(
       () => _i58.GetTransactionUsecase(gh<_i162.MainRepository>()),
-    );
-    gh.factory<_i826.DeleteTransactionUsecase>(
-      () => _i826.DeleteTransactionUsecase(gh<_i162.MainRepository>()),
-    );
-    gh.factory<_i965.UpdateTransactionUsecase>(
-      () => _i965.UpdateTransactionUsecase(gh<_i162.MainRepository>()),
-    );
-    gh.factory<_i115.CreateCategoryUseCase>(
-      () => _i115.CreateCategoryUseCase(gh<_i162.MainRepository>()),
     );
     gh.factory<_i590.UpdateCategoryUsecase>(
       () => _i590.UpdateCategoryUsecase(gh<_i162.MainRepository>()),
     );
+    gh.factory<_i115.CreateCategoryUseCase>(
+      () => _i115.CreateCategoryUseCase(gh<_i162.MainRepository>()),
+    );
     gh.factory<_i685.DeleteCategoryUsecase>(
       () => _i685.DeleteCategoryUsecase(gh<_i162.MainRepository>()),
     );
+    gh.factory<_i886.CreateTransactionUsecase>(
+      () => _i886.CreateTransactionUsecase(gh<_i162.MainRepository>()),
+    );
     gh.factory<_i322.GetBudgetUsecase>(
       () => _i322.GetBudgetUsecase(gh<_i162.MainRepository>()),
+    );
+    gh.factory<_i662.GetCategoryUsecase>(
+      () => _i662.GetCategoryUsecase(gh<_i162.MainRepository>()),
+    );
+    gh.factory<_i965.UpdateTransactionUsecase>(
+      () => _i965.UpdateTransactionUsecase(gh<_i162.MainRepository>()),
+    );
+    gh.factory<_i1030.GetDashboardUsecase>(
+      () => _i1030.GetDashboardUsecase(gh<_i162.MainRepository>()),
+    );
+    gh.factory<_i826.DeleteTransactionUsecase>(
+      () => _i826.DeleteTransactionUsecase(gh<_i162.MainRepository>()),
     );
     gh.factory<_i154.UpdateBudgetUsecase>(
       () => _i154.UpdateBudgetUsecase(gh<_i162.MainRepository>()),
@@ -171,9 +174,6 @@ extension GetItInjectableX on _i174.GetIt {
     );
     gh.factory<_i157.CreateBudgetUsecase>(
       () => _i157.CreateBudgetUsecase(gh<_i162.MainRepository>()),
-    );
-    gh.factory<_i1030.GetDashboardUsecase>(
-      () => _i1030.GetDashboardUsecase(gh<_i162.MainRepository>()),
     );
     gh.factory<_i306.CategoryBloc>(
       () => _i306.CategoryBloc(

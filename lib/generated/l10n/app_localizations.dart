@@ -1028,17 +1028,35 @@ abstract class AppLocalizations {
   /// **'Budget Amount'**
   String get budgetAmount;
 
-  /// No description provided for @selectMonth.
+  /// No description provided for @startDate.
   ///
   /// In en, this message translates to:
-  /// **'Select Month'**
-  String get selectMonth;
+  /// **'Start Date'**
+  String get startDate;
 
-  /// No description provided for @budgetMonth.
+  /// No description provided for @endDate.
   ///
   /// In en, this message translates to:
-  /// **'Budget Month'**
-  String get budgetMonth;
+  /// **'End Date'**
+  String get endDate;
+
+  /// No description provided for @selectStartDate.
+  ///
+  /// In en, this message translates to:
+  /// **'Select Start Date'**
+  String get selectStartDate;
+
+  /// No description provided for @selectEndDate.
+  ///
+  /// In en, this message translates to:
+  /// **'Select End Date'**
+  String get selectEndDate;
+
+  /// No description provided for @budgetPeriod.
+  ///
+  /// In en, this message translates to:
+  /// **'Budget Period'**
+  String get budgetPeriod;
 
   /// No description provided for @createBudget.
   ///
@@ -1106,11 +1124,23 @@ abstract class AppLocalizations {
   /// **'Please enter valid budget amount'**
   String get pleaseEnterValidBudgetAmount;
 
-  /// No description provided for @pleaseSelectMonth.
+  /// No description provided for @pleaseSelectStartDate.
   ///
   /// In en, this message translates to:
-  /// **'Please select a month'**
-  String get pleaseSelectMonth;
+  /// **'Please select a start date'**
+  String get pleaseSelectStartDate;
+
+  /// No description provided for @pleaseSelectEndDate.
+  ///
+  /// In en, this message translates to:
+  /// **'Please select an end date'**
+  String get pleaseSelectEndDate;
+
+  /// No description provided for @endDateMustBeAfterStartDate.
+  ///
+  /// In en, this message translates to:
+  /// **'End date must be after start date'**
+  String get endDateMustBeAfterStartDate;
 
   /// Budget title with category name
   ///

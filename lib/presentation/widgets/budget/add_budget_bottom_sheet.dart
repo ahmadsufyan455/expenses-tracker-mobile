@@ -40,7 +40,8 @@ class _AddBudgetBottomSheetState extends State<AddBudgetBottomSheet> {
 
   late BudgetBloc _bloc;
   CategoryDto? _selectedCategory;
-  DateTime? _selectedMonth;
+  DateTime? _selectedStartDate;
+  DateTime? _selectedEndDate;
   bool _isLoading = false;
   bool _predictionEnabled = false;
   PredictionType? _selectedPredictionType;
@@ -62,7 +63,8 @@ class _AddBudgetBottomSheetState extends State<AddBudgetBottomSheet> {
         (cat) => cat.id == budget.categoryId,
         orElse: () => widget.categories.first,
       );
-      _selectedMonth = DateTime.parse(budget.month);
+      _selectedStartDate = budget.startDate;
+      _selectedEndDate = budget.endDate;
       _amountController.text = NumberUtils.formatWithThousandSeparator(budget.amount);
       _predictionEnabled = budget.predictionEnabled;
       _selectedPredictionType = budget.predictionType;
@@ -71,8 +73,10 @@ class _AddBudgetBottomSheetState extends State<AddBudgetBottomSheet> {
         _predictionDaysController.text = _predictionDaysCount.toString();
       }
     } else {
-      // Default to current month for new budgets
-      _selectedMonth = DateTime(DateTime.now().year, DateTime.now().month);
+      // Default to current week for new budgets
+      final now = DateTime.now();
+      _selectedStartDate = DateTime(now.year, now.month, now.day);
+      _selectedEndDate = DateTime(now.year, now.month, now.day + 7);
     }
   }
 
@@ -175,19 +179,38 @@ class _AddBudgetBottomSheetState extends State<AddBudgetBottomSheet> {
                       ),
                       const SizedBox(height: AppDimensions.spaceM),
 
-                      // Month Selector
+                      // Start Date Selector
                       InkWell(
-                        onTap: _selectMonth,
+                        onTap: _selectStartDate,
                         child: InputDecorator(
                           decoration: InputDecoration(
-                            labelText: context.l10n.budgetMonth,
+                            labelText: context.l10n.startDate,
                             border: const OutlineInputBorder(),
                             suffixIcon: const Icon(Icons.calendar_today_outlined),
                           ),
                           child: Text(
-                            _selectedMonth != null
-                                ? DateFormat.yMMMM().format(_selectedMonth!)
-                                : context.l10n.selectMonth,
+                            _selectedStartDate != null
+                                ? DateFormat.yMMMEd().format(_selectedStartDate!)
+                                : context.l10n.selectStartDate,
+                            style: Theme.of(context).textTheme.bodyLarge,
+                          ),
+                        ),
+                      ),
+                      const SizedBox(height: AppDimensions.spaceM),
+
+                      // End Date Selector
+                      InkWell(
+                        onTap: _selectEndDate,
+                        child: InputDecorator(
+                          decoration: InputDecoration(
+                            labelText: context.l10n.endDate,
+                            border: const OutlineInputBorder(),
+                            suffixIcon: const Icon(Icons.calendar_today_outlined),
+                          ),
+                          child: Text(
+                            _selectedEndDate != null
+                                ? DateFormat.yMMMEd().format(_selectedEndDate!)
+                                : context.l10n.selectEndDate,
                             style: Theme.of(context).textTheme.bodyLarge,
                           ),
                         ),
@@ -282,63 +305,75 @@ class _AddBudgetBottomSheetState extends State<AddBudgetBottomSheet> {
     );
   }
 
-  Future<void> _selectMonth() async {
+  Future<void> _selectStartDate() async {
     final now = DateTime.now();
-    final currentYear = now.year;
+    final initialDate = _selectedStartDate ?? now;
 
-    // Show year picker first
-    final selectedYear = await showDialog<int>(
+    final selectedDate = await showDatePicker(
       context: context,
-      builder: (context) => AlertDialog(
-        title: Text('Select Year'),
-        content: SizedBox(
-          width: double.minPositive,
-          height: 300,
-          child: YearPicker(
-            firstDate: DateTime(currentYear - 5),
-            lastDate: DateTime(currentYear + 5),
-            selectedDate: _selectedMonth ?? now,
-            onChanged: (date) => Navigator.pop(context, date.year),
-          ),
-        ),
-      ),
+      initialDate: initialDate,
+      firstDate: DateTime(now.year - 5),
+      lastDate: DateTime(now.year + 5),
+      helpText: context.l10n.selectStartDate,
     );
 
-    if (selectedYear == null) return;
-
-    if (!mounted) return;
-
-    // Show month picker
-    final selectedMonth = await showDialog<int>(
-      context: context,
-      builder: (context) => SimpleDialog(
-        title: Text('Select Month'),
-        children: List.generate(12, (index) {
-          final month = index + 1;
-          final monthName = DateFormat.MMMM().format(DateTime(selectedYear, month));
-          return SimpleDialogOption(onPressed: () => Navigator.pop(context, month), child: Text(monthName));
-        }),
-      ),
-    );
-
-    if (selectedMonth != null) {
+    if (selectedDate != null) {
       setState(() {
-        _selectedMonth = DateTime(selectedYear, selectedMonth);
+        _selectedStartDate = selectedDate;
+        // If end date is not set or is before start date, set it to start date + 7 days
+        if (_selectedEndDate == null || _selectedEndDate!.isBefore(selectedDate)) {
+          _selectedEndDate = selectedDate.add(const Duration(days: 7));
+        }
+      });
+    }
+  }
+
+  Future<void> _selectEndDate() async {
+    final now = DateTime.now();
+    final initialDate = _selectedEndDate ?? (_selectedStartDate?.add(const Duration(days: 7)) ?? now.add(const Duration(days: 7)));
+    final firstDate = _selectedStartDate ?? now;
+
+    final selectedDate = await showDatePicker(
+      context: context,
+      initialDate: initialDate,
+      firstDate: firstDate,
+      lastDate: DateTime(now.year + 5),
+      helpText: context.l10n.selectEndDate,
+    );
+
+    if (selectedDate != null) {
+      setState(() {
+        _selectedEndDate = selectedDate;
       });
     }
   }
 
   void _saveBudget() {
     if (_formKey.currentState!.validate()) {
-      if (_selectedMonth == null) {
+      if (_selectedStartDate == null) {
         ScaffoldMessenger.of(
           context,
-        ).showSnackBar(SnackBar(content: Text(context.l10n.pleaseSelectMonth), backgroundColor: Colors.red));
+        ).showSnackBar(SnackBar(content: Text(context.l10n.pleaseSelectStartDate), backgroundColor: Colors.red));
+        return;
+      }
+
+      if (_selectedEndDate == null) {
+        ScaffoldMessenger.of(
+          context,
+        ).showSnackBar(SnackBar(content: Text(context.l10n.pleaseSelectEndDate), backgroundColor: Colors.red));
+        return;
+      }
+
+      if (_selectedEndDate!.isBefore(_selectedStartDate!) || _selectedEndDate!.isAtSameMomentAs(_selectedStartDate!)) {
+        ScaffoldMessenger.of(
+          context,
+        ).showSnackBar(SnackBar(content: Text(context.l10n.endDateMustBeAfterStartDate), backgroundColor: Colors.red));
         return;
       }
 
       final amount = NumberUtils.parseFromFormattedString(_amountController.text);
-      final monthString = DateFormat('yyyy-MM').format(_selectedMonth!);
+      final startDateString = DateFormat('yyyy-MM-dd').format(_selectedStartDate!);
+      final endDateString = DateFormat('yyyy-MM-dd').format(_selectedEndDate!);
 
       if (_isUpdate) {
         _bloc.add(
@@ -346,7 +381,8 @@ class _AddBudgetBottomSheetState extends State<AddBudgetBottomSheet> {
             id: widget.budget!.id,
             categoryId: _selectedCategory!.id,
             amount: amount,
-            month: monthString,
+            startDate: startDateString,
+            endDate: endDateString,
             predictionEnabled: _predictionEnabled,
             predictionType: _selectedPredictionType?.value,
             predictionDaysCount: _predictionDaysCount,
@@ -357,7 +393,8 @@ class _AddBudgetBottomSheetState extends State<AddBudgetBottomSheet> {
           CreateBudgetEvent(
             categoryId: _selectedCategory!.id,
             amount: amount,
-            month: monthString,
+            startDate: startDateString,
+            endDate: endDateString,
             predictionEnabled: _predictionEnabled,
             predictionType: _selectedPredictionType?.value,
             predictionDaysCount: _predictionDaysCount,

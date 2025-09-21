@@ -68,7 +68,8 @@ class BudgetBloc extends Bloc<BudgetEvent, BudgetState> {
     final request = BudgetRequest(
       categoryId: event.categoryId,
       amount: event.amount,
-      month: event.month,
+      startDate: event.startDate,
+      endDate: event.endDate,
       predictionEnabled: event.predictionEnabled,
       predictionType: event.predictionType,
       predictionDaysCount: event.predictionDaysCount,
@@ -90,7 +91,8 @@ class BudgetBloc extends Bloc<BudgetEvent, BudgetState> {
     final request = BudgetRequest(
       categoryId: event.categoryId,
       amount: event.amount,
-      month: event.month,
+      startDate: event.startDate,
+      endDate: event.endDate,
       predictionEnabled: event.predictionEnabled,
       predictionType: event.predictionType,
       predictionDaysCount: event.predictionDaysCount,

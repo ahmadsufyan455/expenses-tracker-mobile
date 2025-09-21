@@ -28,9 +28,8 @@ class BudgetItem extends StatelessWidget {
     // Format budget amount
     final formattedAmount = LocalizationUtils.formatCurrency(context, budget.amount.toDouble());
 
-    // Format month
-    final monthDate = DateTime.parse(budget.month);
-    final formattedMonth = DateFormat.yMMMM().format(monthDate);
+    // Format date range
+    final formattedDateRange = '${DateFormat.MMMd().format(budget.startDate)} - ${DateFormat.MMMd().format(budget.endDate)}, ${DateFormat.y().format(budget.startDate)}';
 
     return Container(
       margin: const EdgeInsets.only(bottom: AppDimensions.spaceM),
@@ -73,7 +72,7 @@ class BudgetItem extends StatelessWidget {
                         Text(category.name, style: theme.textTheme.titleMedium?.copyWith(fontWeight: FontWeight.w600)),
                         const SizedBox(height: AppDimensions.spaceXS),
                         Text(
-                          formattedMonth,
+                          formattedDateRange,
                           style: theme.textTheme.bodySmall?.copyWith(color: theme.colorScheme.onSurfaceVariant),
                         ),
                       ],

@@ -17,7 +17,8 @@ class GetBudgetEvent extends BudgetEvent {
 class CreateBudgetEvent extends BudgetEvent {
   final int categoryId;
   final int amount;
-  final String month;
+  final String startDate;
+  final String endDate;
   final bool predictionEnabled;
   final String? predictionType;
   final int? predictionDaysCount;
@@ -25,21 +26,23 @@ class CreateBudgetEvent extends BudgetEvent {
   const CreateBudgetEvent({
     required this.categoryId,
     required this.amount,
-    required this.month,
+    required this.startDate,
+    required this.endDate,
     required this.predictionEnabled,
     this.predictionType,
     this.predictionDaysCount,
   });
 
   @override
-  List<Object?> get props => [categoryId, amount, month, predictionEnabled, predictionType, predictionDaysCount];
+  List<Object?> get props => [categoryId, amount, startDate, endDate, predictionEnabled, predictionType, predictionDaysCount];
 }
 
 class UpdateBudgetEvent extends BudgetEvent {
   final int id;
   final int categoryId;
   final int amount;
-  final String month;
+  final String startDate;
+  final String endDate;
   final bool predictionEnabled;
   final String? predictionType;
   final int? predictionDaysCount;
@@ -48,14 +51,15 @@ class UpdateBudgetEvent extends BudgetEvent {
     required this.id,
     required this.categoryId,
     required this.amount,
-    required this.month,
+    required this.startDate,
+    required this.endDate,
     required this.predictionEnabled,
     this.predictionType,
     this.predictionDaysCount,
   });
 
   @override
-  List<Object?> get props => [id, categoryId, amount, month, predictionEnabled, predictionType, predictionDaysCount];
+  List<Object?> get props => [id, categoryId, amount, startDate, endDate, predictionEnabled, predictionType, predictionDaysCount];
 }
 
 class DeleteBudgetEvent extends BudgetEvent {

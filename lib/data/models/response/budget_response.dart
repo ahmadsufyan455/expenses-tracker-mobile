@@ -11,8 +11,10 @@ class BudgetResponse {
   final int categoryId;
   @JsonKey(name: 'amount')
   final int amount;
-  @JsonKey(name: 'month')
-  final String month;
+  @JsonKey(name: 'start_date')
+  final String startDate;
+  @JsonKey(name: 'end_date')
+  final String endDate;
   @JsonKey(name: 'prediction_enabled')
   final bool predictionEnabled;
   @JsonKey(name: 'prediction_type')
@@ -26,7 +28,8 @@ class BudgetResponse {
     required this.id,
     required this.categoryId,
     required this.amount,
-    required this.month,
+    required this.startDate,
+    required this.endDate,
     required this.predictionEnabled,
     this.predictionType,
     this.predictionDaysCount,
