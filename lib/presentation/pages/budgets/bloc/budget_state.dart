@@ -4,8 +4,6 @@ class BudgetStateData extends Equatable {
   final List<BudgetDto> budgets;
   final List<CategoryDto> categories;
   final String message;
-  final int currentPage;
-  final int totalItems;
   final bool hasMoreData;
   final bool isLoadingMore;
 
@@ -13,21 +11,17 @@ class BudgetStateData extends Equatable {
     this.budgets = const [],
     this.categories = const [],
     this.message = '',
-    this.currentPage = 1,
-    this.totalItems = 0,
     this.hasMoreData = false,
     this.isLoadingMore = false,
   });
 
   @override
-  List<Object> get props => [budgets, categories, message, currentPage, totalItems, hasMoreData, isLoadingMore];
+  List<Object> get props => [budgets, categories, message, hasMoreData, isLoadingMore];
 
   BudgetStateData copyWith({
     List<BudgetDto>? budgets,
     List<CategoryDto>? categories,
     String? message,
-    int? currentPage,
-    int? totalItems,
     bool? hasMoreData,
     bool? isLoadingMore,
   }) {
@@ -35,8 +29,6 @@ class BudgetStateData extends Equatable {
       budgets: budgets ?? this.budgets,
       categories: categories ?? this.categories,
       message: message ?? this.message,
-      currentPage: currentPage ?? this.currentPage,
-      totalItems: totalItems ?? this.totalItems,
       hasMoreData: hasMoreData ?? this.hasMoreData,
       isLoadingMore: isLoadingMore ?? this.isLoadingMore,
     );

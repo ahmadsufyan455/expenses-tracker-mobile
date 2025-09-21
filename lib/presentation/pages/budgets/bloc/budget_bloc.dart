@@ -24,6 +24,11 @@ class BudgetBloc extends Bloc<BudgetEvent, BudgetState> {
 
   var stateData = BudgetStateData();
 
+  int page = 1;
+  int perPage = 10;
+  String sortBy = 'status';
+  String sortOrder = 'asc';
+
   BudgetBloc(
     this._getBudgetUsecase,
     this._createBudgetUsecase,
@@ -41,16 +46,9 @@ class BudgetBloc extends Bloc<BudgetEvent, BudgetState> {
   Future<void> _onGetBudget(GetBudgetEvent event, Emitter<BudgetState> emit) async {
     emit(GetBudgetLoading(data: stateData));
 
-    // Reset pagination state for initial load
-    stateData = stateData.copyWith(
-      currentPage: 1,
-      budgets: [],
-      hasMoreData: false,
-      isLoadingMore: false,
-    );
-
     // Get budgets and categories concurrently
-    final budgetResult = await _getBudgetUsecase.call(1, 20, 'start_date', 'asc');
+    page = 1;
+    final budgetResult = await _getBudgetUsecase.call(page, perPage, sortBy, sortOrder);
     final categoryResult = await _getCategoryUsecase.call();
 
     budgetResult.fold(
@@ -61,12 +59,7 @@ class BudgetBloc extends Bloc<BudgetEvent, BudgetState> {
         categoryResult.fold(
           (failure) {
             final budgets = BudgetDto.fromResponseList(budgetResponse.data);
-            stateData = stateData.copyWith(
-              budgets: budgets,
-              currentPage: budgetResponse.page,
-              totalItems: budgetResponse.total,
-              hasMoreData: budgets.length < budgetResponse.total,
-            );
+            stateData = stateData.copyWith(budgets: budgets, hasMoreData: budgets.length < budgetResponse.total);
             emit(GetBudgetFailure(failure: failure, data: stateData));
           },
           (categories) {
@@ -74,8 +67,6 @@ class BudgetBloc extends Bloc<BudgetEvent, BudgetState> {
             stateData = stateData.copyWith(
               budgets: budgets,
               categories: categories,
-              currentPage: budgetResponse.page,
-              totalItems: budgetResponse.total,
               hasMoreData: budgets.length < budgetResponse.total,
             );
             emit(GetBudgetSuccess(data: stateData));
@@ -92,8 +83,8 @@ class BudgetBloc extends Bloc<BudgetEvent, BudgetState> {
     stateData = stateData.copyWith(isLoadingMore: true);
     emit(GetBudgetSuccess(data: stateData));
 
-    final nextPage = stateData.currentPage + 1;
-    final budgetResult = await _getBudgetUsecase.call(nextPage, 20, 'start_date', 'asc');
+    page++;
+    final budgetResult = await _getBudgetUsecase.call(page, perPage, sortBy, sortOrder);
 
     budgetResult.fold(
       (failure) {
@@ -106,8 +97,6 @@ class BudgetBloc extends Bloc<BudgetEvent, BudgetState> {
 
         stateData = stateData.copyWith(
           budgets: allBudgets,
-          currentPage: budgetResponse.page,
-          totalItems: budgetResponse.total,
           hasMoreData: allBudgets.length < budgetResponse.total,
           isLoadingMore: false,
         );

@@ -113,16 +113,11 @@ class _BudgetPageState extends State<BudgetPage> {
           children: [
             Icon(Icons.pie_chart_outline, size: 64, color: Theme.of(context).colorScheme.onSurfaceVariant),
             const SizedBox(height: AppDimensions.spaceL),
-            Text(
-              context.l10n.budgets,
-              style: theme.textTheme.headlineMedium,
-            ),
+            Text(context.l10n.budgets, style: theme.textTheme.headlineMedium),
             const SizedBox(height: AppDimensions.spaceS),
             Text(
               context.l10n.manageBudgetsSubtitle,
-              style: theme.textTheme.bodyMedium?.copyWith(
-                color: theme.colorScheme.onSurfaceVariant,
-              ),
+              style: theme.textTheme.bodyMedium?.copyWith(color: theme.colorScheme.onSurfaceVariant),
               textAlign: TextAlign.center,
             ),
             const SizedBox(height: AppDimensions.spaceXL),
@@ -153,11 +148,7 @@ class _BudgetPageState extends State<BudgetPage> {
   }
 
   Future<void> _showEditBudgetBottomSheet(BudgetDto budget) async {
-    final result = await AddBudgetBottomSheet.show(
-      context,
-      budget: budget,
-      categories: _bloc.stateData.categories,
-    );
+    final result = await AddBudgetBottomSheet.show(context, budget: budget, categories: _bloc.stateData.categories);
     if (result == true) {
       _bloc.add(GetBudgetEvent());
     }
@@ -171,21 +162,21 @@ class _BudgetPageState extends State<BudgetPage> {
     if (state is GetBudgetFailure) {
       ErrorDialog.show(context, state.failure);
     } else if (state is CreateBudgetSuccess) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text(context.l10n.budgetAddedSuccessfully), backgroundColor: Colors.green),
-      );
+      ScaffoldMessenger.of(
+        context,
+      ).showSnackBar(SnackBar(content: Text(context.l10n.budgetAddedSuccessfully), backgroundColor: Colors.green));
     } else if (state is CreateBudgetFailure) {
       ErrorDialog.show(context, state.failure);
     } else if (state is UpdateBudgetSuccess) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text(context.l10n.budgetUpdatedSuccessfully), backgroundColor: Colors.green),
-      );
+      ScaffoldMessenger.of(
+        context,
+      ).showSnackBar(SnackBar(content: Text(context.l10n.budgetUpdatedSuccessfully), backgroundColor: Colors.green));
     } else if (state is UpdateBudgetFailure) {
       ErrorDialog.show(context, state.failure);
     } else if (state is DeleteBudgetSuccess) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text(context.l10n.budgetDeletedSuccessfully), backgroundColor: Colors.green),
-      );
+      ScaffoldMessenger.of(
+        context,
+      ).showSnackBar(SnackBar(content: Text(context.l10n.budgetDeletedSuccessfully), backgroundColor: Colors.green));
       _bloc.add(GetBudgetEvent()); // Refresh the list
     } else if (state is DeleteBudgetFailure) {
       ErrorDialog.show(context, state.failure);
@@ -199,14 +190,10 @@ class _BudgetPageState extends State<BudgetPage> {
 
     sortedBudgets.sort((a, b) {
       // First, sort by status priority
-      final statusPriority = {
-        BudgetStatus.active: 1,
-        BudgetStatus.upcoming: 2,
-        BudgetStatus.expired: 3,
-      };
+      final statusPriority = {BudgetStatus.active: 1, BudgetStatus.upcoming: 2, BudgetStatus.expired: 3};
 
-      final aPriority = statusPriority[a.status] ?? 4;
-      final bPriority = statusPriority[b.status] ?? 4;
+      final aPriority = statusPriority[a.budgetStatus] ?? 4;
+      final bPriority = statusPriority[b.budgetStatus] ?? 4;
 
       if (aPriority != bPriority) {
         return aPriority.compareTo(bPriority);
@@ -215,7 +202,7 @@ class _BudgetPageState extends State<BudgetPage> {
       // If same status, sort by start date
       // For active and upcoming: earliest start date first
       // For expired: latest end date first (most recently expired first)
-      if (a.status == BudgetStatus.expired) {
+      if (a.budgetStatus == BudgetStatus.expired) {
         return b.endDate.compareTo(a.endDate);
       } else {
         return a.startDate.compareTo(b.startDate);

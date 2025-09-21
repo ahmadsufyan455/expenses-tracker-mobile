@@ -11,6 +11,7 @@ BudgetResponse _$BudgetResponseFromJson(Map<String, dynamic> json) =>
       id: (json['id'] as num).toInt(),
       categoryId: (json['category_id'] as num).toInt(),
       amount: (json['amount'] as num).toInt(),
+      status: (json['status'] as num).toInt(),
       startDate: json['start_date'] as String,
       endDate: json['end_date'] as String,
       predictionEnabled: json['prediction_enabled'] as bool,

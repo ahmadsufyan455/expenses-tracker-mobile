@@ -6,6 +6,7 @@ class BudgetDto {
   final int id;
   final int categoryId;
   final int amount;
+  final int status;
   final DateTime startDate;
   final DateTime endDate;
   final bool predictionEnabled;
@@ -17,6 +18,7 @@ class BudgetDto {
     required this.id,
     required this.categoryId,
     required this.amount,
+    required this.status,
     required this.startDate,
     required this.endDate,
     required this.predictionEnabled,
@@ -30,6 +32,7 @@ class BudgetDto {
       id: response.id,
       categoryId: response.categoryId,
       amount: response.amount,
+      status: response.status,
       startDate: DateTime.parse(response.startDate),
       endDate: DateTime.parse(response.endDate),
       predictionEnabled: response.predictionEnabled,
@@ -47,15 +50,10 @@ class BudgetDto {
 /// Extension methods for BudgetDto to handle status and lifecycle
 extension BudgetDtoExtension on BudgetDto {
   /// Get the current status of the budget based on dates
-  BudgetStatus get status {
-    final now = DateTime.now();
-    final nowDateOnly = DateTime(now.year, now.month, now.day);
-    final startDateOnly = DateTime(startDate.year, startDate.month, startDate.day);
-    final endDateOnly = DateTime(endDate.year, endDate.month, endDate.day);
-
-    if (nowDateOnly.isBefore(startDateOnly)) {
+  BudgetStatus get budgetStatus {
+    if (status == 2) {
       return BudgetStatus.upcoming;
-    } else if (nowDateOnly.isAfter(endDateOnly)) {
+    } else if (status == 3) {
       return BudgetStatus.expired;
     } else {
       return BudgetStatus.active;
@@ -63,13 +61,13 @@ extension BudgetDtoExtension on BudgetDto {
   }
 
   /// Check if budget is currently active
-  bool get isActive => status == BudgetStatus.active;
+  bool get isActive => budgetStatus == BudgetStatus.active;
 
   /// Check if budget has expired
-  bool get isExpired => status == BudgetStatus.expired;
+  bool get isExpired => budgetStatus == BudgetStatus.expired;
 
   /// Check if budget is upcoming
-  bool get isUpcoming => status == BudgetStatus.upcoming;
+  bool get isUpcoming => budgetStatus == BudgetStatus.upcoming;
 
   /// Check if budget is ending soon (within 3 days)
   bool get isEndingSoon {
