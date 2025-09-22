@@ -1,4 +1,3 @@
-import 'package:expense_tracker_mobile/app/theme/app_colors.dart';
 import 'package:expense_tracker_mobile/app/theme/app_dimensions.dart';
 import 'package:expense_tracker_mobile/app/theme/app_text_styles.dart';
 import 'package:flutter/material.dart';
@@ -38,14 +37,16 @@ class AuthHeader extends StatelessWidget {
           width: 80,
           height: 80,
           decoration: BoxDecoration(
-            color: AppColors.primary,
             shape: BoxShape.circle,
             boxShadow: AppDimensions.shadowMedium,
           ),
-          child: const Icon(
-            Icons.account_balance_wallet_rounded,
-            size: 40,
-            color: Colors.white,
+          child: ClipOval(
+            child: Image.asset(
+              'assets/icons/app_icon.png',
+              width: 80,
+              height: 80,
+              fit: BoxFit.cover,
+            ),
           ),
         ),
 

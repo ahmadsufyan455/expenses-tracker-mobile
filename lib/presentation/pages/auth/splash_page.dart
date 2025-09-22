@@ -112,7 +112,6 @@ class _SplashPageState extends State<SplashPage> with SingleTickerProviderStateM
                           width: 120,
                           height: 120,
                           decoration: BoxDecoration(
-                            color: Colors.white,
                             shape: BoxShape.circle,
                             boxShadow: [
                               BoxShadow(
@@ -122,7 +121,14 @@ class _SplashPageState extends State<SplashPage> with SingleTickerProviderStateM
                               ),
                             ],
                           ),
-                          child: const Icon(Icons.account_balance_wallet_rounded, size: 60, color: AppColors.primary),
+                          child: ClipOval(
+                            child: Image.asset(
+                              'assets/icons/app_icon.png',
+                              width: 120,
+                              height: 120,
+                              fit: BoxFit.cover,
+                            ),
+                          ),
                         ),
                       ),
                     );
