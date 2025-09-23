@@ -64,7 +64,9 @@ class _MainNavigationState extends State<MainNavigation> {
               children: [
                 Expanded(child: _buildNavItem(Icons.home_outlined, Icons.home, context.l10n.home, 0)),
                 Expanded(child: _buildNavItem(Icons.pie_chart_outline, Icons.pie_chart, context.l10n.budget, 1)),
-                Expanded(child: _buildNavItem(Icons.receipt_long_outlined, Icons.receipt_long, context.l10n.transactions, 2)),
+                Expanded(
+                  child: _buildNavItem(Icons.receipt_long_outlined, Icons.receipt_long, context.l10n.transactions, 2),
+                ),
                 Expanded(child: _buildNavItem(Icons.category_outlined, Icons.category, context.l10n.categories, 3)),
                 Expanded(child: _buildNavItem(Icons.person_outline, Icons.person, context.l10n.profile, 4)),
               ],
@@ -77,7 +79,7 @@ class _MainNavigationState extends State<MainNavigation> {
 
   Widget _buildNavItem(IconData icon, IconData activeIcon, String label, int index) {
     final isSelected = _currentIndex == index;
-    return GestureDetector(
+    return InkWell(
       onTap: () {
         setState(() {
           _currentIndex = index;
