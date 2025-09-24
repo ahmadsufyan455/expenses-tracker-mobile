@@ -27,7 +27,7 @@ class TransactionBloc extends Bloc<TransactionEvent, TransactionState> {
 
   int page = 1;
   int perPage = 10;
-  String sortBy = 'date';
+  String sortBy = 'created_at';
   String sortOrder = 'desc';
 
   TransactionBloc(
