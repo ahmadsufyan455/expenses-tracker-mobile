@@ -15,7 +15,7 @@ class NewTransactionRequest {
   final int categoryId;
   @JsonKey(name: 'description')
   final String description;
-  @JsonKey(name: 'date')
+  @JsonKey(name: 'transaction_date')
   final String date;
 
   NewTransactionRequest({

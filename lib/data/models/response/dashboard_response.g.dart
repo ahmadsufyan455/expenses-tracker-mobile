@@ -53,7 +53,7 @@ DashboardTransactionResponse _$DashboardTransactionResponseFromJson(
   amount: (json['amount'] as num).toInt(),
   type: json['type'] as String,
   category: json['category'] as String,
-  date: json['date'] as String,
+  date: json['transaction_date'] as String,
 );
 
 DashboardTopExpenseResponse _$DashboardTopExpenseResponseFromJson(

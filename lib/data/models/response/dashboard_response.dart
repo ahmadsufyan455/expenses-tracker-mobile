@@ -92,7 +92,7 @@ class DashboardTransactionResponse {
   @JsonKey(name: 'category')
   final String category;
 
-  @JsonKey(name: 'date')
+  @JsonKey(name: 'transaction_date')
   final String date;
 
   const DashboardTransactionResponse({

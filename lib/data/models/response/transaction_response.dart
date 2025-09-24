@@ -20,7 +20,7 @@ class TransactionResponse {
   final String createdAt;
   @JsonKey(name: 'updated_at')
   final String updatedAt;
-  @JsonKey(name: 'date')
+  @JsonKey(name: 'transaction_date')
   final String date;
 
   TransactionResponse({

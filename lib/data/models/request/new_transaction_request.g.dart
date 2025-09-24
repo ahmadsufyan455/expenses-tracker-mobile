@@ -16,7 +16,7 @@ NewTransactionRequest _$NewTransactionRequestFromJson(
   ),
   categoryId: (json['category_id'] as num).toInt(),
   description: json['description'] as String,
-  date: json['date'] as String,
+  date: json['transaction_date'] as String,
 );
 
 Map<String, dynamic> _$NewTransactionRequestToJson(
@@ -29,5 +29,5 @@ Map<String, dynamic> _$NewTransactionRequestToJson(
   ),
   'category_id': instance.categoryId,
   'description': instance.description,
-  'date': instance.date,
+  'transaction_date': instance.date,
 };
