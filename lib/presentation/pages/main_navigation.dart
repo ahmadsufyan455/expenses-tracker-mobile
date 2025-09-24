@@ -51,62 +51,43 @@ class _MainNavigationState extends State<MainNavigation> {
       ),
       bottomNavigationBar: Container(
         decoration: BoxDecoration(
-          color: Theme.of(context).colorScheme.surface,
           boxShadow: [
             BoxShadow(color: Colors.black.withValues(alpha: 0.1), offset: const Offset(0, -1), blurRadius: 8),
           ],
         ),
-        child: SafeArea(
-          child: SizedBox(
-            height: 64,
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceAround,
-              children: [
-                Expanded(child: _buildNavItem(Icons.home_outlined, Icons.home, context.l10n.home, 0)),
-                Expanded(child: _buildNavItem(Icons.pie_chart_outline, Icons.pie_chart, context.l10n.budget, 1)),
-                Expanded(
-                  child: _buildNavItem(Icons.receipt_long_outlined, Icons.receipt_long, context.l10n.transactions, 2),
-                ),
-                Expanded(child: _buildNavItem(Icons.category_outlined, Icons.category, context.l10n.categories, 3)),
-                Expanded(child: _buildNavItem(Icons.person_outline, Icons.person, context.l10n.profile, 4)),
-              ],
+        child: NavigationBar(
+          selectedIndex: _currentIndex,
+          onDestinationSelected: (index) {
+            setState(() {
+              _currentIndex = index;
+            });
+          },
+          indicatorColor: AppColors.primary.withValues(alpha: 0.15),
+          destinations: [
+            NavigationDestination(
+              icon: const Icon(Icons.home_outlined),
+              selectedIcon: const Icon(Icons.home, color: AppColors.primary),
+              label: context.l10n.home,
             ),
-          ),
-        ),
-      ),
-    );
-  }
-
-  Widget _buildNavItem(IconData icon, IconData activeIcon, String label, int index) {
-    final isSelected = _currentIndex == index;
-    return InkWell(
-      onTap: () {
-        setState(() {
-          _currentIndex = index;
-        });
-      },
-      child: Container(
-        padding: const EdgeInsets.symmetric(vertical: 4),
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Icon(
-              isSelected ? activeIcon : icon,
-              color: isSelected ? AppColors.primary : Theme.of(context).colorScheme.onSurfaceVariant,
-              size: 22,
+            NavigationDestination(
+              icon: const Icon(Icons.pie_chart_outline),
+              selectedIcon: const Icon(Icons.pie_chart, color: AppColors.primary),
+              label: context.l10n.budget,
             ),
-            const SizedBox(height: 2),
-            Text(
-              label,
-              style: TextStyle(
-                fontSize: 11,
-                color: isSelected ? AppColors.primary : Theme.of(context).colorScheme.onSurfaceVariant,
-                fontWeight: isSelected ? FontWeight.w600 : FontWeight.normal,
-              ),
-              textAlign: TextAlign.center,
-              maxLines: 1,
-              overflow: TextOverflow.ellipsis,
+            NavigationDestination(
+              icon: const Icon(Icons.receipt_long_outlined),
+              selectedIcon: const Icon(Icons.receipt_long, color: AppColors.primary),
+              label: context.l10n.transactions,
+            ),
+            NavigationDestination(
+              icon: const Icon(Icons.category_outlined),
+              selectedIcon: const Icon(Icons.category, color: AppColors.primary),
+              label: context.l10n.categories,
+            ),
+            NavigationDestination(
+              icon: const Icon(Icons.person_outline),
+              selectedIcon: const Icon(Icons.person, color: AppColors.primary),
+              label: context.l10n.profile,
             ),
           ],
         ),
