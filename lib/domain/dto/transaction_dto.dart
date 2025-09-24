@@ -9,6 +9,7 @@ class TransactionDto {
   final TransactionCategoryDto category;
   final String paymentMethod;
   final String type;
+  final String date;
 
   TransactionDto({
     required this.id,
@@ -19,6 +20,7 @@ class TransactionDto {
     required this.category,
     required this.paymentMethod,
     required this.type,
+    required this.date,
   });
 
   factory TransactionDto.fromResponse(TransactionResponse response) {
@@ -31,6 +33,7 @@ class TransactionDto {
       category: TransactionCategoryDto(id: response.category?.id ?? 0, name: response.category?.name ?? ''),
       paymentMethod: response.paymentMethod,
       type: response.type,
+      date: response.date,
     );
   }
 

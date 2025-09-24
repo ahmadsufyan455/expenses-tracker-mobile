@@ -57,7 +57,7 @@ class _TransactionDetailBottomSheetState extends State<TransactionDetailBottomSh
         final formattedAmount = LocalizationUtils.formatCurrency(context, amount.toDouble());
 
         // Format date using localized short date format pattern
-        final DateTime transactionDate = DateTime.parse(widget.transaction.createdAt);
+        final DateTime transactionDate = DateTime.parse(widget.transaction.date);
         final fullDate = LocalizationUtils.formatShortDate(context, transactionDate);
 
         final isDeleting = state is DeleteTransactionLoading;

@@ -2,18 +2,15 @@ import 'package:expense_tracker_mobile/app/theme/app_colors.dart';
 import 'package:expense_tracker_mobile/app/theme/app_dimensions.dart';
 import 'package:expense_tracker_mobile/app/theme/app_text_styles.dart';
 import 'package:expense_tracker_mobile/core/extensions/build_context_extensions.dart';
-import 'package:expense_tracker_mobile/core/utils/localization_utils.dart';
 import 'package:expense_tracker_mobile/core/utils/category_icon_utils.dart';
+import 'package:expense_tracker_mobile/core/utils/localization_utils.dart';
 import 'package:expense_tracker_mobile/presentation/pages/home/bloc/home_bloc.dart';
 import 'package:flutter/material.dart';
 
 class TransactionItemCard extends StatelessWidget {
   final TransactionItem transaction;
 
-  const TransactionItemCard({
-    super.key,
-    required this.transaction,
-  });
+  const TransactionItemCard({super.key, required this.transaction});
 
   @override
   Widget build(BuildContext context) {
@@ -24,25 +21,12 @@ class TransactionItemCard extends StatelessWidget {
       margin: const EdgeInsets.only(bottom: AppDimensions.spaceS),
       padding: AppDimensions.paddingAllM,
       decoration: BoxDecoration(
-        color: isDarkMode
-            ? theme.colorScheme.surfaceContainerHighest
-            : theme.colorScheme.surface,
+        color: isDarkMode ? theme.colorScheme.surfaceContainerHighest : theme.colorScheme.surface,
         borderRadius: BorderRadius.circular(AppDimensions.radiusM),
-        border: isDarkMode
-            ? Border.all(
-                color: theme.colorScheme.outline.withValues(alpha: 0.15),
-                width: 1,
-              )
-            : null,
+        border: isDarkMode ? Border.all(color: theme.colorScheme.outline.withValues(alpha: 0.15), width: 1) : null,
         boxShadow: isDarkMode
             ? null
-            : [
-                BoxShadow(
-                  color: theme.shadowColor.withValues(alpha: 0.06),
-                  blurRadius: 6,
-                  offset: const Offset(0, 1),
-                ),
-              ],
+            : [BoxShadow(color: theme.shadowColor.withValues(alpha: 0.06), blurRadius: 6, offset: const Offset(0, 1))],
       ),
       child: Row(
         children: [
@@ -51,12 +35,8 @@ class TransactionItemCard extends StatelessWidget {
             height: 44,
             decoration: BoxDecoration(
               color: transaction.isExpense
-                  ? (isDarkMode
-                      ? AppColors.error.withValues(alpha: 0.2)
-                      : AppColors.error.withValues(alpha: 0.1))
-                  : (isDarkMode
-                      ? AppColors.success.withValues(alpha: 0.2)
-                      : AppColors.success.withValues(alpha: 0.1)),
+                  ? (isDarkMode ? AppColors.error.withValues(alpha: 0.2) : AppColors.error.withValues(alpha: 0.1))
+                  : (isDarkMode ? AppColors.success.withValues(alpha: 0.2) : AppColors.success.withValues(alpha: 0.1)),
               borderRadius: BorderRadius.circular(AppDimensions.radiusM),
               border: Border.all(
                 color: transaction.isExpense
@@ -66,9 +46,7 @@ class TransactionItemCard extends StatelessWidget {
             ),
             child: Icon(
               CategoryIconUtils.getCategoryIcon(transaction.category),
-              color: transaction.isExpense
-                  ? AppColors.error
-                  : AppColors.success,
+              color: transaction.isExpense ? AppColors.error : AppColors.success,
               size: 22,
             ),
           ),
@@ -90,9 +68,7 @@ class TransactionItemCard extends StatelessWidget {
                 const SizedBox(height: 2),
                 Text(
                   _formatDate(transaction.date, context),
-                  style: AppTextStyles.labelMedium.copyWith(
-                    color: theme.colorScheme.onSurfaceVariant,
-                  ),
+                  style: AppTextStyles.labelMedium.copyWith(color: theme.colorScheme.onSurfaceVariant),
                 ),
               ],
             ),
@@ -102,20 +78,15 @@ class TransactionItemCard extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.end,
             children: [
               Text(
-                '${transaction.isExpense ? '-' : '+'}${LocalizationUtils.formatCurrency(context, transaction.amount)}',
+                '${transaction.isExpense ? '-' : '+'}${LocalizationUtils.formatCurrency(context, transaction.amount.toDouble())}',
                 style: AppTextStyles.titleMedium.copyWith(
-                  color: transaction.isExpense
-                      ? AppColors.error
-                      : AppColors.success,
+                  color: transaction.isExpense ? AppColors.error : AppColors.success,
                   fontWeight: FontWeight.bold,
                 ),
               ),
               const SizedBox(height: 2),
               Container(
-                padding: const EdgeInsets.symmetric(
-                  horizontal: AppDimensions.paddingS,
-                  vertical: 2,
-                ),
+                padding: const EdgeInsets.symmetric(horizontal: AppDimensions.paddingS, vertical: 2),
                 decoration: BoxDecoration(
                   color: transaction.isExpense
                       ? AppColors.error.withValues(alpha: 0.1)
@@ -125,9 +96,7 @@ class TransactionItemCard extends StatelessWidget {
                 child: Text(
                   transaction.isExpense ? context.l10n.expense : context.l10n.income,
                   style: AppTextStyles.labelSmall.copyWith(
-                    color: transaction.isExpense
-                        ? AppColors.error
-                        : AppColors.success,
+                    color: transaction.isExpense ? AppColors.error : AppColors.success,
                     fontWeight: FontWeight.w600,
                   ),
                 ),
@@ -138,7 +107,6 @@ class TransactionItemCard extends StatelessWidget {
       ),
     );
   }
-
 
   String _formatDate(DateTime date, BuildContext context) {
     final now = DateTime.now();

@@ -12,9 +12,9 @@ final class HomeInitial extends HomeState {}
 final class HomeLoading extends HomeState {}
 
 final class HomeLoaded extends HomeState {
-  final double totalIncome;
-  final double totalExpense;
-  final double netBalance;
+  final int totalIncome;
+  final int totalExpense;
+  final int netBalance;
   final double savingsRate;
   final String currentFilter;
   final List<BudgetItem> recentBudgets;
@@ -58,8 +58,8 @@ final class HomeError extends HomeState {
 // Data classes for mock data
 class BudgetItem extends Equatable {
   final String name;
-  final double allocated;
-  final double used;
+  final int allocated;
+  final int used;
   final String category;
 
   const BudgetItem({required this.name, required this.allocated, required this.used, required this.category});
@@ -73,7 +73,7 @@ class BudgetItem extends Equatable {
 
 class TransactionItem extends Equatable {
   final String id;
-  final double amount;
+  final int amount;
   final String description;
   final String category;
   final DateTime date;
@@ -94,7 +94,7 @@ class TransactionItem extends Equatable {
 
 class TopExpenseItem extends Equatable {
   final String category;
-  final double amount;
+  final int amount;
   final double percentage;
 
   const TopExpenseItem({required this.category, required this.amount, required this.percentage});

@@ -38,7 +38,7 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
 
   Future<void> _loadHomeData(Emitter<HomeState> emit, String filter) async {
     try {
-      final result = await _getDashboardUsecase(month: filter);
+      final result = await _getDashboardUsecase.call(month: filter);
 
       result.fold((failure) => emit(HomeError(message: failure.message, filter: filter)), (dashboard) {
         final budgets = dashboard.budgets

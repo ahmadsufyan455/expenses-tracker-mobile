@@ -4,8 +4,10 @@ import 'package:expense_tracker_mobile/app/theme/app_dimensions.dart';
 import 'package:expense_tracker_mobile/app/theme/app_text_styles.dart';
 import 'package:expense_tracker_mobile/core/extensions/build_context_extensions.dart';
 import 'package:expense_tracker_mobile/core/services/session_service.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
+import 'package:network_logger/network_logger.dart';
 
 class SplashPage extends StatefulWidget {
   const SplashPage({super.key});
@@ -25,9 +27,9 @@ class _SplashPageState extends State<SplashPage> with SingleTickerProviderStateM
     super.initState();
     _setupAnimations();
     _startSplashSequence();
-    // if (kDebugMode) {
-    //   NetworkLoggerOverlay.attachTo(context);
-    // }
+    if (kDebugMode) {
+      NetworkLoggerOverlay.attachTo(context);
+    }
   }
 
   void _setupAnimations() {
@@ -122,12 +124,7 @@ class _SplashPageState extends State<SplashPage> with SingleTickerProviderStateM
                             ],
                           ),
                           child: ClipOval(
-                            child: Image.asset(
-                              'assets/icons/app_icon.png',
-                              width: 120,
-                              height: 120,
-                              fit: BoxFit.cover,
-                            ),
+                            child: Image.asset('assets/icons/app_icon.png', width: 120, height: 120, fit: BoxFit.cover),
                           ),
                         ),
                       ),

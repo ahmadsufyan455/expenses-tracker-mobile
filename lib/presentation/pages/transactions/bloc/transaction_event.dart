@@ -13,6 +13,7 @@ class CreateTransactionEvent extends TransactionEvent {
   final String paymentMethod;
   final int categoryId;
   final String description;
+  final String date;
 
   const CreateTransactionEvent({
     required this.amount,
@@ -20,10 +21,11 @@ class CreateTransactionEvent extends TransactionEvent {
     required this.paymentMethod,
     required this.categoryId,
     required this.description,
+    required this.date,
   });
 
   @override
-  List<Object> get props => [amount, type, paymentMethod, categoryId, description];
+  List<Object> get props => [amount, type, paymentMethod, categoryId, description, date];
 }
 
 class GetCategoryEvent extends TransactionEvent {
@@ -63,6 +65,7 @@ class UpdateTransactionEvent extends TransactionEvent {
   final String paymentMethod;
   final int categoryId;
   final String description;
+  final String date;
 
   const UpdateTransactionEvent({
     required this.id,
@@ -71,8 +74,9 @@ class UpdateTransactionEvent extends TransactionEvent {
     required this.paymentMethod,
     required this.categoryId,
     required this.description,
+    required this.date,
   });
 
   @override
-  List<Object> get props => [id, amount, type, paymentMethod, categoryId, description];
+  List<Object> get props => [id, amount, type, paymentMethod, categoryId, description, date];
 }

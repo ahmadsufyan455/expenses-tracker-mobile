@@ -20,6 +20,7 @@ TransactionResponse _$TransactionResponseFromJson(Map<String, dynamic> json) =>
       description: json['description'] as String?,
       createdAt: json['created_at'] as String,
       updatedAt: json['updated_at'] as String,
+      date: json['date'] as String,
     );
 
 TransactionCategoryResponse _$TransactionCategoryResponseFromJson(

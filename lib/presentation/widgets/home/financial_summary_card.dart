@@ -6,7 +6,7 @@ import 'package:flutter/material.dart';
 
 class FinancialSummaryCard extends StatelessWidget {
   final String title;
-  final double amount;
+  final int amount;
   final Color color;
   final IconData icon;
   final bool isCompact;
@@ -25,29 +25,17 @@ class FinancialSummaryCard extends StatelessWidget {
     final theme = Theme.of(context);
 
     return Container(
-      padding: isCompact
-          ? AppDimensions.paddingAllS
-          : AppDimensions.paddingAllM,
+      padding: isCompact ? AppDimensions.paddingAllS : AppDimensions.paddingAllM,
       decoration: BoxDecoration(
-        color: theme.brightness == Brightness.dark
-            ? color.withValues(alpha: 0.15)
-            : color.withValues(alpha: 0.08),
+        color: theme.brightness == Brightness.dark ? color.withValues(alpha: 0.15) : color.withValues(alpha: 0.08),
         borderRadius: BorderRadius.circular(AppDimensions.radiusM),
         border: Border.all(
-          color: theme.brightness == Brightness.dark
-              ? color.withValues(alpha: 0.3)
-              : color.withValues(alpha: 0.2),
+          color: theme.brightness == Brightness.dark ? color.withValues(alpha: 0.3) : color.withValues(alpha: 0.2),
           width: 1,
         ),
         boxShadow: theme.brightness == Brightness.dark
             ? null
-            : [
-                BoxShadow(
-                  color: color.withValues(alpha: 0.1),
-                  blurRadius: 8,
-                  offset: const Offset(0, 2),
-                ),
-              ],
+            : [BoxShadow(color: color.withValues(alpha: 0.1), blurRadius: 8, offset: const Offset(0, 2))],
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -61,20 +49,13 @@ class FinancialSummaryCard extends StatelessWidget {
                   color: color.withValues(alpha: 0.15),
                   borderRadius: BorderRadius.circular(AppDimensions.radiusS),
                 ),
-                child: Icon(
-                  icon,
-                  color: color,
-                  size: isCompact ? 16 : 20,
-                ),
+                child: Icon(icon, color: color, size: isCompact ? 16 : 20),
               ),
               const SizedBox(width: AppDimensions.spaceS),
               Expanded(
                 child: Text(
                   title,
-                  style: (isCompact
-                      ? AppTextStyles.labelSmall
-                      : AppTextStyles.labelMedium)
-                      .copyWith(
+                  style: (isCompact ? AppTextStyles.labelSmall : AppTextStyles.labelMedium).copyWith(
                     color: color,
                     fontWeight: FontWeight.w600,
                   ),
@@ -84,15 +65,10 @@ class FinancialSummaryCard extends StatelessWidget {
               ),
             ],
           ),
-          SizedBox(height: isCompact
-              ? AppDimensions.spaceXS
-              : AppDimensions.spaceS),
+          SizedBox(height: isCompact ? AppDimensions.spaceXS : AppDimensions.spaceS),
           Text(
-            LocalizationUtils.formatCurrency(context, amount),
-            style: (isCompact
-                ? AppTextStyles.titleSmall
-                : AppTextStyles.titleLarge)
-                .copyWith(
+            LocalizationUtils.formatCurrency(context, amount.toDouble()),
+            style: (isCompact ? AppTextStyles.titleSmall : AppTextStyles.titleLarge).copyWith(
               color: color,
               fontWeight: FontWeight.bold,
             ),
@@ -110,12 +86,7 @@ class SavingsRateCard extends StatelessWidget {
   final double rate;
   final bool isCompact;
 
-  const SavingsRateCard({
-    super.key,
-    required this.title,
-    required this.rate,
-    this.isCompact = false,
-  });
+  const SavingsRateCard({super.key, required this.title, required this.rate, this.isCompact = false});
 
   @override
   Widget build(BuildContext context) {
@@ -123,33 +94,21 @@ class SavingsRateCard extends StatelessWidget {
     final Color color = rate >= 20
         ? AppColors.success
         : rate >= 10
-            ? Colors.orange
-            : AppColors.error;
+        ? Colors.orange
+        : AppColors.error;
 
     return Container(
-      padding: isCompact
-          ? AppDimensions.paddingAllS
-          : AppDimensions.paddingAllM,
+      padding: isCompact ? AppDimensions.paddingAllS : AppDimensions.paddingAllM,
       decoration: BoxDecoration(
-        color: theme.brightness == Brightness.dark
-            ? color.withValues(alpha: 0.15)
-            : color.withValues(alpha: 0.08),
+        color: theme.brightness == Brightness.dark ? color.withValues(alpha: 0.15) : color.withValues(alpha: 0.08),
         borderRadius: BorderRadius.circular(AppDimensions.radiusM),
         border: Border.all(
-          color: theme.brightness == Brightness.dark
-              ? color.withValues(alpha: 0.3)
-              : color.withValues(alpha: 0.2),
+          color: theme.brightness == Brightness.dark ? color.withValues(alpha: 0.3) : color.withValues(alpha: 0.2),
           width: 1,
         ),
         boxShadow: theme.brightness == Brightness.dark
             ? null
-            : [
-                BoxShadow(
-                  color: color.withValues(alpha: 0.1),
-                  blurRadius: 8,
-                  offset: const Offset(0, 2),
-                ),
-              ],
+            : [BoxShadow(color: color.withValues(alpha: 0.1), blurRadius: 8, offset: const Offset(0, 2))],
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -163,20 +122,13 @@ class SavingsRateCard extends StatelessWidget {
                   color: color.withValues(alpha: 0.15),
                   borderRadius: BorderRadius.circular(AppDimensions.radiusS),
                 ),
-                child: Icon(
-                  Icons.savings,
-                  color: color,
-                  size: isCompact ? 16 : 20,
-                ),
+                child: Icon(Icons.savings, color: color, size: isCompact ? 16 : 20),
               ),
               const SizedBox(width: AppDimensions.spaceS),
               Expanded(
                 child: Text(
                   title,
-                  style: (isCompact
-                      ? AppTextStyles.labelSmall
-                      : AppTextStyles.labelMedium)
-                      .copyWith(
+                  style: (isCompact ? AppTextStyles.labelSmall : AppTextStyles.labelMedium).copyWith(
                     color: color,
                     fontWeight: FontWeight.w600,
                   ),
@@ -186,15 +138,10 @@ class SavingsRateCard extends StatelessWidget {
               ),
             ],
           ),
-          SizedBox(height: isCompact
-              ? AppDimensions.spaceXS
-              : AppDimensions.spaceS),
+          SizedBox(height: isCompact ? AppDimensions.spaceXS : AppDimensions.spaceS),
           Text(
             '${rate.toStringAsFixed(1)}%',
-            style: (isCompact
-                ? AppTextStyles.titleSmall
-                : AppTextStyles.titleLarge)
-                .copyWith(
+            style: (isCompact ? AppTextStyles.titleSmall : AppTextStyles.titleLarge).copyWith(
               color: color,
               fontWeight: FontWeight.bold,
             ),

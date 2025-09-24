@@ -18,7 +18,7 @@ class TransactionItem extends StatelessWidget {
     final paymentMethod = PaymentMethod.fromString(transaction.paymentMethod.toLowerCase().replaceAll(' ', '_'));
     final amount = transaction.amount.abs();
     final formattedAmount = LocalizationUtils.formatCurrency(context, amount.toDouble());
-    final relativeDate = LocalizationUtils.getRelativeDate(context, transaction.createdAt);
+    final relativeDate = LocalizationUtils.getRelativeDate(context, transaction.date);
 
     return Container(
       margin: AppDimensions.paddingVerticalS,
@@ -28,91 +28,78 @@ class TransactionItem extends StatelessWidget {
             : theme.colorScheme.surface,
         borderRadius: BorderRadius.circular(AppDimensions.radiusM),
         border: theme.brightness == Brightness.dark
-            ? Border.all(
-                color: theme.colorScheme.outline.withValues(alpha: 0.2),
-                width: 1,
-              )
+            ? Border.all(color: theme.colorScheme.outline.withValues(alpha: 0.2), width: 1)
             : null,
         boxShadow: theme.brightness == Brightness.dark
             ? null
-            : [
-                BoxShadow(
-                  color: theme.shadowColor.withValues(alpha: 0.08),
-                  blurRadius: 8,
-                  offset: const Offset(0, 2),
-                ),
-              ],
+            : [BoxShadow(color: theme.shadowColor.withValues(alpha: 0.08), blurRadius: 8, offset: const Offset(0, 2))],
       ),
       child: InkWell(
         onTap: onTap,
         borderRadius: BorderRadius.circular(AppDimensions.radiusM),
         child: Padding(
-            padding: AppDimensions.paddingAllM,
-            child: Row(
-              children: [
-                _buildTransactionIcon(transactionType),
-                const SizedBox(width: AppDimensions.spaceM),
-                Expanded(
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Expanded(
-                            child: Text(
-                              transaction.category.name,
-                              style: theme.textTheme.titleMedium,
-                              overflow: TextOverflow.ellipsis,
-                            ),
+          padding: AppDimensions.paddingAllM,
+          child: Row(
+            children: [
+              _buildTransactionIcon(transactionType),
+              const SizedBox(width: AppDimensions.spaceM),
+              Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Expanded(
+                          child: Text(
+                            transaction.category.name,
+                            style: theme.textTheme.titleMedium,
+                            overflow: TextOverflow.ellipsis,
                           ),
-                          Text(
-                            '${transactionType == TransactionType.income ? '+' : '-'}$formattedAmount',
-                            style: transactionType == TransactionType.income
-                                ? AppTextStyles.incomeAmount.copyWith(fontSize: 16)
-                                : AppTextStyles.expenseAmount.copyWith(fontSize: 16),
-                          ),
-                        ],
-                      ),
-                      const SizedBox(height: AppDimensions.spaceXS),
-                      Row(
-                        children: [
-                          Icon(
-                            paymentMethod.icon,
-                            size: AppDimensions.iconXS,
-                            color: theme.colorScheme.onSurfaceVariant,
-                          ),
-                          const SizedBox(width: AppDimensions.spaceXS),
-                          Text(
-                            paymentMethod.getDisplayName(context),
-                            style: theme.textTheme.bodySmall?.copyWith(color: theme.colorScheme.onSurfaceVariant),
-                          ),
-                          const SizedBox(width: AppDimensions.spaceS),
-                          Icon(Icons.circle, size: 4, color: theme.colorScheme.onSurfaceVariant),
-                          const SizedBox(width: AppDimensions.spaceS),
-                          Text(
-                            relativeDate,
-                            style: theme.textTheme.bodySmall?.copyWith(color: theme.colorScheme.onSurfaceVariant),
-                          ),
-                        ],
-                      ),
-                      if (transaction.description != null && transaction.description!.isNotEmpty) ...[
-                        const SizedBox(height: AppDimensions.spaceXS),
+                        ),
                         Text(
-                          transaction.description!,
-                          style: theme.textTheme.bodySmall?.copyWith(color: theme.colorScheme.onSurfaceVariant),
-                          maxLines: 1,
-                          overflow: TextOverflow.ellipsis,
+                          '${transactionType == TransactionType.income ? '+' : '-'}$formattedAmount',
+                          style: transactionType == TransactionType.income
+                              ? AppTextStyles.incomeAmount.copyWith(fontSize: 16)
+                              : AppTextStyles.expenseAmount.copyWith(fontSize: 16),
                         ),
                       ],
+                    ),
+                    const SizedBox(height: AppDimensions.spaceXS),
+                    Row(
+                      children: [
+                        Icon(paymentMethod.icon, size: AppDimensions.iconXS, color: theme.colorScheme.onSurfaceVariant),
+                        const SizedBox(width: AppDimensions.spaceXS),
+                        Text(
+                          paymentMethod.getDisplayName(context),
+                          style: theme.textTheme.bodySmall?.copyWith(color: theme.colorScheme.onSurfaceVariant),
+                        ),
+                        const SizedBox(width: AppDimensions.spaceS),
+                        Icon(Icons.circle, size: 4, color: theme.colorScheme.onSurfaceVariant),
+                        const SizedBox(width: AppDimensions.spaceS),
+                        Text(
+                          relativeDate,
+                          style: theme.textTheme.bodySmall?.copyWith(color: theme.colorScheme.onSurfaceVariant),
+                        ),
+                      ],
+                    ),
+                    if (transaction.description != null && transaction.description!.isNotEmpty) ...[
+                      const SizedBox(height: AppDimensions.spaceXS),
+                      Text(
+                        transaction.description!,
+                        style: theme.textTheme.bodySmall?.copyWith(color: theme.colorScheme.onSurfaceVariant),
+                        maxLines: 1,
+                        overflow: TextOverflow.ellipsis,
+                      ),
                     ],
-                  ),
+                  ],
                 ),
-              ],
-            ),
+              ),
+            ],
           ),
         ),
-      );
+      ),
+    );
   }
 
   Widget _buildTransactionIcon(TransactionType transactionType) {

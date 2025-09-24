@@ -60,7 +60,7 @@ class TopExpensesPieChart extends StatelessWidget {
       final color = colors[index % colors.length];
 
       return PieChartSectionData(
-        value: expense.amount,
+        value: expense.amount.toDouble(),
         title: '${expense.percentage.toStringAsFixed(1)}%',
         color: color,
         radius: 50,

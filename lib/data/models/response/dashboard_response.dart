@@ -33,13 +33,13 @@ class DashboardResponse {
 @JsonSerializable(createToJson: false)
 class DashboardSummaryResponse {
   @JsonKey(name: 'total_income')
-  final double totalIncome;
+  final int totalIncome;
 
   @JsonKey(name: 'total_expenses')
-  final double totalExpenses;
+  final int totalExpenses;
 
   @JsonKey(name: 'net_balance')
-  final double netBalance;
+  final int netBalance;
 
   @JsonKey(name: 'savings_rate')
   final double savingsRate;
@@ -60,10 +60,10 @@ class DashboardBudgetResponse {
   final String category;
 
   @JsonKey(name: 'spent')
-  final double spent;
+  final int spent;
 
   @JsonKey(name: 'limit')
-  final double limit;
+  final int limit;
 
   @JsonKey(name: 'percentage')
   final double percentage;
@@ -84,7 +84,7 @@ class DashboardTransactionResponse {
   final int id;
 
   @JsonKey(name: 'amount')
-  final double amount;
+  final int amount;
 
   @JsonKey(name: 'type')
   final String type;
@@ -113,7 +113,7 @@ class DashboardTopExpenseResponse {
   final String category;
 
   @JsonKey(name: 'amount')
-  final double amount;
+  final int amount;
 
   @JsonKey(name: 'percentage')
   final double percentage;

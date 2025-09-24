@@ -27,7 +27,7 @@ class TransactionBloc extends Bloc<TransactionEvent, TransactionState> {
 
   int page = 1;
   int perPage = 10;
-  String sortBy = 'created_at';
+  String sortBy = 'date';
   String sortOrder = 'desc';
 
   TransactionBloc(
@@ -66,6 +66,7 @@ class TransactionBloc extends Bloc<TransactionEvent, TransactionState> {
       paymentMethod: PaymentMethod.fromString(event.paymentMethod),
       categoryId: event.categoryId,
       description: event.description,
+      date: event.date,
     );
     final result = await _createTransactionUsecase.call(request);
     result.fold(
@@ -149,6 +150,7 @@ class TransactionBloc extends Bloc<TransactionEvent, TransactionState> {
       paymentMethod: PaymentMethod.fromString(event.paymentMethod),
       categoryId: event.categoryId,
       description: event.description,
+      date: event.date,
     );
     final result = await _updateTransactionUsecase.call(event.id, request);
     result.fold(

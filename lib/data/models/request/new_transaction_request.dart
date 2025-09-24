@@ -15,6 +15,8 @@ class NewTransactionRequest {
   final int categoryId;
   @JsonKey(name: 'description')
   final String description;
+  @JsonKey(name: 'date')
+  final String date;
 
   NewTransactionRequest({
     required this.amount,
@@ -22,17 +24,17 @@ class NewTransactionRequest {
     required this.paymentMethod,
     required this.categoryId,
     required this.description,
+    required this.date,
   });
 
   // JSON serialization helpers
   static TransactionType _transactionTypeFromJson(String json) => TransactionType.fromString(json);
   static String _transactionTypeToJson(TransactionType type) => type.value;
-  
+
   static PaymentMethod _paymentMethodFromJson(String json) => PaymentMethod.fromString(json);
   static String _paymentMethodToJson(PaymentMethod method) => method.value;
 
-  factory NewTransactionRequest.fromJson(Map<String, dynamic> json) =>
-      _$NewTransactionRequestFromJson(json);
+  factory NewTransactionRequest.fromJson(Map<String, dynamic> json) => _$NewTransactionRequestFromJson(json);
 
   Map<String, dynamic> toJson() => _$NewTransactionRequestToJson(this);
 }

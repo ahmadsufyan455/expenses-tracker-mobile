@@ -41,7 +41,7 @@ class _TransactionsPageState extends State<TransactionsPage> {
     final Map<String, List<TransactionDto>> grouped = {};
 
     for (final transaction in transactions) {
-      final section = LocalizationUtils.getTransactionSection(context, transaction.createdAt);
+      final section = LocalizationUtils.getTransactionSection(context, transaction.date);
       if (grouped[section] == null) {
         grouped[section] = [];
       }
@@ -186,16 +186,11 @@ class _TransactionsPageState extends State<TransactionsPage> {
           children: [
             Icon(Icons.receipt_long_outlined, size: 64, color: Theme.of(context).colorScheme.onSurfaceVariant),
             const SizedBox(height: AppDimensions.spaceL),
-            Text(
-              context.l10n.transactions,
-              style: theme.textTheme.headlineMedium,
-            ),
+            Text(context.l10n.transactions, style: theme.textTheme.headlineMedium),
             const SizedBox(height: AppDimensions.spaceS),
             Text(
               context.l10n.manageTransactions,
-              style: theme.textTheme.bodyMedium?.copyWith(
-                color: theme.colorScheme.onSurfaceVariant,
-              ),
+              style: theme.textTheme.bodyMedium?.copyWith(color: theme.colorScheme.onSurfaceVariant),
               textAlign: TextAlign.center,
             ),
             const SizedBox(height: AppDimensions.spaceXL),
@@ -219,10 +214,7 @@ class _TransactionsPageState extends State<TransactionsPage> {
   }
 
   Future<void> _navigateToAddTransaction() async {
-    final result = await Navigator.pushNamed(
-      context,
-      RouteName.addTransaction.path,
-    );
+    final result = await Navigator.pushNamed(context, RouteName.addTransaction.path);
 
     // Refresh the transaction list if a new transaction was added
     if (result == true) {

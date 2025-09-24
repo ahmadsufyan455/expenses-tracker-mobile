@@ -27,9 +27,9 @@ class DashboardDto {
 }
 
 class DashboardSummaryDto {
-  final double totalIncome;
-  final double totalExpenses;
-  final double netBalance;
+  final int totalIncome;
+  final int totalExpenses;
+  final int netBalance;
   final double savingsRate;
 
   DashboardSummaryDto({
@@ -51,16 +51,11 @@ class DashboardSummaryDto {
 
 class DashboardBudgetDto {
   final String category;
-  final double spent;
-  final double limit;
+  final int spent;
+  final int limit;
   final double percentage;
 
-  DashboardBudgetDto({
-    required this.category,
-    required this.spent,
-    required this.limit,
-    required this.percentage,
-  });
+  DashboardBudgetDto({required this.category, required this.spent, required this.limit, required this.percentage});
 
   bool get isOverBudget => spent > limit;
 
@@ -80,7 +75,7 @@ class DashboardBudgetDto {
 
 class DashboardTransactionDto {
   final int id;
-  final double amount;
+  final int amount;
   final String type;
   final String category;
   final DateTime date;
@@ -112,14 +107,10 @@ class DashboardTransactionDto {
 
 class DashboardTopExpenseDto {
   final String category;
-  final double amount;
+  final int amount;
   final double percentage;
 
-  DashboardTopExpenseDto({
-    required this.category,
-    required this.amount,
-    required this.percentage,
-  });
+  DashboardTopExpenseDto({required this.category, required this.amount, required this.percentage});
 
   factory DashboardTopExpenseDto.fromResponse(DashboardTopExpenseResponse response) {
     return DashboardTopExpenseDto(

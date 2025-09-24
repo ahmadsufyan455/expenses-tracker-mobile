@@ -29,6 +29,7 @@ class _AddTransactionPageState extends State<AddTransactionPage> {
 
   final _amountController = TextEditingController();
   final _descriptionController = TextEditingController();
+  DateTime _selectedDate = DateTime.now();
 
   TransactionType _selectedType = TransactionType.expense;
   PaymentMethod? _selectedPaymentMethod;
@@ -53,6 +54,7 @@ class _AddTransactionPageState extends State<AddTransactionPage> {
       // Truncate description if it's longer than 150 characters
       final description = widget.transaction!.description ?? '';
       _descriptionController.text = description.length > 150 ? description.substring(0, 150) : description;
+      _selectedDate = DateTime.parse(widget.transaction!.date);
     }
   }
 
@@ -181,6 +183,37 @@ class _AddTransactionPageState extends State<AddTransactionPage> {
                   ),
                   const SizedBox(height: 16),
 
+                  // Date Picker
+                  InkWell(
+                    onTap: () async {
+                      final pickedDate = await showDatePicker(
+                        context: context,
+                        initialDate: _selectedDate,
+                        firstDate: DateTime(2000),
+                        lastDate: DateTime(2100),
+                      );
+                      if (pickedDate != null) {
+                        setState(() {
+                          _selectedDate = pickedDate;
+                        });
+                      }
+                    },
+                    child: InputDecorator(
+                      decoration: InputDecoration(
+                        labelText: context.l10n.date,
+                        border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(12),
+                        ),
+                        suffixIcon: const Icon(Icons.calendar_today),
+                      ),
+                      child: Text(
+                        '${_selectedDate.year}-${_selectedDate.month.toString().padLeft(2, '0')}-${_selectedDate.day.toString().padLeft(2, '0')}',
+                        style: const TextStyle(fontSize: 16),
+                      ),
+                    ),
+                  ),
+                  const SizedBox(height: 16),
+
                   // Payment Method Selection
                   Text(context.l10n.paymentMethod, style: const TextStyle(fontSize: 16, fontWeight: FontWeight.w600)),
                   const SizedBox(height: 12),
@@ -275,6 +308,7 @@ class _AddTransactionPageState extends State<AddTransactionPage> {
 
       // Parse formatted amount (e.g., "10.000" -> 10000)
       final amount = NumberUtils.parseFromFormattedString(_amountController.text);
+      final formattedDate = '${_selectedDate.year}-${_selectedDate.month.toString().padLeft(2, '0')}-${_selectedDate.day.toString().padLeft(2, '0')}';
 
       if (_isUpdate()) {
         _bloc.add(
@@ -285,6 +319,7 @@ class _AddTransactionPageState extends State<AddTransactionPage> {
             paymentMethod: _selectedPaymentMethod!.value,
             categoryId: _selectedCategory?.id ?? 0,
             description: _descriptionController.text,
+            date: formattedDate,
           ),
         );
       } else {
@@ -295,6 +330,7 @@ class _AddTransactionPageState extends State<AddTransactionPage> {
             paymentMethod: _selectedPaymentMethod!.value,
             categoryId: _selectedCategory?.id ?? 0,
             description: _descriptionController.text,
+            date: formattedDate,
           ),
         );
       }

@@ -20,6 +20,8 @@ class TransactionResponse {
   final String createdAt;
   @JsonKey(name: 'updated_at')
   final String updatedAt;
+  @JsonKey(name: 'date')
+  final String date;
 
   TransactionResponse({
     required this.id,
@@ -30,6 +32,7 @@ class TransactionResponse {
     this.description,
     required this.createdAt,
     required this.updatedAt,
+    required this.date,
   });
 
   factory TransactionResponse.fromJson(Map<String, dynamic> json) => _$TransactionResponseFromJson(json);

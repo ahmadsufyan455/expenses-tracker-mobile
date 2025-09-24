@@ -9,10 +9,7 @@ import 'package:flutter/material.dart';
 class BudgetCard extends StatelessWidget {
   final BudgetItem budget;
 
-  const BudgetCard({
-    super.key,
-    required this.budget,
-  });
+  const BudgetCard({super.key, required this.budget});
 
   @override
   Widget build(BuildContext context) {
@@ -22,25 +19,12 @@ class BudgetCard extends StatelessWidget {
     return Container(
       margin: const EdgeInsets.only(bottom: AppDimensions.spaceM),
       decoration: BoxDecoration(
-        color: isDarkMode
-            ? theme.colorScheme.surfaceContainerHighest
-            : theme.colorScheme.surface,
+        color: isDarkMode ? theme.colorScheme.surfaceContainerHighest : theme.colorScheme.surface,
         borderRadius: BorderRadius.circular(AppDimensions.radiusM),
-        border: isDarkMode
-            ? Border.all(
-                color: theme.colorScheme.outline.withValues(alpha: 0.2),
-                width: 1,
-              )
-            : null,
+        border: isDarkMode ? Border.all(color: theme.colorScheme.outline.withValues(alpha: 0.2), width: 1) : null,
         boxShadow: isDarkMode
             ? null
-            : [
-                BoxShadow(
-                  color: theme.shadowColor.withValues(alpha: 0.08),
-                  blurRadius: 8,
-                  offset: const Offset(0, 2),
-                ),
-              ],
+            : [BoxShadow(color: theme.shadowColor.withValues(alpha: 0.08), blurRadius: 8, offset: const Offset(0, 2))],
       ),
       child: Column(
         children: [
@@ -83,9 +67,7 @@ class BudgetCard extends StatelessWidget {
                       child: Text(
                         '${budget.percentage.toStringAsFixed(1)}%',
                         style: AppTextStyles.labelSmall.copyWith(
-                          color: budget.isOverBudget
-                              ? AppColors.error
-                              : AppColors.success,
+                          color: budget.isOverBudget ? AppColors.error : AppColors.success,
                           fontWeight: FontWeight.w600,
                         ),
                       ),
@@ -94,10 +76,8 @@ class BudgetCard extends StatelessWidget {
                 ),
                 const SizedBox(height: AppDimensions.spaceS),
                 Text(
-                  '${LocalizationUtils.formatCurrency(context, budget.used)} / ${LocalizationUtils.formatCurrency(context, budget.allocated)}',
-                  style: AppTextStyles.bodyMedium.copyWith(
-                    color: theme.colorScheme.onSurfaceVariant,
-                  ),
+                  '${LocalizationUtils.formatCurrency(context, budget.used.toDouble())} / ${LocalizationUtils.formatCurrency(context, budget.allocated.toDouble())}',
+                  style: AppTextStyles.bodyMedium.copyWith(color: theme.colorScheme.onSurfaceVariant),
                 ),
                 const SizedBox(height: AppDimensions.spaceS),
               ],
@@ -129,9 +109,7 @@ class BudgetCard extends StatelessWidget {
                   child: Container(
                     height: 6,
                     decoration: BoxDecoration(
-                      color: budget.isOverBudget
-                          ? AppColors.error
-                          : AppColors.success,
+                      color: budget.isOverBudget ? AppColors.error : AppColors.success,
                       borderRadius: BorderRadius.circular(AppDimensions.radiusS),
                     ),
                   ),
@@ -146,18 +124,12 @@ class BudgetCard extends StatelessWidget {
               children: [
                 Text(
                   context.l10n.used,
-                  style: AppTextStyles.labelSmall.copyWith(
-                    color: theme.colorScheme.onSurfaceVariant,
-                  ),
+                  style: AppTextStyles.labelSmall.copyWith(color: theme.colorScheme.onSurfaceVariant),
                 ),
                 Text(
-                  budget.isOverBudget
-                      ? context.l10n.overBudget
-                      : context.l10n.withinBudget,
+                  budget.isOverBudget ? context.l10n.overBudget : context.l10n.withinBudget,
                   style: AppTextStyles.labelSmall.copyWith(
-                    color: budget.isOverBudget
-                        ? AppColors.error
-                        : AppColors.success,
+                    color: budget.isOverBudget ? AppColors.error : AppColors.success,
                     fontWeight: FontWeight.w600,
                   ),
                 ),
