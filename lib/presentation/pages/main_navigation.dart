@@ -55,41 +55,50 @@ class _MainNavigationState extends State<MainNavigation> {
             BoxShadow(color: Colors.black.withValues(alpha: 0.1), offset: const Offset(0, -1), blurRadius: 8),
           ],
         ),
-        child: NavigationBar(
-          selectedIndex: _currentIndex,
-          onDestinationSelected: (index) {
-            setState(() {
-              _currentIndex = index;
-            });
-          },
-          indicatorColor: AppColors.primary.withValues(alpha: 0.15),
-          destinations: [
-            NavigationDestination(
-              icon: const Icon(Icons.home_outlined),
-              selectedIcon: const Icon(Icons.home, color: AppColors.primary),
-              label: context.l10n.home,
+        child: Theme(
+          data: Theme.of(context).copyWith(
+            navigationBarTheme: NavigationBarThemeData(
+              labelTextStyle: WidgetStateProperty.all(Theme.of(context).textTheme.labelSmall),
             ),
-            NavigationDestination(
-              icon: const Icon(Icons.pie_chart_outline),
-              selectedIcon: const Icon(Icons.pie_chart, color: AppColors.primary),
-              label: context.l10n.budget,
-            ),
-            NavigationDestination(
-              icon: const Icon(Icons.receipt_long_outlined),
-              selectedIcon: const Icon(Icons.receipt_long, color: AppColors.primary),
-              label: context.l10n.transactions,
-            ),
-            NavigationDestination(
-              icon: const Icon(Icons.category_outlined),
-              selectedIcon: const Icon(Icons.category, color: AppColors.primary),
-              label: context.l10n.categories,
-            ),
-            NavigationDestination(
-              icon: const Icon(Icons.person_outline),
-              selectedIcon: const Icon(Icons.person, color: AppColors.primary),
-              label: context.l10n.profile,
-            ),
-          ],
+          ),
+          child: NavigationBar(
+            selectedIndex: _currentIndex,
+            onDestinationSelected: (index) {
+              setState(() {
+                _currentIndex = index;
+              });
+            },
+            indicatorColor: AppColors.primary.withValues(alpha: 0.15),
+            labelBehavior: NavigationDestinationLabelBehavior.alwaysShow,
+            height: 65,
+            destinations: [
+              NavigationDestination(
+                icon: const Icon(Icons.home_outlined),
+                selectedIcon: const Icon(Icons.home, color: AppColors.primary),
+                label: context.l10n.home,
+              ),
+              NavigationDestination(
+                icon: const Icon(Icons.pie_chart_outline),
+                selectedIcon: const Icon(Icons.pie_chart, color: AppColors.primary),
+                label: context.l10n.budget,
+              ),
+              NavigationDestination(
+                icon: const Icon(Icons.receipt_long_outlined),
+                selectedIcon: const Icon(Icons.receipt_long, color: AppColors.primary),
+                label: context.l10n.transactions,
+              ),
+              NavigationDestination(
+                icon: const Icon(Icons.category_outlined),
+                selectedIcon: const Icon(Icons.category, color: AppColors.primary),
+                label: context.l10n.categories,
+              ),
+              NavigationDestination(
+                icon: const Icon(Icons.person_outline),
+                selectedIcon: const Icon(Icons.person, color: AppColors.primary),
+                label: context.l10n.profile,
+              ),
+            ],
+          ),
         ),
       ),
     );
