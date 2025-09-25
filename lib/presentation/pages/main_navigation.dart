@@ -58,7 +58,9 @@ class _MainNavigationState extends State<MainNavigation> {
         child: Theme(
           data: Theme.of(context).copyWith(
             navigationBarTheme: NavigationBarThemeData(
-              labelTextStyle: WidgetStateProperty.all(Theme.of(context).textTheme.labelSmall?.copyWith(fontSize: 10)),
+              labelTextStyle: WidgetStateProperty.all(
+                Theme.of(context).textTheme.labelSmall?.copyWith(color: Theme.of(context).colorScheme.onSurface),
+              ),
             ),
           ),
           child: NavigationBar(
