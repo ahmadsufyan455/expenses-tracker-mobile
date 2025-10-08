@@ -572,9 +572,9 @@ class _ApiService implements ApiService {
   @override
   Future<BaseResponse<DashboardResponse>> getDashboard({
     String? month,
-    int? transactionLimit = 5,
-    int? expenseLimit = 3,
-    int? budgetLimit = 3,
+    int? transactionLimit,
+    int? expenseLimit,
+    int? budgetLimit,
   }) async {
     final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{
