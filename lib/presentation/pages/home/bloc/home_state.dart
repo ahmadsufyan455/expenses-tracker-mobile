@@ -14,6 +14,7 @@ final class HomeLoading extends HomeState {}
 final class HomeLoaded extends HomeState {
   final int totalIncome;
   final int totalExpense;
+  final int totalExpenseToday;
   final int netBalance;
   final double savingsRate;
   final String currentFilter;
@@ -24,6 +25,7 @@ final class HomeLoaded extends HomeState {
   const HomeLoaded({
     required this.totalIncome,
     required this.totalExpense,
+    required this.totalExpenseToday,
     required this.netBalance,
     required this.savingsRate,
     required this.currentFilter,
@@ -36,6 +38,7 @@ final class HomeLoaded extends HomeState {
   List<Object> get props => [
     totalIncome,
     totalExpense,
+    totalExpenseToday,
     netBalance,
     savingsRate,
     currentFilter,

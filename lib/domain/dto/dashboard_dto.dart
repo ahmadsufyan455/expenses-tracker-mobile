@@ -29,12 +29,14 @@ class DashboardDto {
 class DashboardSummaryDto {
   final int totalIncome;
   final int totalExpenses;
+  final int totalExpensesToday;
   final int netBalance;
   final double savingsRate;
 
   DashboardSummaryDto({
     required this.totalIncome,
     required this.totalExpenses,
+    required this.totalExpensesToday,
     required this.netBalance,
     required this.savingsRate,
   });
@@ -43,6 +45,7 @@ class DashboardSummaryDto {
     return DashboardSummaryDto(
       totalIncome: response.totalIncome,
       totalExpenses: response.totalExpenses,
+      totalExpensesToday: response.totalExpensesToday,
       netBalance: response.netBalance,
       savingsRate: response.savingsRate,
     );

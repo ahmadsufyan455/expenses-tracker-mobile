@@ -78,6 +78,7 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
             totalExpense: dashboard.summary.totalExpenses,
             netBalance: dashboard.summary.netBalance,
             savingsRate: dashboard.summary.savingsRate,
+            totalExpenseToday: dashboard.summary.totalExpensesToday,
             currentFilter: filter,
             recentBudgets: budgets,
             recentTransactions: transactions,

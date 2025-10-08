@@ -81,6 +81,7 @@ class FinancialSummaryCard extends StatelessWidget {
   }
 }
 
+/// ***this class is no longer used anymore
 class SavingsRateCard extends StatelessWidget {
   final String title;
   final double rate;

@@ -38,6 +38,9 @@ class DashboardSummaryResponse {
   @JsonKey(name: 'total_expenses')
   final int totalExpenses;
 
+  @JsonKey(name: 'total_expenses_today')
+  final int totalExpensesToday;
+
   @JsonKey(name: 'net_balance')
   final int netBalance;
 
@@ -47,6 +50,7 @@ class DashboardSummaryResponse {
   const DashboardSummaryResponse({
     required this.totalIncome,
     required this.totalExpenses,
+    required this.totalExpensesToday,
     required this.netBalance,
     required this.savingsRate,
   });

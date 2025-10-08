@@ -702,6 +702,9 @@ class AppLocalizationsId extends AppLocalizations {
   String get totalExpensesChart => 'Total Pengeluaran';
 
   @override
+  String get todayExpenses => 'Pengeluaran hari ini';
+
+  @override
   String get netBalanceChart => 'Saldo Bersih';
 
   @override

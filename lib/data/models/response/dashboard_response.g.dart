@@ -33,6 +33,7 @@ DashboardSummaryResponse _$DashboardSummaryResponseFromJson(
 ) => DashboardSummaryResponse(
   totalIncome: (json['total_income'] as num).toInt(),
   totalExpenses: (json['total_expenses'] as num).toInt(),
+  totalExpensesToday: (json['total_expenses_today'] as num).toInt(),
   netBalance: (json['net_balance'] as num).toInt(),
   savingsRate: (json['savings_rate'] as num).toDouble(),
 );

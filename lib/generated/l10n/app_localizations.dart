@@ -1412,6 +1412,12 @@ abstract class AppLocalizations {
   /// **'Total Expenses'**
   String get totalExpensesChart;
 
+  /// No description provided for @todayExpenses.
+  ///
+  /// In en, this message translates to:
+  /// **'Today Expenses'**
+  String get todayExpenses;
+
   /// No description provided for @netBalanceChart.
   ///
   /// In en, this message translates to:

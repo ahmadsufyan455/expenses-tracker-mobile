@@ -703,6 +703,9 @@ class AppLocalizationsEn extends AppLocalizations {
   String get totalExpensesChart => 'Total Expenses';
 
   @override
+  String get todayExpenses => 'Today Expenses';
+
+  @override
   String get netBalanceChart => 'Net Balance';
 
   @override

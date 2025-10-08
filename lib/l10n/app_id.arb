@@ -244,6 +244,7 @@
   "noBudgetData": "Tidak ada data anggaran tersedia",
   "totalIncomeChart": "Total Pemasukan",
   "totalExpensesChart": "Total Pengeluaran",
+  "todayExpenses": "Pengeluaran hari ini",
   "netBalanceChart": "Saldo Bersih",
   "savingsRateGauge": "Tingkat Tabungan",
   "income": "Pemasukan",

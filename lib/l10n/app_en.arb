@@ -361,6 +361,7 @@
   "noBudgetData": "No budget data available",
   "totalIncomeChart": "Total Income",
   "totalExpensesChart": "Total Expenses",
+  "todayExpenses": "Today Expenses",
   "netBalanceChart": "Net Balance",
   "savingsRateGauge": "Savings Rate",
   "income": "Income",

@@ -62,7 +62,13 @@ class OverviewSection extends StatelessWidget {
             ),
             const SizedBox(width: AppDimensions.spaceM),
             Expanded(
-              child: SavingsRateCard(title: context.l10n.savingsRate, rate: state.savingsRate, isCompact: true),
+              child: FinancialSummaryCard(
+                title: context.l10n.todayExpenses,
+                amount: state.totalExpenseToday,
+                color: AppColors.error,
+                icon: Icons.money_rounded,
+                isCompact: true,
+              ),
             ),
           ],
         ),
