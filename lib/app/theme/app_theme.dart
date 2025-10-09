@@ -266,7 +266,7 @@ class AppTheme {
       // Elevated Button Theme
       elevatedButtonTheme: ElevatedButtonThemeData(
         style: ElevatedButton.styleFrom(
-          backgroundColor: AppColors.primaryLight,
+          backgroundColor: AppColors.primaryDark,
           foregroundColor: AppColors.onPrimary,
           elevation: AppDimensions.cardElevation,
           minimumSize: const Size(double.infinity, AppDimensions.buttonHeightM),

@@ -88,15 +88,7 @@ class _SplashPageState extends State<SplashPage> with SingleTickerProviderStateM
 
     return Scaffold(
       body: Container(
-        decoration: BoxDecoration(
-          gradient: isDark
-              ? LinearGradient(
-                  begin: Alignment.topCenter,
-                  end: Alignment.bottomCenter,
-                  colors: [AppColors.backgroundDark, AppColors.surfaceDark],
-                )
-              : AppColors.primaryGradient,
-        ),
+        decoration: BoxDecoration(gradient: isDark ? AppColors.primaryGradientDark : AppColors.primaryGradient),
         child: SafeArea(
           child: Center(
             child: Column(
