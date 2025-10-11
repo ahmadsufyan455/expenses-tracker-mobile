@@ -72,18 +72,6 @@ class AppColors {
     end: Alignment.bottomRight,
   );
 
-  // Category Colors
-  static const List<Color> categoryColors = [
-    Color(0xFFE3F2FD), // Light Blue
-    Color(0xFFF3E5F5), // Light Purple
-    Color(0xFFE8F5E8), // Light Green
-    Color(0xFFFFF3E0), // Light Orange
-    Color(0xFFFFEBEE), // Light Red
-    Color(0xFFF1F8E9), // Light Lime
-    Color(0xFFE0F2F1), // Light Teal
-    Color(0xFFFCE4EC), // Light Pink
-  ];
-
   // Chart Colors
   static const List<Color> chartColors = [
     Color(0xFF4CAF50), // Green

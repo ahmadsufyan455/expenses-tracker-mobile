@@ -1,3 +1,4 @@
+import 'package:expense_tracker_mobile/app/theme/app_colors.dart';
 import 'package:expense_tracker_mobile/core/utils/number_utils.dart';
 import 'package:expense_tracker_mobile/domain/dto/dashboard_dto.dart';
 import 'package:fl_chart/fl_chart.dart';
@@ -43,21 +44,11 @@ class TopExpensesPieChart extends StatelessWidget {
 
   List<PieChartSectionData> _buildPieSections(BuildContext context) {
     final theme = Theme.of(context);
-    final colors = [
-      theme.colorScheme.primary,
-      theme.colorScheme.secondary,
-      theme.colorScheme.tertiary,
-      theme.colorScheme.error,
-      Colors.purple,
-      Colors.teal,
-      Colors.indigo,
-      Colors.pink,
-    ];
 
     return topExpenses.asMap().entries.map((entry) {
       final index = entry.key;
       final expense = entry.value;
-      final color = colors[index % colors.length];
+      final color = AppColors.chartColors[index % AppColors.chartColors.length];
 
       return PieChartSectionData(
         value: expense.amount.toDouble(),
@@ -82,23 +73,13 @@ class TopExpensesLegend extends StatelessWidget {
     }
 
     final theme = Theme.of(context);
-    final colors = [
-      theme.colorScheme.primary,
-      theme.colorScheme.secondary,
-      theme.colorScheme.tertiary,
-      theme.colorScheme.error,
-      Colors.purple,
-      Colors.teal,
-      Colors.indigo,
-      Colors.pink,
-    ];
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: topExpenses.asMap().entries.map((entry) {
         final index = entry.key;
         final expense = entry.value;
-        final color = colors[index % colors.length];
+        final color = AppColors.chartColors[index % AppColors.chartColors.length];
 
         return Padding(
           padding: const EdgeInsets.symmetric(vertical: 2),
