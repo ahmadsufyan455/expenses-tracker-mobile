@@ -1447,6 +1447,18 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Savings'**
   String get savings;
+
+  /// No description provided for @filterByStatus.
+  ///
+  /// In en, this message translates to:
+  /// **'Filter by Status'**
+  String get filterByStatus;
+
+  /// No description provided for @all.
+  ///
+  /// In en, this message translates to:
+  /// **'All'**
+  String get all;
 }
 
 class _AppLocalizationsDelegate

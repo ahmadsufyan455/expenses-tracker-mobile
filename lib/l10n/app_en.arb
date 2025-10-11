@@ -367,5 +367,7 @@
   "income": "Income",
   "expenses": "Expenses",
   "net": "Net",
-  "savings": "Savings"
+  "savings": "Savings",
+  "filterByStatus": "Filter by Status",
+  "all": "All"
 }

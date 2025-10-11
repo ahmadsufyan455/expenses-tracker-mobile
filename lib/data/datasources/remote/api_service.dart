@@ -74,6 +74,7 @@ abstract class ApiService {
     @Query('per_page') int perPage,
     @Query('sort_by') String sortBy,
     @Query('sort_order') String sortOrder,
+    @Query('status') int? status,
   );
 
   @POST('/budgets/')

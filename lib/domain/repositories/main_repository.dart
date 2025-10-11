@@ -36,6 +36,7 @@ abstract interface class MainRepository {
     int perPage,
     String sortBy,
     String sortOrder,
+    int? status,
   );
 
   Future<Either<Failure, String>> createBudget(BudgetRequest request);

@@ -17,4 +17,7 @@ extension BuildContextExtensions on BuildContext {
 
   /// Get current language code
   String get languageCode => locale.languageCode;
+
+  /// Get theme
+  ThemeData get theme => Theme.of(this);
 }

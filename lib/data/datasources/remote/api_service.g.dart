@@ -336,6 +336,7 @@ class _ApiService implements ApiService {
     int perPage,
     String sortBy,
     String sortOrder,
+    int? status,
   ) async {
     final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{
@@ -343,7 +344,9 @@ class _ApiService implements ApiService {
       r'per_page': perPage,
       r'sort_by': sortBy,
       r'sort_order': sortOrder,
+      r'status': status,
     };
+    queryParameters.removeWhere((k, v) => v == null);
     final _headers = <String, dynamic>{};
     const Map<String, dynamic>? _data = null;
     final _options = _setStreamType<BasePaginationResponse<BudgetResponse>>(

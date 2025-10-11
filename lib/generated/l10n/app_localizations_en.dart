@@ -719,4 +719,10 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get savings => 'Savings';
+
+  @override
+  String get filterByStatus => 'Filter by Status';
+
+  @override
+  String get all => 'All';
 }

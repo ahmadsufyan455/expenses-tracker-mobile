@@ -1,10 +1,10 @@
-import 'package:flutter/material.dart';
 import 'package:expense_tracker_mobile/core/extensions/build_context_extensions.dart';
+import 'package:flutter/material.dart';
 
 /// Budget status enum for tracking budget lifecycle
 enum BudgetStatus {
-  upcoming('upcoming'),
   active('active'),
+  upcoming('upcoming'),
   expired('expired');
 
   const BudgetStatus(this.value);
@@ -12,10 +12,7 @@ enum BudgetStatus {
 
   /// Create BudgetStatus from string value
   static BudgetStatus fromString(String value) {
-    return BudgetStatus.values.firstWhere(
-      (status) => status.value == value,
-      orElse: () => BudgetStatus.active,
-    );
+    return BudgetStatus.values.firstWhere((status) => status.value == value, orElse: () => BudgetStatus.active);
   }
 }
 
@@ -56,6 +53,19 @@ extension BudgetStatusExtension on BudgetStatus {
         return Icons.access_time;
     }
   }
+
+  /// Convert BudgetStatus to int for API
+  /// upcoming = 0, active = 1, expired = 2
+  int toInt() {
+    switch (this) {
+      case BudgetStatus.active:
+        return 1;
+      case BudgetStatus.upcoming:
+        return 2;
+      case BudgetStatus.expired:
+        return 3;
+    }
+  }
 }
 
 /// Prediction type enum for budget prediction options
@@ -70,10 +80,7 @@ enum PredictionType {
 
   /// Create PredictionType from string value
   static PredictionType fromString(String value) {
-    return PredictionType.values.firstWhere(
-      (type) => type.value == value,
-      orElse: () => PredictionType.daily,
-    );
+    return PredictionType.values.firstWhere((type) => type.value == value, orElse: () => PredictionType.daily);
   }
 }
 
