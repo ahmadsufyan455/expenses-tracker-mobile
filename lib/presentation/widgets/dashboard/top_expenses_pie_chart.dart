@@ -1,4 +1,5 @@
 import 'package:expense_tracker_mobile/app/theme/app_colors.dart';
+import 'package:expense_tracker_mobile/core/extensions/build_context_extensions.dart';
 import 'package:expense_tracker_mobile/core/utils/number_utils.dart';
 import 'package:expense_tracker_mobile/domain/dto/dashboard_dto.dart';
 import 'package:fl_chart/fl_chart.dart';
@@ -16,7 +17,7 @@ class TopExpensesPieChart extends StatelessWidget {
         height: 200,
         child: Center(
           child: Text(
-            'No data available',
+            context.l10n.noDataAvailable,
             style: Theme.of(
               context,
             ).textTheme.bodyMedium?.copyWith(color: Theme.of(context).colorScheme.onSurfaceVariant),
