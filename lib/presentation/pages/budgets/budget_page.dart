@@ -90,10 +90,12 @@ class _BudgetPageState extends State<BudgetPage> {
                             itemBuilder: (context, index) {
                               if (index < budgets.length) {
                                 final budget = budgets[index];
+                                final isBudgetExpired = budget.status == BudgetStatus.expired.toInt();
                                 return BudgetItem(
                                   budget: budget,
                                   categories: state.data.categories,
-                                  onTap: () => _showEditBudgetBottomSheet(budget),
+                                  isBudgetExpired: isBudgetExpired,
+                                  onTap: () => isBudgetExpired ? null : _showEditBudgetBottomSheet(budget),
                                   onDelete: () => _deleteBudget(budget.id),
                                 );
                               } else {
