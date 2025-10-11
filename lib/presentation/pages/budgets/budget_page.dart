@@ -57,7 +57,7 @@ class _BudgetPageState extends State<BudgetPage> {
             return const Center(child: CircularProgressIndicator());
           }
 
-          final budgets = _sortBudgetsByStatus(state.data.budgets);
+          final budgets = state.data.budgets;
 
           return Column(
             children: [
@@ -196,34 +196,5 @@ class _BudgetPageState extends State<BudgetPage> {
     } else if (state is DeleteBudgetFailure) {
       ErrorDialog.show(context, state.failure);
     }
-  }
-
-  /// Sort budgets by status: Active first, then Upcoming, then Expired
-  /// Within each status group, sort by start date (earliest first)
-  List<BudgetDto> _sortBudgetsByStatus(List<BudgetDto> budgets) {
-    final List<BudgetDto> sortedBudgets = [...budgets];
-
-    sortedBudgets.sort((a, b) {
-      // First, sort by status priority
-      final statusPriority = {BudgetStatus.active: 1, BudgetStatus.upcoming: 2, BudgetStatus.expired: 3};
-
-      final aPriority = statusPriority[a.budgetStatus] ?? 4;
-      final bPriority = statusPriority[b.budgetStatus] ?? 4;
-
-      if (aPriority != bPriority) {
-        return aPriority.compareTo(bPriority);
-      }
-
-      // If same status, sort by start date
-      // For active and upcoming: earliest start date first
-      // For expired: latest end date first (most recently expired first)
-      if (a.budgetStatus == BudgetStatus.expired) {
-        return b.endDate.compareTo(a.endDate);
-      } else {
-        return a.startDate.compareTo(b.startDate);
-      }
-    });
-
-    return sortedBudgets;
   }
 }
