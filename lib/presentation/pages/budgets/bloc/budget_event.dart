@@ -8,17 +8,19 @@ sealed class BudgetEvent extends Equatable {
 }
 
 class GetBudgetEvent extends BudgetEvent {
-  const GetBudgetEvent();
+  final int? status;
+  const GetBudgetEvent({this.status});
 
   @override
-  List<Object?> get props => [];
+  List<Object?> get props => [status];
 }
 
 class LoadMoreBudgetEvent extends BudgetEvent {
-  const LoadMoreBudgetEvent();
+  final int? status;
+  const LoadMoreBudgetEvent({this.status});
 
   @override
-  List<Object?> get props => [];
+  List<Object?> get props => [status];
 }
 
 class CreateBudgetEvent extends BudgetEvent {
@@ -41,7 +43,15 @@ class CreateBudgetEvent extends BudgetEvent {
   });
 
   @override
-  List<Object?> get props => [categoryId, amount, startDate, endDate, predictionEnabled, predictionType, predictionDaysCount];
+  List<Object?> get props => [
+    categoryId,
+    amount,
+    startDate,
+    endDate,
+    predictionEnabled,
+    predictionType,
+    predictionDaysCount,
+  ];
 }
 
 class UpdateBudgetEvent extends BudgetEvent {
@@ -66,7 +76,16 @@ class UpdateBudgetEvent extends BudgetEvent {
   });
 
   @override
-  List<Object?> get props => [id, categoryId, amount, startDate, endDate, predictionEnabled, predictionType, predictionDaysCount];
+  List<Object?> get props => [
+    id,
+    categoryId,
+    amount,
+    startDate,
+    endDate,
+    predictionEnabled,
+    predictionType,
+    predictionDaysCount,
+  ];
 }
 
 class DeleteBudgetEvent extends BudgetEvent {

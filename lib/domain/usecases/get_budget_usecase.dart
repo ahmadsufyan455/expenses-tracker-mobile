@@ -16,7 +16,8 @@ class GetBudgetUsecase {
     int perPage,
     String sortBy,
     String sortOrder,
+    int? status,
   ) async {
-    return await _mainRepository.getBudgets(page, perPage, sortBy, sortOrder);
+    return await _mainRepository.getBudgets(page, perPage, sortBy, sortOrder, status);
   }
 }

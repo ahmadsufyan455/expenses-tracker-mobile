@@ -28,6 +28,7 @@ class BudgetBloc extends Bloc<BudgetEvent, BudgetState> {
   int perPage = 10;
   String sortBy = 'status';
   String sortOrder = 'asc';
+  int? currentStatusFilter;
 
   BudgetBloc(
     this._getBudgetUsecase,
@@ -48,7 +49,8 @@ class BudgetBloc extends Bloc<BudgetEvent, BudgetState> {
 
     // Get budgets and categories concurrently
     page = 1;
-    final budgetResult = await _getBudgetUsecase.call(page, perPage, sortBy, sortOrder);
+    currentStatusFilter = event.status;
+    final budgetResult = await _getBudgetUsecase.call(page, perPage, sortBy, sortOrder, currentStatusFilter);
     final categoryResult = await _getCategoryUsecase.call();
 
     budgetResult.fold(
@@ -84,7 +86,7 @@ class BudgetBloc extends Bloc<BudgetEvent, BudgetState> {
     emit(GetBudgetSuccess(data: stateData));
 
     page++;
-    final budgetResult = await _getBudgetUsecase.call(page, perPage, sortBy, sortOrder);
+    final budgetResult = await _getBudgetUsecase.call(page, perPage, sortBy, sortOrder, currentStatusFilter);
 
     budgetResult.fold(
       (failure) {

@@ -718,4 +718,10 @@ class AppLocalizationsId extends AppLocalizations {
 
   @override
   String get savings => 'Tabungan';
+
+  @override
+  String get filterByStatus => 'Filter berdasarkan Status';
+
+  @override
+  String get all => 'Semua';
 }

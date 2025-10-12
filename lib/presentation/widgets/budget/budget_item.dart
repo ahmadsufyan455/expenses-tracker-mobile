@@ -10,10 +10,18 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
 class BudgetItem extends StatelessWidget {
-  const BudgetItem({super.key, required this.budget, required this.categories, this.onTap, this.onDelete});
+  const BudgetItem({
+    super.key,
+    required this.budget,
+    required this.categories,
+    this.isBudgetExpired = false,
+    this.onTap,
+    this.onDelete,
+  });
 
   final BudgetDto budget;
   final List<CategoryDto> categories;
+  final bool isBudgetExpired;
   final VoidCallback? onTap;
   final VoidCallback? onDelete;
 
@@ -107,7 +115,7 @@ class BudgetItem extends StatelessWidget {
                         ),
                         const SizedBox(width: AppDimensions.spaceXS),
                         IconButton(
-                          onPressed: () => _showDeleteConfirmation(context),
+                          onPressed: () => isBudgetExpired ? null : _showDeleteConfirmation(context),
                           icon: const Icon(Icons.delete_outline),
                           iconSize: 20,
                           constraints: const BoxConstraints(minWidth: 32, minHeight: 32),

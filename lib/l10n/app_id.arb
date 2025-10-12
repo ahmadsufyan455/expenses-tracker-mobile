@@ -250,5 +250,7 @@
   "income": "Pemasukan",
   "expenses": "Pengeluaran",
   "net": "Bersih",
-  "savings": "Tabungan"
+  "savings": "Tabungan",
+  "filterByStatus": "Filter berdasarkan Status",
+  "all": "Semua"
 }

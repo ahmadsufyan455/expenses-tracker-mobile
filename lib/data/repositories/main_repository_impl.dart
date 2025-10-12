@@ -110,9 +110,10 @@ class MainRepositoryImpl implements MainRepository {
     int perPage,
     String sortBy,
     String sortOrder,
+    int? status,
   ) async {
     try {
-      final response = await _apiService.getBudgets(page, perPage, sortBy, sortOrder);
+      final response = await _apiService.getBudgets(page, perPage, sortBy, sortOrder, status);
       return Right(response);
     } catch (e) {
       return Left(ErrorHandler.handleError(e));
