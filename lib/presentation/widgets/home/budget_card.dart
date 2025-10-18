@@ -84,7 +84,7 @@ class BudgetCard extends StatelessWidget {
             ),
           ),
           Container(
-            height: 6,
+            height: 10,
             margin: const EdgeInsets.symmetric(horizontal: AppDimensions.paddingM),
             decoration: BoxDecoration(
               color: isDarkMode
@@ -96,7 +96,7 @@ class BudgetCard extends StatelessWidget {
               children: [
                 Container(
                   width: double.infinity,
-                  height: 6,
+                  height: 10,
                   decoration: BoxDecoration(
                     color: isDarkMode
                         ? theme.colorScheme.outline.withValues(alpha: 0.2)
@@ -107,7 +107,7 @@ class BudgetCard extends StatelessWidget {
                 FractionallySizedBox(
                   widthFactor: (budget.percentage / 100).clamp(0.0, 1.0),
                   child: Container(
-                    height: 6,
+                    height: 10,
                     decoration: BoxDecoration(
                       color: budget.isOverBudget ? AppColors.error : AppColors.success,
                       borderRadius: BorderRadius.circular(AppDimensions.radiusS),
