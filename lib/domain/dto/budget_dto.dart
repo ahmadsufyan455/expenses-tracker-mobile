@@ -9,6 +9,7 @@ class BudgetDto {
   final int status;
   final DateTime startDate;
   final DateTime endDate;
+  final int remainingBudget;
   final bool predictionEnabled;
   final PredictionType? predictionType;
   final int? predictionDaysCount;
@@ -21,6 +22,7 @@ class BudgetDto {
     required this.status,
     required this.startDate,
     required this.endDate,
+    required this.remainingBudget,
     required this.predictionEnabled,
     this.predictionType,
     this.predictionDaysCount,
@@ -35,6 +37,7 @@ class BudgetDto {
       status: response.status,
       startDate: DateTime.parse(response.startDate),
       endDate: DateTime.parse(response.endDate),
+      remainingBudget: response.remainingBudget,
       predictionEnabled: response.predictionEnabled,
       predictionType: response.predictionType != null ? PredictionType.fromString(response.predictionType!) : null,
       predictionDaysCount: response.predictionDaysCount,

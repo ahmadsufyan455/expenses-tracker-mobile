@@ -599,7 +599,10 @@ class AppLocalizationsEn extends AppLocalizations {
   String get dailyAllowance => 'Daily Allowance';
 
   @override
-  String get remainingBudget => 'Remaining Budget';
+  String get spentAmount => 'Spent';
+
+  @override
+  String get remainingBudget => 'Remaining';
 
   @override
   String get predictionTitle => 'Budget Prediction';
