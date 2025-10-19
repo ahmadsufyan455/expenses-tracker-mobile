@@ -598,7 +598,10 @@ class AppLocalizationsId extends AppLocalizations {
   String get dailyAllowance => 'Tunjangan Harian';
 
   @override
-  String get remainingBudget => 'Sisa Anggaran';
+  String get spentAmount => 'Terpakai';
+
+  @override
+  String get remainingBudget => 'Tersisa';
 
   @override
   String get predictionTitle => 'Prediksi Anggaran';

@@ -1214,10 +1214,16 @@ abstract class AppLocalizations {
   /// **'Daily Allowance'**
   String get dailyAllowance;
 
+  /// No description provided for @spentAmount.
+  ///
+  /// In en, this message translates to:
+  /// **'Spent'**
+  String get spentAmount;
+
   /// No description provided for @remainingBudget.
   ///
   /// In en, this message translates to:
-  /// **'Remaining Budget'**
+  /// **'Remaining'**
   String get remainingBudget;
 
   /// No description provided for @predictionTitle.

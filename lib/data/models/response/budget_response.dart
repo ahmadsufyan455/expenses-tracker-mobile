@@ -17,6 +17,8 @@ class BudgetResponse {
   final String startDate;
   @JsonKey(name: 'end_date')
   final String endDate;
+  @JsonKey(name: 'remaining_budget')
+  final int remainingBudget;
   @JsonKey(name: 'prediction_enabled')
   final bool predictionEnabled;
   @JsonKey(name: 'prediction_type')
@@ -33,6 +35,7 @@ class BudgetResponse {
     required this.status,
     required this.startDate,
     required this.endDate,
+    required this.remainingBudget,
     required this.predictionEnabled,
     this.predictionType,
     this.predictionDaysCount,

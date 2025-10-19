@@ -105,17 +105,18 @@ class BudgetItem extends StatelessWidget {
                     Row(
                       mainAxisSize: MainAxisSize.min,
                       children: [
-                        IconButton(
-                          onPressed: onTap,
-                          icon: const Icon(Icons.edit_outlined),
-                          iconSize: 20,
-                          constraints: const BoxConstraints(minWidth: 32, minHeight: 32),
-                          padding: EdgeInsets.zero,
-                          tooltip: context.l10n.editBudget,
-                        ),
+                        if (!isBudgetExpired)
+                          IconButton(
+                            onPressed: onTap,
+                            icon: const Icon(Icons.edit_outlined),
+                            iconSize: 20,
+                            constraints: const BoxConstraints(minWidth: 32, minHeight: 32),
+                            padding: EdgeInsets.zero,
+                            tooltip: context.l10n.editBudget,
+                          ),
                         const SizedBox(width: AppDimensions.spaceXS),
                         IconButton(
-                          onPressed: () => isBudgetExpired ? null : _showDeleteConfirmation(context),
+                          onPressed: () => _showDeleteConfirmation(context),
                           icon: const Icon(Icons.delete_outline),
                           iconSize: 20,
                           constraints: const BoxConstraints(minWidth: 32, minHeight: 32),
@@ -168,6 +169,32 @@ class BudgetItem extends StatelessWidget {
                   ),
                 ),
 
+                // Spent and Remaining Budget
+                const SizedBox(height: AppDimensions.spaceM),
+                Row(
+                  children: [
+                    Expanded(
+                      child: _buildBudgetInfoCard(
+                        context,
+                        context.l10n.spentAmount,
+                        LocalizationUtils.formatCurrency(context, (budget.amount - budget.remainingBudget).toDouble()),
+                        Icons.shopping_cart_outlined,
+                        Colors.orange,
+                      ),
+                    ),
+                    const SizedBox(width: AppDimensions.spaceM),
+                    Expanded(
+                      child: _buildBudgetInfoCard(
+                        context,
+                        context.l10n.remainingBudget,
+                        LocalizationUtils.formatCurrency(context, budget.remainingBudget.toDouble()),
+                        Icons.savings_outlined,
+                        Colors.green,
+                      ),
+                    ),
+                  ],
+                ),
+
                 // Prediction information
                 if (budget.predictionEnabled && budget.prediction != null) ...[
                   const SizedBox(height: AppDimensions.spaceM),
@@ -215,12 +242,6 @@ class BudgetItem extends StatelessWidget {
                             ),
                           ],
                         ),
-                        const SizedBox(height: AppDimensions.spaceS),
-                        _buildPredictionInfo(
-                          context,
-                          context.l10n.remainingBudget,
-                          LocalizationUtils.formatCurrency(context, budget.prediction!.remainingBudget.toDouble()),
-                        ),
                       ],
                     ),
                   ),
@@ -229,6 +250,38 @@ class BudgetItem extends StatelessWidget {
             ),
           ),
         ),
+      ),
+    );
+  }
+
+  Widget _buildBudgetInfoCard(BuildContext context, String label, String value, IconData icon, Color color) {
+    final theme = Theme.of(context);
+    return Container(
+      padding: AppDimensions.paddingAllM,
+      decoration: BoxDecoration(
+        color: color.withValues(alpha: 0.1),
+        borderRadius: AppDimensions.borderRadiusS,
+        border: Border.all(color: color.withValues(alpha: 0.3), width: 1),
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Row(
+            children: [
+              Icon(icon, color: color, size: 16),
+              const SizedBox(width: AppDimensions.spaceXS),
+              Text(
+                label,
+                style: theme.textTheme.bodySmall?.copyWith(color: color, fontWeight: FontWeight.w500, fontSize: 11),
+              ),
+            ],
+          ),
+          const SizedBox(height: AppDimensions.spaceXS),
+          Text(
+            value,
+            style: theme.textTheme.titleSmall?.copyWith(color: color, fontWeight: FontWeight.bold),
+          ),
+        ],
       ),
     );
   }

@@ -4,7 +4,7 @@ publish_to: "none"
 version: 1.2.0+3
 
 environment:
-  sdk: ^3.8.1
+  sdk: ^3.9.2
 
 dependencies:
   animated_toggle_switch: ^0.8.5
