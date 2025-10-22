@@ -1,7 +1,7 @@
 name: expense_tracker_mobile
 description: "A new Flutter project."
 publish_to: "none"
-version: 1.2.1+4
+version: 1.2.2+5
 
 environment:
   sdk: ^3.9.2
@@ -23,6 +23,7 @@ dependencies:
   intl: ^0.20.2
   json_annotation: ^4.9.0
   network_logger: ^1.0.4
+  package_info_plus: ^9.0.0
   retrofit: ^4.7.2
   sentry_flutter: ^9.6.0
   shared_preferences: ^2.5.3

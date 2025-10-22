@@ -2,6 +2,7 @@ import 'package:expense_tracker_mobile/app/router.dart';
 import 'package:expense_tracker_mobile/app/theme/app_dimensions.dart';
 import 'package:expense_tracker_mobile/core/extensions/build_context_extensions.dart';
 import 'package:expense_tracker_mobile/core/services/session_service.dart';
+import 'package:expense_tracker_mobile/core/utils/package_info_utils.dart';
 import 'package:expense_tracker_mobile/presentation/pages/profile/bloc/profile_bloc.dart';
 import 'package:expense_tracker_mobile/presentation/widgets/common/confirmation_dialog.dart';
 import 'package:expense_tracker_mobile/presentation/widgets/common/error_dialog.dart';
@@ -131,6 +132,15 @@ class _ProfilePageState extends State<ProfilePage> {
                   subtitle: context.l10n.changePassword,
                   onTap: () async {
                     await ChangePasswordBottomSheet.show(context);
+                  },
+                ),
+
+                const SizedBox(height: 16),
+
+                FutureBuilder(
+                  future: PackageInfoUtils.appVersion(),
+                  builder: (context, asyncSnapshot) {
+                    return Text('Version ${asyncSnapshot.data}', style: theme.textTheme.bodyMedium);
                   },
                 ),
 

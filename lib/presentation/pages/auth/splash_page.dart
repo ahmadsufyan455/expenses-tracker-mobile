@@ -4,6 +4,7 @@ import 'package:expense_tracker_mobile/app/theme/app_dimensions.dart';
 import 'package:expense_tracker_mobile/app/theme/app_text_styles.dart';
 import 'package:expense_tracker_mobile/core/extensions/build_context_extensions.dart';
 import 'package:expense_tracker_mobile/core/services/session_service.dart';
+import 'package:expense_tracker_mobile/core/utils/package_info_utils.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
@@ -64,7 +65,7 @@ class _SplashPageState extends State<SplashPage> with SingleTickerProviderStateM
 
   void _startSplashSequence() {
     _animationController.forward();
-    Future.delayed(const Duration(milliseconds: 3000), () {
+    Future.delayed(const Duration(milliseconds: 2000), () {
       if (mounted) {
         if (_isLoggedIn()) {
           Navigator.pushReplacementNamed(context, RouteName.home.path);
@@ -193,6 +194,19 @@ class _SplashPageState extends State<SplashPage> with SingleTickerProviderStateM
                           valueColor: AlwaysStoppedAnimation<Color>(Colors.white),
                           strokeWidth: 2.0,
                         ),
+                      ),
+                    );
+                  },
+                ),
+                const Spacer(),
+                FutureBuilder(
+                  future: PackageInfoUtils.appVersion(),
+                  builder: (context, asyncSnapshot) {
+                    return Text(
+                      'Version ${asyncSnapshot.data}',
+                      style: theme.textTheme.bodyMedium?.copyWith(
+                        color: Colors.white.withValues(alpha: 0.8),
+                        fontWeight: FontWeight.w600,
                       ),
                     );
                   },
