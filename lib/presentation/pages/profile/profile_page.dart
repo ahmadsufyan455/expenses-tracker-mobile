@@ -134,9 +134,7 @@ class _ProfilePageState extends State<ProfilePage> {
                     await ChangePasswordBottomSheet.show(context);
                   },
                 ),
-
-                const SizedBox(height: 16),
-
+                const SizedBox(height: 4),
                 FutureBuilder(
                   future: PackageInfoUtils.appVersion(),
                   builder: (context, asyncSnapshot) {

@@ -75,10 +75,22 @@ class BudgetCard extends StatelessWidget {
                   ],
                 ),
                 const SizedBox(height: AppDimensions.spaceS),
-                Text(
-                  '${LocalizationUtils.formatCurrency(context, budget.used.toDouble())} / ${LocalizationUtils.formatCurrency(context, budget.allocated.toDouble())}',
-                  style: AppTextStyles.bodyMedium.copyWith(color: theme.colorScheme.onSurfaceVariant),
+                Row(
+                  children: [
+                    Text(
+                      LocalizationUtils.formatCurrency(context, budget.used.toDouble()),
+                      style: AppTextStyles.bodyMedium.copyWith(
+                        color: theme.colorScheme.onSurfaceVariant,
+                        fontWeight: FontWeight.w600,
+                      ),
+                    ),
+                    Text(
+                      ' / ${LocalizationUtils.formatCurrency(context, budget.allocated.toDouble())}',
+                      style: AppTextStyles.bodyMedium.copyWith(color: theme.colorScheme.onSurfaceVariant),
+                    ),
+                  ],
                 ),
+
                 const SizedBox(height: AppDimensions.spaceS),
               ],
             ),

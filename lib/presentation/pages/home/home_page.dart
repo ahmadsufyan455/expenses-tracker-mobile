@@ -38,15 +38,7 @@ class _HomePageState extends State<HomePage> {
 
     return Scaffold(
       backgroundColor: theme.colorScheme.surface,
-      appBar: AppBar(
-        backgroundColor: Colors.transparent,
-        elevation: 0,
-        scrolledUnderElevation: 0,
-        title: Text(
-          _getGreeting(context),
-          style: AppTextStyles.headlineMedium.copyWith(color: theme.colorScheme.onSurface, fontWeight: FontWeight.w700),
-        ),
-      ),
+      appBar: AppBar(title: Text(_getGreeting(context))),
       body: BlocBuilder<HomeBloc, HomeState>(
         bloc: _bloc,
         builder: (context, state) {
