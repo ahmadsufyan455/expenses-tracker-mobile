@@ -91,128 +91,143 @@ class _SplashPageState extends State<SplashPage> with SingleTickerProviderStateM
       body: Container(
         decoration: BoxDecoration(gradient: isDark ? AppColors.primaryGradientDark : AppColors.primaryGradient),
         child: SafeArea(
-          child: Center(
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                // Animated Logo/Icon
-                AnimatedBuilder(
-                  animation: _animationController,
-                  builder: (context, child) {
-                    return FadeTransition(
-                      opacity: _fadeAnimation,
-                      child: ScaleTransition(
-                        scale: _scaleAnimation,
-                        child: Container(
-                          width: 120,
-                          height: 120,
-                          decoration: BoxDecoration(
-                            shape: BoxShape.circle,
-                            boxShadow: [
-                              BoxShadow(
-                                color: Colors.black.withValues(alpha: 0.2),
-                                blurRadius: 20,
-                                offset: const Offset(0, 10),
+          child: Stack(
+            children: [
+              Center(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    // Animated Logo/Icon
+                    AnimatedBuilder(
+                      animation: _animationController,
+                      builder: (context, child) {
+                        return FadeTransition(
+                          opacity: _fadeAnimation,
+                          child: ScaleTransition(
+                            scale: _scaleAnimation,
+                            child: Container(
+                              width: 120,
+                              height: 120,
+                              decoration: BoxDecoration(
+                                shape: BoxShape.circle,
+                                boxShadow: [
+                                  BoxShadow(
+                                    color: Colors.black.withValues(alpha: 0.2),
+                                    blurRadius: 20,
+                                    offset: const Offset(0, 10),
+                                  ),
+                                ],
                               ),
-                            ],
+                              child: ClipOval(
+                                child: Image.asset(
+                                  'assets/icons/app_icon.png',
+                                  width: 120,
+                                  height: 120,
+                                  fit: BoxFit.cover,
+                                ),
+                              ),
+                            ),
                           ),
-                          child: ClipOval(
-                            child: Image.asset('assets/icons/app_icon.png', width: 120, height: 120, fit: BoxFit.cover),
+                        );
+                      },
+                    ),
+
+                    const SizedBox(height: AppDimensions.spaceXL),
+
+                    // Animated App Name
+                    AnimatedBuilder(
+                      animation: _slideAnimation,
+                      builder: (context, child) {
+                        return SlideTransition(
+                          position: _slideAnimation,
+                          child: FadeTransition(
+                            opacity: _fadeAnimation,
+                            child: Column(
+                              children: [
+                                Text(
+                                  'ExpenseTracker',
+                                  style: AppTextStyles.displayMedium.copyWith(
+                                    color: Colors.white,
+                                    fontWeight: FontWeight.bold,
+                                    letterSpacing: 1.2,
+                                  ),
+                                  textAlign: TextAlign.center,
+                                ),
+
+                                const SizedBox(height: AppDimensions.spaceM),
+
+                                // Tagline
+                                Text(
+                                  context.l10n.appTagline,
+                                  style: AppTextStyles.titleMedium.copyWith(
+                                    color: Colors.white.withValues(alpha: 0.9),
+                                    fontWeight: FontWeight.w500,
+                                    letterSpacing: 0.5,
+                                  ),
+                                  textAlign: TextAlign.center,
+                                ),
+
+                                const SizedBox(height: AppDimensions.spaceS),
+
+                                // Subtitle
+                                Text(
+                                  context.l10n.appSubtitle,
+                                  style: AppTextStyles.bodyLarge.copyWith(
+                                    color: Colors.white.withValues(alpha: 0.8),
+                                    fontWeight: FontWeight.w400,
+                                    letterSpacing: 2.0,
+                                  ),
+                                  textAlign: TextAlign.center,
+                                ),
+                              ],
+                            ),
                           ),
-                        ),
-                      ),
-                    );
-                  },
-                ),
+                        );
+                      },
+                    ),
 
-                const SizedBox(height: AppDimensions.spaceXL),
+                    const SizedBox(height: AppDimensions.spaceXXL),
 
-                // Animated App Name
-                AnimatedBuilder(
-                  animation: _slideAnimation,
-                  builder: (context, child) {
-                    return SlideTransition(
-                      position: _slideAnimation,
-                      child: FadeTransition(
-                        opacity: _fadeAnimation,
-                        child: Column(
-                          children: [
-                            Text(
-                              'ExpenseTracker',
-                              style: AppTextStyles.displayMedium.copyWith(
-                                color: Colors.white,
-                                fontWeight: FontWeight.bold,
-                                letterSpacing: 1.2,
-                              ),
-                              textAlign: TextAlign.center,
+                    // Loading Indicator
+                    AnimatedBuilder(
+                      animation: _fadeAnimation,
+                      builder: (context, child) {
+                        return FadeTransition(
+                          opacity: _fadeAnimation,
+                          child: const SizedBox(
+                            width: 24,
+                            height: 24,
+                            child: CircularProgressIndicator(
+                              valueColor: AlwaysStoppedAnimation<Color>(Colors.white),
+                              strokeWidth: 2.0,
                             ),
-
-                            const SizedBox(height: AppDimensions.spaceM),
-
-                            // Tagline
-                            Text(
-                              context.l10n.appTagline,
-                              style: AppTextStyles.titleMedium.copyWith(
-                                color: Colors.white.withValues(alpha: 0.9),
-                                fontWeight: FontWeight.w500,
-                                letterSpacing: 0.5,
-                              ),
-                              textAlign: TextAlign.center,
-                            ),
-
-                            const SizedBox(height: AppDimensions.spaceS),
-
-                            // Subtitle
-                            Text(
-                              context.l10n.appSubtitle,
-                              style: AppTextStyles.bodyLarge.copyWith(
-                                color: Colors.white.withValues(alpha: 0.8),
-                                fontWeight: FontWeight.w400,
-                                letterSpacing: 2.0,
-                              ),
-                              textAlign: TextAlign.center,
-                            ),
-                          ],
+                          ),
+                        );
+                      },
+                    ),
+                  ],
+                ),
+              ),
+              Positioned(
+                bottom: 16,
+                left: 0,
+                right: 0,
+                child: Center(
+                  child: FutureBuilder(
+                    future: PackageInfoUtils.appVersion(),
+                    builder: (context, asyncSnapshot) {
+                      return Text(
+                        'Version ${asyncSnapshot.data}',
+                        style: theme.textTheme.bodyMedium?.copyWith(
+                          color: Colors.white.withValues(alpha: 0.8),
+                          fontWeight: FontWeight.w600,
                         ),
-                      ),
-                    );
-                  },
+                      );
+                    },
+                  ),
                 ),
-
-                const SizedBox(height: AppDimensions.spaceXXL),
-
-                // Loading Indicator
-                AnimatedBuilder(
-                  animation: _fadeAnimation,
-                  builder: (context, child) {
-                    return FadeTransition(
-                      opacity: _fadeAnimation,
-                      child: const SizedBox(
-                        width: 24,
-                        height: 24,
-                        child: CircularProgressIndicator(
-                          valueColor: AlwaysStoppedAnimation<Color>(Colors.white),
-                          strokeWidth: 2.0,
-                        ),
-                      ),
-                    );
-                  },
-                ),
-                const Spacer(),
-                FutureBuilder(
-                  future: PackageInfoUtils.appVersion(),
-                  builder: (context, asyncSnapshot) {
-                    return Text(
-                      'Version ${asyncSnapshot.data}',
-                      style: theme.textTheme.bodyMedium?.copyWith(
-                        color: Colors.white.withValues(alpha: 0.8),
-                        fontWeight: FontWeight.w600,
-                      ),
-                    );
-                  },
-                ),
-              ],
-            ),
+              ),
+            ],
           ),
         ),
       ),
