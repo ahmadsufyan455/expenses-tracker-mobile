@@ -1514,6 +1514,24 @@ abstract class AppLocalizations {
   /// **'Last 30 Days'**
   String get last30Days;
 
+  /// No description provided for @currentMonth.
+  ///
+  /// In en, this message translates to:
+  /// **'Current Month'**
+  String get currentMonth;
+
+  /// No description provided for @defaultDashboardFilter.
+  ///
+  /// In en, this message translates to:
+  /// **'Default Dashboard Filter'**
+  String get defaultDashboardFilter;
+
+  /// No description provided for @defaultFilterDescription.
+  ///
+  /// In en, this message translates to:
+  /// **'Choose which period to show when opening dashboard'**
+  String get defaultFilterDescription;
+
   /// No description provided for @chooseCustomDateRange.
   ///
   /// In en, this message translates to:

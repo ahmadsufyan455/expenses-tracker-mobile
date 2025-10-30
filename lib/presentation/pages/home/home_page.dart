@@ -4,6 +4,7 @@ import 'package:expense_tracker_mobile/app/theme/app_dimensions.dart';
 import 'package:expense_tracker_mobile/app/theme/app_text_styles.dart';
 import 'package:expense_tracker_mobile/core/extensions/build_context_extensions.dart';
 import 'package:expense_tracker_mobile/core/utils/date_utils.dart' as app_date_utils;
+import 'package:expense_tracker_mobile/core/utils/preference_utils.dart';
 import 'package:expense_tracker_mobile/domain/dto/dashboard_dto.dart';
 import 'package:expense_tracker_mobile/presentation/pages/home/bloc/home_bloc.dart';
 import 'package:expense_tracker_mobile/presentation/widgets/dashboard/top_expenses_pie_chart.dart';
@@ -29,7 +30,14 @@ class _HomePageState extends State<HomePage> {
   void initState() {
     super.initState();
     _bloc = GetIt.instance<HomeBloc>();
-    _bloc.add(HomeStarted(app_date_utils.AppDateUtils.getCurrentMonthFilter()));
+    _initializeWithDefaultFilter();
+  }
+
+  Future<void> _initializeWithDefaultFilter() async {
+    // Get saved default filter or fall back to current month
+    final defaultFilter = await PreferenceUtils.getDefaultDashboardFilter();
+    final filter = defaultFilter ?? app_date_utils.AppDateUtils.getCurrentMonthFilter();
+    _bloc.add(HomeStarted(filter));
   }
 
   @override

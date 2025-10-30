@@ -217,15 +217,9 @@ class _OverviewSectionState extends State<OverviewSection> {
                   padding: const EdgeInsets.symmetric(horizontal: AppDimensions.paddingL),
                   child: InkWell(
                     onTap: () async {
-                      // First pop the bottom sheet
-                      Navigator.pop(bottomSheetContext);
-
-                      // Wait a bit for the bottom sheet animation to complete
-                      await Future.delayed(const Duration(milliseconds: 300));
-
-                      // Show date range picker
-                      if (context.mounted) {
-                        await _showDateRangePicker(context);
+                      final result = await _showDateRangePicker(context);
+                      if (context.mounted && result) {
+                        Navigator.pop(bottomSheetContext);
                       }
                     },
                     borderRadius: BorderRadius.circular(AppDimensions.radiusM),
@@ -345,7 +339,7 @@ class _OverviewSectionState extends State<OverviewSection> {
     );
   }
 
-  Future<void> _showDateRangePicker(BuildContext context) async {
+  Future<bool> _showDateRangePicker(BuildContext context) async {
     final now = DateTime.now();
 
     // Parse current custom period if exists
@@ -375,7 +369,10 @@ class _OverviewSectionState extends State<OverviewSection> {
         selectedDateRange.end,
       );
       onFilterChanged(filterString);
+
+      return true;
     }
+    return false;
   }
 
   Widget _buildQuickFilterCard(

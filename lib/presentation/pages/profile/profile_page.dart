@@ -2,12 +2,15 @@ import 'package:expense_tracker_mobile/app/router.dart';
 import 'package:expense_tracker_mobile/app/theme/app_dimensions.dart';
 import 'package:expense_tracker_mobile/core/extensions/build_context_extensions.dart';
 import 'package:expense_tracker_mobile/core/services/session_service.dart';
+import 'package:expense_tracker_mobile/core/utils/date_utils.dart' as app_date_utils;
 import 'package:expense_tracker_mobile/core/utils/package_info_utils.dart';
+import 'package:expense_tracker_mobile/core/utils/preference_utils.dart';
 import 'package:expense_tracker_mobile/presentation/pages/profile/bloc/profile_bloc.dart';
 import 'package:expense_tracker_mobile/presentation/widgets/common/confirmation_dialog.dart';
 import 'package:expense_tracker_mobile/presentation/widgets/common/error_dialog.dart';
 import 'package:expense_tracker_mobile/presentation/widgets/common/global_button.dart';
 import 'package:expense_tracker_mobile/presentation/widgets/profile/change_password_bottom_sheet.dart';
+import 'package:expense_tracker_mobile/presentation/widgets/profile/default_filter_bottom_sheet.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get_it/get_it.dart';
@@ -22,11 +25,22 @@ class ProfilePage extends StatefulWidget {
 class _ProfilePageState extends State<ProfilePage> {
   late ProfileBloc _bloc;
   final sessionService = GetIt.instance<SessionService>();
+  String? _defaultFilter;
 
   @override
   void initState() {
     super.initState();
     _bloc = GetIt.instance<ProfileBloc>()..add(GetProfileEvent());
+    _loadDefaultFilter();
+  }
+
+  Future<void> _loadDefaultFilter() async {
+    final filter = await PreferenceUtils.getDefaultDashboardFilter();
+    if (mounted) {
+      setState(() {
+        _defaultFilter = filter ?? app_date_utils.AppDateUtils.getCurrentMonthFilter();
+      });
+    }
   }
 
   @override
@@ -134,7 +148,23 @@ class _ProfilePageState extends State<ProfilePage> {
                     await ChangePasswordBottomSheet.show(context);
                   },
                 ),
-                const SizedBox(height: 4),
+
+                _buildProfileOption(
+                  theme: theme,
+                  icon: Icons.filter_list_outlined,
+                  title: context.l10n.defaultDashboardFilter,
+                  subtitle: _defaultFilter != null
+                      ? app_date_utils.AppDateUtils.formatFilterToDisplayName(context, _defaultFilter!)
+                      : context.l10n.defaultFilterDescription,
+                  onTap: () async {
+                    final result = await DefaultFilterBottomSheet.show(context, currentFilter: _defaultFilter);
+                    if (result != null) {
+                      await PreferenceUtils.saveDefaultDashboardFilter(result);
+                      await _loadDefaultFilter();
+                    }
+                  },
+                ),
+                // const SizedBox(height: 4),
                 FutureBuilder(
                   future: PackageInfoUtils.appVersion(),
                   builder: (context, asyncSnapshot) {

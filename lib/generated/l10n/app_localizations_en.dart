@@ -754,6 +754,16 @@ class AppLocalizationsEn extends AppLocalizations {
   String get last30Days => 'Last 30 Days';
 
   @override
+  String get currentMonth => 'Current Month';
+
+  @override
+  String get defaultDashboardFilter => 'Default Dashboard Filter';
+
+  @override
+  String get defaultFilterDescription =>
+      'Choose which period to show when opening dashboard';
+
+  @override
   String get chooseCustomDateRange => 'Choose custom date range';
 
   @override

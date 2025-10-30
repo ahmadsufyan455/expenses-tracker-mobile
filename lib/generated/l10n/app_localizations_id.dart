@@ -753,6 +753,16 @@ class AppLocalizationsId extends AppLocalizations {
   String get last30Days => '30 Hari Terakhir';
 
   @override
+  String get currentMonth => 'Bulan Ini';
+
+  @override
+  String get defaultDashboardFilter => 'Filter Dashboard Default';
+
+  @override
+  String get defaultFilterDescription =>
+      'Pilih periode yang ditampilkan saat membuka dashboard';
+
+  @override
   String get chooseCustomDateRange => 'Pilih rentang tanggal kustom';
 
   @override
