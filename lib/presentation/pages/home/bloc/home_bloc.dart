@@ -1,4 +1,5 @@
 import 'package:equatable/equatable.dart';
+import 'package:expense_tracker_mobile/core/utils/date_utils.dart' as app_date_utils;
 import 'package:expense_tracker_mobile/domain/usecases/get_dashboard_usecase.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:injectable/injectable.dart';
@@ -38,7 +39,10 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
 
   Future<void> _loadHomeData(Emitter<HomeState> emit, String filter) async {
     try {
-      final result = await _getDashboardUsecase.call(month: filter, expenseLimit: 10);
+      // Convert filter to start_date and end_date
+      final (startDate, endDate) = app_date_utils.AppDateUtils.getDateRangeFromFilter(filter);
+
+      final result = await _getDashboardUsecase.call(startDate: startDate, endDate: endDate, expenseLimit: 10);
 
       result.fold((failure) => emit(HomeError(message: failure.message, filter: filter)), (dashboard) {
         final budgets = dashboard.budgets

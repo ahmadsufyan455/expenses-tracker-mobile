@@ -1465,6 +1465,96 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'All'**
   String get all;
+
+  /// No description provided for @customPeriod.
+  ///
+  /// In en, this message translates to:
+  /// **'Custom Period'**
+  String get customPeriod;
+
+  /// No description provided for @selectCustomPeriod.
+  ///
+  /// In en, this message translates to:
+  /// **'Select Custom Period'**
+  String get selectCustomPeriod;
+
+  /// No description provided for @selectFilterPeriod.
+  ///
+  /// In en, this message translates to:
+  /// **'Select Filter Period'**
+  String get selectFilterPeriod;
+
+  /// No description provided for @selectPeriod.
+  ///
+  /// In en, this message translates to:
+  /// **'Select Period'**
+  String get selectPeriod;
+
+  /// No description provided for @monthlyPeriods.
+  ///
+  /// In en, this message translates to:
+  /// **'Monthly Periods'**
+  String get monthlyPeriods;
+
+  /// No description provided for @chooseCustomDateRange.
+  ///
+  /// In en, this message translates to:
+  /// **'Choose custom date range'**
+  String get chooseCustomDateRange;
+
+  /// No description provided for @apply.
+  ///
+  /// In en, this message translates to:
+  /// **'Apply'**
+  String get apply;
+
+  /// No description provided for @startDate.
+  ///
+  /// In en, this message translates to:
+  /// **'Start Date'**
+  String get startDate;
+
+  /// No description provided for @endDate.
+  ///
+  /// In en, this message translates to:
+  /// **'End Date'**
+  String get endDate;
+
+  /// No description provided for @selectStartDate.
+  ///
+  /// In en, this message translates to:
+  /// **'Select start date'**
+  String get selectStartDate;
+
+  /// No description provided for @selectEndDate.
+  ///
+  /// In en, this message translates to:
+  /// **'Select end date'**
+  String get selectEndDate;
+
+  /// No description provided for @applyFilter.
+  ///
+  /// In en, this message translates to:
+  /// **'Apply Filter'**
+  String get applyFilter;
+
+  /// No description provided for @endDateMustBeAfterStartDate.
+  ///
+  /// In en, this message translates to:
+  /// **'End date must be after start date'**
+  String get endDateMustBeAfterStartDate;
+
+  /// No description provided for @pleaseSelectBothDates.
+  ///
+  /// In en, this message translates to:
+  /// **'Please select both start and end dates'**
+  String get pleaseSelectBothDates;
+
+  /// Format for displaying custom period
+  ///
+  /// In en, this message translates to:
+  /// **'{startDate} - {endDate}'**
+  String customPeriodFormat(String startDate, String endDate);
 }
 
 class _AppLocalizationsDelegate

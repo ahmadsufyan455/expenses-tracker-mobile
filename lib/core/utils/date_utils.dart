@@ -12,8 +12,14 @@ class AppDateUtils {
   }
 
   /// Convert YYYY-MM format to localized month name with year
+  /// Also handles custom period filters (YYYY-MM-DD:YYYY-MM-DD)
   static String formatFilterToDisplayName(BuildContext context, String filter) {
     try {
+      // Check if it's a custom period filter
+      if (isCustomPeriodFilter(filter)) {
+        return formatCustomPeriodToDisplayName(context, filter);
+      }
+
       final parts = filter.split('-');
       if (parts.length != 2) return filter;
 
@@ -79,5 +85,104 @@ class AppDateUtils {
   /// Get the display name for current month
   static String getCurrentMonthDisplayName(BuildContext context) {
     return formatFilterToDisplayName(context, getCurrentMonthFilter());
+  }
+
+  /// Format custom period filter to string (YYYY-MM-DD:YYYY-MM-DD)
+  static String formatCustomPeriodFilter(DateTime startDate, DateTime endDate) {
+    final start =
+        '${startDate.year}-${startDate.month.toString().padLeft(2, '0')}-${startDate.day.toString().padLeft(2, '0')}';
+    final end = '${endDate.year}-${endDate.month.toString().padLeft(2, '0')}-${endDate.day.toString().padLeft(2, '0')}';
+    return '$start:$end';
+  }
+
+  /// Check if filter is a custom period filter
+  static bool isCustomPeriodFilter(String filter) {
+    return filter.contains(':');
+  }
+
+  /// Parse custom period filter to get start and end dates
+  static (DateTime?, DateTime?) parseCustomPeriodFilter(String filter) {
+    try {
+      if (!isCustomPeriodFilter(filter)) {
+        return (null, null);
+      }
+
+      final parts = filter.split(':');
+      if (parts.length != 2) {
+        return (null, null);
+      }
+
+      final startParts = parts[0].split('-');
+      final endParts = parts[1].split('-');
+
+      if (startParts.length != 3 || endParts.length != 3) {
+        return (null, null);
+      }
+
+      final startDate = DateTime(int.parse(startParts[0]), int.parse(startParts[1]), int.parse(startParts[2]));
+
+      final endDate = DateTime(int.parse(endParts[0]), int.parse(endParts[1]), int.parse(endParts[2]));
+
+      return (startDate, endDate);
+    } catch (e) {
+      return (null, null);
+    }
+  }
+
+  /// Format custom period filter to display name
+  static String formatCustomPeriodToDisplayName(BuildContext context, String filter) {
+    final (startDate, endDate) = parseCustomPeriodFilter(filter);
+
+    if (startDate == null || endDate == null) {
+      return filter;
+    }
+
+    final start =
+        '${startDate.year}-${startDate.month.toString().padLeft(2, '0')}-${startDate.day.toString().padLeft(2, '0')}';
+    final end = '${endDate.year}-${endDate.month.toString().padLeft(2, '0')}-${endDate.day.toString().padLeft(2, '0')}';
+
+    return '$start - $end';
+  }
+
+  /// Convert filter string to start and end date strings (YYYY-MM-DD format)
+  /// Returns (startDate, endDate) tuple
+  static (String?, String?) getDateRangeFromFilter(String filter) {
+    // Check if it's a custom period filter (YYYY-MM-DD:YYYY-MM-DD)
+    if (isCustomPeriodFilter(filter)) {
+      final (startDate, endDate) = parseCustomPeriodFilter(filter);
+      if (startDate != null && endDate != null) {
+        final start =
+            '${startDate.year}-${startDate.month.toString().padLeft(2, '0')}-${startDate.day.toString().padLeft(2, '0')}';
+        final end =
+            '${endDate.year}-${endDate.month.toString().padLeft(2, '0')}-${endDate.day.toString().padLeft(2, '0')}';
+        return (start, end);
+      }
+      return (null, null);
+    }
+
+    // Monthly filter (YYYY-MM)
+    try {
+      final parts = filter.split('-');
+      if (parts.length != 2) return (null, null);
+
+      final year = int.parse(parts[0]);
+      final month = int.parse(parts[1]);
+
+      if (month < 1 || month > 12) return (null, null);
+
+      // First day of the month
+      final startDate = DateTime(year, month, 1);
+      // Last day of the month
+      final endDate = DateTime(year, month + 1, 0);
+
+      final start =
+          '${startDate.year}-${startDate.month.toString().padLeft(2, '0')}-${startDate.day.toString().padLeft(2, '0')}';
+      final end =
+          '${endDate.year}-${endDate.month.toString().padLeft(2, '0')}-${endDate.day.toString().padLeft(2, '0')}';
+
+      return (start, end);
+    } catch (e) {
+      return (null, null);
+    }
   }
 }

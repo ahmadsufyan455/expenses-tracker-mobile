@@ -253,5 +253,20 @@
   "net": "Bersih",
   "savings": "Tabungan",
   "filterByStatus": "Filter berdasarkan Status",
-  "all": "Semua"
+  "all": "Semua",
+  "customPeriod": "Periode Kustom",
+  "selectCustomPeriod": "Pilih Periode Kustom",
+  "selectFilterPeriod": "Pilih Periode Filter",
+  "selectPeriod": "Pilih Periode",
+  "monthlyPeriods": "Periode Bulanan",
+  "chooseCustomDateRange": "Pilih rentang tanggal kustom",
+  "apply": "Terapkan",
+  "startDate": "Tanggal Mulai",
+  "endDate": "Tanggal Selesai",
+  "selectStartDate": "Pilih tanggal mulai",
+  "selectEndDate": "Pilih tanggal selesai",
+  "applyFilter": "Terapkan Filter",
+  "endDateMustBeAfterStartDate": "Tanggal selesai harus setelah tanggal mulai",
+  "pleaseSelectBothDates": "Harap pilih tanggal mulai dan selesai",
+  "customPeriodFormat": "{startDate} - {endDate}"
 }

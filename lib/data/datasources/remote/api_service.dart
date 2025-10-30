@@ -105,6 +105,8 @@ abstract class ApiService {
   @GET('/dashboard/')
   Future<BaseResponse<DashboardResponse>> getDashboard({
     @Query('month') String? month,
+    @Query('start_date') String? startDate,
+    @Query('end_date') String? endDate,
     @Query('transaction_limit') int? transactionLimit,
     @Query('expense_limit') int? expenseLimit,
     @Query('budget_limit') int? budgetLimit,

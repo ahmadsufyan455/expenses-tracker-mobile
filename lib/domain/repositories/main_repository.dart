@@ -47,6 +47,8 @@ abstract interface class MainRepository {
 
   Future<Either<Failure, DashboardDto>> getDashboard({
     String? month,
+    String? startDate,
+    String? endDate,
     int? transactionLimit,
     int? expenseLimit,
     int? budgetLimit,

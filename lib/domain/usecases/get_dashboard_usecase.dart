@@ -12,12 +12,16 @@ class GetDashboardUsecase {
 
   Future<Either<Failure, DashboardDto>> call({
     String? month,
+    String? startDate,
+    String? endDate,
     int? transactionLimit,
     int? expenseLimit,
     int? budgetLimit,
   }) async {
     return await _mainRepository.getDashboard(
       month: month,
+      startDate: startDate,
+      endDate: endDate,
       transactionLimit: transactionLimit,
       expenseLimit: expenseLimit,
       budgetLimit: budgetLimit,

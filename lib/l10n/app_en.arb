@@ -370,5 +370,33 @@
   "net": "Net",
   "savings": "Savings",
   "filterByStatus": "Filter by Status",
-  "all": "All"
+  "all": "All",
+  "customPeriod": "Custom Period",
+  "selectCustomPeriod": "Select Custom Period",
+  "selectFilterPeriod": "Select Filter Period",
+  "selectPeriod": "Select Period",
+  "monthlyPeriods": "Monthly Periods",
+  "chooseCustomDateRange": "Choose custom date range",
+  "apply": "Apply",
+  "startDate": "Start Date",
+  "endDate": "End Date",
+  "selectStartDate": "Select start date",
+  "selectEndDate": "Select end date",
+  "applyFilter": "Apply Filter",
+  "endDateMustBeAfterStartDate": "End date must be after start date",
+  "pleaseSelectBothDates": "Please select both start and end dates",
+  "customPeriodFormat": "{startDate} - {endDate}",
+  "@customPeriodFormat": {
+    "description": "Format for displaying custom period",
+    "placeholders": {
+      "startDate": {
+        "type": "String",
+        "example": "2025-09-28"
+      },
+      "endDate": {
+        "type": "String",
+        "example": "2025-10-27"
+      }
+    }
+  }
 }

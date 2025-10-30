@@ -728,4 +728,51 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get all => 'All';
+
+  @override
+  String get customPeriod => 'Custom Period';
+
+  @override
+  String get selectCustomPeriod => 'Select Custom Period';
+
+  @override
+  String get selectFilterPeriod => 'Select Filter Period';
+
+  @override
+  String get selectPeriod => 'Select Period';
+
+  @override
+  String get monthlyPeriods => 'Monthly Periods';
+
+  @override
+  String get chooseCustomDateRange => 'Choose custom date range';
+
+  @override
+  String get apply => 'Apply';
+
+  @override
+  String get startDate => 'Start Date';
+
+  @override
+  String get endDate => 'End Date';
+
+  @override
+  String get selectStartDate => 'Select start date';
+
+  @override
+  String get selectEndDate => 'Select end date';
+
+  @override
+  String get applyFilter => 'Apply Filter';
+
+  @override
+  String get endDateMustBeAfterStartDate => 'End date must be after start date';
+
+  @override
+  String get pleaseSelectBothDates => 'Please select both start and end dates';
+
+  @override
+  String customPeriodFormat(String startDate, String endDate) {
+    return '$startDate - $endDate';
+  }
 }

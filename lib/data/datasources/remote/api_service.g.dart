@@ -575,6 +575,8 @@ class _ApiService implements ApiService {
   @override
   Future<BaseResponse<DashboardResponse>> getDashboard({
     String? month,
+    String? startDate,
+    String? endDate,
     int? transactionLimit,
     int? expenseLimit,
     int? budgetLimit,
@@ -582,6 +584,8 @@ class _ApiService implements ApiService {
     final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{
       r'month': month,
+      r'start_date': startDate,
+      r'end_date': endDate,
       r'transaction_limit': transactionLimit,
       r'expense_limit': expenseLimit,
       r'budget_limit': budgetLimit,

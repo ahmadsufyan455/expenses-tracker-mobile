@@ -727,4 +727,52 @@ class AppLocalizationsId extends AppLocalizations {
 
   @override
   String get all => 'Semua';
+
+  @override
+  String get customPeriod => 'Periode Kustom';
+
+  @override
+  String get selectCustomPeriod => 'Pilih Periode Kustom';
+
+  @override
+  String get selectFilterPeriod => 'Pilih Periode Filter';
+
+  @override
+  String get selectPeriod => 'Pilih Periode';
+
+  @override
+  String get monthlyPeriods => 'Periode Bulanan';
+
+  @override
+  String get chooseCustomDateRange => 'Pilih rentang tanggal kustom';
+
+  @override
+  String get apply => 'Terapkan';
+
+  @override
+  String get startDate => 'Tanggal Mulai';
+
+  @override
+  String get endDate => 'Tanggal Selesai';
+
+  @override
+  String get selectStartDate => 'Pilih tanggal mulai';
+
+  @override
+  String get selectEndDate => 'Pilih tanggal selesai';
+
+  @override
+  String get applyFilter => 'Terapkan Filter';
+
+  @override
+  String get endDateMustBeAfterStartDate =>
+      'Tanggal selesai harus setelah tanggal mulai';
+
+  @override
+  String get pleaseSelectBothDates => 'Harap pilih tanggal mulai dan selesai';
+
+  @override
+  String customPeriodFormat(String startDate, String endDate) {
+    return '$startDate - $endDate';
+  }
 }

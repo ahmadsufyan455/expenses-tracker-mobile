@@ -153,6 +153,8 @@ class MainRepositoryImpl implements MainRepository {
   @override
   Future<Either<Failure, DashboardDto>> getDashboard({
     String? month,
+    String? startDate,
+    String? endDate,
     int? transactionLimit,
     int? expenseLimit,
     int? budgetLimit,
@@ -160,6 +162,8 @@ class MainRepositoryImpl implements MainRepository {
     try {
       final response = await _apiService.getDashboard(
         month: month,
+        startDate: startDate,
+        endDate: endDate,
         transactionLimit: transactionLimit,
         expenseLimit: expenseLimit,
         budgetLimit: budgetLimit,
