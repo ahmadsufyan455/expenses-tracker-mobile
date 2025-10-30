@@ -1496,6 +1496,24 @@ abstract class AppLocalizations {
   /// **'Monthly Periods'**
   String get monthlyPeriods;
 
+  /// No description provided for @quickFilters.
+  ///
+  /// In en, this message translates to:
+  /// **'Quick Filters'**
+  String get quickFilters;
+
+  /// No description provided for @last7Days.
+  ///
+  /// In en, this message translates to:
+  /// **'Last 7 Days'**
+  String get last7Days;
+
+  /// No description provided for @last30Days.
+  ///
+  /// In en, this message translates to:
+  /// **'Last 30 Days'**
+  String get last30Days;
+
   /// No description provided for @chooseCustomDateRange.
   ///
   /// In en, this message translates to:

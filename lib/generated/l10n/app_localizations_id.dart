@@ -744,6 +744,15 @@ class AppLocalizationsId extends AppLocalizations {
   String get monthlyPeriods => 'Periode Bulanan';
 
   @override
+  String get quickFilters => 'Filter Cepat';
+
+  @override
+  String get last7Days => '7 Hari Terakhir';
+
+  @override
+  String get last30Days => '30 Hari Terakhir';
+
+  @override
   String get chooseCustomDateRange => 'Pilih rentang tanggal kustom';
 
   @override

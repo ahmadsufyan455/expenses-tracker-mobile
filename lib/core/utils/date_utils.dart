@@ -1,3 +1,4 @@
+import 'package:expense_tracker_mobile/core/extensions/build_context_extensions.dart';
 import 'package:expense_tracker_mobile/core/utils/localization_utils.dart';
 import 'package:flutter/material.dart';
 
@@ -11,10 +12,28 @@ class AppDateUtils {
     return '${now.year}-${now.month.toString().padLeft(2, '0')}';
   }
 
+  /// Get last 7 days filter identifier
+  static String getLast7DaysFilter() {
+    return 'LAST_7_DAYS';
+  }
+
+  /// Get last 30 days filter identifier
+  static String getLast30DaysFilter() {
+    return 'LAST_30_DAYS';
+  }
+
   /// Convert YYYY-MM format to localized month name with year
-  /// Also handles custom period filters (YYYY-MM-DD:YYYY-MM-DD)
+  /// Also handles custom period filters (YYYY-MM-DD:YYYY-MM-DD) and quick filters
   static String formatFilterToDisplayName(BuildContext context, String filter) {
     try {
+      // Check if it's a quick filter
+      if (filter == 'LAST_7_DAYS') {
+        return context.l10n.last7Days;
+      }
+      if (filter == 'LAST_30_DAYS') {
+        return context.l10n.last30Days;
+      }
+
       // Check if it's a custom period filter
       if (isCustomPeriodFilter(filter)) {
         return formatCustomPeriodToDisplayName(context, filter);
@@ -147,6 +166,25 @@ class AppDateUtils {
   /// Convert filter string to start and end date strings (YYYY-MM-DD format)
   /// Returns (startDate, endDate) tuple
   static (String?, String?) getDateRangeFromFilter(String filter) {
+    final now = DateTime.now();
+
+    // Check if it's a quick filter
+    if (filter == 'LAST_7_DAYS') {
+      final startDate = now.subtract(const Duration(days: 7));
+      final start =
+          '${startDate.year}-${startDate.month.toString().padLeft(2, '0')}-${startDate.day.toString().padLeft(2, '0')}';
+      final end = '${now.year}-${now.month.toString().padLeft(2, '0')}-${now.day.toString().padLeft(2, '0')}';
+      return (start, end);
+    }
+
+    if (filter == 'LAST_30_DAYS') {
+      final startDate = now.subtract(const Duration(days: 30));
+      final start =
+          '${startDate.year}-${startDate.month.toString().padLeft(2, '0')}-${startDate.day.toString().padLeft(2, '0')}';
+      final end = '${now.year}-${now.month.toString().padLeft(2, '0')}-${now.day.toString().padLeft(2, '0')}';
+      return (start, end);
+    }
+
     // Check if it's a custom period filter (YYYY-MM-DD:YYYY-MM-DD)
     if (isCustomPeriodFilter(filter)) {
       final (startDate, endDate) = parseCustomPeriodFilter(filter);

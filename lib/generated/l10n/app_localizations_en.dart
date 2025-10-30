@@ -745,6 +745,15 @@ class AppLocalizationsEn extends AppLocalizations {
   String get monthlyPeriods => 'Monthly Periods';
 
   @override
+  String get quickFilters => 'Quick Filters';
+
+  @override
+  String get last7Days => 'Last 7 Days';
+
+  @override
+  String get last30Days => 'Last 30 Days';
+
+  @override
   String get chooseCustomDateRange => 'Choose custom date range';
 
   @override

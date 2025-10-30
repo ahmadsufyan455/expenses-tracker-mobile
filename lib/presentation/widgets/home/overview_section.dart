@@ -167,6 +167,51 @@ class _OverviewSectionState extends State<OverviewSection> {
                 ),
                 const SizedBox(height: AppDimensions.spaceL),
 
+                // Quick Filters Section
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: AppDimensions.paddingL),
+                  child: Text(
+                    context.l10n.quickFilters,
+                    style: AppTextStyles.titleMedium.copyWith(
+                      fontWeight: FontWeight.w600,
+                      color: theme.colorScheme.onSurfaceVariant,
+                    ),
+                  ),
+                ),
+                const SizedBox(height: AppDimensions.spaceS),
+
+                // Quick Filter Cards
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: AppDimensions.paddingL),
+                  child: Row(
+                    children: [
+                      Expanded(
+                        child: _buildQuickFilterCard(
+                          context,
+                          theme,
+                          bottomSheetContext,
+                          app_date_utils.AppDateUtils.getLast7DaysFilter(),
+                          context.l10n.last7Days,
+                          Icons.calendar_today,
+                        ),
+                      ),
+                      const SizedBox(width: AppDimensions.spaceM),
+                      Expanded(
+                        child: _buildQuickFilterCard(
+                          context,
+                          theme,
+                          bottomSheetContext,
+                          app_date_utils.AppDateUtils.getLast30DaysFilter(),
+                          context.l10n.last30Days,
+                          Icons.calendar_month,
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+
+                const SizedBox(height: AppDimensions.spaceL),
+
                 // Custom Period Card
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: AppDimensions.paddingL),
@@ -331,5 +376,49 @@ class _OverviewSectionState extends State<OverviewSection> {
       );
       onFilterChanged(filterString);
     }
+  }
+
+  Widget _buildQuickFilterCard(
+    BuildContext context,
+    ThemeData theme,
+    BuildContext bottomSheetContext,
+    String filterValue,
+    String label,
+    IconData icon,
+  ) {
+    final isSelected = state.currentFilter == filterValue;
+
+    return InkWell(
+      onTap: () {
+        Navigator.pop(bottomSheetContext);
+        onFilterChanged(filterValue);
+      },
+      borderRadius: BorderRadius.circular(AppDimensions.radiusM),
+      child: Container(
+        padding: const EdgeInsets.all(AppDimensions.paddingM),
+        decoration: BoxDecoration(
+          color: isSelected ? AppColors.primary.withValues(alpha: 0.1) : theme.colorScheme.surfaceContainerHigh,
+          borderRadius: BorderRadius.circular(AppDimensions.radiusM),
+          border: Border.all(
+            color: isSelected ? AppColors.primary : theme.colorScheme.outline.withValues(alpha: 0.3),
+            width: isSelected ? 2 : 1,
+          ),
+        ),
+        child: Column(
+          children: [
+            Icon(icon, color: isSelected ? AppColors.primary : theme.colorScheme.onSurfaceVariant, size: 24),
+            const SizedBox(height: AppDimensions.spaceS),
+            Text(
+              label,
+              style: AppTextStyles.labelSmall.copyWith(
+                fontWeight: isSelected ? FontWeight.w600 : FontWeight.normal,
+                color: isSelected ? AppColors.primary : theme.colorScheme.onSurface,
+              ),
+              textAlign: TextAlign.center,
+            ),
+          ],
+        ),
+      ),
+    );
   }
 }
