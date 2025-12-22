@@ -36,6 +36,7 @@ class _BudgetPageState extends State<BudgetPage> {
 
   Future<void> _onRefresh() async {
     _bloc.add(GetBudgetEvent(status: _selectedStatus?.toInt()));
+    _bloc.add(GetTotalActiveBudgtesEvent());
   }
 
   @override
@@ -182,6 +183,7 @@ class _BudgetPageState extends State<BudgetPage> {
     final result = await AddBudgetBottomSheet.show(context, categories: _bloc.stateData.categories);
     if (result == true) {
       _bloc.add(GetBudgetEvent(status: _selectedStatus?.toInt()));
+      _bloc.add(GetTotalActiveBudgtesEvent());
     }
   }
 
@@ -189,6 +191,7 @@ class _BudgetPageState extends State<BudgetPage> {
     final result = await AddBudgetBottomSheet.show(context, budget: budget, categories: _bloc.stateData.categories);
     if (result == true) {
       _bloc.add(GetBudgetEvent(status: _selectedStatus?.toInt()));
+      _bloc.add(GetTotalActiveBudgtesEvent());
     }
   }
 
