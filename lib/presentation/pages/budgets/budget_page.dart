@@ -63,7 +63,10 @@ class _BudgetPageState extends State<BudgetPage> {
           }
 
           final budgets = state.data.budgets;
-          final formattedAmount = LocalizationUtils.formatCurrency(context, state.data.totalActiveBudgets.toDouble());
+          final totalActiveBudget = state.data.activeBudget.totalActiveBudgets;
+          final remainingActiveBudget = state.data.activeBudget.remainingActiveBugets;
+          final formattedRemaningAmount = LocalizationUtils.formatCurrency(context, remainingActiveBudget.toDouble());
+          final formattedTotalAmount = LocalizationUtils.formatCurrency(context, totalActiveBudget.toDouble());
 
           return Column(
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -80,13 +83,15 @@ class _BudgetPageState extends State<BudgetPage> {
                 child: RichText(
                   text: TextSpan(
                     children: [
+                      TextSpan(text: 'Remaining: ', style: AppTextStyles.bodyMedium.copyWith(letterSpacing: 1.2)),
                       TextSpan(
-                        text: 'Total Active Budgets: ',
-                        style: AppTextStyles.bodyMedium.copyWith(letterSpacing: 1.2),
-                      ),
-                      TextSpan(
-                        text: formattedAmount,
+                        text: formattedRemaningAmount,
                         style: AppTextStyles.bodyMedium.copyWith(letterSpacing: 1.2, fontWeight: FontWeight.bold),
+                      ),
+                      TextSpan(text: ' of ', style: AppTextStyles.bodyMedium.copyWith(letterSpacing: 1.2)),
+                      TextSpan(
+                        text: formattedTotalAmount,
+                        style: AppTextStyles.bodyMedium.copyWith(letterSpacing: 1.2, fontWeight: FontWeight.w500),
                       ),
                     ],
                   ),

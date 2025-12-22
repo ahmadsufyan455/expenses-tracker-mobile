@@ -3,7 +3,7 @@ part of 'budget_bloc.dart';
 class BudgetStateData extends Equatable {
   final List<BudgetDto> budgets;
   final List<CategoryDto> categories;
-  final int totalActiveBudgets;
+  final TotalActiveBudgetDto activeBudget;
   final String message;
   final bool hasMoreData;
   final bool isLoadingMore;
@@ -11,7 +11,7 @@ class BudgetStateData extends Equatable {
   const BudgetStateData({
     this.budgets = const [],
     this.categories = const [],
-    this.totalActiveBudgets = 0,
+    this.activeBudget = const TotalActiveBudgetDto(),
     this.message = '',
     this.hasMoreData = false,
     this.isLoadingMore = false,
@@ -23,7 +23,7 @@ class BudgetStateData extends Equatable {
   BudgetStateData copyWith({
     List<BudgetDto>? budgets,
     List<CategoryDto>? categories,
-    int? totalActiveBudgets,
+    TotalActiveBudgetDto? activeBudget,
     String? message,
     bool? hasMoreData,
     bool? isLoadingMore,
@@ -31,7 +31,7 @@ class BudgetStateData extends Equatable {
     return BudgetStateData(
       budgets: budgets ?? this.budgets,
       categories: categories ?? this.categories,
-      totalActiveBudgets: totalActiveBudgets ?? this.totalActiveBudgets,
+      activeBudget: activeBudget ?? this.activeBudget,
       message: message ?? this.message,
       hasMoreData: hasMoreData ?? this.hasMoreData,
       isLoadingMore: isLoadingMore ?? this.isLoadingMore,

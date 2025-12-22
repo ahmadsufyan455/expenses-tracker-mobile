@@ -5,6 +5,7 @@ import 'package:expense_tracker_mobile/data/models/request/new_transaction_reque
 import 'package:expense_tracker_mobile/data/models/response/base_pagination_response.dart';
 import 'package:expense_tracker_mobile/data/models/response/budget_response.dart';
 import 'package:expense_tracker_mobile/data/models/response/category_response.dart';
+import 'package:expense_tracker_mobile/data/models/response/total_active_budget_response.dart';
 import 'package:expense_tracker_mobile/data/models/response/transaction_response.dart';
 import 'package:expense_tracker_mobile/domain/dto/dashboard_dto.dart';
 import 'package:fpdart/fpdart.dart';
@@ -54,5 +55,5 @@ abstract interface class MainRepository {
     int? budgetLimit,
   });
 
-  Future<Either<Failure, int>> getTotalActiveBudgets();
+  Future<Either<Failure, TotalActiveBudgetResponse>> getTotalActiveBudgets();
 }
