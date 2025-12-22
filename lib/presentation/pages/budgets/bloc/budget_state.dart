@@ -3,6 +3,7 @@ part of 'budget_bloc.dart';
 class BudgetStateData extends Equatable {
   final List<BudgetDto> budgets;
   final List<CategoryDto> categories;
+  final int totalActiveBudgets;
   final String message;
   final bool hasMoreData;
   final bool isLoadingMore;
@@ -10,6 +11,7 @@ class BudgetStateData extends Equatable {
   const BudgetStateData({
     this.budgets = const [],
     this.categories = const [],
+    this.totalActiveBudgets = 0,
     this.message = '',
     this.hasMoreData = false,
     this.isLoadingMore = false,
@@ -21,6 +23,7 @@ class BudgetStateData extends Equatable {
   BudgetStateData copyWith({
     List<BudgetDto>? budgets,
     List<CategoryDto>? categories,
+    int? totalActiveBudgets,
     String? message,
     bool? hasMoreData,
     bool? isLoadingMore,
@@ -28,6 +31,7 @@ class BudgetStateData extends Equatable {
     return BudgetStateData(
       budgets: budgets ?? this.budgets,
       categories: categories ?? this.categories,
+      totalActiveBudgets: totalActiveBudgets ?? this.totalActiveBudgets,
       message: message ?? this.message,
       hasMoreData: hasMoreData ?? this.hasMoreData,
       isLoadingMore: isLoadingMore ?? this.isLoadingMore,
@@ -114,6 +118,22 @@ final class DeleteBudgetFailure extends BudgetState {
   final Failure failure;
 
   const DeleteBudgetFailure({required this.failure, required super.data});
+
+  @override
+  List<Object> get props => [failure];
+}
+
+final class GetTotalActiveBudgetsLoading extends BudgetState {
+  const GetTotalActiveBudgetsLoading({required super.data});
+}
+
+final class GetTotalActiveBudgetsSuccess extends BudgetState {
+  const GetTotalActiveBudgetsSuccess({required super.data});
+}
+
+final class GetTotalActiveBudgetsFailure extends BudgetState {
+  final Failure failure;
+  const GetTotalActiveBudgetsFailure({required this.failure, required super.data});
 
   @override
   List<Object> get props => [failure];

@@ -1,7 +1,9 @@
 import 'package:expense_tracker_mobile/app/theme/app_colors.dart';
 import 'package:expense_tracker_mobile/app/theme/app_dimensions.dart';
+import 'package:expense_tracker_mobile/app/theme/app_text_styles.dart';
 import 'package:expense_tracker_mobile/core/enums/budget_enums.dart';
 import 'package:expense_tracker_mobile/core/extensions/build_context_extensions.dart';
+import 'package:expense_tracker_mobile/core/utils/localization_utils.dart';
 import 'package:expense_tracker_mobile/domain/dto/budget_dto.dart';
 import 'package:expense_tracker_mobile/presentation/pages/budgets/bloc/budget_bloc.dart';
 import 'package:expense_tracker_mobile/presentation/widgets/budget/add_budget_bottom_sheet.dart';
@@ -27,7 +29,9 @@ class _BudgetPageState extends State<BudgetPage> {
   @override
   void initState() {
     super.initState();
-    _bloc = GetIt.instance<BudgetBloc>()..add(GetBudgetEvent(status: _selectedStatus?.toInt()));
+    _bloc = GetIt.instance<BudgetBloc>()
+      ..add(GetBudgetEvent(status: _selectedStatus?.toInt()))
+      ..add(GetTotalActiveBudgtesEvent());
   }
 
   Future<void> _onRefresh() async {
@@ -58,8 +62,10 @@ class _BudgetPageState extends State<BudgetPage> {
           }
 
           final budgets = state.data.budgets;
+          final formattedAmount = LocalizationUtils.formatCurrency(context, state.data.totalActiveBudgets.toDouble());
 
           return Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               BudgetFilter(
                 selectedStatus: _selectedStatus,
@@ -67,6 +73,23 @@ class _BudgetPageState extends State<BudgetPage> {
                   _selectedStatus = status;
                   _bloc.add(GetBudgetEvent(status: _selectedStatus?.toInt()));
                 },
+              ),
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+                child: RichText(
+                  text: TextSpan(
+                    children: [
+                      TextSpan(
+                        text: 'Total Active Budgets: ',
+                        style: AppTextStyles.bodyMedium.copyWith(letterSpacing: 1.2),
+                      ),
+                      TextSpan(
+                        text: formattedAmount,
+                        style: AppTextStyles.bodyMedium.copyWith(letterSpacing: 1.2, fontWeight: FontWeight.bold),
+                      ),
+                    ],
+                  ),
+                ),
               ),
               Expanded(
                 child: RefreshIndicator(

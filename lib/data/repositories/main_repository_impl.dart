@@ -174,4 +174,14 @@ class MainRepositoryImpl implements MainRepository {
       return Left(ErrorHandler.handleError(e));
     }
   }
+
+  @override
+  Future<Either<Failure, int>> getTotalActiveBudgets() async {
+    try {
+      final response = await _apiService.getTotalActiveBudgets();
+      return Right(response.data!.totalActiveBudgets);
+    } catch (e) {
+      return Left(ErrorHandler.handleError(e));
+    }
+  }
 }

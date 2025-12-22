@@ -20,4 +20,8 @@ class GetBudgetUsecase {
   ) async {
     return await _mainRepository.getBudgets(page, perPage, sortBy, sortOrder, status);
   }
+
+  Future<Either<Failure, int>> callTotalActiveBudget() async {
+    return await _mainRepository.getTotalActiveBudgets();
+  }
 }

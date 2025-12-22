@@ -53,4 +53,6 @@ abstract interface class MainRepository {
     int? expenseLimit,
     int? budgetLimit,
   });
+
+  Future<Either<Failure, int>> getTotalActiveBudgets();
 }

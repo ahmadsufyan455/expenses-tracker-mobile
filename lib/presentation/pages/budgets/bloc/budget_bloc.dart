@@ -38,10 +38,22 @@ class BudgetBloc extends Bloc<BudgetEvent, BudgetState> {
     this._getCategoryUsecase,
   ) : super(BudgetInitial()) {
     on<GetBudgetEvent>(_onGetBudget);
+    on<GetTotalActiveBudgtesEvent>(_onGetTotalActiveBudgets);
     on<LoadMoreBudgetEvent>(_onLoadMoreBudget);
     on<CreateBudgetEvent>(_onCreateBudget);
     on<UpdateBudgetEvent>(_onUpdateBudget);
     on<DeleteBudgetEvent>(_onDeleteBudget);
+  }
+
+  Future<void> _onGetTotalActiveBudgets(GetTotalActiveBudgtesEvent event, Emitter<BudgetState> emit) async {
+    emit(GetTotalActiveBudgetsLoading(data: stateData));
+    final totalActiveBudgetResult = await _getBudgetUsecase.callTotalActiveBudget();
+    totalActiveBudgetResult.fold((failure) => emit(GetTotalActiveBudgetsFailure(failure: failure, data: stateData)), (
+      result,
+    ) {
+      stateData = stateData.copyWith(totalActiveBudgets: result);
+      emit(GetTotalActiveBudgetsSuccess(data: stateData));
+    });
   }
 
   Future<void> _onGetBudget(GetBudgetEvent event, Emitter<BudgetState> emit) async {
