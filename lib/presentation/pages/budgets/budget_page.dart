@@ -1,6 +1,5 @@
 import 'package:expense_tracker_mobile/app/theme/app_colors.dart';
 import 'package:expense_tracker_mobile/app/theme/app_dimensions.dart';
-import 'package:expense_tracker_mobile/app/theme/app_text_styles.dart';
 import 'package:expense_tracker_mobile/core/enums/budget_enums.dart';
 import 'package:expense_tracker_mobile/core/extensions/build_context_extensions.dart';
 import 'package:expense_tracker_mobile/core/utils/localization_utils.dart';
@@ -41,6 +40,7 @@ class _BudgetPageState extends State<BudgetPage> {
 
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
     return Scaffold(
       appBar: AppBar(
         title: Text(context.l10n.budgets),
@@ -84,15 +84,15 @@ class _BudgetPageState extends State<BudgetPage> {
                   child: RichText(
                     text: TextSpan(
                       children: [
-                        TextSpan(text: 'Remaining: ', style: AppTextStyles.bodyMedium.copyWith(letterSpacing: 1.2)),
+                        TextSpan(text: 'Remaining: ', style: theme.textTheme.bodyMedium?.copyWith(letterSpacing: 1.2)),
                         TextSpan(
                           text: formattedRemaningAmount,
-                          style: AppTextStyles.bodyMedium.copyWith(letterSpacing: 1.2, fontWeight: FontWeight.bold),
+                          style: theme.textTheme.bodyMedium?.copyWith(letterSpacing: 1.2, fontWeight: FontWeight.bold),
                         ),
-                        TextSpan(text: ' of ', style: AppTextStyles.bodyMedium.copyWith(letterSpacing: 1.2)),
+                        TextSpan(text: ' of ', style: theme.textTheme.bodyMedium?.copyWith(letterSpacing: 1.2)),
                         TextSpan(
                           text: formattedTotalAmount,
-                          style: AppTextStyles.bodyMedium.copyWith(letterSpacing: 1.2, fontWeight: FontWeight.w500),
+                          style: theme.textTheme.bodyMedium?.copyWith(letterSpacing: 1.2, fontWeight: FontWeight.w500),
                         ),
                       ],
                     ),
