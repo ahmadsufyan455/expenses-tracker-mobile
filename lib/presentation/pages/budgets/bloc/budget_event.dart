@@ -15,6 +15,10 @@ class GetBudgetEvent extends BudgetEvent {
   List<Object?> get props => [status];
 }
 
+class GetTotalActiveBudgtesEvent extends BudgetEvent {
+  const GetTotalActiveBudgtesEvent();
+}
+
 class LoadMoreBudgetEvent extends BudgetEvent {
   final int? status;
   const LoadMoreBudgetEvent({this.status});

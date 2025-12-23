@@ -7,6 +7,7 @@ import 'package:expense_tracker_mobile/data/models/request/new_transaction_reque
 import 'package:expense_tracker_mobile/data/models/response/base_pagination_response.dart';
 import 'package:expense_tracker_mobile/data/models/response/budget_response.dart';
 import 'package:expense_tracker_mobile/data/models/response/category_response.dart';
+import 'package:expense_tracker_mobile/data/models/response/total_active_budget_response.dart';
 import 'package:expense_tracker_mobile/data/models/response/transaction_response.dart';
 import 'package:expense_tracker_mobile/domain/dto/dashboard_dto.dart';
 import 'package:expense_tracker_mobile/domain/repositories/main_repository.dart';
@@ -170,6 +171,16 @@ class MainRepositoryImpl implements MainRepository {
       );
       final dashboard = DashboardDto.fromResponse(response.data!);
       return Right(dashboard);
+    } catch (e) {
+      return Left(ErrorHandler.handleError(e));
+    }
+  }
+
+  @override
+  Future<Either<Failure, TotalActiveBudgetResponse>> getTotalActiveBudgets() async {
+    try {
+      final response = await _apiService.getTotalActiveBudgets();
+      return Right(response.data!);
     } catch (e) {
       return Left(ErrorHandler.handleError(e));
     }

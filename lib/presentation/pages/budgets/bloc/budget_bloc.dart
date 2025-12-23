@@ -3,6 +3,7 @@ import 'package:expense_tracker_mobile/core/errors/failure.dart';
 import 'package:expense_tracker_mobile/data/models/request/budget_request.dart';
 import 'package:expense_tracker_mobile/domain/dto/budget_dto.dart';
 import 'package:expense_tracker_mobile/domain/dto/category_dto.dart';
+import 'package:expense_tracker_mobile/domain/dto/total_active_budget_dto.dart';
 import 'package:expense_tracker_mobile/domain/usecases/create_budget_usecase.dart';
 import 'package:expense_tracker_mobile/domain/usecases/delete_budget_usecase.dart';
 import 'package:expense_tracker_mobile/domain/usecases/get_budget_usecase.dart';
@@ -38,10 +39,22 @@ class BudgetBloc extends Bloc<BudgetEvent, BudgetState> {
     this._getCategoryUsecase,
   ) : super(BudgetInitial()) {
     on<GetBudgetEvent>(_onGetBudget);
+    on<GetTotalActiveBudgtesEvent>(_onGetTotalActiveBudgets);
     on<LoadMoreBudgetEvent>(_onLoadMoreBudget);
     on<CreateBudgetEvent>(_onCreateBudget);
     on<UpdateBudgetEvent>(_onUpdateBudget);
     on<DeleteBudgetEvent>(_onDeleteBudget);
+  }
+
+  Future<void> _onGetTotalActiveBudgets(GetTotalActiveBudgtesEvent event, Emitter<BudgetState> emit) async {
+    emit(GetTotalActiveBudgetsLoading(data: stateData));
+    final totalActiveBudgetResult = await _getBudgetUsecase.callTotalActiveBudget();
+    totalActiveBudgetResult.fold((failure) => emit(GetTotalActiveBudgetsFailure(failure: failure, data: stateData)), (
+      result,
+    ) {
+      stateData = stateData.copyWith(activeBudget: result);
+      emit(GetTotalActiveBudgetsSuccess(data: stateData));
+    });
   }
 
   Future<void> _onGetBudget(GetBudgetEvent event, Emitter<BudgetState> emit) async {

@@ -13,6 +13,7 @@ import 'package:expense_tracker_mobile/data/models/response/category_response.da
 import 'package:expense_tracker_mobile/data/models/response/dashboard_response.dart';
 import 'package:expense_tracker_mobile/data/models/response/login_response.dart';
 import 'package:expense_tracker_mobile/data/models/response/profile_response.dart';
+import 'package:expense_tracker_mobile/data/models/response/total_active_budget_response.dart';
 import 'package:expense_tracker_mobile/data/models/response/transaction_response.dart';
 import 'package:injectable/injectable.dart';
 import 'package:retrofit/retrofit.dart';
@@ -76,6 +77,9 @@ abstract class ApiService {
     @Query('sort_order') String sortOrder,
     @Query('status') int? status,
   );
+
+  @GET('/budgets/total-active')
+  Future<BaseResponse<TotalActiveBudgetResponse>> getTotalActiveBudgets();
 
   @POST('/budgets/')
   Future<BaseResponse> createBudget(@Body() BudgetRequest request);
