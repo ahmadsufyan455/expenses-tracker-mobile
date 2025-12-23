@@ -78,25 +78,26 @@ class _BudgetPageState extends State<BudgetPage> {
                   _bloc.add(GetBudgetEvent(status: _selectedStatus?.toInt()));
                 },
               ),
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-                child: RichText(
-                  text: TextSpan(
-                    children: [
-                      TextSpan(text: 'Remaining: ', style: AppTextStyles.bodyMedium.copyWith(letterSpacing: 1.2)),
-                      TextSpan(
-                        text: formattedRemaningAmount,
-                        style: AppTextStyles.bodyMedium.copyWith(letterSpacing: 1.2, fontWeight: FontWeight.bold),
-                      ),
-                      TextSpan(text: ' of ', style: AppTextStyles.bodyMedium.copyWith(letterSpacing: 1.2)),
-                      TextSpan(
-                        text: formattedTotalAmount,
-                        style: AppTextStyles.bodyMedium.copyWith(letterSpacing: 1.2, fontWeight: FontWeight.w500),
-                      ),
-                    ],
+              if (budgets.isNotEmpty)
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+                  child: RichText(
+                    text: TextSpan(
+                      children: [
+                        TextSpan(text: 'Remaining: ', style: AppTextStyles.bodyMedium.copyWith(letterSpacing: 1.2)),
+                        TextSpan(
+                          text: formattedRemaningAmount,
+                          style: AppTextStyles.bodyMedium.copyWith(letterSpacing: 1.2, fontWeight: FontWeight.bold),
+                        ),
+                        TextSpan(text: ' of ', style: AppTextStyles.bodyMedium.copyWith(letterSpacing: 1.2)),
+                        TextSpan(
+                          text: formattedTotalAmount,
+                          style: AppTextStyles.bodyMedium.copyWith(letterSpacing: 1.2, fontWeight: FontWeight.w500),
+                        ),
+                      ],
+                    ),
                   ),
                 ),
-              ),
               Expanded(
                 child: RefreshIndicator(
                   key: _refreshIndicatorKey,
@@ -224,6 +225,7 @@ class _BudgetPageState extends State<BudgetPage> {
         context,
       ).showSnackBar(SnackBar(content: Text(context.l10n.budgetDeletedSuccessfully), backgroundColor: Colors.green));
       _bloc.add(GetBudgetEvent(status: _selectedStatus?.toInt())); // Refresh the list
+      _bloc.add(GetTotalActiveBudgtesEvent());
     } else if (state is DeleteBudgetFailure) {
       ErrorDialog.show(context, state.failure);
     }
