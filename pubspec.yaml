@@ -1,7 +1,7 @@
 name: expense_tracker_mobile
 description: "A new Flutter project."
 publish_to: "none"
-version: 1.3.0+7
+version: 1.4.0+8
 
 environment:
   sdk: ^3.9.2
